@@ -1,12 +1,12 @@
 /* global require, exports */
 var db = require('./db_config');
+var url = require('url');
 
 exports.grabUser = function(req, res) {
-  console.log('hitting grabUser');
-
-  console.log(req.url);
-  // db.User.find({}, function(err, users){
-  //   // console.log(users);
-  //   res.send(200);
-  // });
+  var query = url.parse(req.url).query.slice(5);
+  var name = query.split('+').join(' ');
+  db.User.find({name: name}, function(err, user){
+    console.log(user);
+    res.send(200, user);
+  });
 };
