@@ -19,12 +19,28 @@ dash.service('getUsers', function($http) {
 dash.controller('profileController', function ($scope, getUsers) {
 
   // *** Want to grab this upon authentication. ***
-  $scope.user = 'Josh Gman';
+  $scope.testUser = 'Josh Gman';
+  $scope.testHometown;
+  $scope.testFavMovie;
+  $scope.testFavGenre;
+  $scope.testAge;
+  $scope.testFavTheater;
+  $scope.testCurrentCity;
+  $scope.testFavActor;
 
   // *** Want to nest this in a promise or callback. ***
-  getUsers.getUser($scope.user)
+  getUsers.getUser($scope.testUser)
   .then(function(data) {
-    console.log(data.data[0]);
+    var user = data.data[0];
+    $scope.testHometown     = user.hometown;
+    $scope.testFavMovie     = user.favMovie;
+    $scope.testFavGenre     = user.favGenre;
+    $scope.testAge          = user.age;
+    $scope.testFavTheater   = user.favTheater;
+    $scope.testCurrentCity  = user.currentCity;
+    $scope.testFavActor     = user.favActor;
+
+
   });
 
   // Mystery goodness.
