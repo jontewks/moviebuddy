@@ -90,6 +90,12 @@ body {
 
 
 @media (min-width: 768px) {
+  .container {
+    background-color: white;
+    border-radius: 5px;
+    max-width: 1000px;
+  }
+  
   .sectionHeader {
     text-align: center;
     border-bottom: 1px solid black;
