@@ -2,7 +2,7 @@
 body {
   padding-top: 20px;
   padding-bottom: 20px;
-  background-color: rgba(92, 192, 255, 1);  
+  background: url('../images/photography.png');
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -39,21 +39,40 @@ body {
 .container {
   background-color: white;
   border-radius: 5px;
-  max-width: 500px;
+  max-width: 80%;
 }
 
 .sectionHeader {
+  color: white;
+  padding: 2px;
+  border-radius: 3px;
   text-align: center;
-  border-bottom: 1px solid black;
 }
 
 .sectionContainer {
   text-align: center;
   min-height: 220px;
+  display: none;
+}
+
+.profile {
+  background-color: rgba(94, 243, 143, 1);
+}
+
+.friends {
+  background-color: rgba(243, 134, 94, 1);
+}
+
+.movies {
+  background-color: rgba(94, 208, 243, 1);
+}
+
+.outings {
+  background-color: rgba(243, 94, 101, 1);
 }
 
 #profilePicDiv {
-  margin-left: 20px;
+
 }
 
 #profilePic {
@@ -88,55 +107,6 @@ body {
   border-top: 1px solid #e5e5e5;
 }
 
-
-@media (min-width: 768px) {
-  .container {
-    background-color: white;
-    border-radius: 5px;
-    max-width: 1000px;
-  }
-  
-  .sectionHeader {
-    text-align: center;
-    border-bottom: 1px solid black;
-  }
-
-  .sectionContainer {
-    text-align: center;
-    min-height: 220px;
-  }
-
-  #profilePicDiv {
-    margin-left: 20px;
-  }
-
-  #profilePic {
-    border-radius: 3px;
-    height: 200px;
-    width: 180px;
-    border: 5px solid white;
-    margin-bottom: 10px;
-    margin-left: 10px;
-  }
-
-  #userDetails {
-    width: 400px;
-    margin: auto auto;
-  }
-
-  #userMovieDetails {
-    width: 400px;
-    margin: auto auto;
-  }
-
-  .userDetail {
-    padding-left: 100px;
-    text-align: left;
-    display: block;
-  }
-}
-
-
 /* Customize container */
 @media (min-width: 990px) {
   .container {
@@ -163,11 +133,11 @@ body {
 
   .sectionHeader {
     text-align: center;
-    border-bottom: 1px solid black;
   }
 
   .sectionContainer {
     min-height: 220px;
+    display: block;
   }
 
   #profilePicDiv {
@@ -209,21 +179,3 @@ body {
   margin-top: 28px;
 }
 
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 5px;
-  }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
-}
