@@ -7,11 +7,13 @@ angular
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        templateUrl: 'views/dashboard.html',
+        controller: 'dashController'
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/login',
+        templateUrl: 'views/login.html',
+        controller: 'loginController'
       });
   })
   .directive('fb', ['$FB', function($FB) {

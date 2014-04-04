@@ -1,0 +1,33 @@
+<script>
+  /* global $ */
+  $(document).ready(function(){
+    $('body').on('click', '.sectionHeader', function(){
+      $(this).next().slideToggle();
+    });
+
+    // $.ajax({
+    //   dataType: 'jsonp',
+    //   url: moviesSearchUrl,
+    //   success: function(data){
+    //     console.log(data);
+    //   }
+    // });
+    //
+  });
+</script>
+
+
+<div class='header'>
+  <ul class='nav nav-pills pull-right'>
+    <li><a ng-href='#'>Logout</a></li>
+  </ul>
+  <h3 class='text-muted'>Movie Buddy</h3>
+</div>
+
+<div class='jumbotron' ng-include="'/views/profile.html'" ng-controller="profileController"></div>
+
+<div class='jumbotron' ng-include="'/views/friends.html'" ng-controller="friendsController"></div>
+
+<div class='jumbotron' ng-include="'/views/movies.html'" ng-controller="moviesController"></div>
+
+<div class='jumbotron' ng-include="'/views/outings.html'" ng-controller="outingsController"></div>
