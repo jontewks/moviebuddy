@@ -2,6 +2,7 @@
 body {
   padding-top: 20px;
   padding-bottom: 20px;
+  background: url('../images/photography.png');
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -21,7 +22,81 @@ body {
   margin-top: 0;
   margin-bottom: 0;
   line-height: 40px;
-  padding-bottom: 19px;
+  padding-bottom: 0px;
+}
+
+.jumbotron {
+  padding: 0px !important;
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 10px;
+  text-align: left;
+}
+.jumbotron .btn {
+  font-size: 21px;
+  padding: 14px 24px;
+}
+
+.container {
+  background-color: white;
+  border-radius: 5px;
+  max-width: 80%;
+}
+
+.sectionHeader {
+  color: white;
+  padding: 2px;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.sectionContainer {
+  text-align: center;
+  height: 100%;
+  display: none;
+}
+
+.profile {
+  background-color: rgba(94, 243, 143, 1);
+}
+
+.friends {
+  background-color: rgba(243, 134, 94, 1);
+}
+
+.movies {
+  background-color: rgba(94, 208, 243, 1);
+}
+
+.outings {
+  background-color: rgba(243, 94, 101, 1);
+}
+
+#profilePicDiv {
+
+}
+
+#profilePic {
+  border-radius: 3px;
+  width: 180px;
+  border: 5px solid white;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+#userDetails {
+  width: 400px;
+  margin: auto auto;
+}
+
+#userMovieDetails {
+  width: 400px;
+  margin: auto auto;
+}
+
+.userDetail {
+  padding-left: 100px;
+  text-align: left;
+  display: block;
 }
 
 /* Custom page footer */
@@ -32,23 +107,67 @@ body {
 }
 
 /* Customize container */
-@media (min-width: 768px) {
+@media (min-width: 990px) {
   .container {
-    max-width: 730px;
+    background-color: white;
+    border-radius: 5px;
+    max-width: 1000px;
   }
-}
-.container-narrow > hr {
-  margin: 30px 0;
-}
 
-/* Main marketing message and sign up button */
-.jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
-}
-.jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
+  .container-narrow > hr {
+    margin: 30px 0;
+  }
+
+  /* Main marketing message and sign up button */
+  .jumbotron {
+    padding: 0px !important;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 10px;
+    text-align: left;
+  }
+  .jumbotron .btn {
+    font-size: 21px;
+    padding: 14px 24px;
+  }
+
+  .sectionHeader {
+    text-align: center;
+  }
+
+  .sectionContainer {
+    padding-bottom: 10px;
+    display: block;
+  }
+
+  #profilePicDiv {
+    margin-left: 20px;
+    float: left;
+  }
+
+  #profilePic {
+    border-radius: 3px;
+    height: 200px;
+    width: 180px;
+    border: 5px solid white;
+    margin-bottom: 10px;
+    margin-left: 10px;
+  }
+
+  #userDetails {
+    display: inline-block;
+    padding: 10px;
+    width: 300px;
+  }
+
+  #userMovieDetails {
+    display: inline-block;
+    width: 300px;
+  }
+
+  .userDetail {
+    padding-left: 0px;
+    display: block;
+  }
 }
 
 /* Supporting marketing content */
@@ -59,21 +178,3 @@ body {
   margin-top: 28px;
 }
 
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
-}
