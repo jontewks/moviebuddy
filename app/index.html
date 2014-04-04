@@ -16,6 +16,8 @@
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
+    <script src='scripts/controllers/rottenTomatoes.js'></script>
+    <script src='http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?callback=useMovieData&apikey=63za93cgdtv88ves8p6d9wrk'></script>
     <!-- endbuild -->
   </head>
   <body ng-app="moviebuddyApp">
