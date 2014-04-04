@@ -1,17 +1,21 @@
 <h3 class='sectionHeader movies'>Movies</h3>
+
 <div class='sectionContainer'>
-<div ng-repeat='movie in movies' class='movie'>
-  <img src={{movie.posters.thumbnail}} class='movieThumb'>
-  <span class='movieTitle'><u>{{movie.title}}</u></span>
-  <span class='criticScore'>Critics Score: {{movie.ratings.critics_score}}</span>
-  <span class='audienceScore'>Audience Score: {{movie.ratings.audience_score}}</span>
-  <span class='cast' ng-repeat='actor in movie.abridged_cast'>{{actor.name}}</span>
-  <span class='criticsConsensus'>Critics' Consensus: {{movie.critics_consensus}}</span>
-  <span class='runtime'>{{movie.runtime}}</span>
-  <span class='mpaaRating'>{{movie.mpaa_rating}}</span>
-  <span class='synopsis'>{{movie.synopsis}}</span>
+
+  <div ng-repeat='movie in movies' class='movie'>
+    <img src={{movie.posters.thumbnail}} class='movieThumb'>
+    <span class='movieTitle'><u>{{movie.title}}</u></span>
+    <span class='criticScore'>Critics Score: {{movie.ratings.critics_score}}</span>
+    <span class='audienceScore'>Audience Score: {{movie.ratings.audience_score}}</span>
+    <span class='cast' ng-repeat='actor in movie.abridged_cast'>{{actor.name}}</span>
+    <span class='criticsConsensus'>Critics' Consensus: {{movie.critics_consensus}}</span>
+    <span class='runtime'>{{movie.runtime}}</span>
+    <span class='mpaaRating'>{{movie.mpaa_rating}}</span>
+    <span class='synopsis'>{{movie.synopsis}}</span>
+
+  </div>
+
+  <button class='prevPage' ng-click='prevPage()' >Prev</button>
+  <button class='nextPage' ng-click='nextPage()' >Next</button>
 
 </div>
-</div>
-
-
