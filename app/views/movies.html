@@ -1,6 +1,6 @@
 <h3 class='sectionHeader movies'>Movies</h3>
 
-<div class='sectionContainer'>
+<div class='sectionContainer movieDiv'>
 
   <div ng-repeat='movie in movies' class='movie'>
     <img src={{movie.posters.thumbnail}} class='movieThumb'>
@@ -12,7 +12,7 @@
     <span class='runtime'>{{movie.runtime}}</span>
     <span class='mpaaRating'>{{movie.mpaa_rating}}</span>
     <span class='synopsis'>{{movie.synopsis}}</span>
-
+    <hr class='movieHR'>
   </div>
 
   <button class='prevPage' ng-click='prevPage()' >Prev</button>
