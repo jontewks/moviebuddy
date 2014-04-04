@@ -2,10 +2,10 @@
 
 /* global angular */
 
-var dash = angular.module('moviebuddyApp');
+var app = angular.module('moviebuddyApp');
 
 // This service returns 'Users' from the DB.
-dash.service('getUsers', function($http) {
+app.service('getUsers', function($http) {
   this.getUser = function(user) {
     return $http({
       method: 'GET',
@@ -16,7 +16,7 @@ dash.service('getUsers', function($http) {
 });
 
 // This controller controls the profile.
-dash.controller('profileController', function ($scope, getUsers) {
+app.controller('profileController', function ($scope, getUsers) {
 
   // *** Want to grab this upon authentication. ***
   $scope.testUser = 'Josh Gman';

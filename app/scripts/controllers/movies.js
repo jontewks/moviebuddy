@@ -1,8 +1,8 @@
 'use strict';
 
-var dash = angular.module('moviebuddyApp');
+var app = angular.module('moviebuddyApp');
 
-dash.controller('moviesController', function ($scope, $http) {
+app.controller('moviesController', function ($scope, $http) {
 
     var rottenTomatoesUrl = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?callback=JSON_CALLBACK&page_limit=50&apikey=63za93cgdtv88ves8p6d9wrk';
 

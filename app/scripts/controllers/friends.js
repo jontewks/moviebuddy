@@ -1,8 +1,8 @@
 'use strict';
 
-var dash = angular.module('moviebuddyApp');
+var app = angular.module('moviebuddyApp');
 
-dash.controller('friendsController', function ($scope) {
+app.controller('friendsController', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
