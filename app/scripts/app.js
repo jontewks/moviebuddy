@@ -11,7 +11,9 @@ angular
         controller: 'dashController'
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/login',
+        templateUrl: 'views/login.html',
+        controller: 'loginController'
       });
   });
 

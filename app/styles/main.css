@@ -36,11 +36,14 @@ body {
   padding: 14px 24px;
 }
 
+
 .container {
   background-color: white;
   border-radius: 5px;
   max-width: 80%;
 }
+
+/* dashboard elements */
 
 .sectionHeader {
   color: white;
@@ -97,6 +100,19 @@ body {
   padding-left: 100px;
   text-align: left;
   display: block;
+}
+
+/* login elements */
+
+.loginDiv {
+  margin-top: 50px;
+  padding: 120px !important;
+  text-align: center;
+}
+
+.btn-success {
+  background-color: #3b5998;
+  border: 1px solid #3b5998;
 }
 
 /* Custom page footer */
