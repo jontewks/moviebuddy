@@ -6,51 +6,47 @@ app.service('getMoviesData', function($http){
   var rottenTomatoesUrl = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?callback=JSON_CALLBACK&apikey=63za93cgdtv88ves8p6d9wrk';
   var pageLimitQuery = '&page_limit=';
   var pageQuery = '&page=';
-  this.getMovieData = function(page) {
-    // page = page || 1;
-    var pageLimit = 20;
+  this.getMovieData = function(page, pageLimit) {
     var query = rottenTomatoesUrl + pageLimitQuery + pageLimit + pageQuery + page;
     return $http.jsonp(query);
   };
 });
 
 app.controller('moviesController', function ($scope, $http, getMoviesData) {
+  $scope.allMovies = [];
   $scope.movies;
   $scope.page = 1;
-  $scope.totalMovies;
+  var pageLimit = 50;
 
-  // get movie data
-  getMoviesData.getMovieData($scope.page)
-  .then(function(data){
-    var rtData = data.data;
-    $scope.movies = rtData.movies;
-    $scope.totalMovies = rtData.total;
-  });
+  var getMovies = function(page, pageLimit) {
+    getMoviesData.getMovieData(page, pageLimit)
+    .then(function(data){
+      var rtData = data.data;
+      var totalMovies = rtData.total;
+      var totalPages = Math.ceil(totalMovies / pageLimit);
+      $scope.allMovies = $scope.allMovies.concat(rtData.movies);
+
+      if (page <= totalPages) {
+        getMovies(++page, pageLimit);
+      }
+      if (page === totalPages) {
+        $scope.movies = $scope.allMovies.slice(0, 20);
+      }
+    });
+  };
+  getMovies($scope.page, pageLimit);
+
+  // Filter and/or sort movies
+
+  // Display (render?) movies
 
   // go to the next page
   $scope.nextPage = function() {
-
-    var lastPage = Math.ceil($scope.totalMovies / 20);
-    if ($scope.page === lastPage) { return;}
-
-    getMoviesData.getMovieData(++$scope.page)
-    .then(function(data) {
-      var rtData = data.data;
-      $scope.movies = rtData.movies;
-    });
 
   };
 
   // go to the next page
   $scope.prevPage = function() {
-
-    if ($scope.page === 1) { return; }
-
-    getMoviesData.getMovieData(--$scope.page)
-    .then(function(data) {
-      var rtData = data.data;
-      $scope.movies = rtData.movies;
-    });
 
   };
 
