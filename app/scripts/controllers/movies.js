@@ -21,10 +21,6 @@ app.controller('moviesController', function ($scope, $http, getMoviesData) {
     var rtData = data.data;
     console.log(rtData);
     $scope.movies = rtData.movies;
-    // $scope.moviePosters = [];
-    // for (var i = 0; i < $scope.movies.length; i++){
-    //   $scope.moviePosters.push($scope.movies[i].posters.thumbnail);
-    // }
   });
 
   $scope.awesomeThings = [
