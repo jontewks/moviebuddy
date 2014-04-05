@@ -1,96 +1,74 @@
 'use strict';
 
-angular
-  .module('moviebuddyApp', [
-    'ngRoute'
-  ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/dashboard.html',
-        controller: 'dashController'
-      })
-      .otherwise({
-        redirectTo: '/login',
-        templateUrl: 'views/login.html',
-        controller: 'loginController'
-      });
-  })
-  .directive('fb', ['$FB', function($FB) {
-    return {
-      restrict: "E",
-      replace: true,
-      template: "<div id='fb-root'></div>",
-      compile: function(tElem, tAttrs) {
-        return {
-          post: function(scope, iElem, iAttrs, controller) {
-            var fbAppId = iAttrs.appId || '';
-            var fb_params = {
-              appId: iAttrs.appId || "",
-              cookie: iAttrs.cookie || true,
-              status: iAttrs.status || true,
-              xfbml: iAttrs.xfbml || true
-            };
+var app = angular.module('moviebuddyApp', ['ngRoute']);
 
-            // Setup the post-load callback
-            window.fbAsyncInit = function() {
-              $FB._init(fb_params);
-              if('fbInit' in iAttrs) {
-                  iAttrs.fbInit();
-              }
-            };
+app.config(function ($routeProvider) {
+  $routeProvider
+    .when('/', {
+      templateUrl: 'views/dashboard.html',
+      controller: 'dashController'
+    })
+    .otherwise({
+      redirectTo: '/login',
+      templateUrl: 'views/login.html',
+      controller: 'loginController'
+    });
+});
 
-            (function(d, s, id, fbAppId) {
-              var js, fjs = d.getElementsByTagName(s)[0];
-              if (d.getElementById(id)) return;
-              js = d.createElement(s); js.id = id; js.async = true;
-              js.src = "//connect.facebook.net/en_US/all.js";
-              fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk', fbAppId));
-          }
-        };
-      }
-    };
-  }])
-  .factory('$FB', ['$rootScope', function($rootScope) {
-    var fbLoaded = false;
+app.run(function($rootScope, Facebook) {
+  $rootScope.Facebook = Facebook;
+});
 
-    // Our own customisations
-    var _fb =  {
-      loaded: fbLoaded,
-      isLoaded : function(){
-          return this.loaded;
-      },
-      authenticated : false,
-      isAuthenticated : function(){
-          return this.authenticated;
-      },
-      _init: function(params) {
-        var self = this;
-        if(window.FB) {
+app.factory('Facebook', function() {
+  var self = this;
+  this.auth = null;
 
-          // FIXME: Ugly hack to maintain both window.FB
-          // and our AngularJS-wrapped $FB with our customisations
-          angular.extend(window.FB, this);
-          angular.extend(this, window.FB);
+  return {
+    getAuth: function() {
+      return self.auth;
+    },
+    login: function() {
+      FB.login(function(response) {
+        if (response.authResponse) {
+          self.auth = response.authResponse;
+          console.log("in login success callback, response = ", response);
+          console.log("self = ", self);
+          FB.api('/me', function(response){
+            console.log("me object = ",response);
+            /*
 
-          // Set the flag
-          this.loaded = true;
-
-          // Initialise FB SDK
-          window.FB.init(params);
-          window.FB.Event.subscribe('auth.authResponseChange', function(response) {
-            if (response.status === 'connected') {
-              self.authenticated = true;
-            }
+            FIX MEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+             */
           });
-
-          if(!$rootScope.$$phase) {
-            $rootScope.$apply();
-          }
+        } else {
+          console.log('Facebook login failed', response);
         }
-      }
-    };
+      }, {scope: "basic_info, email, user_location"});
+    },
+    logout: function() {
+      FB.logout(function(response) {
+        if (response) {
+          self.auth = null;
+        } else {
+          console.log('Facebook logout failed.', response);
+        }
+      });
+    }
+  };
+});
 
-    return _fb;
-  }]);
+window.fbAsyncInit = function() {
+  FB.init({
+    appId: '1391051064505902'
+  });
+};
+
+// Load the SDK Asynchronously
+(function(d){
+  var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement('script'); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js";
+  ref.parentNode.insertBefore(js, ref);
+}(document));
+
