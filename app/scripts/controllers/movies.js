@@ -21,8 +21,10 @@ app.controller('moviesController', function ($scope, $http, getMoviesData) {
   $scope.allMovies = [];
   $scope.movies;
   $scope.totalPages;
+  $scope.morePages = true;
   var pageLimit = 20;
   $scope.page = 1;
+
 
   var getMovies = function(queryPage, queryPageLimit) {
     getMoviesData.getMovieData(queryPage, queryPageLimit)
@@ -33,30 +35,31 @@ app.controller('moviesController', function ($scope, $http, getMoviesData) {
 
       $scope.allMovies = $scope.allMovies.concat(rtData.movies);
       queryPage++;
+
       if (queryPage <= totalQueryPages) {
         getMovies(queryPage, queryPageLimit);
       }
       if (queryPage === totalQueryPages) {
-        $scope.movies = $scope.allMovies.slice(($scope.page - 1) * pageLimit, pageLimit * $scope.page);
+        $scope.movies = $scope.allMovies.slice(0, pageLimit * $scope.page);
       }
     });
   };
 
   getMovies(queryPage, queryPageLimit);
 
-  // go to the next page
-  $scope.nextPage = function() {
+  // view more movies
+  $scope.viewMore = function() {
     $scope.totalPages = Math.ceil($scope.allMovies.length / pageLimit);
-    if ($scope.page + 1 > $scope.totalPages) {return;}
-    $scope.movies = $scope.allMovies.slice($scope.page * pageLimit, pageLimit * (++$scope.page));
+    if ($scope.page + 1 > $scope.totalPages) { return; }
+    $scope.movies = $scope.allMovies.slice(0, pageLimit * (++$scope.page));
+    console.log($scope.page);
+    if ($scope.page + 1 > $scope.totalPages) {
+      $scope.morePages = !$scope.morePages;
+    }
   };
 
-  // go to the next page
-  $scope.prevPage = function() {
-    if ($scope.page - 1 <= 0) {return;}
-    $scope.page--;
-    $scope.movies = $scope.allMovies.slice(($scope.page - 1) * pageLimit, pageLimit * ($scope.page) );
-  };
+
+
 
   $scope.awesomeThings = [
     'HTML5 Boilerplate',
