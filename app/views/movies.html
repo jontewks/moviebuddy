@@ -1,10 +1,10 @@
 <h3 class='sectionHeader movies'>Movies</h3>
 
 <div class='sectionContainer movieDiv'>
-  <button class='filter' ng-click="order = 'ratings.audience_score'; reverse = true">Audience Score</button>
-  <button class='filter' ng-click="order = 'ratings.audience_score'; reverse = true">Critics' Score</button>
-  <button class='filter' ng-click="order = 'title'; reverse = false">Title</button>
-  <button class='filter' ng-click="order = 'runtime'; reverse = true">Runtime</button>
+  <button class='filter' ng-click="sortAllMovies('ratings.audience_score'); order = 'ratings.audience_score'; reverse = true">Audience Score</button>
+  <button class='filter' ng-click="sortAllMovies('ratings.critics_score'); order = 'ratings.critics_score'; reverse = true">Critics' Score</button>
+  <button class='filter' ng-click="sortAllMovies('title'); order = 'title'; reverse = false">Title</button>
+  <button class='filter' ng-click="sortAllMovies('runtime'); order = 'runtime'; reverse = true">Runtime</button>
   <button class='filter' ng-click="reverse = !reverse">Reverse</button>
   <input class='filter' type='text' placeholder='Search by movie title' ng-model='search.title'>
 

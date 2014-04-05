@@ -1,4 +1,5 @@
 'use strict';
+/* global _ */
 
 var app = angular.module('moviebuddyApp');
 
@@ -52,7 +53,6 @@ app.controller('moviesController', function ($scope, $http, getMoviesData) {
     $scope.totalPages = Math.ceil($scope.allMovies.length / pageLimit);
     if ($scope.page + 1 > $scope.totalPages) { return; }
     $scope.movies = $scope.allMovies.slice(0, pageLimit * (++$scope.page));
-    console.log($scope.page);
     if ($scope.page + 1 > $scope.totalPages) {
       $scope.morePages = false;
     }
@@ -61,6 +61,16 @@ app.controller('moviesController', function ($scope, $http, getMoviesData) {
   $scope.hideViewMoreButton = function(){
     return $scope.morePages;
   };
+
+  $scope.sortAllMovies = function(category){
+    $scope.movies = _.sortBy($scope.allMovies, function(movie){
+      if (category === 'runtime' && movie.runtime === '') {
+        movie.runtime = 0;
+      }
+      return movie.category;
+    });
+  };
+
 
 
 
