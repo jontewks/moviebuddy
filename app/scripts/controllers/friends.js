@@ -12,10 +12,11 @@ app.service('getFriends', function($http){
 	};
 });
 
-app.controller('friendsController', function ($scope, getFriends) {
+app.controller('friendsController', function ($scope, $rootScope,getFriends) {
 		$scope.friends = [];
 
 		// getFriends to be used
+		
 
 		var richard = {
 			imgPath: '../images/mainManRich.jpg',
