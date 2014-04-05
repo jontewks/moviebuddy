@@ -1,4 +1,5 @@
 'use strict';
+/* global _ */
 
 var app = angular.module('moviebuddyApp');
 
@@ -22,7 +23,7 @@ app.controller('moviesController', function ($scope, $http, getMoviesData) {
   $scope.movies;
   $scope.totalPages;
   $scope.morePages = true;
-  var pageLimit = 20;
+  var pageLimit = 10;
   $scope.page = 1;
 
 
@@ -52,7 +53,6 @@ app.controller('moviesController', function ($scope, $http, getMoviesData) {
     $scope.totalPages = Math.ceil($scope.allMovies.length / pageLimit);
     if ($scope.page + 1 > $scope.totalPages) { return; }
     $scope.movies = $scope.allMovies.slice(0, pageLimit * (++$scope.page));
-    console.log($scope.page);
     if ($scope.page + 1 > $scope.totalPages) {
       $scope.morePages = false;
     }
@@ -61,6 +61,48 @@ app.controller('moviesController', function ($scope, $http, getMoviesData) {
   $scope.hideViewMoreButton = function(){
     return $scope.morePages;
   };
+
+
+  // sort movies helper function
+  var sortMovies = function(collection, category) {
+    if (category.split('.').length > 1) {
+      category = category.split('.');
+    }
+
+    return collection.sort(function(a, b){
+      a[category] = (a[category] === '' && category === 'runtime') ? 0 : a[category];
+      a[category] = (a[category] === '' && category === 'runtime') ? 0 : a[category];
+
+      if (Array.isArray(category)) {
+        if (b[category[0]][category[1]] < a[category[0]][category[1]]) {
+          return -1;
+        } else {
+          return 1;
+        }
+        return 0;
+      } else {
+        if (b[category] < a[category]) {
+          return -1;
+        } else {
+          return 1;
+        }
+        return 0;
+      }
+    });
+  };
+
+  // sort all movies on button clicks
+  $scope.sortAllMovies = function(category){
+    $scope.allMovies = sortMovies($scope.allMovies, category);
+    $scope.movies = $scope.allMovies.slice(0, pageLimit * $scope.page);
+  };
+
+  // reverse the all movies storage
+  $scope.reverseAllMovies = function(){
+    $scope.allMovies.reverse();
+    $scope.movies = $scope.allMovies.slice(0, pageLimit * $scope.page);
+  };
+
 
 
 
