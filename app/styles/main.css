@@ -115,6 +115,65 @@ body {
   border: 1px solid #3b5998;
 }
 
+/* movies */
+.movieDiv {
+  font-size: .5em;
+}
+
+.movie {
+
+}
+
+.movieTitle {
+
+}
+
+.movieThumb {
+  height: 92px;
+  width: 62px;
+}
+
+.criticScore {
+
+}
+
+.audienceScore {
+
+}
+
+.cast {
+
+}
+
+.criticsConsensus {
+
+}
+
+.runtime {
+
+}
+
+.mpaaRating {
+
+}
+
+.synopsis {
+
+}
+
+.movieHR {
+  background-color: black;
+  height: 1px;
+}
+
+.prevPage {
+
+}
+
+.nextPage {
+
+}
+
 /* Custom page footer */
 .footer {
   padding-top: 19px;
@@ -183,6 +242,60 @@ body {
   .userDetail {
     padding-left: 0px;
     display: block;
+  }
+
+  /* movies */
+  .movieDiv {
+    font-size: .5em;
+  }
+
+  .movie {
+
+  }
+
+  .movieTitle {
+
+  }
+
+  .criticScore {
+
+  }
+
+  .audienceScore {
+
+  }
+
+  .cast {
+
+  }
+
+  .criticsConsensus {
+
+  }
+
+  .runtime {
+
+  }
+
+  .mpaaRating {
+
+  }
+
+  .synopsis {
+
+  }
+
+  .movieHR {
+    background-color: black;
+    height: 1px;
+  }
+
+  .prevPage {
+
+  }
+
+  .nextPage {
+
   }
 }
 

@@ -1,8 +1,8 @@
 'use strict';
 
-var dash = angular.module('moviebuddyApp');
+var app = angular.module('moviebuddyApp');
 
-dash.controller('loginController', function ($scope) {
+app.controller('loginController', function ($scope) {
     console.log('hitting the login script');
 
     $scope.awesomeThings = [
