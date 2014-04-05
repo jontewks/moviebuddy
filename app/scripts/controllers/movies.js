@@ -54,8 +54,12 @@ app.controller('moviesController', function ($scope, $http, getMoviesData) {
     $scope.movies = $scope.allMovies.slice(0, pageLimit * (++$scope.page));
     console.log($scope.page);
     if ($scope.page + 1 > $scope.totalPages) {
-      $scope.morePages = !$scope.morePages;
+      $scope.morePages = false;
     }
+  };
+
+  $scope.hideViewMoreButton = function(){
+    return $scope.morePages;
   };
 
 
