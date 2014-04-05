@@ -1,4 +1,3 @@
-/* global require, exports */
 var db = require('./db_config');
 var url = require('url');
 
@@ -20,7 +19,7 @@ exports.updateUser = function(req, res) {
   // });
 };
 
-exports.parseUser = function(req){
+exports.parseUser = function(req) {
   var data = req.body.info;
 
   return {
@@ -33,30 +32,31 @@ exports.parseUser = function(req){
   };
 };
 
+exports.getUser = function() {
 
-exports.getUser = function(){
 };
 
-exports.postUser = function(req,res){
+exports.postUser = function(req,res) {
   // check if user exists in db
   db.User.find({}).exec(function(err, user){
     // if you could not connect to db, throw error
-    if( err){
+    if (err) {
       throw 'in post user, could not connect to db';
     }
     // if user exists overwrite fields
-    if( user){
+    if (user) {
       console.log('in post user, user exists. user =' , user);
-
-
-    }
-    // create new user, save to db
-    else{
+    } else {
       var newUser = db.User(req.body);
       newUser.save();
     }
   });
 };
 
-exports.getOuting = function(){};
-exports.postOuting = function(){}
+exports.getOuting = function() {
+
+};
+
+exports.postOuting = function() {
+
+};
