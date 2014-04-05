@@ -1,7 +1,12 @@
 {
   "name": "moviebuddy",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "express": "^3.5.1",
+    "mongoose": "~3.8.8",
+    "bcrypt": "~0.7.7",
+    "passport": "~0.2.0"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-autoprefixer": "~0.4.0",
