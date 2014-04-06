@@ -9,6 +9,10 @@ app.config(function ($routeProvider) {
       templateUrl: 'views/dashboard.html',
       controller: 'dashController'
     })
+    .when('/api/friends', {
+      templateUrl: 'views/friends.html',
+      controller: 'friendsController'
+    })
     .otherwise({
       redirectTo: '/login',
       templateUrl: 'views/login.html',

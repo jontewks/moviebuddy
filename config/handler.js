@@ -1,11 +1,11 @@
 var db = require('./db_config');
 
 exports.getUser = function(req, res) {
-  return db.User.findOne({facebookId: req.params.facebookId}, function (err, user) {
+  db.user.findOne({facebookId: req.params.facebookId}, function (err, user) {
     if (!err) {
-      return res.send(user);
+      res.send(user);
     } else {
-      return console.log(err);
+      res.send(err);
     }
   });
 };
@@ -36,54 +36,73 @@ exports.postUser = function(req, res) {
     }
   });
 
-  return res.send(user);
+  res.send(user);
 };
 
 exports.putUser = function(req, res) {
   var body = req.body;
 
-  return db.User.findOne({facebookId: req.params.facebookId}, function (err, user) {
+  db.User.findOne({facebookId: req.params.facebookId}, function (err, user) {
     user.facebookToken = body.facebookToken;
     user.name           = body.name;
     user.email          = body.email;
     user.city           = body.city;
 
-    return user.save(function (err) {
+    user.save(function (err) {
       if (!err) {
         console.log("updated");
       } else {
         console.log(err);
       }
 
-      return res.send(user);
+      res.send(user);
     });
   });
 };
 
 exports.deleteUser = function(req, res) {
-  return db.User.findOne({facebookId: req.params.facebookId}, function (err, user) {
-    return user.remove(function (err) {
+  db.User.findOne({facebookId: req.params.facebookId}, function (err, user) {
+    user.remove(function (err) {
       if (!err) {
         console.log("removed");
-        return res.send();
+        res.send();
       } else {
-        console.log(err);
+        res.send(err);
       }
     });
   });
 };
 
-exports.getOuting = function(req, res){
-  return db.Outing.findById(req.params.id, function(err, outing){
-    if(!err){
-      return res.send(user);
-    }else{
-      return console.log(err);
+exports.getFriends = function(req, res) {
+  db.User.findOne({facebookId: req.params[0]}, function(err, user) {
+    if (!err && user) {
+      var usersFriends = [];
+
+      for (var i = 0; i < user.friends.length; i++) {
+        db.User.find({facebookId: user.friends[i]}, function(err, friend) {
+          usersFriends.push(friend[0]);
+          if (i === user.friends.length) {
+            res.send(usersFriends);
+          }
+        });
+      }
+    } else {
+      res.send(err);
     }
   });
 };
 
-exports.postOuting = function(req, res){
+exports.getOuting = function(req, res) {
+  db.Outing.findById(req.params.id, function(err, outing){
+    if(!err){
+      res.send(user);
+    }else{
+      res.send(err);
+    }
+  });
+};
+
+exports.postOuting = function(req, res) {
   var body = req.body;
   var outing = new db.Outing({
     theaterName:   body.theaterName,
@@ -96,18 +115,18 @@ exports.postOuting = function(req, res){
 
   outing.save(function (err) {
     if (!err) {
-      return console.log("created");
+      console.log("created");
     } else {
-      return console.log(err);
+      console.log(err);
     }
   });
 
-  return res.send(outing);
+  res.send(outing);
 };
 
-exports.putOuting = function(req, res){
+exports.putOuting = function(req, res) {
   var body = req.body;
-  return db.Outing.findById(req.params.id, function(err, outing){
+  db.Outing.findById(req.params.id, function(err, outing){
     outing.theaterName    = body.theaterName;
     outing.location       = body.location;
     outing.movie          = body.movie;
@@ -115,26 +134,26 @@ exports.putOuting = function(req, res){
     outing.peopleGoing    = body.peopleGoing;
     outing.createdBy      = body.createdBy;
 
-    return outing.save(function(err){
-      if(!err){
+    outing.save(function(err){
+      if (!err){
         console.log("updated");
-      }else{
+      } else {
         console.log(err);
       }
 
-      return res.send(user);
+      res.send(user);
     });
   });
 };
 
-exports.deleteOuting = function(req, res){
-  return db.Outing.findById(req.params.id, function(err, outing){
-    return user.remove(function(err){
+exports.deleteOuting = function(req, res) {
+  db.Outing.findById(req.params.id, function(err, outing){
+    user.remove(function(err){
       if(!err){
         console.log("removed!");
-        return res.send();
+        res.send();
       } else {
-        console.log(err);
+        res.send(err);
       }
     });
   });
