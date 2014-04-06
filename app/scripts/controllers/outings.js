@@ -31,6 +31,35 @@ app.controller('outingsController', function ($scope, getOutings) {
     });
   });
 
+  var newOutingButtonVisible = true;
+  var newOutingFormVisible = false;
+
+  $scope.showNewOutingButton = function() {
+    return newOutingButtonVisible;
+  };
+
+  $scope.showNewOutingForm = function() {
+    return newOutingFormVisible;
+  };
+
+  $scope.newOuting = function() {
+    newOutingButtonVisible = false;
+    newOutingFormVisible = true;
+  };
+
+  $scope.cancelNewOuting = function() {
+    newOutingButtonVisible = true;
+    newOutingFormVisible = false;
+  };
+
+  $scope.createOuting = function() {
+    // Create outing object. 
+    // Submit outing object to server. 
+    // Clear 'newOutingForm'?
+    $scope.newOutingButtonVisible = true;
+    $scope.newOutingFormVisible = false;
+  };
+
   $scope.awesomeThings = [
     'HTML5 Boilerplate',
     'AngularJS',

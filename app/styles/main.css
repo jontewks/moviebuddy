@@ -36,7 +36,6 @@ body {
   padding: 14px 24px;
 }
 
-
 .container {
   background-color: white;
   border-radius: 5px;
@@ -174,6 +173,38 @@ body {
 
 }
 
+/* Outings */
+.movie {
+
+}
+.date {
+
+}
+.theater {
+
+}
+.address {
+
+}
+.city {
+
+}
+.state {
+
+}
+.zip {
+
+}
+.invitees {
+
+}
+.attendees {
+
+}
+.creator {
+
+}
+
 /* Custom page footer */
 .footer {
   padding-top: 19px;
@@ -297,6 +328,37 @@ body {
   .nextPage {
 
   }
+  /* Outings */
+  .movie {
+
+  }
+  .date {
+
+  }
+  .theater {
+
+  }
+  .address {
+
+  }
+  .city {
+
+  }
+  .state {
+
+  }
+  .zip {
+
+  }
+  .invitees {
+
+  }
+  .attendees {
+
+  }
+  .creator {
+
+  }
 }
 
 /* Supporting marketing content */
@@ -306,4 +368,3 @@ body {
 .marketing p + h4 {
   margin-top: 28px;
 }
-
