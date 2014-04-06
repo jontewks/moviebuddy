@@ -25,10 +25,16 @@ app.config(function ($routeProvider) {
 });
 
 app.run(function($rootScope, $location) {
-  // $rootScope.Facebook = Facebook;
   $rootScope.loggedIn = false;
 
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: '1391051064505902'
+    });
+  };
+
   $rootScope.$watch('loggedIn', function(){
+    console.log('rootscope.loggedin: ' + $rootScope.loggedIn);
     if ($rootScope.loggedIn === true) {
       $location.path('/dash');
     } else {
@@ -40,13 +46,13 @@ app.run(function($rootScope, $location) {
 app.service('authentication', function($rootScope) {
 
   this.fbLogin = function(){
-    return FB.login(function(response){
+    FB.login(function(response){
       if (response.authResponse){
         FB.api('/me', function(response){
           $rootScope.me = response;
-
+          $rootScope.loggedIn = true;
+          $rootScope.$apply();
         });
-        $rootScope.loggedIn = true;
       }
     });
   };
@@ -55,59 +61,12 @@ app.service('authentication', function($rootScope) {
     FB.logout(function() {
       console.log('hitting the logout baby');
       $rootScope.loggedIn = false;
+      $rootScope.$apply();
     });
   };
 
-
 });
 
-
-
-// app.factory('Facebook', function($location) {
-//   var self = this;
-
-//   return {
-//     auth : null,
-//     loggedIn : false,
-//     getAuth: function() {
-//       return self.auth;
-//     },
-//     login: function(callback) {
-//       FB.login(function(response) {
-//         if (response.authResponse) {
-//           this.auth = response.authResponse;
-//           this.loggedIn = true;
-//           // console.log('in login success callback, response = ', response);
-//           // console.log('self = ', self); 
-//           // FB.api('/me', function(response){
-//           //   console.log('me object = ',response);
-//           //   /*
-//           //   FIX MEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
-//           //    */
-//           // });
-//         } else {
-//           console.log('Facebook login failed', response);
-//         }
-//       }, {scope: 'basic_info, email, user_location'});
-
-//     },
-//     logout: function() {
-//       FB.logout(function(response) {
-//         if (response) {
-//           self.auth = null;
-//         } else {
-//           console.log('Facebook logout failed.', response);
-//         }
-//       });
-//     }
-//   };
-// });
-
-window.fbAsyncInit = function() {
-  FB.init({
-    appId: '1391051064505902'
-  });
-};
 
 // Load the SDK Asynchronously
 (function(d){

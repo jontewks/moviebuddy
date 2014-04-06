@@ -2,7 +2,7 @@
 
 var app = angular.module('moviebuddyApp');
 
-app.controller('loginController', function ($scope, $rootScope, $http, $location, authentication) {
+app.controller('loginController', function ($scope, $http, authentication) {
     $scope.updateDB = function() {
       FB.api('/me', function(response){
         $http({
