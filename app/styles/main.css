@@ -85,6 +85,7 @@ body {
   font-weight: 900;
   font-size: 2em;
   letter-spacing: .1em;
+  cursor: pointer;
 }
 
 .sectionContainer {
@@ -100,28 +101,40 @@ body {
 
 /* login fun */
 
-.header {
+/*.header {
   height: 100px;
   background: url('../images/grey_wash_wall.png');
 
-}
+}*/
 
 .loginContainer {
   width: 100%;
-  background: #E0E4CC;
+  background: url('../images/bg.jpg');
 }
 
 .loginHeaderDiv {
-  padding-top: 20px;
+  padding-bottom: 15px;
+  background: url('../images/grey_wash_wall.png');
 }
 
 .loginHeader {
   font-family: 'Bebas';
   letter-spacing: .05em;
-  color: #333;
+  color: white;
   font-size: 5em;
   text-transform: uppercase;
   text-align: center;
+  word-spacing: .1em;
+  text-decoration: underline;
+}
+
+.loginHeaderTwo {
+  color: white ;
+  text-align: center; 
+  font-family: 'Bebas';
+  letter-spacing: .05em;
+  word-spacing: .2em;
+  margin-top: 10px;
 }
 
 .logoDiv {
@@ -134,29 +147,30 @@ body {
 
 .loginDiv {
   text-align: center;
-  padding: 50px;
+  padding: 10px;
   margin: auto;
-  margin-top: 75px;
-  border-width: 10px 0px 10px 0px;
-  -moz-border-image:url('../images/grey_wash_wall.png') 25 30 10 20 repeat stretch;
-  -webkit-border-image:url('../images/grey_wash_wall.png') 25 30 10 20 repeat stretch;
-  border-image:url('../images/grey_wash_wall.png') 25 30 10 20 repeat stretch;
+  margin-top: 170px;
+  border-radius: 15px;
+  width: 400px;
+  background: url('../images/grey_wash_wall.png');
 }
 
 .fbLogin {
-  height: 100px;
+  height: 80px;
   width: 400px;
   border: 0px;
   background: url('../images/fblogin.png');
   background-position: center;
+  cursor: pointer;
 }
+
 
 .fbLogin:focus {
   outline: 0;
 }
 
 .loginFooter {
-  height: 100px;
+  height: 150px;
   background: url('../images/grey_wash_wall.png');
   bottom: 0;
   margin: 0 auto;
@@ -308,6 +322,7 @@ body {
   padding-top: 15px;
   margin-bottom: 10px;
   overflow: ellipsis;
+  color: lightgrey;
 }
 
 .movieThumb {
@@ -353,6 +368,7 @@ body {
 
 .criticsConsensus {
   display: block;
+  cursor: pointer;
 }
 
 .runtime {
@@ -365,6 +381,7 @@ body {
 
 .synopsis {
   display: block;
+  cursor: pointer;
 
 }
 
@@ -435,9 +452,12 @@ body {
     font-size: 7em;
   }
 
+  .loginHeaderTwo {
+
+  }
+
   .loginDiv {
-    margin-top: 50px;
-    padding: 100px;
+    margin-top: 150px;
   }
 
   .fbLogin {

@@ -15,16 +15,16 @@
     <img src={{movie.posters.thumbnail}} class='movieThumb'>
     <div class='infoOne'>
       <span class='movieTitle'><u>{{movie.title}}</u></span>
-      <span class='criticScore'>Critics Score: {{movie.ratings.critics_score}}</span>
-      <span class='audienceScore'>Audience Score: {{movie.ratings.audience_score}}</span>
+      <span class='criticScore'>Critics Score: {{movie.ratings.critics_score}}%</span>
+      <span class='audienceScore'>Audience Score: {{movie.ratings.audience_score}}%</span>
       <div class='cast'>
         <span class='actor' ng-repeat='actor in movie.abridged_cast'>{{actor.name}} </span> 
       </div>
     </div>
     <div class='infoTwo'>
-      <span class='runtime'>Runtime: {{movie.runtime}}</span>
-      <span class='mpaaRating'>MPAA-Rating: {{movie.mpaa_rating}}</span>
-      <span ng-controller='criticsController' ng-click='toggleText(movie.critics_consensus)' class='criticsConsensus'>Critics' Consensus: {{movie.critics_consensus | limitTo:textLimit}}{{moreText}}</span>
+      <span class='runtime'>Runtime: {{movie.runtime}} min.</span>
+      <span class='mpaaRating'>Rated: {{movie.mpaa_rating}}</span>
+      <span ng-controller='criticsController' ng-click='toggleText(movie.critics_consensus)' class='criticsConsensus'>Critics Consensus: {{movie.critics_consensus | limitTo:textLimit}}{{moreText}}</span>
       <span ng-controller='synopsisController' ng-click='toggleText(movie.synopsis)' class='synopsis'>Synopsis: {{movie.synopsis | limitTo:textLimit}}{{moreText}}</span>
     </div>
     <hr class='movieHR'>
