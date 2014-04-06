@@ -25,6 +25,7 @@ app.controller('moviesController', function ($scope, $http, getMoviesData) {
   $scope.morePages = true;
   var pageLimit = 10;
   $scope.page = 1;
+  $scope.textLimit = 40;
 
 
   var getMovies = function(queryPage, queryPageLimit) {
@@ -101,6 +102,10 @@ app.controller('moviesController', function ($scope, $http, getMoviesData) {
   $scope.reverseAllMovies = function(){
     $scope.allMovies.reverse();
     $scope.movies = $scope.allMovies.slice(0, pageLimit * $scope.page);
+  };
+
+  $scope.toggleText = function(text){
+    $scope.textLimit = $scope.textLimit === 40 ? $scope.textLimit = text.length : $scope.textLimit = 40;
   };
 
 

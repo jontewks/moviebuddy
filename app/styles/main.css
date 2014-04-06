@@ -191,7 +191,10 @@ body {
 }
 
 .movie {
-
+  display: block;
+  padding-top: 15px;
+  margin-bottom: 10px;
+  overflow: ellipsis;
 }
 
 .movieThumb {
@@ -200,10 +203,17 @@ body {
 }
 
 .infoOne {
-  display: inline-block;
+  float: left;
   width: 200px;
+  height: 180px;
   margin-left: 25px;
-  border: 1px solid red;
+}
+
+.infoTwo{
+  width: 200px;
+  height: 180px;
+  margin-left: 25px;
+  display: inline-block;
 }
 
 .movieTitle {
@@ -220,9 +230,8 @@ body {
 }
 
 .cast {
-  width: 200px;
   display: block;
-  overflow: scroll;
+  overflow: ellipsis;
 }
 
 .actor {
@@ -230,23 +239,35 @@ body {
 }
 
 .criticsConsensus {
-
+  display: block;
 }
 
 .runtime {
-
+  display: block;
 }
 
 .mpaaRating {
-
+  display: block;
 }
 
-.synposis {
+.synopsis {
+  display: block;
 
 }
 
 .movieHR {
+  margin-bottom: 10px;
+}
 
+.viewMore {
+  display: block;
+  margin: auto auto;
+  margin-top: 10px;  height: 30px;
+  width: 100px;
+  background-color: white;
+  border-radius: 2px;
+  border-right: 2px solid white;
+  border-top: 2px solid white;
 }
 
 /* outings */
@@ -258,7 +279,7 @@ body {
 .outingsSectionHeader {
   padding-top: 40px;
   padding-bottom: 40px;
-  background-color: rgba(170, 124, 203, .75);
+  background-color: rgba(51, 199, 240, 1);
 }
 
 /* footer */
