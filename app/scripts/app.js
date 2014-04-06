@@ -33,14 +33,14 @@ app.run(function($rootScope, $location) {
     });
   };
 
-  $rootScope.$watch('loggedIn', function(){
-    console.log('rootscope.loggedin: ' + $rootScope.loggedIn);
-    if ($rootScope.loggedIn === true) {
-      $location.path('/dash');
-    } else {
-      $location.path('/');
-    }
-  });
+  // $rootScope.$watch('loggedIn', function(){
+  //   console.log('rootscope.loggedin: ' + $rootScope.loggedIn);
+  //   if ($rootScope.loggedIn === true) {
+  //     $location.path('/dash');
+  //   } else {
+  //     $location.path('/');
+  //   }
+  // });
 });
 
 app.service('authentication', function($rootScope) {

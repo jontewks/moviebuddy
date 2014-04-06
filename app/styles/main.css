@@ -1,148 +1,232 @@
 /* Space out content a bit */
+
+/* Google Fonts
+
+font-family: 'Inder', sans-serif;
+font-family: 'Viga', sans-serif;
+font-family: 'Hammersmith One', sans-serif;
+font-family: 'Gentium Book Basic', serif;
+
+
+  Colors Used
+
+rgba(51, 199, 240, 1) - light blueish
+rgba(244, 147, 37, 1) -- burnt orange
+*/
+
+/* Global Reset */
+html, body, div, section, article, aside, header, hgroup, footer, nav, h1, h2, h3, h4, h5, h6, p, blockquote, address, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+html {
+
+}
+
 body {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  background: url('../images/photography.png');
+  font-family: 'Hammersmith One', sans-serif;
 }
-
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-/* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-}
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
-  padding-bottom: 0px;
-}
-
-.jumbotron {
-  padding: 0px !important;
-  border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 10px;
-  text-align: left;
-}
-.jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
-}
-
 
 .container {
-  background-color: white;
-  border-radius: 5px;
-  max-width: 80%;
+
 }
 
-/* dashboard elements */
+.headerDiv {
+  text-align: center;
+  background: url('../images/grey_wash_wall.png');
+  height: 100px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+}
+
+.appHeader {
+  background: url('../images/apple.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 80px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100px;
+  border-radius: 50%;
+  margin: auto;
+  background-color: white;
+}
+
+.sectionDiv {
+
+}
 
 .sectionHeader {
-  color: white;
-  padding: 2px;
-  border-radius: 3px;
   text-align: center;
+  font-weight: 900;
+  font-size: 2em;
+  letter-spacing: .1em;
 }
 
 .sectionContainer {
-  text-align: center;
-  height: 100%;
+  padding: 20px;
   display: none;
+  background: url('../images/grey_wash_wall.png');
+}
+
+.sectionContainerProfile {
+  color: black;
+  padding: 20px;
+}
+
+.profileSection{
+  height: 200px;
+  min-width: 700px;
+  text-transform: uppercase;
+  font-size: .75em;
 }
 
 .profile {
-  background-color: rgba(94, 243, 143, 1);
-}
-
-.friends {
-  background-color: rgba(243, 134, 94, 1);
-}
-
-.movies {
-  background-color: rgba(94, 208, 243, 1);
-}
-
-.outings {
-  background-color: rgba(243, 94, 101, 1);
+  margin-top: 20px;
+  min-width: 600px;
+  width: auto;
 }
 
 #profilePicDiv {
-
+  float: left;
+  margin-left: 15px;
 }
 
 #profilePic {
-  border-radius: 3px;
-  width: 180px;
-  border: 5px solid white;
-  margin-bottom: 10px;
-  margin-left: 10px;
+  height: 150px;
+  width: 140px;
+  border-radius: 20px;
 }
 
 #userDetails {
-  width: 400px;
-  margin: auto auto;
+  margin-top: 10px;
+  margin-left: 30px;
+  width: 200px;
+  float: left;
 }
 
 #userMovieDetails {
-  width: 400px;
-  margin: auto auto;
+  margin-top: 10px;
+  margin-left: 30px;
+  display: inline-block;
+  width: 200px;
 }
 
 .userDetail {
-  padding-left: 100px;
-  text-align: left;
+  width: 200px;
+  line-height: 2.5em;
   display: block;
 }
 
-/* login elements */
+/* friends */
 
-.loginDiv {
-  margin-top: 50px;
-  padding: 120px !important;
-  text-align: center;
+.sectionContainerFriends {
+  padding-left: 0px;
 }
 
-.btn-success {
-  background-color: #3b5998;
-  border: 1px solid #3b5998;
+.friendsSection {
+  padding: 0px !important;
+}
+
+.friendsSectionHeader {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: rgba(244, 147, 37, .75);
+}
+
+.friend {
+  height: 75px;
+  padding: 10px;
+  background-color: lightgrey;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.friendsPhoto {
+  height: 70px;
+  border-radius: 20px;
+  float: left;
+}
+
+.friendName {
+  display: inline-block;
+  margin-left: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 2em;
 }
 
 /* movies */
-.movieDiv {
-  font-size: .5em;
+
+.moviesSection {
+
+}
+
+.moviesSectionHeader {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: rgba(37, 244, 154, .75);
+}
+
+.filters {
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+.filter {
+  height: 30px;
+  width: 100px;
+  background-color: white;
+  border-radius: 2px;
+  border-right: 2px solid white;
+  border-top: 2px solid white;
+}
+
+.searchFilter {
+  height: 23px;
 }
 
 .movie {
 
 }
 
-.movieTitle {
-
+.movieThumb {
+  height: 100px;
+  float: left;
 }
 
-.movieThumb {
-  height: 92px;
-  width: 62px;
+.infoOne {
+  display: inline-block;
+  width: 200px;
+  margin-left: 25px;
+  border: 1px solid red;
+}
+
+.movieTitle {
+  display: block;
 }
 
 .criticScore {
+  display: block;
 
 }
 
 .audienceScore {
-
+  display: block;
 }
 
 .cast {
+  width: 200px;
+  display: block;
+  overflow: scroll;
+}
 
+.actor {
+  
 }
 
 .criticsConsensus {
@@ -157,166 +241,33 @@ body {
 
 }
 
-.synopsis {
+.synposis {
 
 }
 
 .movieHR {
-  background-color: black;
-  height: 1px;
-}
-
-.prevPage {
 
 }
 
-.nextPage {
+/* outings */
+
+.outingsSection {
 
 }
 
-/* Custom page footer */
-.footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
+.outingsSectionHeader {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: rgba(170, 124, 203, .75);
 }
 
-/* Customize container */
+/* footer */
+
+#footer {
+  background: url('../images/grey_wash_wall.png');
+  height: 100px;
+}
+
 @media (min-width: 990px) {
-  .container {
-    background-color: white;
-    border-radius: 5px;
-    max-width: 1000px;
-  }
 
-  .container-narrow > hr {
-    margin: 30px 0;
-  }
-
-  /* Main marketing message and sign up button */
-  .jumbotron {
-    padding: 0px !important;
-    border-bottom: 1px solid #e5e5e5;
-    margin-bottom: 10px;
-    text-align: left;
-  }
-  .jumbotron .btn {
-    font-size: 21px;
-    padding: 14px 24px;
-  }
-
-  /* login elements */
-
-  .loginDiv {
-    margin-top: 50px;
-    padding: 120px !important;
-    text-align: center;
-  }
-
-  .btn-success {
-    background-color: #3b5998;
-    border: 1px solid #3b5998;
-  }
-
-  .sectionHeader {
-    text-align: center;
-  }
-
-  .sectionContainer {
-    padding-bottom: 10px;
-    display: block;
-  }
-
-  #profilePicDiv {
-    margin-left: 20px;
-    float: left;
-  }
-
-  #profilePic {
-    border-radius: 3px;
-    height: 200px;
-    width: 180px;
-    border: 5px solid white;
-    margin-bottom: 10px;
-    margin-left: 10px;
-  }
-
-  #userDetails {
-    display: inline-block;
-    padding: 10px;
-    width: 300px;
-  }
-
-  #userMovieDetails {
-    display: inline-block;
-    width: 300px;
-  }
-
-  .userDetail {
-    padding-left: 0px;
-    display: block;
-  }
-
-  /* movies */
-  .movieDiv {
-    font-size: .5em;
-  }
-
-  .movie {
-
-  }
-
-  .movieTitle {
-
-  }
-
-  .criticScore {
-
-  }
-
-  .audienceScore {
-
-  }
-
-  .cast {
-
-  }
-
-  .criticsConsensus {
-
-  }
-
-  .runtime {
-
-  }
-
-  .mpaaRating {
-
-  }
-
-  .synopsis {
-
-  }
-
-  .movieHR {
-    background-color: black;
-    height: 1px;
-  }
-
-  .prevPage {
-
-  }
-
-  .nextPage {
-
-  }
 }
-
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
-}
-.marketing p + h4 {
-  margin-top: 28px;
-}
-

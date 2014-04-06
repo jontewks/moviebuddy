@@ -30,9 +30,8 @@ app.controller('profileController', function ($scope, getUsers) {
   // *** Want to nest this in a promise or callback. ***
   getUsers.getUser('1234')
   .then(function(data) {
-    console.log(data);
     var user = data.data;
-    $scope.testUser         = user.testUser;
+    $scope.testUser         = user.name;
     $scope.testHometown     = user.hometown;
     $scope.testFavMovie     = user.favMovie;
     $scope.testFavGenre     = user.favGenre;
