@@ -173,21 +173,36 @@ body {
 }
 
 .filters {
-  margin: auto;
-  margin-bottom: 10px;
+  text-align: center;
+  min-width: 650px;
 }
 
 .filter {
   height: 30px;
   width: 100px;
+  margin-bottom: 10px;
   background-color: white;
   border-radius: 2px;
   border-right: 2px solid white;
   border-top: 2px solid white;
+
 }
 
 .searchFilter {
-  height: 23px;
+  height: 30px;
+  width: 300px;
+  border: 0px;
+  border-bottom: 3px solid black;
+  padding: 0px;
+  text-transform: uppercase;
+  line-height: 1em;
+  font-size: 1.2em;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.searchFilter:focus {
+  outline: 0;
 }
 
 .movie {
