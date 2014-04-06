@@ -1,5 +1,20 @@
 /* Space out content a bit */
 
+/* web fonts */
+
+
+@font-face {
+    font-family: 'bebasregular';
+    src: url('../fonts/Bebas/bebas___-webfont.eot');
+    src: url('../fonts/Bebas/bebas___-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Bebas/bebas___-webfont.woff') format('woff'),
+         url('../fonts/Bebas/bebas___-webfont.ttf') format('truetype'),
+         url('../fonts/Bebas/bebas___-webfont.svg#bebasregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 /* Google Fonts
 
 font-family: 'Inder', sans-serif;
@@ -10,8 +25,10 @@ font-family: 'Gentium Book Basic', serif;
 
   Colors Used
 
-rgba(51, 199, 240, 1) - light blueish
-rgba(244, 147, 37, 1) -- burnt orange
+#00A8C6 - light blueish
+#F38630 - burnt orange
+rgba(37, 244, 154, .75) - mint
+#E0E4CC - off white
 */
 
 /* Global Reset */
@@ -27,6 +44,8 @@ html {
 
 body {
   font-family: 'Hammersmith One', sans-serif;
+  color: #333;
+  background: #E0E4CC;
 }
 
 .container {
@@ -38,19 +57,19 @@ body {
   background: url('../images/grey_wash_wall.png');
   height: 100px;
   padding-top: 10px;
-  padding-bottom: 10px;
+  padding-bottom: 30px;
 
 }
 
 .appHeader {
-  background: url('../images/apple.png');
+  background: url('../images/bearLogo.png');
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  height: 80px;
+  height: 100px;
   padding-top: 10px;
   padding-bottom: 10px;
-  width: 100px;
+  width: 120px;
   border-radius: 50%;
   margin: auto;
   background-color: white;
@@ -77,6 +96,70 @@ body {
   color: black;
   padding: 20px;
 }
+
+/* login fun */
+
+.header {
+  height: 100px;
+  background: #00A8C6;
+}
+
+.loginContainer {
+  width: 100%;
+  background: #E0E4CC;
+}
+
+.loginHeaderDiv {
+  padding-top: 20px;
+}
+
+.loginHeader {
+  font-family: 'Bebas';
+  letter-spacing: .05em;
+  font-size: 5em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.logoDiv {
+
+}
+
+.logo {
+
+}
+
+.loginDiv {
+  text-align: center;
+  padding: 50px;
+  margin: auto;
+  margin-top: 30px;
+  border-radius: 10px;
+  border: 10px solid #00A8C6;
+  background: #E0E4CC;
+  width: 400px;
+}
+
+.fbLogin {
+  height: 100px;
+  width: 400px;
+  border: 0px;
+  background: url('../images/fblogin.png');
+  background-position: center;
+}
+
+.fbLogin:focus {
+  outline: 0;
+}
+
+.loginFooter {
+  height: 100px;
+  background: #00A8C6;
+  bottom: 0;
+  margin: 0 auto;
+}
+
+/* Profile Fun */
 
 .profileSection{
   height: 200px;
@@ -135,7 +218,7 @@ body {
 .friendsSectionHeader {
   padding-top: 40px;
   padding-bottom: 40px;
-  background-color: rgba(244, 147, 37, .75);
+  background-color: #F38630;
 }
 
 .friend {
@@ -178,14 +261,25 @@ body {
 }
 
 .filter {
-  height: 30px;
-  width: 100px;
-  margin-bottom: 10px;
-  background-color: white;
-  border-radius: 2px;
-  border-right: 2px solid white;
-  border-top: 2px solid white;
+  padding: 8px 15px;
+  cursor: pointer;
+  border: 1px solid #00A8C6;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #ffffff;
+  background-color: #00A8C6;
+  text-transform: uppercase;
+}
 
+.filter:hover {
+  background-color: rgba(37, 244, 154, .75);
+  border-color: rgba(37, 244, 154, .75);
+  color: #ffffff;
+}
+
+.filter:focus {
+  outline: 0;
 }
 
 .searchFilter {
@@ -194,6 +288,7 @@ body {
   border: 0px;
   border-bottom: 3px solid black;
   padding: 0px;
+  margin-top: 10px;
   text-transform: uppercase;
   line-height: 1em;
   font-size: 1.2em;
@@ -274,16 +369,6 @@ body {
   margin-bottom: 10px;
 }
 
-.viewMore {
-  display: block;
-  margin: auto auto;
-  margin-top: 10px;  height: 30px;
-  width: 100px;
-  background-color: white;
-  border-radius: 2px;
-  border-right: 2px solid white;
-  border-top: 2px solid white;
-}
 
 /* outings */
 
@@ -294,16 +379,229 @@ body {
 .outingsSectionHeader {
   padding-top: 40px;
   padding-bottom: 40px;
-  background-color: rgba(51, 199, 240, 1);
+  background-color: #00A8C6;
 }
 
 /* footer */
 
-#footer {
+.footer {
   background: url('../images/grey_wash_wall.png');
   height: 100px;
 }
 
 @media (min-width: 990px) {
+  .container {
 
+  }
+
+  .headerDiv {
+
+  }
+
+  .appHeader {
+
+  }
+
+  .sectionDiv {
+
+  }
+
+  .sectionHeader {
+
+  }
+
+  .sectionContainer {
+
+  }
+
+  .sectionContainerProfile {
+    min-width: 1100px;
+  }
+
+  /* login fun */
+
+  .loginContainer {
+
+  }
+
+  .loginHeaderDiv {
+
+  }
+
+  .loginHeader {
+    font-size: 7em;
+  }
+
+  .loginDiv {
+    padding: 100px;
+  }
+
+  .fbLogin {
+
+  }
+
+  .fbLogin:focus {
+
+  }
+
+  /* profile fun */
+
+  .profileSection{
+
+  }
+
+  .profile {
+
+  }
+
+  #profilePicDiv {
+    margin-left: 50px;
+  }
+
+  #profilePic {
+
+  }
+
+  #userDetails {
+    margin-top: 0px;
+    width: 350px;
+    margin-left: 150px;
+  }
+
+  #userMovieDetails {
+    margin-top: 0px;
+    width: 350px;
+  }
+
+  .userDetail {
+    font-size: 1.5em;
+    width: 350px;
+  }
+
+  /* friends */
+
+  .sectionContainerFriends {
+
+  }
+
+  .friendsSection {
+
+  }
+
+  .friendsSectionHeader {
+
+  }
+
+  .friend {
+
+  }
+
+  .friendsPhoto {
+
+  }
+
+  .friendName {
+
+  }
+
+  /* movies */
+
+  .moviesSection {
+
+  }
+
+  .moviesSectionHeader {
+
+  }
+
+  .filters {
+    min-width: 1050px;
+  }
+
+  .filter {
+    width: 200px;
+    height: 50px;
+
+  }
+
+  .filter:hover {
+
+  }
+
+  .searchFilter {
+    height: 50px;
+    font-size: 1.5em;
+  }
+
+  .searchFilter:focus {
+
+  }
+
+  .movie {
+    font-size: 1.3em;
+    min-width: 1050px;
+  }
+
+  .movieThumb {
+    margin-left: 50px;
+  }
+
+  .infoOne {
+    width: 400px;
+  }
+
+  .infoTwo{
+    width: 400px;
+  }
+
+  .movieTitle {
+
+  }
+
+  .criticScore {
+
+  }
+
+  .audienceScore {
+
+  }
+
+  .cast {
+
+  }
+
+  .actor {
+    
+  }
+
+  .criticsConsensus {
+
+  }
+
+  .runtime {
+
+  }
+
+  .mpaaRating {
+
+  }
+
+  .synopsis {
+
+  }
+
+  .movieHR {
+
+  }
+
+
+  /* outings */
+
+  .outingsSection {
+
+  }
+
+  .outingsSectionHeader {
+
+  }
 }

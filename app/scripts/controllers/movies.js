@@ -44,20 +44,6 @@ app.controller('moviesController', function ($scope, $http, getMoviesData) {
 
   getMovies(queryPage, queryPageLimit);
 
-  // view more movies
-  $scope.viewMore = function() {
-    $scope.totalPages = Math.ceil($scope.allMovies.length / pageLimit);
-    if ($scope.page + 1 > $scope.totalPages) { return; }
-    $scope.movies = $scope.allMovies.slice(0, pageLimit * (++$scope.page));
-    if ($scope.page + 1 > $scope.totalPages) {
-      $scope.morePages = false;
-    }
-  };
-
-  $scope.hideViewMoreButton = function(){
-    return $scope.morePages;
-  };
-
 
   // sort movies helper function
   var sortMovies = function(collection, category) {
