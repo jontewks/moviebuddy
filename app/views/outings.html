@@ -1,45 +1,39 @@
-<h3 class='sectionHeader outings'>Movie Outings Feed</h3>
+<h3 class="sectionHeader outings">Movie Outings Feed</h3>
 
-<div class='sectionContainer'>
+<div class="sectionContainer">
 
-  <button ng-click='newOuting()' ng-show='showNewOutingButton()' class='newOutingButton'>New Outing</button>
+  <button ng-click="newOuting()" ng-show="showNewOutingButton()" class="newOutingButton">New Outing</button>
 
-  <form ng-show='showNewOutingForm()' name='newOutingForm'>
+  <form name="outingForm" ng-controller="outingFormCtrl" ng-show="showNewOutingForm()" class="outingForm">
 
-    <!-- Type-filter-select from all movie titles. -->
-    <input data-ng-model='search.title' [required] name='outingMovie' type='text' class='filter' placeholder='Movie'>
-
-    <input data-ng-model='select.date' name='outingDate' type='date'>
-
-    <!-- Type-filter-select from theater names in user's current city. -->
-    <input data-ng-model='search.theater' name='outingTheater' class='filter' type='text' placeholder='Theater'>
-    <!-- *** TO-DO: Add button to change current city. -->
-
-    <!-- Type-filter-select from friends. -->
-    <input data-ng-model='search.friends' name='outingInvitees' class='filter' type='text' placeholder='Invite Friends'>
-
-    <button ng-click='cancelNewOuting()' class='cancelButton' type='reset'>Cancel</button>
-
-    <button ng-click='createOuting()' class='createButton' type='submit'>Create Outing</button>
+    <input name="outingMovie" ng-model="movie" required class="filter" type="text" placeholder="Movie">
+    <input name="outingDate" ng-model="date" type="date">
+    <input name="outingTheater" ng-model="theater" class="filter" type="text" placeholder="Theater">
+    <!-- *** TO-DO: Add button to allow user to change their current city. -->
+    <input name="outingInvitees" ng-model="friends" class="filter" type="text" placeholder="Invite Friends">
+    <button ng-click="cancelNewOuting()" class="cancelButton" type="reset">Cancel</button>
+    <button ng-click="createOuting()" class="createButton" type="submit">Create Outing</button>
 
   </form>
 
-  <div class='outingsList'>
+  <div class="outingsList">
 
-    <div ng-repeat='outing in outings' class='outing'>
+    <div ng-repeat="outing in outings" class="outing">
 
-      <span class='movie'><u>Movie:</u> {{testMovie}}</span>
-      <span class='date'><u>Date:</u> {{testDate}}</span>
-      <span class='theater'><u>Theater:</u> {{testTheater}}</span>
-      <span class='address'><u>Address:</u> {{testAddress}}</span>
-      <span class='city'><u>City:</u> {{testCity}}</span>
-      <span class='state'><u>State:</u> {{testState}}</span>
-      <span class='zip'><u>ZIP:</u> {{testZip}}</span>
-      <span class='invitees'><u>Invitees:</u> {{testInvitees}}</span>
-      <span class='attendees'><u>Attendees:</u> {{testAttendees}}</span>
-      <span class='creator'><u>Creator:</u> {{testCreator}}</span>
+      <span class="movie"><u>Movie:</u> {{testMovie}}</span>
+      <span class="date"><u>Date:</u> {{testDate}}</span>
+      <span class="theater"><u>Theater:</u> {{testTheater}}</span>
+      <span class="address"><u>Address:</u> {{testAddress}}</span>
+      <span class="city"><u>City:</u> {{testCity}}</span>
+      <span class="state"><u>State:</u> {{testState}}</span>
+      <span class="zip"><u>ZIP:</u> {{testZip}}</span>
+      <span class="invitees"><u>Invitees:</u> {{testInvitees}}</span>
+      <span class="attendees"><u>Attendees:</u> {{testAttendees}}</span>
+      <span class="creator"><u>Creator:</u> {{testCreator}}</span>
 
-      <hr class='movieHR'>
+      <hr class="movieHR">
+
+    </div>
 
   </div>
 

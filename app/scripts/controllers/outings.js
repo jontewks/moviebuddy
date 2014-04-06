@@ -53,12 +53,29 @@ app.controller('outingsController', function ($scope, getOutings) {
   };
 
   $scope.createOuting = function() {
-    // Create outing object.
-    
+    console.log($scope);
+    var outing = {};
+    outing.movie = $scope.movie.value;
+    outing.date = $scope.date.value;
+    outing.theater = $scope.theater.value;
+    // Look these up in our DB based on theater name?
+    // outing.address;
+    // outing.city;
+    // outing.state;
+    // outing.zip;
+    outing.invitees = $scope.invitees.value;
+    outing.attendees = [];
+    outing.creator = $scope.userId;
+    console.log(outing);
     // Submit outing object to server. 
-    // Clear 'newOutingForm'?
+
+    // Clear 'newOutingForm'? $setPristine()?
     $scope.newOutingButtonVisible = true;
     $scope.newOutingFormVisible = false;
+  };
+
+  $scope.outingFormCtrl = function($scope) {
+    console.log($scope);
   };
 
   $scope.awesomeThings = [
