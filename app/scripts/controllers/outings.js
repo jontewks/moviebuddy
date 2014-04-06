@@ -53,7 +53,8 @@ app.controller('outingsController', function ($scope, getOutings) {
   };
 
   $scope.createOuting = function() {
-    // Create outing object. 
+    // Create outing object.
+    
     // Submit outing object to server. 
     // Clear 'newOutingForm'?
     $scope.newOutingButtonVisible = true;
