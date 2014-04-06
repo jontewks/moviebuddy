@@ -1,15 +1,19 @@
 <h3 class='sectionHeader movies'>Movies</h3>
 
 <div class='sectionContainer movieDiv'>
+
   <button class='filter' ng-click="sortAllMovies('ratings.audience_score')">Audience Score</button>
   <button class='filter' ng-click="sortAllMovies('ratings.critics_score')">Critics' Score</button>
   <button class='filter' ng-click="sortAllMovies('title')">Title</button>
   <button class='filter' ng-click="sortAllMovies('runtime')">Runtime</button>
   <button class='filter' ng-click="reverseAllMovies()">Reverse</button>
+
   <input class='filter' type='text' placeholder='Search by movie title' ng-model='search.title'>
 
   <div ng-repeat='movie in movies | filter:search:strict' class='movie'>
+
     <img src={{movie.posters.thumbnail}} class='movieThumb'>
+
     <span class='movieTitle'><u>{{movie.title}}</u></span>
     <span class='criticScore'>Critics Score: {{movie.ratings.critics_score}}</span>
     <span class='audienceScore'>Audience Score: {{movie.ratings.audience_score}}</span>
@@ -18,9 +22,11 @@
     <span class='runtime'>Runtime: {{movie.runtime}}</span>
     <span class='mpaaRating'>MPAA-Rating: {{movie.mpaa_rating}}</span>
     <span class='synopsis'>Synopsis: {{movie.synopsis}}</span>
+
     <hr class='movieHR'>
+
   </div>
 
-  <button class='viewMore' ng-click='viewMore()' ng-show='hideViewMoreButton()' >View More</button>
+  <button class='viewMore' ng-click='viewMore()' ng-show='hideViewMoreButton()'>View More</button>
 
 </div>

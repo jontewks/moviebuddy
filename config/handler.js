@@ -82,12 +82,16 @@ exports.getOuting = function(req, res){
 exports.postOuting = function(req, res){
   var body = req.body;
   var outing = new db.Outing({
-    theaterName:   body.theaterName,
-    location:      body.location,
-    movie:         body.movie,
-    peopleInvited: body.peopleInvited,
-    peopleGoing:   body.peopleGoing,
-    createdBy:     body.createdBy
+    movie:     body.movie,
+    date:      body.date,
+    theater:   body.theater,
+    address:   body.address,
+    city:      body.city,
+    state:     body.state,
+    zip:       body.zip,
+    invitees:  body.invitees,
+    attendees: body.attendees,
+    creator:   body.creator
   });
   outing.save(function (err) {
     if (!err) {
@@ -102,12 +106,16 @@ exports.postOuting = function(req, res){
 exports.putOuting = function(req, res){
   var body = req.body;
   return db.Outing.findById(req.params.id, function(err, outing){
-    outing.theaterName    = body.theaterName;
-    outing.location       = body.location;
-    outing.movie          = body.movie;
-    outing.peopleInvited  = body.peopleInvited;
-    outing.peopleGoing    = body.peopleGoing;
-    outing.createdBy      = body.createdBy;
+    outing.movie     = body.movie;
+    outing.date      = body.date;
+    outing.theater   = body.theater;
+    outing.address   = body.address;
+    city             = body.city,
+    state            = body.state,
+    zip              = body.zip,
+    outing.invitees  = body.invitees;
+    outing.attendees = body.attendees;
+    outing.creator   = body.creator;
 
     return outing.save(function(err){
       if(!err){

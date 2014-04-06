@@ -1,12 +1,12 @@
 <script>
   /* global $ */
+  'use strict';
   $(document).ready(function(){
     $('body').on('click', '.sectionHeader', function(){
       $(this).next().slideToggle();
     });
   });
 </script>
-
 
 <div class='header'>
   <ul class='nav nav-pills pull-right'>
@@ -16,9 +16,6 @@
 </div>
 
 <div class='jumbotron' ng-include="'/views/profile.html'" ng-controller="profileController"></div>
-
 <div class='jumbotron' ng-include="'/views/friends.html'" ng-controller="friendsController"></div>
-
 <div class='jumbotron' ng-include="'/views/movies.html'" ng-controller="moviesController"></div>
-
 <div class='jumbotron' ng-include="'/views/outings.html'" ng-controller="outingsController"></div>

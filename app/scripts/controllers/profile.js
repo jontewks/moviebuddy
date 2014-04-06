@@ -9,7 +9,7 @@ app.service('getUsers', function($http) {
   this.getUser = function(facebookId) {
     return $http({
       method: 'GET',
-      url: '/api/user/'+facebookId,
+      url: '/api/user/' + facebookId
     });
   };
 });
@@ -28,11 +28,10 @@ app.controller('profileController', function ($scope, getUsers) {
   $scope.testFavActor;
 
   // *** Want to nest this in a promise or callback. ***
-  getUsers.getUser('1234')
+  getUsers.getUser('1234') // *** Want this parameter to be dynamic.
   .then(function(data) {
-    console.log(data);
     var user = data.data;
-    $scope.testUser         = user.testUser;
+    $scope.testUser         = user.user;
     $scope.testHometown     = user.hometown;
     $scope.testFavMovie     = user.favMovie;
     $scope.testFavGenre     = user.favGenre;
@@ -40,8 +39,6 @@ app.controller('profileController', function ($scope, getUsers) {
     $scope.testFavTheater   = user.favTheater;
     $scope.testCurrentCity  = user.currentCity;
     $scope.testFavActor     = user.favActor;
-
-
   });
 
   // Mystery goodness.

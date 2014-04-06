@@ -12,10 +12,10 @@ app.post('/api/user', handler.postUser);
 app.put('/api/user/:facebookid', handler.putUser);
 app.delete('/api/user/:facebookid', handler.deleteUser);
 
-app.get('/api/outing/:id', handler.getOuting);
-app.post('/api/outing', handler.postOuting);
-app.put('/api/outing/:id', handler.putOuting);
-app.delete('/api/outing/:id', handler.deleteOuting);
+app.get('/api/outings/:id', handler.getOuting);
+app.post('/api/outings', handler.postOuting);
+app.put('/api/outings/:id', handler.putOuting);
+app.delete('/api/outings/:id', handler.deleteOuting);
 
 app.listen(port);
 console.log('Listening on ' + port);
