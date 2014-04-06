@@ -2,21 +2,18 @@
 
 var app = angular.module('moviebuddyApp');
 
-app.service('getFriends', function($http){
-	this.getFriendsData = function(){
-		return $http({
-			method: 'GET',
-			url: '',
-			params: 'obj'
-		});
-	};
-});
+// app.service('getFriends', function($http){
+// 	this.getFriendsData = function(){
+// 		return $http({
+// 			method: 'GET',
+// 			url: '',
+// 			params: 'obj'
+// 		});
+// 	};
+// });
 
-app.controller('friendsController', function ($scope, $rootScope,getFriends) {
+app.controller('friendsController', function ($scope, $rootScope) {
 		$scope.friends = [];
-
-		// getFriends to be used
-		
 
 		var richard = {
 			imgPath: '../images/mainManRich.jpg',
