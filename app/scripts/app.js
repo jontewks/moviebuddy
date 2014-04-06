@@ -29,25 +29,12 @@ app.run(function($rootScope, $location) {
   $rootScope.loggedIn = false;
 
   $rootScope.$watch('loggedIn', function(){
-    console.log('watching logged in');
     if ($rootScope.loggedIn === true) {
-      console.log('lets go to dash');
       $location.path('/dash');
     } else {
-      console.log('lets go to login');
-      $location.path('/login');
+      $location.path('/');
     }
   });
-
-  // $rootScope.$on( "$routeChangeStart", function(event, next, current) {
-  //   console.log('hitting auth');
-  //   if (authentication.loggedIn) {
-
-  //     $location.path('/dash');
-  //   } else {
-  //     $location.path('/');
-  //   }
-  // });
 });
 
 app.service('authentication', function($rootScope) {
@@ -71,7 +58,7 @@ app.service('authentication', function($rootScope) {
     });
   };
 
-  
+
 });
 
 
