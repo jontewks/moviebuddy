@@ -65,37 +65,50 @@ app.controller('OutingsController', function ($scope, $http) {
   };
 
   // Pull from the DB outings that are visible to the user.
-  var getOutings = function(userId) {
-    return $http({
-      method: 'GET',
-      url: '/api/outings/' + (userId || '1234')
-    })
-    .success(function(data, status, headers, config) {
-      console.log('Success getting outings from DB:', data, status, headers, config);
-      // *** Call a 'displayOutings' or 'refreshOutings' or 'appendOuting' function?
-    })
-    .error(function(data, status, headers, config) {
-      console.log('Error getting outings from DB:', data, status, headers, config);
-      // *** Throw an 'error' object?
-    });
+  $scope.getOutings = function(userId) {
+    userId = userId || 1234;
+    console.log('In getOutings(), userId is', userId);
+    // return $http({
+    //   method: 'GET',
+    //   url: '/api/outings/' + userId
+    // })
+    // .success(function(data, status, headers, config) {
+    //   console.log('Success getting outings from DB:', data, status, headers, config);
+    //   // *** Call a 'displayOutings' or 'refreshOutings' or 'appendOuting' function?
+    // })
+    // .error(function(data, status, headers, config) {
+    //   console.log('Error getting outings from DB:', data, status, headers, config);
+    //   // *** Throw an 'error' object?
+    // });
+    // *** Returning only dummy data below.
+    return [{
+      outingId:      5678,
+      movie:         'Ride Along',
+      date:          '2014-04-12',
+      theater:       'Kabuki',
+      address:       '1881 Post St',
+      city:          'San Francisco',
+      state:         'CA',
+      zip:           94115,
+      invitees:      [],
+      attendees:     [],
+      creator:       1234 // A user id (foreign key).
+    }, {
+      outingId:      8765,
+      movie:         'Divergent',
+      date:          '2014-04-19',
+      theater:       'Metreon',
+      address:       '135 4th St #3000',
+      city:          'San Francisco',
+      state:         'CA',
+      zip:           94103,
+      invitees:      [],
+      attendees:     [],
+      creator:       4321 // A user id (foreign key).
+    }];
   };
 
-  getOutings($scope.userID || '1234')
-  .then(function(data) {
-    angular.forEach(data.data, function(outing) {
-      $scope.testMovie     = outing.movie;
-      $scope.testDate      = outing.date;
-      $scope.testTheater   = outing.theater;
-      $scope.testAddress   = outing.address;
-      $scope.testCity      = outing.city;
-      $scope.testState     = outing.state;
-      $scope.testZip       = outing.zip;
-      $scope.testInvitees  = outing.invitees;
-      $scope.testAttendees = outing.attendees;
-      $scope.testCreator   = outing.creator;
-    });
-  });
-
+  $scope.outings = $scope.getOutings($scope.userId);
 
   $scope.awesomeThings = [
     'HTML5 Boilerplate',

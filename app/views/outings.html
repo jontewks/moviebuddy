@@ -1,4 +1,4 @@
-<h3 class="sectionHeader outings">Movie Outings Feed</h3>
+<h3 class="sectionHeader outings">Outings</h3>
 
 <div class="sectionContainer">
 
@@ -6,7 +6,8 @@
   <button ng-click="newOuting()" ng-show="showNewOutingButton()">New Outing</button>
 
   <!-- 'new outing' form displays when button above is clicked. -->
-  <form ng-submit="processOutingForm()" ng-show="showNewOutingForm()" name="outingForm"> <!-- action="#" -->
+  <!-- *** Should 'action="#"' be included in the tag below? -->
+  <form ng-submit="processOutingForm()" ng-show="showNewOutingForm()" name="outingForm">
     <input ng-model="form.movie" required name="movie" type="text" placeholder="Movie">
     <!-- *** TO-DO: Enable above display of filter-search results via something like below: -->
       <!-- ng-model="movie in movies | filter:movieTitle | orderBy:movieTitle" ??-->
@@ -22,19 +23,16 @@
   <!-- Show list (feed) of existing outings. -->
   <div class="outingsList">
 
-    <div ng-repeat="outing in outings">
-      <span class="movie"><u>Movie:</u> {{testMovie}}</span>
-      <span class="date"><u>Date:</u> {{testDate}}</span>
-      <span class="theater"><u>Theater:</u> {{testTheater}}</span>
-      <span class="address"><u>Address:</u> {{testAddress}}</span>
-      <span class="city"><u>City:</u> {{testCity}}</span>
-      <span class="state"><u>State:</u> {{testState}}</span>
-      <span class="zip"><u>ZIP:</u> {{testZip}}</span>
-      <span class="invitees"><u>Invitees:</u> {{testInvitees}}</span>
-      <span class="attendees"><u>Attendees:</u> {{testAttendees}}</span>
-      <span class="creator"><u>Creator:</u> {{testCreator}}</span>
+    <div ng-init="getOutings()" ng-repeat="outing in outings">
+      <span class="movie">Movie: {{outing.movie}}</span>
+      <span class="date">Date: {{outing.date}}</span>
+      <span class="theater">Theater: {{outing.theater}}</span>
+      <!-- *** TO-DO: Show theater info (address & map upon click of theater name. -->
+      <span class="invitees">Invitees: {{outing.invitees}}</span>
+      <span class="attendees">Attendees: {{outing.attendees}}</span>
+      <span class="creator">Creator: {{outing.creator}}</span>
       <!-- *** TO-DO: Show an 'edit' button if current user is the outing creator. -->
-      <hr class="movieHR">
+      <hr />
     </div>
 
   </div>
