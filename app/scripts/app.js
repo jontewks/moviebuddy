@@ -37,14 +37,14 @@ app.run(function($rootScope, $location) {
     });
   };
 
-  // $rootScope.$watch('loggedIn', function(){
-  //   console.log('rootscope.loggedin: ' + $rootScope.loggedIn);
-  //   if ($rootScope.loggedIn === true) {
-  //     $location.path('/dash');
-  //   } else {
-  //     $location.path('/');
-  //   }
-  // });
+  $rootScope.$watch('loggedIn', function(){
+    if ($rootScope.loggedIn === true) {
+      $location.path('/dash');
+    } else {
+      $location.path('/');
+    }
+  });
+
 });
 
 app.service('authentication', function($rootScope) {
@@ -52,18 +52,32 @@ app.service('authentication', function($rootScope) {
   this.fbLogin = function(){
     FB.login(function(response){
       if (response.authResponse){
+        // attach user object to the rootscope
         FB.api('/me', function(response){
           $rootScope.me = response;
           $rootScope.loggedIn = true;
           $rootScope.$apply();
         });
+
+        // get user's friends array on login and store them all in a hash
+        FB.api('/me/friends', function(friends){
+          $rootScope.me.friends = [];
+          for (var i = 0; i < friends.data.length; i++){
+            $rootScope.me.friends.push(friends.data[i].id);
+          }
+          $rootScope.$apply();
+        });
+
+        FB.api('/me/picture', function(photo){
+          console.log(photo);
+        });
+
       }
     });
   };
 
   this.fbLogout = function(){
     FB.logout(function() {
-      console.log('hitting the logout baby');
       $rootScope.loggedIn = false;
       $rootScope.$apply();
     });
