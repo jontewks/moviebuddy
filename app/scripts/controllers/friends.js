@@ -2,30 +2,19 @@
 
 var app = angular.module('moviebuddyApp');
 
-// app.service('getFriends', function($http){
-// 	this.getFriendsData = function(){
-// 		return $http({
-// 			method: 'GET',
-// 			url: '',
-// 			params: 'obj'
-// 		});
-// 	};
-// });
 
-app.controller('friendsController', function ($scope, $rootScope) {
-		$scope.friends = [];
+app.service('getFriends', function ($http) {
+	this.friendsData = function (facebookId) {
+		$http({
+			method: 'GET',
+			url: 'http://localhost:8080/api/friends/' + facebookId
+		}).success(function(result) {
+      console.log(result);
+    });
+	};
+});
 
-		var richard = {
-			imgPath: '../images/mainManRich.jpg',
-			name: 'Richard Branson'
-		};
-
-		$scope.friends.push(richard);
-
-
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+app.controller('friendsController', function ($scope, $rootScope, getFriends) {
+  // getFriends.friendsData($rootScope.userInfo.id);
+  // console.log($scope.friends);
+});

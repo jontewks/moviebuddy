@@ -13,9 +13,15 @@ app.config(function ($routeProvider) {
       templateUrl: 'views/dashboard.html',
       controller: 'dashController'
     })
+<<<<<<< HEAD
     .when('/login', {
       templateUrl: 'views/login.html',
       controller: 'loginController'
+=======
+    .when('/api/friends', {
+      templateUrl: 'views/friends.html',
+      controller: 'friendsController'
+>>>>>>> c2fbffc6aa2d3212bd8e3d769c430e068881c922
     })
     .otherwise({
       redirectTo: '/',
