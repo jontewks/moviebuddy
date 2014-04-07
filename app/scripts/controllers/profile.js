@@ -12,10 +12,11 @@ app.service('getUsers', function($http) {
       url: '/api/user/'+facebookId,
     });
   };
+
 });
 
 // This controller controls the profile.
-app.controller('profileController', function ($scope, getUsers) {
+app.controller('profileController', function ($scope, $rootScope,getUsers) {
 
   // *** Want to grab this upon authentication. ***
   $scope.testUser;
@@ -26,9 +27,11 @@ app.controller('profileController', function ($scope, getUsers) {
   $scope.testFavTheater;
   $scope.testCurrentCity;
   $scope.testFavActor;
+  $scope.profilePicture;
+  $scope.profilePicture = 'http://graph.facebook.com/'+$rootScope.me.id+'/picture?type=large';
 
   // *** Want to nest this in a promise or callback. ***
-  getUsers.getUser('1234')
+  getUsers.getUser($rootScope.me.id)
   .then(function(data) {
     var user = data.data;
     $scope.testUser         = user.name;

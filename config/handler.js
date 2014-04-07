@@ -76,7 +76,6 @@ exports.getFriends = function(req, res) {
   db.User.findOne({facebookId: req.params[0]}, function(err, user) {
     if (!err && user) {
       var usersFriends = [];
-
       for (var i = 0; i < user.friends.length; i++) {
         db.User.find({facebookId: user.friends[i]}, function(err, friend) {
           usersFriends.push(friend[0]);
@@ -140,7 +139,6 @@ exports.putOuting = function(req, res) {
       } else {
         console.log(err);
       }
-
       res.send(user);
     });
   });

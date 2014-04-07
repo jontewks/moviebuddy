@@ -4,24 +4,25 @@
 var app = angular.module('moviebuddyApp', ['ngRoute']);
 
 app.config(function ($routeProvider) {
+
   $routeProvider
     .when('/', {
       templateUrl: 'views/login.html',
-      controller: 'loginController'
+      controller: 'loginController',
+      resolve: {
+        checkLogin: function(authentication){
+          return authentication.auth();
+        }
+      }
     })
     .when('/dash', {
       templateUrl: 'views/dashboard.html',
-      controller: 'dashController'
-    })
-<<<<<<< HEAD
-    .when('/login', {
-      templateUrl: 'views/login.html',
-      controller: 'loginController'
-=======
-    .when('/api/friends', {
-      templateUrl: 'views/friends.html',
-      controller: 'friendsController'
->>>>>>> c2fbffc6aa2d3212bd8e3d769c430e068881c922
+      controller: 'dashController',
+      resolve: {
+        checkLogin: function(authentication){
+          return authentication.auth();
+        }
+      }
     })
     .otherwise({
       redirectTo: '/',
@@ -31,46 +32,19 @@ app.config(function ($routeProvider) {
 });
 
 app.run(function($rootScope, $location) {
-  $rootScope.loggedIn = false;
-
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId: '1391051064505902'
-    });
-  };
-
-  // $rootScope.$watch('loggedIn', function(){
-  //   console.log('rootscope.loggedin: ' + $rootScope.loggedIn);
-  //   if ($rootScope.loggedIn === true) {
-  //     $location.path('/dash');
-  //   } else {
-  //     $location.path('/');
-  //   }
-  // });
+ // Fun Stuff
 });
 
-app.service('authentication', function($rootScope) {
 
-  this.fbLogin = function(){
-    FB.login(function(response){
-      if (response.authResponse){
-        FB.api('/me', function(response){
-          $rootScope.me = response;
-          $rootScope.loggedIn = true;
-          $rootScope.$apply();
-        });
-      }
-    });
+// authentication service, handles login and logout
+app.service('authentication', function($rootScope, $location) {
+  this.auth = function(){
+    if (!window.document.cookie) {
+      $location.path('/');
+    } else {
+      $location.path('/dash');
+    }
   };
-
-  this.fbLogout = function(){
-    FB.logout(function() {
-      console.log('hitting the logout baby');
-      $rootScope.loggedIn = false;
-      $rootScope.$apply();
-    });
-  };
-
 });
 
 
