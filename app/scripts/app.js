@@ -1,7 +1,7 @@
 'use strict';
 /* global FB */
 
-var app = angular.module('moviebuddyApp', ['ngRoute']);
+var app = angular.module('moviebuddyApp', ['ngRoute', 'ngCookies']);
 
 app.config(function ($routeProvider) {
   $routeProvider
@@ -36,15 +36,6 @@ app.run(function($rootScope, $location) {
       appId: '1391051064505902'
     });
   };
-
-  // $rootScope.$watch('loggedIn', function(){
-  //   console.log('rootscope.loggedin: ' + $rootScope.loggedIn);
-  //   if ($rootScope.loggedIn === true) {
-  //     $location.path('/dash');
-  //   } else {
-  //     $location.path('/');
-  //   }
-  // });
 });
 
 app.service('authentication', function($rootScope) {

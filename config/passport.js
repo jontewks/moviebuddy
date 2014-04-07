@@ -7,7 +7,7 @@ var User  = require('./db_config');
 
 // load the auth variables
 var configAuth = require('./auth'); // use this one for testing
-
+var passport = require('passport');
 module.exports = function(passport) {
 
     // =========================================================================

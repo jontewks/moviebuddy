@@ -12,6 +12,7 @@ app.service('getUsers', function($http) {
       url: '/api/user/'+facebookId,
     });
   };
+
 });
 
 // This controller controls the profile.
