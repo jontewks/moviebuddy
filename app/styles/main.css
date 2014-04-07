@@ -74,6 +74,29 @@ body {
   border-radius: 50%;
   margin: auto;
   background-color: white;
+  display: inline-block;
+}
+
+.logoutButton {
+  float: right;
+  display: inline-block;
+  padding: 8px 15px;
+  cursor: pointer;
+  border: 1px solid #00A8C6;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #ffffff;
+  background-color: #00A8C6;
+  text-transform: uppercase;
+  margin-right: 100px;
+  margin-top: 40px;
+}
+
+.logoutButton:hover {
+  background-color: rgba(37, 244, 154, .75);
+  border-color: rgba(37, 244, 154, .75);
+  color: #ffffff;
 }
 
 .sectionDiv {

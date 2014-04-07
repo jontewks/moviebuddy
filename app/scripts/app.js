@@ -58,26 +58,13 @@ app.service('authentication', function($rootScope) {
           $rootScope.loggedIn = true;
           $rootScope.$apply();
         });
-
-        // get user's friends array on login and store them all in a hash
-        FB.api('/me/friends', function(friends){
-          $rootScope.me.friends = [];
-          for (var i = 0; i < friends.data.length; i++){
-            $rootScope.me.friends.push(friends.data[i].id);
-          }
-          $rootScope.$apply();
-        });
-
-        FB.api('/me/picture', function(photo){
-          console.log(photo);
-        });
-
       }
     });
   };
 
   this.fbLogout = function(){
     FB.logout(function() {
+      console.logout('hitting the logout');
       $rootScope.loggedIn = false;
       $rootScope.$apply();
     });
