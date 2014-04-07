@@ -4,22 +4,25 @@
 var app = angular.module('moviebuddyApp', ['ngRoute']);
 
 app.config(function ($routeProvider) {
+
   $routeProvider
     .when('/', {
       templateUrl: 'views/login.html',
-      controller: 'loginController'
+      controller: 'loginController',
+      resolve: {
+        checkLogin: function(authentication){
+          return authentication.auth();
+        }
+      }
     })
     .when('/dash', {
       templateUrl: 'views/dashboard.html',
-      controller: 'dashController'
-    })
-    .when('/login', {
-      templateUrl: 'views/login.html',
-      controller: 'loginController'
-    })
-    .when('/api/friends', {
-      templateUrl: 'views/friends.html',
-      controller: 'friendsController'
+      controller: 'dashController',
+      resolve: {
+        checkLogin: function(authentication){
+          return authentication.auth();
+        }
+      }
     })
     .otherwise({
       redirectTo: '/',
@@ -29,47 +32,19 @@ app.config(function ($routeProvider) {
 });
 
 app.run(function($rootScope, $location) {
-  $rootScope.loggedIn = false;
-
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId: '1391051064505902'
-    });
-  };
-
-  $rootScope.$watch('loggedIn', function(){
-    if ($rootScope.loggedIn === true) {
-      $location.path('/dash');
-    } else {
-      $location.path('/');
-    }
-  });
-
+ // Fun Stuff
 });
 
-app.service('authentication', function($rootScope) {
 
-  this.fbLogin = function(){
-    FB.login(function(response){
-      if (response.authResponse){
-        // attach user object to the rootscope
-        FB.api('/me', function(response){
-          $rootScope.me = response;
-          $rootScope.loggedIn = true;
-          $rootScope.$apply();
-        });
-      }
-    });
+// authentication service, handles login and logout
+app.service('authentication', function($rootScope, $location) {
+  this.auth = function(){
+    if (!window.document.cookie) {
+      $location.path('/');
+    } else {
+      $location.path('/dash');
+    }
   };
-
-  this.fbLogout = function(){
-    FB.logout(function() {
-      console.logout('hitting the logout');
-      $rootScope.loggedIn = false;
-      $rootScope.$apply();
-    });
-  };
-
 });
 
 
