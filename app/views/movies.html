@@ -1,26 +1,33 @@
-<h3 class='sectionHeader movies'>Movies</h3>
+<h3 class='sectionHeader moviesSectionHeader'>MOVIES</h3>
 
 <div class='sectionContainer movieDiv'>
+  <div class='filters'>
   <button class='filter' ng-click="sortAllMovies('ratings.audience_score')">Audience Score</button>
   <button class='filter' ng-click="sortAllMovies('ratings.critics_score')">Critics' Score</button>
   <button class='filter' ng-click="sortAllMovies('title')">Title</button>
   <button class='filter' ng-click="sortAllMovies('runtime')">Runtime</button>
   <button class='filter' ng-click="reverseAllMovies()">Reverse</button>
-  <input class='filter' type='text' placeholder='Search by movie title' ng-model='search.title'>
-
-  <div ng-repeat='movie in movies | filter:search:strict' class='movie'>
+  <br>
+  <input class='searchFilter' type='text' placeholder='Search by movie title' onfocus='this.placeholder = ""' onblur='this.placeholder = "Search By Movie Title"' ng-model='search.title'>
+  <hr>
+  </div>
+  <div class='movie' ng-repeat='movie in allMovies | filter:search:strict' >
     <img src={{movie.posters.thumbnail}} class='movieThumb'>
-    <span class='movieTitle'><u>{{movie.title}}</u></span>
-    <span class='criticScore'>Critics Score: {{movie.ratings.critics_score}}</span>
-    <span class='audienceScore'>Audience Score: {{movie.ratings.audience_score}}</span>
-    <span class='cast' ng-repeat='actor in movie.abridged_cast'>{{actor.name}}</span>
-    <span class='criticsConsensus'>Critics' Consensus: {{movie.critics_consensus}}</span>
-    <span class='runtime'>Runtime: {{movie.runtime}}</span>
-    <span class='mpaaRating'>MPAA-Rating: {{movie.mpaa_rating}}</span>
-    <span class='synopsis'>Synopsis: {{movie.synopsis}}</span>
+    <div class='infoOne'>
+      <span class='movieTitle'><u>{{movie.title}}</u></span>
+      <span class='criticScore'>Critics Score: {{movie.ratings.critics_score}}%</span>
+      <span class='audienceScore'>Audience Score: {{movie.ratings.audience_score}}%</span>
+      <div class='cast'>
+        <span class='actor' ng-repeat='actor in movie.abridged_cast'>{{actor.name}} </span> 
+      </div>
+    </div>
+    <div class='infoTwo'>
+      <span class='runtime'>Runtime: {{movie.runtime}} min.</span>
+      <span class='mpaaRating'>Rated: {{movie.mpaa_rating}}</span>
+      <span ng-controller='criticsController' ng-click='toggleText(movie.critics_consensus)' class='criticsConsensus'>Critics Consensus: {{movie.critics_consensus | limitTo:textLimit}}{{moreText}}</span>
+      <span ng-controller='synopsisController' ng-click='toggleText(movie.synopsis)' class='synopsis'>Synopsis: {{movie.synopsis | limitTo:textLimit}}{{moreText}}</span>
+    </div>
     <hr class='movieHR'>
   </div>
-
-  <button class='viewMore' ng-click='viewMore()' ng-show='hideViewMoreButton()' >View More</button>
 
 </div>

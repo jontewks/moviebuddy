@@ -7,18 +7,17 @@
   });
 </script>
 
-
-<div class='header'>
-  <ul class='nav nav-pills pull-right'>
-    <li><a ng-href='#'>Logout</a></li>
-  </ul>
-  <h3 class='text-muted'>Movie Buddy</h3>
+<div ng-controller='dashController'>
+<div class='headerDiv'>
+  <h3 class='appHeader'></h3>
 </div>
 
-<div class='jumbotron' ng-include="'/views/profile.html'" ng-controller="profileController"></div>
+<div class='sectionDiv profileSection' ng-include="'/views/profile.html'" ng-controller="profileController"></div>
 
-<div class='jumbotron' ng-include="'/views/friends.html'" ng-controller="friendsController"></div>
+<div class='sectionDiv friendsSection' ng-include="'/views/friends.html'" ng-controller="friendsController"></div>
 
-<div class='jumbotron' ng-include="'/views/movies.html'" ng-controller="moviesController"></div>
+<div class='sectionDiv moviesSection' ng-include="'/views/movies.html'" ng-controller="moviesController"></div>
 
-<div class='jumbotron' ng-include="'/views/outings.html'" ng-controller="outingsController"></div>
+<div class='sectionDiv outingsSection' ng-include="'/views/outings.html'" ng-controller="outingsController"></div>
+</div>
+<div class='footer'></div>

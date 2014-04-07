@@ -6,11 +6,10 @@ var app = angular.module('moviebuddyApp');
 
 // This service returns 'Users' from the DB.
 app.service('getUsers', function($http) {
-  this.getUser = function(user) {
+  this.getUser = function(facebookId) {
     return $http({
       method: 'GET',
-      url: '/userQuery',
-      params: {user: user},
+      url: '/api/user/'+facebookId,
     });
   };
 });
@@ -19,7 +18,7 @@ app.service('getUsers', function($http) {
 app.controller('profileController', function ($scope, getUsers) {
 
   // *** Want to grab this upon authentication. ***
-  $scope.testUser = 'Josh Gman';
+  $scope.testUser;
   $scope.testHometown;
   $scope.testFavMovie;
   $scope.testFavGenre;
@@ -29,9 +28,10 @@ app.controller('profileController', function ($scope, getUsers) {
   $scope.testFavActor;
 
   // *** Want to nest this in a promise or callback. ***
-  getUsers.getUser($scope.testUser)
+  getUsers.getUser('1234')
   .then(function(data) {
-    var user = data.data[0];
+    var user = data.data;
+    $scope.testUser         = user.name;
     $scope.testHometown     = user.hometown;
     $scope.testFavMovie     = user.favMovie;
     $scope.testFavGenre     = user.favGenre;

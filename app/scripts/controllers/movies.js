@@ -20,7 +20,6 @@ app.controller('moviesController', function ($scope, $http, getMoviesData) {
   var queryPageLimit = 50;
 
   $scope.allMovies = [];
-  $scope.movies;
   $scope.totalPages;
   $scope.morePages = true;
   var pageLimit = 10;
@@ -40,27 +39,10 @@ app.controller('moviesController', function ($scope, $http, getMoviesData) {
       if (queryPage <= totalQueryPages) {
         getMovies(queryPage, queryPageLimit);
       }
-      if (queryPage === totalQueryPages) {
-        $scope.movies = $scope.allMovies.slice(0, pageLimit * $scope.page);
-      }
     });
   };
 
   getMovies(queryPage, queryPageLimit);
-
-  // view more movies
-  $scope.viewMore = function() {
-    $scope.totalPages = Math.ceil($scope.allMovies.length / pageLimit);
-    if ($scope.page + 1 > $scope.totalPages) { return; }
-    $scope.movies = $scope.allMovies.slice(0, pageLimit * (++$scope.page));
-    if ($scope.page + 1 > $scope.totalPages) {
-      $scope.morePages = false;
-    }
-  };
-
-  $scope.hideViewMoreButton = function(){
-    return $scope.morePages;
-  };
 
 
   // sort movies helper function
@@ -94,17 +76,12 @@ app.controller('moviesController', function ($scope, $http, getMoviesData) {
   // sort all movies on button clicks
   $scope.sortAllMovies = function(category){
     $scope.allMovies = sortMovies($scope.allMovies, category);
-    $scope.movies = $scope.allMovies.slice(0, pageLimit * $scope.page);
   };
 
   // reverse the all movies storage
   $scope.reverseAllMovies = function(){
     $scope.allMovies.reverse();
-    $scope.movies = $scope.allMovies.slice(0, pageLimit * $scope.page);
   };
-
-
-
 
 
   $scope.awesomeThings = [
@@ -113,4 +90,35 @@ app.controller('moviesController', function ($scope, $http, getMoviesData) {
     'Karma'
   ];
 
+});
+
+app.controller('castController', function($scope){
+  $scope.textLimit = 40;
+  $scope.moreText = '...';
+
+  $scope.toggleText = function(text){
+    $scope.textLimit = $scope.textLimit === 40 ? $scope.textLimit = text.length : $scope.textLimit = 40;
+    $scope.moreText =  $scope.moreText === '...'? $scope.moreText = '' : $scope.moreText = '...';
+  };
+});
+
+
+app.controller('synopsisController', function($scope){
+  $scope.textLimit = 40;
+  $scope.moreText = '...';
+
+  $scope.toggleText = function(text){
+    $scope.textLimit = $scope.textLimit === 40 ? $scope.textLimit = text.length : $scope.textLimit = 40;
+    $scope.moreText =  $scope.moreText === '...'? $scope.moreText = '' : $scope.moreText = '...';
+  };
+});
+
+app.controller('criticsController', function($scope){
+  $scope.textLimit = 40;
+  $scope.moreText = '...';
+
+  $scope.toggleText = function(text){
+    $scope.textLimit = $scope.textLimit === 40 ? $scope.textLimit = text.length : $scope.textLimit = 40;
+    $scope.moreText =  $scope.moreText === '...' ? $scope.moreText = '' : $scope.moreText = '...';
+  };
 });

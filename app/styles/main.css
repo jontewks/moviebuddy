@@ -1,256 +1,581 @@
 /* Space out content a bit */
+
+/* web fonts */
+
+
+@font-face {
+    font-family: 'bebasregular';
+    src: url('../fonts/Bebas/bebas___-webfont.eot');
+    src: url('../fonts/Bebas/bebas___-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Bebas/bebas___-webfont.woff') format('woff'),
+         url('../fonts/Bebas/bebas___-webfont.ttf') format('truetype'),
+         url('../fonts/Bebas/bebas___-webfont.svg#bebasregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+/* Google Fonts
+
+font-family: 'Inder', sans-serif;
+font-family: 'Viga', sans-serif;
+font-family: 'Hammersmith One', sans-serif;
+font-family: 'Gentium Book Basic', serif;
+
+
+  Colors Used
+
+#00A8C6 - light blueish
+#F38630 - bright orange
+#FA6900 - slightly darker orange
+rgba(37, 244, 154, .75) - mint
+#E0E4CC - off white
+*/
+
+/* Global Reset */
+html, body, div, section, article, aside, header, hgroup, footer, nav, h1, h2, h3, h4, h5, h6, p, blockquote, address, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+html {
+
+}
+
 body {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  background: url('../images/photography.png');
+  font-family: 'Hammersmith One', sans-serif;
+  color: #333;
+  background: #E0E4CC;
 }
-
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-/* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-}
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
-  padding-bottom: 0px;
-}
-
-.jumbotron {
-  padding: 0px !important;
-  border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 10px;
-  text-align: left;
-}
-.jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
-}
-
 
 .container {
-  background-color: white;
-  border-radius: 5px;
-  max-width: 80%;
+
 }
 
-/* dashboard elements */
+.headerDiv {
+  text-align: center;
+  background: url('../images/grey_wash_wall.png');
+  height: 100px;
+  padding-top: 10px;
+  padding-bottom: 30px;
+
+}
+
+.appHeader {
+  background: url('../images/bearLogo.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 100px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 120px;
+  border-radius: 50%;
+  margin: auto;
+  background-color: white;
+}
+
+.sectionDiv {
+
+}
 
 .sectionHeader {
-  color: white;
-  padding: 2px;
-  border-radius: 3px;
   text-align: center;
+  font-weight: 900;
+  font-size: 2em;
+  letter-spacing: .1em;
+  cursor: pointer;
 }
 
 .sectionContainer {
-  text-align: center;
-  height: 100%;
+  padding: 20px;
   display: none;
+  background: url('../images/grey_wash_wall.png');
+}
+
+.sectionContainerProfile {
+  color: black;
+  padding: 20px;
+}
+
+/* login fun */
+
+/*.header {
+  height: 100px;
+  background: url('../images/grey_wash_wall.png');
+
+}*/
+
+.loginContainer {
+  width: 100%;
+  background: url('../images/bg.jpg');
+}
+
+.loginHeaderDiv {
+  padding-bottom: 15px;
+  background: url('../images/grey_wash_wall.png');
+}
+
+.loginHeader {
+  font-family: 'Bebas';
+  letter-spacing: .05em;
+  color: white;
+  font-size: 5em;
+  text-transform: uppercase;
+  text-align: center;
+  word-spacing: .1em;
+  text-decoration: underline;
+}
+
+.loginHeaderTwo {
+  color: white ;
+  text-align: center; 
+  font-family: 'Bebas';
+  letter-spacing: .05em;
+  word-spacing: .2em;
+  margin-top: 10px;
+}
+
+.logoDiv {
+
+}
+
+.logo {
+
+}
+
+.loginDiv {
+  text-align: center;
+  padding: 10px;
+  margin: auto;
+  margin-top: 170px;
+  border-radius: 15px;
+  width: 400px;
+  background: url('../images/grey_wash_wall.png');
+}
+
+.fbLogin {
+  height: 80px;
+  width: 400px;
+  border: 0px;
+  background: url('../images/fblogin.png');
+  background-position: center;
+  cursor: pointer;
+}
+
+
+.fbLogin:focus {
+  outline: 0;
+}
+
+.loginFooter {
+  height: 150px;
+  background: url('../images/grey_wash_wall.png');
+  bottom: 0;
+  margin: 0 auto;
+}
+
+/* Profile Fun */
+
+.profileSection{
+  height: 200px;
+  min-width: 700px;
+  text-transform: uppercase;
+  font-size: .75em;
 }
 
 .profile {
-  background-color: rgba(94, 243, 143, 1);
-}
-
-.friends {
-  background-color: rgba(243, 134, 94, 1);
-}
-
-.movies {
-  background-color: rgba(94, 208, 243, 1);
-}
-
-.outings {
-  background-color: rgba(243, 94, 101, 1);
+  margin-top: 20px;
+  min-width: 600px;
+  width: auto;
 }
 
 #profilePicDiv {
-
+  float: left;
+  margin-left: 15px;
 }
 
 #profilePic {
-  border-radius: 3px;
-  width: 180px;
-  border: 5px solid white;
-  margin-bottom: 10px;
-  margin-left: 10px;
+  height: 150px;
+  width: 140px;
+  border-radius: 20px;
 }
 
 #userDetails {
-  width: 400px;
-  margin: auto auto;
+  margin-top: 10px;
+  margin-left: 30px;
+  width: 200px;
+  float: left;
 }
 
 #userMovieDetails {
-  width: 400px;
-  margin: auto auto;
+  margin-top: 10px;
+  margin-left: 30px;
+  display: inline-block;
+  width: 200px;
 }
 
 .userDetail {
-  padding-left: 100px;
-  text-align: left;
+  width: 200px;
+  line-height: 2.5em;
   display: block;
 }
 
-/* login elements */
+/* friends */
 
-.loginDiv {
-  margin-top: 50px;
-  padding: 120px !important;
-  text-align: center;
+.sectionContainerFriends {
+  padding-left: 0px;
 }
 
-.btn-success {
-  background-color: #3b5998;
-  border: 1px solid #3b5998;
+.friendsSection {
+  padding: 0px !important;
+}
+
+.friendsSectionHeader {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #F38630;
+}
+
+.friend {
+  height: 75px;
+  padding: 10px;
+  background-color: lightgrey;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.friendsPhoto {
+  height: 70px;
+  border-radius: 20px;
+  float: left;
+}
+
+.friendName {
+  display: inline-block;
+  margin-left: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 2em;
 }
 
 /* movies */
-.movieDiv {
-  font-size: .5em;
+
+.moviesSection {
+
+}
+
+.moviesSectionHeader {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: rgba(37, 244, 154, .75);
+}
+
+.filters {
+  text-align: center;
+  min-width: 650px;
+}
+
+.filter {
+  padding: 8px 15px;
+  cursor: pointer;
+  border: 1px solid #00A8C6;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #ffffff;
+  background-color: #00A8C6;
+  text-transform: uppercase;
+}
+
+.filter:hover {
+  background-color: rgba(37, 244, 154, .75);
+  border-color: rgba(37, 244, 154, .75);
+  color: #ffffff;
+}
+
+.filter:focus {
+  outline: 0;
+}
+
+.searchFilter {
+  height: 30px;
+  width: 300px;
+  border: 0px;
+  border-bottom: 3px solid black;
+  padding: 0px;
+  margin-top: 10px;
+  text-transform: uppercase;
+  line-height: 1em;
+  font-size: 1.2em;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.searchFilter:focus {
+  outline: 0;
 }
 
 .movie {
-
-}
-
-.movieTitle {
-
+  display: block;
+  padding-top: 15px;
+  margin-bottom: 10px;
+  overflow: ellipsis;
+  color: lightgrey;
 }
 
 .movieThumb {
-  height: 92px;
-  width: 62px;
+  height: 100px;
+  float: left;
+}
+
+.infoOne {
+  float: left;
+  width: 200px;
+  height: 180px;
+  margin-left: 25px;
+}
+
+.infoTwo{
+  width: 200px;
+  height: 180px;
+  margin-left: 25px;
+  display: inline-block;
+}
+
+.movieTitle {
+  display: block;
 }
 
 .criticScore {
+  display: block;
 
 }
 
 .audienceScore {
-
+  display: block;
 }
 
 .cast {
+  display: block;
+  overflow: ellipsis;
+}
 
+.actor {
+  
 }
 
 .criticsConsensus {
-
+  display: block;
+  cursor: pointer;
 }
 
 .runtime {
-
+  display: block;
 }
 
 .mpaaRating {
-
+  display: block;
 }
 
 .synopsis {
+  display: block;
+  cursor: pointer;
 
 }
 
 .movieHR {
-  background-color: black;
-  height: 1px;
+  margin-bottom: 10px;
 }
 
-.prevPage {
+
+/* outings */
+
+.outingsSection {
 
 }
 
-.nextPage {
-
+.outingsSectionHeader {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #00A8C6;
 }
 
-/* Custom page footer */
+/* footer */
+
 .footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
+  background: url('../images/grey_wash_wall.png');
+  height: 100px;
 }
 
-/* Customize container */
 @media (min-width: 990px) {
   .container {
-    background-color: white;
-    border-radius: 5px;
-    max-width: 1000px;
+
   }
 
-  .container-narrow > hr {
-    margin: 30px 0;
+  .headerDiv {
+
   }
 
-  /* Main marketing message and sign up button */
-  .jumbotron {
-    padding: 0px !important;
-    border-bottom: 1px solid #e5e5e5;
-    margin-bottom: 10px;
-    text-align: left;
+  .appHeader {
+
   }
-  .jumbotron .btn {
-    font-size: 21px;
-    padding: 14px 24px;
+
+  .sectionDiv {
+
   }
 
   .sectionHeader {
-    text-align: center;
+
   }
 
   .sectionContainer {
-    padding-bottom: 10px;
-    display: block;
+
+  }
+
+  .sectionContainerProfile {
+    min-width: 1100px;
+  }
+
+  /* login fun */
+
+  .loginContainer {
+
+  }
+
+  .loginHeaderDiv {
+
+  }
+
+  .loginHeader {
+    font-size: 7em;
+  }
+
+  .loginHeaderTwo {
+
+  }
+
+  .loginDiv {
+    margin-top: 150px;
+  }
+
+  .fbLogin {
+
+  }
+
+  .fbLogin:focus {
+
+  }
+
+  /* profile fun */
+
+  .profileSection{
+
+  }
+
+  .profile {
+
   }
 
   #profilePicDiv {
-    margin-left: 20px;
-    float: left;
+    margin-left: 50px;
   }
 
   #profilePic {
-    border-radius: 3px;
-    height: 200px;
-    width: 180px;
-    border: 5px solid white;
-    margin-bottom: 10px;
-    margin-left: 10px;
+
   }
 
   #userDetails {
-    display: inline-block;
-    padding: 10px;
-    width: 300px;
+    margin-top: 0px;
+    width: 350px;
+    margin-left: 150px;
   }
 
   #userMovieDetails {
-    display: inline-block;
-    width: 300px;
+    margin-top: 0px;
+    width: 350px;
   }
 
   .userDetail {
-    padding-left: 0px;
-    display: block;
+    font-size: 1.5em;
+    width: 350px;
+  }
+
+  /* friends */
+
+  .sectionContainerFriends {
+
+  }
+
+  .friendsSection {
+
+  }
+
+  .friendsSectionHeader {
+
+  }
+
+  .friend {
+
+  }
+
+  .friendsPhoto {
+
+  }
+
+  .friendName {
+
   }
 
   /* movies */
-  .movieDiv {
-    font-size: .5em;
+
+  .moviesSection {
+
+  }
+
+  .moviesSectionHeader {
+
+  }
+
+  .filters {
+    min-width: 1050px;
+  }
+
+  .filter {
+    width: 200px;
+    height: 50px;
+
+  }
+
+  .filter:hover {
+
+  }
+
+  .searchFilter {
+    height: 50px;
+    font-size: 1.5em;
+  }
+
+  .searchFilter:focus {
+
   }
 
   .movie {
+    font-size: 1.3em;
+    min-width: 1050px;
+  }
 
+  .movieThumb {
+    margin-left: 50px;
+  }
+
+  .infoOne {
+    width: 400px;
+  }
+
+  .infoTwo{
+    width: 400px;
   }
 
   .movieTitle {
@@ -267,6 +592,10 @@ body {
 
   .cast {
 
+  }
+
+  .actor {
+    
   }
 
   .criticsConsensus {
@@ -286,24 +615,17 @@ body {
   }
 
   .movieHR {
-    background-color: black;
-    height: 1px;
-  }
-
-  .prevPage {
 
   }
 
-  .nextPage {
+
+  /* outings */
+
+  .outingsSection {
+
+  }
+
+  .outingsSectionHeader {
 
   }
 }
-
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
-}
-.marketing p + h4 {
-  margin-top: 28px;
-}
-

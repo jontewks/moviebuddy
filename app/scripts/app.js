@@ -6,63 +6,67 @@ var app = angular.module('moviebuddyApp', ['ngRoute']);
 app.config(function ($routeProvider) {
   $routeProvider
     .when('/', {
+      templateUrl: 'views/login.html',
+      controller: 'loginController'
+    })
+    .when('/dash', {
       templateUrl: 'views/dashboard.html',
       controller: 'dashController'
     })
+    .when('/login', {
+      templateUrl: 'views/login.html',
+      controller: 'loginController'
+    })
     .otherwise({
-      redirectTo: '/login',
+      redirectTo: '/',
       templateUrl: 'views/login.html',
       controller: 'loginController'
     });
 });
 
-app.run(function($rootScope, Facebook) {
-  $rootScope.Facebook = Facebook;
-});
+app.run(function($rootScope, $location) {
+  $rootScope.loggedIn = false;
 
-app.factory('Facebook', function() {
-  var self = this;
-  this.auth = null;
-
-  return {
-    getAuth: function() {
-      return self.auth;
-    },
-    login: function() {
-      FB.login(function(response) {
-        if (response.authResponse) {
-          self.auth = response.authResponse;
-          console.log('in login success callback, response = ', response);
-          console.log('self = ', self);
-          FB.api('/me', function(response){
-            console.log('me object = ',response);
-            /*
-
-            FIX MEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
-             */
-          });
-        } else {
-          console.log('Facebook login failed', response);
-        }
-      }, {scope: 'basic_info, email, user_location'});
-    },
-    logout: function() {
-      FB.logout(function(response) {
-        if (response) {
-          self.auth = null;
-        } else {
-          console.log('Facebook logout failed.', response);
-        }
-      });
-    }
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: '1391051064505902'
+    });
   };
+
+  // $rootScope.$watch('loggedIn', function(){
+  //   console.log('rootscope.loggedin: ' + $rootScope.loggedIn);
+  //   if ($rootScope.loggedIn === true) {
+  //     $location.path('/dash');
+  //   } else {
+  //     $location.path('/');
+  //   }
+  // });
 });
 
-window.fbAsyncInit = function() {
-  FB.init({
-    appId: '1391051064505902'
-  });
-};
+app.service('authentication', function($rootScope) {
+
+  this.fbLogin = function(){
+    FB.login(function(response){
+      if (response.authResponse){
+        FB.api('/me', function(response){
+          $rootScope.me = response;
+          $rootScope.loggedIn = true;
+          $rootScope.$apply();
+        });
+      }
+    });
+  };
+
+  this.fbLogout = function(){
+    FB.logout(function() {
+      console.log('hitting the logout baby');
+      $rootScope.loggedIn = false;
+      $rootScope.$apply();
+    });
+  };
+
+});
+
 
 // Load the SDK Asynchronously
 (function(d){

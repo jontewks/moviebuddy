@@ -2,7 +2,7 @@
 
 var app = angular.module('moviebuddyApp');
 
-app.controller('loginController', function ($scope, $rootScope, $http) {
+app.controller('loginController', function ($scope, $http, authentication) {
     $scope.updateDB = function() {
       FB.api('/me', function(response){
         $http({
@@ -19,8 +19,12 @@ app.controller('loginController', function ($scope, $rootScope, $http) {
       });
     };
 
-    $rootScope.isLoggedIn = function() {
-      console.log( !!$rootScope.Facebook.getAuth());
+    $scope.login = function() {
+      authentication.fbLogin();
+    };
+
+    $scope.logout = function(){
+      authentication.fbLogout();
     };
 
   });

@@ -1,5 +1,4 @@
 var express = require('express');
-var util = require('./config/utility.js');
 var handler = require('./config/handler');
 
 var app = express();

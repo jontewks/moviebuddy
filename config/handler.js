@@ -2,7 +2,7 @@ var db = require('./db_config');
 var url = require('url');
 
 exports.getUser = function(req, res) {
-  return User.findOne({facebook_id: req.params.id}, function (err, user) {
+  return db.User.findOne({facebook_id: req.params.facebookid}, function (err, user) {
     if (!err) {
       return res.send(user);
     } else {
@@ -40,7 +40,7 @@ exports.postUser = function(req, res) {
 
 exports.putUser = function(req, res) {
   var body = req.body;
-  return User.findOne({facebook_id: req.params.id}, function (err, user) {
+  return db.User.findOne({facebook_id: req.params.id}, function (err, user) {
     user.facebook_token = body.facebook_token;
     user.name           = body.name;
     user.email          = body.email;
@@ -57,7 +57,7 @@ exports.putUser = function(req, res) {
 };
 
 exports.deleteUser = function(req, res) {
-  return User.findOne({facebook_id: req.params.id}, function (err, user) {
+  return db.User.findOne({facebook_id: req.params.id}, function (err, user) {
     return user.remove(function (err) {
       if (!err) {
         console.log("removed");
@@ -70,7 +70,7 @@ exports.deleteUser = function(req, res) {
 };
 
 exports.getOuting = function(req, res){
-  return Outing.findById(req.params.id, function(err, outing){
+  return db.Outing.findById(req.params.id, function(err, outing){
     if(!err){
       return res.send(user);
     }else{
@@ -101,7 +101,7 @@ exports.postOuting = function(req, res){
 
 exports.putOuting = function(req, res){
   var body = req.body;
-  return Outing.findById(req.params.id, function(err, outing){
+  return db.Outing.findById(req.params.id, function(err, outing){
     outing.theaterName    = body.theaterName;
     outing.location       = body.location;
     outing.movie          = body.movie;
@@ -122,7 +122,7 @@ exports.putOuting = function(req, res){
 };
 
 exports.deleteOuting = function(req, res){
-  return Outing.findById( req.params.id, function(err, outing){
+  return db.Outing.findById( req.params.id, function(err, outing){
     return user.remove(function(err){
       if(!err){
         console.log("removed!");
