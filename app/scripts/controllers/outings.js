@@ -1,5 +1,5 @@
 'use strict';
-/* global angular, $ */
+/* global angular */
 
 var app = angular.module('moviebuddyApp');
 
@@ -7,6 +7,7 @@ app.controller('OutingsController', function ($scope, $http) {
 
   var newOutingButtonVisible = true;
   var newOutingFormVisible = false;
+  $scope.form = {};
 
   $scope.showNewOutingButton = function() {
     return newOutingButtonVisible;
@@ -28,73 +29,73 @@ app.controller('OutingsController', function ($scope, $http) {
     newOutingButtonVisible = true;
   };
 
-  // Create a new 'outing' object.
-  // var createOuting = function() {
-  //   window.alert('In createOuting()');
-  //   var outing = {};
-    // outing.movie = $scope.movie.value;
-    // outing.date = $scope.date.value;
-    // outing.theater = $scope.theater.value;
+  // Create a new 'outing' object from passed form and user.
+  var createOuting = function(form, userId) {
+    var outing = {};
+    outing.movie = form.movie;
+    outing.date = form.date;
+    outing.theater = form.theater;
     // Look these up in our DB based on theater name?
     // outing.address;    // outing.city;    // outing.state;    // outing.zip;
-    // outing.invitees = $scope.invitees.value;
-    // outing.attendees = [];
-    // outing.creator = $scope.userId;
-    // window.alert('In createOuting() outing =', outing);
-    // return outing;
-  // };
-
-  $scope.outing = {};
+    outing.invitees = form.invitees;
+    outing.attendees = [];
+    outing.creator = userId;
+    return outing;
+  };
 
   // Process the 'new outing' form.
   $scope.processOutingForm = function() {
-    window.alert('In processOutingForm()');
-    // *** TO-DO: Bind 'outing' to the creating user below.
-    // $http.post('/api/outings', $scope.outing)
-    // $http({
-    //   method: 'POST',
-    //   *** TO-DO: Bind 'outing' to the creating user below.
-    //   url: '/api/outings/',
-    //   // Pass in 'data' as strings.
-    //   data: $.param($scope.outing),
-    //   // Set the 'headers' so Angular passes info as form data (not request payload).
-    //   headers: {
-    //     'Content-Type': 'application/x-www-form-urlencoded'
-    //   }
-    // })
-    // .success(function(data) {
-    //   window.alert('In processOutingForm(), $http().success(), data =', data);
-    //   if(!data.success) {
-    //     // If not successful, bind errors to error variables.
-    //     $scope.errorMovie = data.errors.movie;
-    //     $scope.errorDate = data.errors.date;
-    //     $scope.errorTheater = data.errors.theater;
-    //     $scope.errorInvitees = data.errors.invitees;
-    //   } else {
-    //     // If successful, bind success message to 'message'.
-    //     $scope.message = data.message;
-    //   }
-    // });
-    // Hide the 'new outing' form, show the 'new outing' button.
-    $scope.newOutingFormVisible = false;
-    $scope.newOutingButtonVisible = true;
+    var outing = createOuting($scope.form, $scope.userId || 1234);
+    $http({
+      method: 'POST',
+      url: '/api/outings/',
+      data: outing
+    })
+    .success(function(data) {
+      console.log('Successfully posted:', data);
+      // Hide the 'new outing' form, show the 'new outing' button.
+      newOutingFormVisible = false;
+      newOutingButtonVisible = true;
+      // *** Call a 'displayOutings' or 'refreshOutings' or 'appendOuting' function?
+    })
+    .error(function(data, status, headers, config) {
+      console.log('Error processing "new outing" form:', data, status, headers, config);
+      // *** Throw an 'error' object?
+    });
   };
 
-  // getOutings.getVisibleOutings('1234') // *** User ID parameter should be dynamic. ***
-  // .then(function(data) {
-  //   angular.forEach(data.data, function(outing) {
-  //     $scope.testMovie     = outing.movie;
-  //     $scope.testDate      = outing.date;
-  //     $scope.testTheater   = outing.theater;
-  //     $scope.testAddress   = outing.address;
-  //     $scope.testCity      = outing.city;
-  //     $scope.testState     = outing.state;
-  //     $scope.testZip       = outing.zip;
-  //     $scope.testInvitees  = outing.invitees;
-  //     $scope.testAttendees = outing.attendees;
-  //     $scope.testCreator   = outing.creator;
-  //   });
-  // });
+  // Pull from the DB outings that are visible to the user.
+  var getOutings = function(userId) {
+    return $http({
+      method: 'GET',
+      url: '/api/outings/' + (userId || '1234')
+    })
+    .success(function(data, status, headers, config) {
+      console.log('Success getting outings from DB:', data, status, headers, config);
+      // *** Call a 'displayOutings' or 'refreshOutings' or 'appendOuting' function?
+    })
+    .error(function(data, status, headers, config) {
+      console.log('Error getting outings from DB:', data, status, headers, config);
+      // *** Throw an 'error' object?
+    });
+  };
+
+  getOutings($scope.userID || '1234')
+  .then(function(data) {
+    angular.forEach(data.data, function(outing) {
+      $scope.testMovie     = outing.movie;
+      $scope.testDate      = outing.date;
+      $scope.testTheater   = outing.theater;
+      $scope.testAddress   = outing.address;
+      $scope.testCity      = outing.city;
+      $scope.testState     = outing.state;
+      $scope.testZip       = outing.zip;
+      $scope.testInvitees  = outing.invitees;
+      $scope.testAttendees = outing.attendees;
+      $scope.testCreator   = outing.creator;
+    });
+  });
+
 
   $scope.awesomeThings = [
     'HTML5 Boilerplate',
@@ -103,13 +104,3 @@ app.controller('OutingsController', function ($scope, $http) {
   ];
 
 });
-
-// Pull from the DB outings that are visible to the user.
-// app.service('getOutings', function($http) {
-//   this.getVisibleOutings = function(userId) {
-//     return $http({
-//       method: 'GET',
-//       url: '/api/outings/' + userId
-//     });
-//   };
-// });

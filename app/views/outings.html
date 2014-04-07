@@ -6,15 +6,15 @@
   <button ng-click="newOuting()" ng-show="showNewOutingButton()">New Outing</button>
 
   <!-- 'new outing' form displays when button above is clicked. -->
-  <form name="outingForm" action="#" ng-submit="processOutingForm()" ng-show="showNewOutingForm()">
-    <input name="movie" ng-model="form.movie" required type="text" placeholder="Movie">
+  <form ng-submit="processOutingForm()" ng-show="showNewOutingForm()" name="outingForm"> <!-- action="#" -->
+    <input ng-model="form.movie" required name="movie" type="text" placeholder="Movie">
     <!-- *** TO-DO: Enable above display of filter-search results via something like below: -->
       <!-- ng-model="movie in movies | filter:movieTitle | orderBy:movieTitle" ??-->
       <!-- Access list of movie titles thru root scope ?? -->
-    <input name="date" ng-model="form.date" type="date">
-    <input name="theater" ng-model="form.theater" type="text" placeholder="Theater">
+    <input ng-model="form.date" name="date" type="date">
+    <input ng-model="form.theater" name="theater" type="text" placeholder="Theater">
     <!-- *** TO-DO: Add button to allow user to change their current city. -->
-    <input name="invitees" ng-model="form.invitees" type="text" placeholder="Invite Friends">
+    <input ng-model="form.invitees" name="invitees" type="text" placeholder="Invite Friends">
     <button ng-click="cancelNewOuting()" type="reset">Cancel</button>
     <button ng-click="createOuting()" type="submit">Create Outing</button>
   </form>
