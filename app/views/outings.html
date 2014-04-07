@@ -2,24 +2,27 @@
 
 <div class="sectionContainer">
 
-  <button ng-click="newOuting()" ng-show="showNewOutingButton()" class="newOutingButton">New Outing</button>
+  <!-- Show 'new outing' button on launch, hide after click. -->
+  <button ng-click="newOuting()" ng-show="showNewOutingButton()">New Outing</button>
 
-  <form name="outingForm" ng-controller="outingFormCtrl" ng-show="showNewOutingForm()" class="outingForm">
-
-    <input name="outingMovie" ng-model="movie" required class="filter" type="text" placeholder="Movie">
-    <input name="outingDate" ng-model="date" type="date">
-    <input name="outingTheater" ng-model="theater" class="filter" type="text" placeholder="Theater">
+  <!-- 'new outing' form displays when button above is clicked. -->
+  <form name="outingForm" action="#" ng-submit="processOutingForm()" ng-show="showNewOutingForm()">
+    <input name="movie" ng-model="form.movie" required type="text" placeholder="Movie">
+    <!-- *** TO-DO: Enable above display of filter-search results via something like below: -->
+      <!-- ng-model="movie in movies | filter:movieTitle | orderBy:movieTitle" ??-->
+      <!-- Access list of movie titles thru root scope ?? -->
+    <input name="date" ng-model="form.date" type="date">
+    <input name="theater" ng-model="form.theater" type="text" placeholder="Theater">
     <!-- *** TO-DO: Add button to allow user to change their current city. -->
-    <input name="outingInvitees" ng-model="friends" class="filter" type="text" placeholder="Invite Friends">
-    <button ng-click="cancelNewOuting()" class="cancelButton" type="reset">Cancel</button>
-    <button ng-click="createOuting()" class="createButton" type="submit">Create Outing</button>
-
+    <input name="invitees" ng-model="form.invitees" type="text" placeholder="Invite Friends">
+    <button ng-click="cancelNewOuting()" type="reset">Cancel</button>
+    <button ng-click="createOuting()" type="submit">Create Outing</button>
   </form>
 
+  <!-- Show list (feed) of existing outings. -->
   <div class="outingsList">
 
-    <div ng-repeat="outing in outings" class="outing">
-
+    <div ng-repeat="outing in outings">
       <span class="movie"><u>Movie:</u> {{testMovie}}</span>
       <span class="date"><u>Date:</u> {{testDate}}</span>
       <span class="theater"><u>Theater:</u> {{testTheater}}</span>
@@ -30,9 +33,8 @@
       <span class="invitees"><u>Invitees:</u> {{testInvitees}}</span>
       <span class="attendees"><u>Attendees:</u> {{testAttendees}}</span>
       <span class="creator"><u>Creator:</u> {{testCreator}}</span>
-
+      <!-- *** TO-DO: Show an 'edit' button if current user is the outing creator. -->
       <hr class="movieHR">
-
     </div>
 
   </div>
