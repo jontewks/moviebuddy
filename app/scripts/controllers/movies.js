@@ -7,9 +7,25 @@ app.service('getMoviesData', function($http){
   var pageLimitQuery = '&page_limit=';
   var pageQuery = '&page=';
 
+  var totalMovies;
+  var totalQueryPages;
+  this.allMovies = [];
+
   this.getMovieData = function(queryPage, queryPageLimit) {
+    var that = this;
     var query = rottenTomatoesUrl + pageLimitQuery + queryPageLimit + pageQuery + queryPage;
-    return $http.jsonp(query);
+    return $http.jsonp(query)
+    .success(function(data){
+      totalMovies = data.total;
+      totalQueryPages = Math.ceil(totalMovies / queryPageLimit);
+
+      that.allMovies = that.allMovies.concat(data.movies);
+      queryPage++;
+
+      if (queryPage <= totalQueryPages) {
+        that.getMovieData(queryPage, queryPageLimit);
+      }
+    });
   };
 });
 
@@ -21,8 +37,12 @@ app.controller('MoviesController', function ($scope, $http, getMoviesData) {
 
   $scope.allMovies = [];
 
+
   var getMovies = function(queryPage, queryPageLimit) {
-    getMoviesData.getMovieData(queryPage, queryPageLimit);
+    getMoviesData.getMovieData(queryPage, queryPageLimit)
+    .then(function(){
+      $scope.allMovies = getMoviesData.allMovies;
+    });
   };
 
   getMovies(queryPage, queryPageLimit);
@@ -84,7 +104,7 @@ app.controller('synopsisController', function($scope){
 
   $scope.toggleText = function(text){
     $scope.textLimit = $scope.textLimit === 40 ? $scope.textLimit = text.length : $scope.textLimit = 40;
-    $scope.moreText =  $scope.moreText === '...' ? $scope.moreText = '' : $scope.moreText = '...';
+    $scope.moreText =  $scope.moreText === '...'? $scope.moreText = '' : $scope.moreText = '...';
   };
 });
 
@@ -93,7 +113,6 @@ app.controller('criticsController', function($scope){
   $scope.moreText = '...';
 
   $scope.toggleText = function(text){
-    if (!text) { text = 0; }
     $scope.textLimit = $scope.textLimit === 40 ? $scope.textLimit = text.length : $scope.textLimit = 40;
     $scope.moreText =  $scope.moreText === '...' ? $scope.moreText = '' : $scope.moreText = '...';
   };
