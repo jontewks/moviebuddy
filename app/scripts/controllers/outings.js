@@ -70,7 +70,6 @@ app.controller('OutingsController', function ($scope, $http) {
   // Function to pull from DB 'outings' for user.
   $scope.getOutings = function(userId) {
     userId = userId || 1234;
-    console.log('In getOutings()', $scope.outings);
     // *** Temporarily return only dummy data until DB is up.
     // return $http({
     //   method: 'GET',

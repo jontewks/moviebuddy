@@ -24,7 +24,7 @@
   <div class="outingsList">
 
     <!-- *** TO-DO: Add '| filter:' inputs above the feed below. -->
-    <div ng-repeat="outing in outings | orderBy: outing.date">
+    <div ng-repeat="outing in outings | orderBy: 'date'">
       <span class="movie">Movie: {{outing.movie}}</span>
       <span class="date">Date: {{outing.date}}</span>
       <span class="theater">Theater: {{outing.theater}}</span>
