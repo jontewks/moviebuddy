@@ -5,7 +5,6 @@ var FB = require('fb');
 exports.getUser = function(req, res) {
   
   db.User.findOne({facebookId: req.params.facebookId}, function (err, user) {
-    console.log('user found: line 8 ', user);
     if (!err) {
       res.send(user);
     } else {
@@ -46,29 +45,23 @@ exports.postUser = function(req, res) {
 
 // update user collection
 exports.putUser = function(req, res) {
-  var body = req.body;
-  console.log(body);
-  // db.User.findOne({facebookId: req.params.facebookId}, function (err, user) {
+  var userObj = req.body.user;
+  db.User.findOne({facebookId: userObj.facebookId}, function (err, user) {
 
-  //   // user.facebookToken  = body.facebookToken;
-  //   // user.name           = body.name;
-  //   // user.email          = body.email;
-  //   // user.city           = body.city;
-  //   // user.hometown       = body.hometown || '';
-  //   // user.currentCity    = body.CurrentCity || '';
+    user.name          = userObj.name;
+    user.hometown      = userObj.hometown     || '';
+    user.city          = userObj.currentCity  || '';
+    user.favMovie      = userObj.favMovie     || '';
+    user.favGenre      = userObj.favGenre     || '';
+    user.favTheater    = userObj.favTheater   || '';
+    user.favActor      = userObj.favActor     || '';
+    user.age           = userObj.age          || '';
 
-
-
-  //   user.save(function (err) {
-  //     if (!err) {
-  //       console.log('updated');
-  //     } else {
-  //       console.log(err);
-  //     }
-
-  //     res.send(user);
-  //   });
-  // });
+    user.save(function (err) {
+      !err ? console.log('updated') : console.log(err);
+      res.send(user);
+    });
+  });
 };
 
 // delete users from the db
@@ -149,7 +142,7 @@ exports.queryFBFriends = function(token, profile){
 
 // get outings from the database
 exports.getOuting = function(req, res){
-  console.log('req.params:', req.params);
+  // console.log('req.params:', req.params);
   return db.Outing.find({
     // *** TO-DO: Enable find of correct outings.
   }, function(err, outing){
