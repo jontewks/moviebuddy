@@ -1,5 +1,7 @@
 var db = require('./db_config');
+var FB = require('fb');
 
+// get a user from the db
 exports.getUser = function(req, res) {
   db.User.findOne({facebook_id: req.params.facebookid}, function (err, user) {
     if (!err) {
@@ -10,6 +12,7 @@ exports.getUser = function(req, res) {
   });
 };
 
+// enter a user into the db
 exports.postUser = function(req, res) {
   var body = req.body;
   var user = new db.User({
@@ -39,6 +42,7 @@ exports.postUser = function(req, res) {
   res.send(user);
 };
 
+// update user collection
 exports.putUser = function(req, res) {
   var body = req.body;
   db.User.findOne({facebookId: req.params.facebookId}, function (err, user) {
@@ -59,6 +63,7 @@ exports.putUser = function(req, res) {
   });
 };
 
+// delete users from the db
 exports.deleteUser = function(req, res) {
   db.User.findOne({facebookId: req.params.facebookId}, function (err, user) {
     user.remove(function (err) {
@@ -72,6 +77,7 @@ exports.deleteUser = function(req, res) {
   });
 };
 
+//get user friends from the db
 exports.getFriends = function(req, res) {
   db.User.findOne({facebookId: req.params[0]}, function(err, user) {
     if (!err && user) {
@@ -80,16 +86,56 @@ exports.getFriends = function(req, res) {
         db.User.find({facebookId: user.friends[i]}, function(err, friend) {
           usersFriends.push(friend[0]);
           if (i === user.friends.length) {
+            console.log('sending users friends: ', usersFriends);
             res.send(usersFriends);
           }
         });
       }
     } else {
+      console.log('sending error: ', err);
       res.send(err);
     }
   });
 };
 
+// Update user friends 
+exports.updateFriends = function(res, id) {
+
+  db.User.findOne({facebookId : id}, function(err, user){
+    if(!err) {
+      // <-- loop through the results array --> // 
+      for (var i = 0; i < res.length; i++){
+        // <-- check if the user exists in the database --> // 
+        db.User.findOne({ facebookId: res[i].uid }, function(err, friend){
+          // <-- loop through the results array --> // 
+          if (!err && friend !== null) {
+            var friendId = friend.facebookId;
+            var userFriends = user.friends;
+            // <-- if user doesn't already exist as a friend insert --> // 
+            if (userFriends.indexOf(friendId) === -1) {
+              userFriends.push(friendId);
+              user.save();
+            }
+          }
+        });
+      }
+    }
+  });
+};
+
+exports.queryFBFriends = function(token, profile){
+
+  FB.setAccessToken(token);
+
+  FB.api('fql', {
+    q : 'SELECT name, uid FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = '+profile.id+')'
+  }, function(res){
+    exports.updateFriends(res.data, profile.id);
+  });
+};
+
+
+// get outings from the database
 exports.getOuting = function(req, res) {
   db.Outing.findById(req.params.id, function(err, outing){
     if(!err){
@@ -100,6 +146,7 @@ exports.getOuting = function(req, res) {
   });
 };
 
+// enter outings into database function
 exports.postOuting = function(req, res) {
   var body = req.body;
   var outing = new db.Outing({
@@ -122,6 +169,8 @@ exports.postOuting = function(req, res) {
   res.send(outing);
 };
 
+
+// update outings into database function
 exports.putOuting = function(req, res) {
   var body = req.body;
 
@@ -144,6 +193,8 @@ exports.putOuting = function(req, res) {
   });
 };
 
+
+// Delete outings handler function
 exports.deleteOuting = function(req, res) {
   db.Outing.findById(req.params.id, function(err, outing){
     user.remove(function(err){
@@ -156,3 +207,6 @@ exports.deleteOuting = function(req, res) {
     });
   });
 };
+
+
+

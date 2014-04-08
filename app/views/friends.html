@@ -1,7 +1,7 @@
-<h3 class='sectionHeader friendsSectionHeader'>FRIENDS</h3>
+<h3 class='sectionHeader friendsSectionHeader' ng-click='getMovieFriends()'>FRIENDS</h3>
 <div class='sectionContainer sectionContainerFriends'>
 	<div ng-repeat='friend in friends' class='friend'>
-		<img class='friendsPhoto' ng-src='{{friend.imgPath}}'>
+		<img class='friendsPhoto' src='http://graph.facebook.com/{{friend.facebookId}}/picture?type=large'>
 		<span class='friendName'>{{friend.name}}</span>
 	</div>
 </div>
