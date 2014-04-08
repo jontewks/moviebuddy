@@ -56,7 +56,7 @@ exports.putUser = function(req, res) {
 
     user.save(function (err) {
       if (!err) {
-        console.log("updated");
+        console.log('updated');
       } else {
         console.log(err);
       }
@@ -71,7 +71,7 @@ exports.deleteUser = function(req, res) {
   db.User.findOne({facebookId: req.params.facebookId}, function (err, user) {
     user.remove(function (err) {
       if (!err) {
-        console.log("removed");
+        console.log('removed');
         res.send();
       } else {
         res.send(err);
@@ -175,7 +175,7 @@ exports.postOuting = function(req, res) {
 
   outing.save(function (err) {
     if (!err) {
-      console.log("created");
+      console.log('created');
     } else {
       console.log(err);
     }
@@ -203,7 +203,7 @@ exports.putOuting = function(req, res) {
 
     outing.save(function(err){
       if (!err){
-        console.log("updated");
+        console.log('updated');
       } else {
         console.log(err);
       }
@@ -218,7 +218,7 @@ exports.deleteOuting = function(req, res) {
   db.Outing.findById(req.params.id, function(err, outing){
     user.remove(function(err){
       if(!err){
-        console.log("removed!");
+        console.log('removed!');
         res.send();
       } else {
         res.send(err);
@@ -226,6 +226,3 @@ exports.deleteOuting = function(req, res) {
     });
   });
 };
-
-
-

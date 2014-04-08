@@ -12,7 +12,7 @@ app.service('getMoviesData', function($http){
   };
 });
 
-app.controller('moviesController', function ($scope, $http, getMoviesData) {
+app.controller('MoviesController', function ($scope, $http, getMoviesData) {
   var totalMovies;
   var totalQueryPages;
   var queryPage = 1;
