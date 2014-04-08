@@ -8,7 +8,7 @@ app.config(function ($routeProvider) {
   $routeProvider
     .when('/', {
       templateUrl: 'views/login.html',
-      controller: 'loginController',
+      controller: 'LoginController',
       resolve: {
         checkLogin: function(authentication){
           return authentication.auth();
@@ -17,7 +17,7 @@ app.config(function ($routeProvider) {
     })
     .when('/dash', {
       templateUrl: 'views/dashboard.html',
-      controller: 'dashController',
+      controller: 'DashController',
       resolve: {
         checkLogin: function(authentication){
           return authentication.auth();
@@ -27,7 +27,7 @@ app.config(function ($routeProvider) {
     .otherwise({
       redirectTo: '/',
       templateUrl: 'views/login.html',
-      controller: 'loginController'
+      controller: 'LoginController'
     });
 });
 
