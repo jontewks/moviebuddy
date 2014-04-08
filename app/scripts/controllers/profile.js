@@ -12,35 +12,50 @@ app.service('getUsers', function($http) {
       url: '/api/user/' + facebookId
     });
   };
+});
 
+app.service('updateUsers', function($http){
+  this.updateUser = function(facebookId, userObj) {
+    return $http.put('/api/user/' + facebookId, { user: userObj});
+  };
 });
 
 // This controller controls the profile.
-app.controller('ProfileController', function ($scope, $rootScope,getUsers) {
-
+app.controller('ProfileController', function ($scope, $rootScope,getUsers, updateUsers) {
+  var facebookId = $rootScope.user.facebookId;
   // *** Want to grab this upon authentication. ***
-  $scope.testUser;
-  $scope.testHometown;
-  $scope.testFavMovie;
-  $scope.testFavGenre;
-  $scope.testAge;
-  $scope.testFavTheater;
-  $scope.testCurrentCity;
-  $scope.testFavActor;
-  $scope.profilePicture;
-  $scope.profilePicture = 'http://graph.facebook.com/'+$rootScope.user.facebookId+'/picture?type=large';
+  $scope.user = {
+    facebookId        : facebookId,
+    name              : '',
+    hometown          : '',
+    favMovie          : '',
+    favGenre          : '',
+    age               : '',
+    favTheater        : '',
+    currentCity       : '',
+    favActor          : '',
+    profilePicture    : 'http://graph.facebook.com/'+facebookId+'/picture?type=large'
+  };
+
   // *** Want to nest this in a promise or callback. ***
-  getUsers.getUser($rootScope.user.facebookId)
+  getUsers.getUser(facebookId)
   .then(function(data) {
     var user = data.data;
-    $scope.testUser         = user.name;
-    $scope.testHometown     = user.hometown;
-    $scope.testFavMovie     = user.favMovie;
-    $scope.testFavGenre     = user.favGenre;
-    $scope.testAge          = user.age;
-    $scope.testFavTheater   = user.favTheater;
-    $scope.testCurrentCity  = user.currentCity;
-    $scope.testFavActor     = user.favActor;
+    $scope.user.name         = user.name;
+    $scope.user.hometown     = user.hometown;
+    $scope.user.favMovie     = user.favMovie;
+    $scope.user.favGenre     = user.favGenre;
+    $scope.user.age          = user.age;
+    $scope.user.favTheater   = user.favTheater;
+    $scope.user.currentCity  = user.city;
+    $scope.user.favActor     = user.favActor;
   });
+
+
+  $scope.updateUser = function(){
+    console.log($scope.user);
+    updateUsers.updateUser($rootScope.user.facebookId, $scope.user);
+
+  };
 
 });
