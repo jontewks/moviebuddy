@@ -32,6 +32,7 @@ app.controller('profileController', function ($scope, $rootScope,getUsers) {
   // *** Want to nest this in a promise or callback. ***
   getUsers.getUser($rootScope.user.facebookId)
   .then(function(data) {
+    console.log(data);
     var user = data.data;
     $scope.testUser         = user.name;
     $scope.testHometown     = user.hometown;
