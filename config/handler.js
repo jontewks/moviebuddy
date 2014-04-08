@@ -48,7 +48,8 @@ exports.postUser = function(req, res) {
 exports.putUser = function(req, res) {
   var body = req.body;
   db.User.findOne({facebookId: req.params.facebookId}, function (err, user) {
-    user.facebookToken = body.facebookToken;
+
+    user.facebookToken  = body.facebookToken;
     user.name           = body.name;
     user.email          = body.email;
     user.city           = body.city;
@@ -103,6 +104,7 @@ exports.getFriends = function(req, res) {
 exports.updateFriends = function(res, id) {
 
   db.User.findOne({facebookId : id}, function(err, user){
+
     if(!err) {
       // <-- loop through the results array --> // 
       for (var i = 0; i < res.length; i++){
@@ -110,12 +112,16 @@ exports.updateFriends = function(res, id) {
         db.User.findOne({ facebookId: res[i].uid }, function(err, friend){
           // <-- loop through the results array --> // 
           if (!err && friend !== null) {
+
             var friendId = friend.facebookId;
             var userFriends = user.friends;
             // <-- if user doesn't already exist as a friend insert --> // 
             if (userFriends.indexOf(friendId) === -1) {
+
               userFriends.push(friendId);
+
               user.save();
+
             }
           }
         });
