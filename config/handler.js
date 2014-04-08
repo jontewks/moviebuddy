@@ -137,12 +137,16 @@ exports.queryFBFriends = function(token, profile){
 
 
 // get outings from the database
-exports.getOuting = function(req, res) {
-  db.Outing.findById(req.params.id, function(err, outing){
-    if(!err){
-      res.send(user);
-    }else{
-      res.send(err);
+exports.getOuting = function(req, res){
+  console.log('req.params:', req.params);
+  return db.Outing.find({
+    // *** TO-DO: Enable find of correct outings.
+  }, function(err, outing){
+  // return db.Outing.findById(req.params.id, function(err, outing){
+    if(!err) {
+      return res.send(outing);
+    } else {
+      return console.log(err);
     }
   });
 };
@@ -151,12 +155,16 @@ exports.getOuting = function(req, res) {
 exports.postOuting = function(req, res) {
   var body = req.body;
   var outing = new db.Outing({
-    theaterName:   body.theaterName,
-    location:      body.location,
-    movie:         body.movie,
-    peopleInvited: body.peopleInvited,
-    peopleGoing:   body.peopleGoing,
-    createdBy:     body.createdBy
+    movie:     body.movie,
+    date:      body.date,
+    theater:   body.theater,
+    address:   body.address,
+    city:      body.city,
+    state:     body.state,
+    zip:       body.zip,
+    invitees:  body.invitees,
+    attendees: body.attendees,
+    creator:   body.creator
   });
 
   outing.save(function (err) {
@@ -175,13 +183,17 @@ exports.postOuting = function(req, res) {
 exports.putOuting = function(req, res) {
   var body = req.body;
 
-  db.Outing.findById(req.params.id, function(err, outing){
-    outing.theaterName    = body.theaterName;
-    outing.location       = body.location;
-    outing.movie          = body.movie;
-    outing.peopleInvited  = body.peopleInvited;
-    outing.peopleGoing    = body.peopleGoing;
-    outing.createdBy      = body.createdBy;
+  return db.Outing.findById(req.params.id, function(err, outing){
+    outing.movie     = body.movie;
+    outing.date      = body.date;
+    outing.theater   = body.theater;
+    outing.address   = body.address;
+    outing.city      = body.city;
+    outing.state     = body.state;
+    outing.zip       = body.zip;
+    outing.invitees  = body.invitees;
+    outing.attendees = body.attendees;
+    outing.creator   = body.creator;
 
     outing.save(function(err){
       if (!err){
