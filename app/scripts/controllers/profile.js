@@ -9,7 +9,7 @@ app.service('getUsers', function($http) {
   this.getUser = function(facebookId) {
     return $http({
       method: 'GET',
-      url: '/api/user/'+facebookId,
+      url: '/api/user/' + facebookId
     });
   };
 
@@ -28,10 +28,9 @@ app.controller('profileController', function ($scope, $rootScope,getUsers) {
   $scope.testCurrentCity;
   $scope.testFavActor;
   $scope.profilePicture;
-  $scope.profilePicture = 'http://graph.facebook.com/'+$rootScope.me.id+'/picture?type=large';
-
+  $scope.profilePicture = 'http://graph.facebook.com/'+$rootScope.user.facebookId+'/picture?type=large';
   // *** Want to nest this in a promise or callback. ***
-  getUsers.getUser($rootScope.me.id)
+  getUsers.getUser($rootScope.user.facebookId)
   .then(function(data) {
     var user = data.data;
     $scope.testUser         = user.name;
@@ -42,15 +41,6 @@ app.controller('profileController', function ($scope, $rootScope,getUsers) {
     $scope.testFavTheater   = user.favTheater;
     $scope.testCurrentCity  = user.currentCity;
     $scope.testFavActor     = user.favActor;
-
-
   });
-
-  // Mystery goodness.
-  $scope.awesomeThings = [
-    'HTML5 Boilerplate',
-    'AngularJS',
-    'Karma'
-  ];
 
 });

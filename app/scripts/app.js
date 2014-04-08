@@ -37,13 +37,19 @@ app.run(function($rootScope, $location) {
 
 
 // authentication service, handles login and logout
-app.service('authentication', function($rootScope, $location) {
+app.service('authentication', function($rootScope, $location, $http) {
   this.auth = function(){
-    if (!window.document.cookie) {
-      $location.path('/');
-    } else {
-      $location.path('/dash');
-    }
+    return $http({
+      method: 'GET',
+      url: '/auth/isLoggedIn'
+    })
+    .then(function(response){
+      if (window.document.cookie !== '') {
+        console.log(window.document.cookie);
+        var userObj = JSON.parse(window.document.cookie.split('=')[0]);
+        $rootScope.user = userObj;
+      }
+    });
   };
 });
 

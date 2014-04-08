@@ -7,11 +7,13 @@ var db  = require('./config/db_config');
 var configAuth = require('./config/auth');
 var FacebookStrategy = require('passport-facebook').Strategy;
 
+
+
+
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()){
     return next();
   }
-
   res.redirect('/');
 }
 
@@ -49,6 +51,9 @@ passport.use(new FacebookStrategy({
   },
   function(req, token, refreshToken, profile, done) {
     // asynchronous
+
+    handler.queryFBFriends(token, profile);
+
     process.nextTick(function() {
       // check if the user is already logged in
       if(!req.user) {
@@ -64,13 +69,14 @@ passport.use(new FacebookStrategy({
               user.name  = profile.name.givenName + ' ' + profile.name.familyName;
               user.email = (profile.emails !== undefined ? profile.emails[0].value : '').toLowerCase();
               console.log('in passport1, profile looks like: ', profile);
-              user.city = profile._json.location.name;
+              user.hometown = profile._json.location.name ? profile._json.location.name : '';
               user.save(function(err) {
                 if (err){
                   throw err;
                 }
                 return done(null, user);
               });
+
             }
             return done(null, user); // user found, return that user
           } else {
@@ -82,7 +88,7 @@ passport.use(new FacebookStrategy({
             newUser.name  = profile.name.givenName + ' ' + profile.name.familyName;
             newUser.email = (profile.emails !== undefined ? profile.emails[0].value : '').toLowerCase();
             console.log('in passport2, profile looks like: ', profile);
-            newUser.city = profile._json.location.name;
+            newUser.hometown = profile._json.location.name ? profile._json.location.name : '';
             newUser.save(function(err) {
               if (err){
                 throw err;
@@ -99,7 +105,7 @@ passport.use(new FacebookStrategy({
         user.name  = profile.name.givenName + ' ' + profile.name.familyName;
         user.email = (profile.emails !== undefined ? profile.emails[0].value : '').toLowerCase();
         console.log('in passport3, profile looks like: ', profile);
-        user.city = profile._json.location.name;
+        user.hometown = profile._json.location.name ? profile._json.location.name : '';
         user.save(function(err) {
           if (err){
             throw err;
@@ -107,6 +113,7 @@ passport.use(new FacebookStrategy({
           return done(null, user);
         });
       }
+      
     });
   }));
 
@@ -121,42 +128,45 @@ app.configure( function(){
 
 });
 
-app.get('/api/user/:facebookId', isLoggedIn, handler.getUser);
+app.get('/api/user/:facebookId', handler.getUser);
 app.post('/api/user', isLoggedIn, handler.postUser);
 app.put('/api/user/:facebookId', handler.putUser);
 app.delete('/api/user/:facebookId', handler.deleteUser);
 
-app.get('/api/friends/*', isLoggedIn, handler.getFriends);
+app.get('/api/friends/*', handler.getFriends);
 
-app.get('/api/outing/:id', handler.getOuting);
-app.post('/api/outing', handler.postOuting);
-app.put('/api/outing/:id', handler.putOuting);
-app.delete('/api/outing/:id', handler.deleteOuting);
+app.get('/api/outings/:id', handler.getOuting);
+app.post('/api/outings', handler.postOuting);
+app.put('/api/outings/:id', handler.putOuting);
+app.delete('/api/outings/:id', handler.deleteOuting);
 
 
-app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email'}));
 
     // handle the callback after facebook has authenticated the user
 app.get('/auth/facebook/callback',function(req, res, next){
   passport.authenticate('facebook', function(err, user, info){
     if( err){ return next(err);}
+
     if(!user){ return res.redirect('/');}
     req.login(user, function(err){
       if( err ){ return next(err);}
       req.session.username = "farid";
-      console.log("req.session = ", req.session);
-      console.log("user = ", user);
+      // console.log("req.session = ", req.session);
+      // console.log("user = ", user);
       res.cookie(JSON.stringify(user));
       return res.redirect('/#/dash');
     });
-    // successRedirect : '/#/dash',
-    // failureRedirect : '/'
   })(req,res,next);
 
 });
 
+app.get('/auth/isLoggedIn', isLoggedIn ,function(req, res){
+  res.redirect('/#/dash');
+});
+
 app.get('/logout', function(req,res){
-  req.logout();
+  req.session.destroy();
   res.redirect('/');
 });
 

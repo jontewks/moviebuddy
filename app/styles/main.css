@@ -425,8 +425,30 @@ body {
   background-color: #00A8C6;
 }
 
-/* footer */
+/* Outings */
+.outingsList {
+  font-size: 12pt;
+}
+.movie {
 
+}
+.date {
+
+}
+.theater {
+
+}
+.invitees {
+
+}
+.attendees {
+
+}
+.creator {
+
+}
+
+/* footer */
 .footer {
   background: url('../images/grey_wash_wall.png');
   height: 100px;
@@ -647,8 +669,41 @@ body {
   .outingsSection {
 
   }
+<<<<<<< HEAD
 
   .outingsSectionHeader {
 
   }
+=======
+  /* Outings */
+  .outingsList {
+    font-size: 12pt;
+  }
+  .movie {
+
+  }
+  .date {
+
+  }
+  .theater {
+
+  }
+  .invitees {
+
+  }
+  .attendees {
+
+  }
+  .creator {
+
+  }
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 40px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+>>>>>>> outings
 }
