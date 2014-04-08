@@ -85,15 +85,42 @@ exports.getFriends = function(req, res) {
         db.User.find({facebookId: user.friends[i]}, function(err, friend) {
           usersFriends.push(friend[0]);
           if (i === user.friends.length) {
+            console.log('sending users friends: ', usersFriends);
             res.send(usersFriends);
           }
         });
       }
     } else {
+      console.log('sending error: ', err);
       res.send(err);
     }
   });
 };
+
+// Update user friends 
+exports.updateFriends = function(res, id) {
+  db.User.findOne({facebookId : id}, function(err, user){
+    if(!err) {
+      // <-- loop through the results array --> // 
+      for (var i = 0; i < res.length; i++){
+        // <-- check if the user exists in the database --> // 
+        db.User.findOne({ facebookId: res[i].uid }, function(err, friend){
+          // <-- loop through the results array --> // 
+          if (!err && friend !== null) {
+            var friendId = friend.facebookId;
+            var userFriends = user.friends;
+            // <-- if user doesn't already exist as a friend insert --> // 
+            if (userFriends.indexOf(friendId) === -1) {
+              userFriends.push(friendId);
+              user.save();
+            }
+          }
+        });
+      }
+    }
+  });
+};
+
 
 // get outings from the database
 exports.getOuting = function(req, res) {
@@ -168,25 +195,5 @@ exports.deleteOuting = function(req, res) {
   });
 };
 
-// update user friends
-exports.updateFriends = function(res, id) {
-  db.User.findOne({facebookId : id}, function(err, user){
-    if(!err) {
-      for (var i = 0; i < res.length; i++){
-        db.User.findOne({ facebookId: res[i].uid }, function(err, friend){
-          if (!err && friend !== null) {
-            var friendId = friend.facebookId;
-            var userFriends = user.friends;
-            if (userFriends.indexOf(friendId) === -1) {
-              userFriends.push(friendId);
-              user.save();
-            }
-          }
-        });
-      }
-    }
-  });
-
-};
 
 

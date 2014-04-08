@@ -135,7 +135,7 @@ app.post('/api/user', isLoggedIn, handler.postUser);
 app.put('/api/user/:facebookId', handler.putUser);
 app.delete('/api/user/:facebookId', handler.deleteUser);
 
-app.get('/api/friends/*', isLoggedIn, handler.getFriends);
+app.get('/api/friends/*', handler.getFriends);
 
 app.get('/api/outing/:id', handler.getOuting);
 app.post('/api/outing', handler.postOuting);

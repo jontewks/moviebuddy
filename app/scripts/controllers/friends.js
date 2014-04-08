@@ -13,8 +13,11 @@ app.service('getFriends', function ($http) {
 });
 
 app.controller('friendsController', function ($scope, $rootScope, getFriends) {
+
   getFriends.friendsData($rootScope.user.facebookId)
   .then(function(friends){
+    console.log(friends);
     $scope.friends = friends.data;
   });
+
 });
