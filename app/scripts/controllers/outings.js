@@ -1,9 +1,13 @@
 'use strict';
 /* global angular */
 
+
 var app = angular.module('moviebuddyApp');
 
-app.controller('OutingsController', function ($scope, $http) {
+app.controller('OutingsController', function ($scope, $rootScope, $http, getMoviesData) {
+
+// console.log(getMoviesData.allMovies);
+// console.log($rootScope.user);
 
   var newOutingButtonVisible = true;
   var newOutingFormVisible = false;
