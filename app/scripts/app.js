@@ -39,11 +39,11 @@ app.run(function($rootScope, $location) {
 // authentication service, handles login and logout
 app.service('authentication', function($rootScope, $location) {
   this.auth = function(){
-    // if (!window.document.cookie) {
-    //   $location.path('/');
-    // } else {
-    //   $location.path('/dash');
-    // }
+    if (!window.document.cookie) {
+      $location.path('/');
+    } else {
+      $location.path('/dash');
+    }
   };
 });
 
