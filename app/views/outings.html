@@ -14,7 +14,7 @@
     <input ng-model="form.date" name="date" type="date">
     <input ng-model="form.theater" name="theater" type="text" placeholder="Theater">
     <!-- *** TO-DO: Add button to allow user to change their current city. -->
-    <input ng-model="form.invitees" name="invitees" type="text" placeholder="Invite Friends">
+    <!-- <input ng-model="form.invitees" name="invitees" type="text" placeholder="Invite Friends"> -->
     <button ng-click="cancelNewOuting()" type="reset">Cancel</button>
     <button ng-click="createOuting()" type="submit">Create Outing</button>
   </form>
@@ -28,7 +28,7 @@
       <span class="date">Date: {{outing.date}}</span>
       <span class="theater">Theater: {{outing.theater}}</span>
       <!-- *** TO-DO: Show theater info (address & map upon click of theater name. -->
-      <span class="invitees">Invitees: {{outing.invitees}}</span>
+      <!-- <span class="invitees">Invitees: {{outing.invitees}}</span> -->
       <span class="attendees">Attendees: {{outing.attendees}}</span>
       <span class="creator">Creator: {{outing.creator}}</span>
       <!-- *** TO-DO: Show an 'edit' button if current user is the outing creator. -->

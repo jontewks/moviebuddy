@@ -1,13 +1,12 @@
 'use strict';
 /* global angular */
 
-
 var app = angular.module('moviebuddyApp');
 
 app.controller('OutingsController', function ($scope, $rootScope, $http, getMoviesData) {
 
 // console.log(getMoviesData.allMovies);
-// console.log($rootScope.user);
+console.log($rootScope.user);
 
   var newOutingButtonVisible = true;
   var newOutingFormVisible = false;
@@ -17,7 +16,7 @@ app.controller('OutingsController', function ($scope, $rootScope, $http, getMovi
     $scope.form.movie = '';
     $scope.form.date = '';
     $scope.form.theater = '';
-    $scope.form.invitees = '';
+    // $scope.form.invitees = '';
   };
 
   // Function to create new 'outing' object from form and user.
@@ -28,7 +27,7 @@ app.controller('OutingsController', function ($scope, $rootScope, $http, getMovi
     outing.theater = form.theater;
     // In lieu of Fandango, look up below values in our DB based on theater name?
     // outing.address;    // outing.city;    // outing.state;    // outing.zip;
-    outing.invitees = form.invitees;
+    // outing.invitees = form.invitees;
     outing.attendees = [];
     outing.creator = userId;
     return outing;

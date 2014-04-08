@@ -685,18 +685,6 @@ body {
 
   }
 
-
-  /* outings */
-
-  .outingsSection {
-
-  }
-<<<<<<< HEAD
-
-  .outingsSectionHeader {
-
-  }
-=======
   /* Outings */
   .outingsList {
     font-size: 12pt;
@@ -727,5 +715,4 @@ body {
 }
 .marketing p + h4 {
   margin-top: 28px;
->>>>>>> outings
 }

@@ -1,8 +1,10 @@
 /* global require, process */
 var express = require('express');
 var handler = require('./config/handler');
+
 var app = express();
 var port = process.env.PORT || 8080;
+
 // initialize passport
 var passport = require('./config/passport').passport;
 function isLoggedIn(req, res, next) {
@@ -32,7 +34,6 @@ app.get(   '/api/outings/:id', handler.getOuting);
 app.post(  '/api/outings',     handler.postOuting);
 app.put(   '/api/outings/:id', handler.putOuting);
 app.delete('/api/outings/:id', handler.deleteOuting);
-
 
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email'}));
 app.get('/auth/facebook/callback',function(req, res, next){

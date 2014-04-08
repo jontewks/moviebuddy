@@ -167,7 +167,7 @@ exports.postOuting = function(req, res) {
     city:      body.city,
     state:     body.state,
     zip:       body.zip,
-    invitees:  body.invitees,
+    // invitees:  body.invitees,
     attendees: body.attendees,
     creator:   body.creator
   });
@@ -196,7 +196,7 @@ exports.putOuting = function(req, res) {
     outing.city      = body.city;
     outing.state     = body.state;
     outing.zip       = body.zip;
-    outing.invitees  = body.invitees;
+    // outing.invitees  = body.invitees;
     outing.attendees = body.attendees;
     outing.creator   = body.creator;
 
