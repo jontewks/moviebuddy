@@ -70,10 +70,14 @@ exports.deleteUser = function(req, res) {
 };
 
 exports.getOuting = function(req, res){
-  return db.Outing.findById(req.params.id, function(err, outing){
-    if(!err){
-      return res.send(user);
-    }else{
+  console.log('req.params:', req.params);
+  return db.Outing.find({
+    // *** TO-DO: Enable find of correct outings.
+  }, function(err, outing){
+  // return db.Outing.findById(req.params.id, function(err, outing){
+    if(!err) {
+      return res.send(outing);
+    } else {
       return console.log(err);
     }
   });

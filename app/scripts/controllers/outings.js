@@ -22,7 +22,7 @@ app.controller('OutingsController', function ($scope, $http) {
     return outing;
   };
 
-  // Define empty object to hold 'new outing' form data.
+  // Define empty object to hold form data.
   $scope.form = {};
 
   $scope.showNewOutingButton = function() {
@@ -33,13 +33,13 @@ app.controller('OutingsController', function ($scope, $http) {
     return newOutingFormVisible;
   };
 
-  // Function to hide 'new outing' button, show 'new outing' form.
+  // Function to hide 'new outing' button & show 'new outing' form.
   $scope.newOuting = function() {
     newOutingButtonVisible = false;
     newOutingFormVisible = true;
   };
 
-  // Function to hide 'new outing' form; show 'new outing' button.
+  // Function to hide 'new outing' form & show 'new outing' button.
   $scope.cancelNewOuting = function() {
     newOutingFormVisible = false;
     newOutingButtonVisible = true;
@@ -54,63 +54,37 @@ app.controller('OutingsController', function ($scope, $http) {
       data: outing
     })
     .success(function(data) {
-      console.log('Successfully posted:', data);
-      // *** Temporarily push to local array until DB is up.
-      $scope.outings.push(outing);
-      // Hide the 'new outing' form, show the 'new outing' button.
+      console.log('POST Success:', data);
+      // Clear form values.
+      // $scope.form.$setPristine(); // Doesn't work--why?
+      // Hide 'new outing' form, show 'new outing' button.
       newOutingFormVisible = false;
       newOutingButtonVisible = true;
+      // Refresh the 'outings' display.
+      $scope.getOutings($scope.userId);
     })
     .error(function(data, status, headers, config) {
-      console.log('Error processing "new outing" form:', data, status, headers, config);
-      // *** Throw an 'error' object?
+      console.log('POST Error:', data, status, headers, config);
     });
   };
 
   // Function to pull from DB 'outings' for user.
   $scope.getOutings = function(userId) {
     userId = userId || 1234;
-    // *** Temporarily return only dummy data until DB is up.
-    // return $http({
-    //   method: 'GET',
-    //   url: '/api/outings/' + userId
-    // })
-    // .success(function(data, status, headers, config) {
-    //   console.log('Success getting outings from DB:', data, status, headers, config);
-    //   // *** Call a 'displayOutings' or 'refreshOutings' or 'appendOuting' function?
-    // })
-    // .error(function(data, status, headers, config) {
-    //   console.log('Error getting outings from DB:', data, status, headers, config);
-    //   // *** Throw an 'error' object?
-    // });
-    return $scope.outings || [{
-      outingId:      5678,
-      movie:         'Ride Along',
-      date:          '2014-04-12',
-      theater:       'Kabuki',
-      address:       '1881 Post St',
-      city:          'San Francisco',
-      state:         'CA',
-      zip:           94115,
-      invitees:      [1234, 1111, 2222], // User IDs (foreign keys).
-      attendees:     [1234, 1111], // User IDs (foreign keys).
-      creator:       1234 // A user ID (foreign key).
-    }, {
-      outingId:      8765,
-      movie:         'Divergent',
-      date:          '2014-04-19',
-      theater:       'Metreon',
-      address:       '135 4th St #3000',
-      city:          'San Francisco',
-      state:         'CA',
-      zip:           94103,
-      invitees:      [], // User IDs (foreign keys).
-      attendees:     [], // User IDs (foreign keys).
-      creator:       4321 // A user ID (foreign key).
-    }];
+    $http({
+      method: 'GET',
+      url: '/api/outings/' + userId
+    })
+    .success(function(data) {
+      console.log('GET Success:', data);
+      $scope.outings = data;
+    })
+    .error(function(data, status, headers, config) {
+      console.log('GET Error:', data, status, headers, config);
+    });
   };
 
-  // Initialize list of outings.
-  $scope.outings = $scope.getOutings($scope.userId);
+  // Initialize display of outings.
+  $scope.getOutings($scope.userId);
 
 });
