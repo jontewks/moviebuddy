@@ -3,7 +3,9 @@ var FB = require('fb');
 
 // get a user from the db
 exports.getUser = function(req, res) {
-  db.User.findOne({facebook_id: req.params.facebookid}, function (err, user) {
+  
+  db.User.findOne({facebookId: req.params.facebookId}, function (err, user) {
+    console.log('user found: line 8 ', user);
     if (!err) {
       res.send(user);
     } else {
@@ -86,7 +88,6 @@ exports.getFriends = function(req, res) {
         db.User.find({facebookId: user.friends[i]}, function(err, friend) {
           usersFriends.push(friend[0]);
           if (i === user.friends.length) {
-            console.log('sending users friends: ', usersFriends);
             res.send(usersFriends);
           }
         });

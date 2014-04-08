@@ -69,7 +69,7 @@ passport.use(new FacebookStrategy({
               user.name  = profile.name.givenName + ' ' + profile.name.familyName;
               user.email = (profile.emails !== undefined ? profile.emails[0].value : '').toLowerCase();
               console.log('in passport1, profile looks like: ', profile);
-              user.city = profile._json.location.name;
+              user.hometown = profile._json.location.name;
               user.save(function(err) {
                 if (err){
                   throw err;
@@ -106,7 +106,7 @@ passport.use(new FacebookStrategy({
         user.name  = profile.name.givenName + ' ' + profile.name.familyName;
         user.email = (profile.emails !== undefined ? profile.emails[0].value : '').toLowerCase();
         console.log('in passport3, profile looks like: ', profile);
-        user.city = profile._json.location.name;
+        user.hometown = profile._json.location.name;
         user.save(function(err) {
           if (err){
             throw err;
