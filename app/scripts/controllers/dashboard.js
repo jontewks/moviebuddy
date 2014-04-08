@@ -2,7 +2,7 @@
 
 var app = angular.module('moviebuddyApp');
 
-app.controller('dashController', function ($scope, authentication) {
+app.controller('DashController', function ($scope, authentication) {
 
 		$scope.logout = function(){
       console.log('trying to logout!!!');

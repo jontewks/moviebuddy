@@ -3,7 +3,7 @@
 var app = angular.module('moviebuddyApp');
 
 // refactor authentication out 
-app.controller('loginController', function ($scope, $rootScope, $http, $window, authentication) {
+app.controller('LoginController', function ($scope, $rootScope, $http, $window, authentication) {
 
   $scope.updateDB = function() {
     FB.api('/me', function(response){
