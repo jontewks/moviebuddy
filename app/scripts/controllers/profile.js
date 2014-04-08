@@ -16,7 +16,7 @@ app.service('getUsers', function($http) {
 });
 
 // This controller controls the profile.
-app.controller('profileController', function ($scope, $rootScope,getUsers) {
+app.controller('ProfileController', function ($scope, $rootScope,getUsers) {
 
   // *** Want to grab this upon authentication. ***
   $scope.testUser;
