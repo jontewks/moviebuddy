@@ -2,10 +2,10 @@
 
 <div class="sectionContainer">
 
-  <!-- Show 'new outing' button on launch, hide after click. -->
+  <!-- Show 'new outing' button on launch, hide upon click. -->
   <button ng-click="newOuting()" ng-show="showNewOutingButton()">New Outing</button>
 
-  <!-- 'new outing' form displays when button above is clicked. -->
+  <!-- 'new outing' form below displays when button above is clicked. -->
   <!-- *** Should 'action="#"' be included in the tag below? -->
   <form ng-submit="processOutingForm()" ng-show="showNewOutingForm()" name="outingForm">
     <input ng-model="form.movie" required name="movie" type="text" placeholder="Movie">
@@ -20,10 +20,11 @@
     <button ng-click="createOuting()" type="submit">Create Outing</button>
   </form>
 
-  <!-- Show list (feed) of existing outings. -->
+  <!-- Show list (feed) of outings. -->
   <div class="outingsList">
 
-    <div ng-init="getOutings()" ng-repeat="outing in outings">
+    <!-- *** TO-DO: Add '| filter:' inputs above the feed below. -->
+    <div ng-repeat="outing in outings | orderBy: outing.date">
       <span class="movie">Movie: {{outing.movie}}</span>
       <span class="date">Date: {{outing.date}}</span>
       <span class="theater">Theater: {{outing.theater}}</span>
