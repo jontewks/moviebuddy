@@ -1,9 +1,10 @@
+/* global require, exports */
 var db = require('./db_config');
 var FB = require('fb');
 
 // get a user from the db
 exports.getUser = function(req, res) {
-  
+
   db.User.findOne({facebookId: req.params.facebookId}, function (err, user) {
     console.log('user found: line 8 ', user);
     if (!err) {
@@ -19,7 +20,7 @@ exports.postUser = function(req, res) {
   var body = req.body;
   var user = new db.User({
     facebookId:      body.facebookId,
-    facebook_token:  body.facebookToken,
+    facebookToken:  body.facebookToken,
     name:            body.name,
     email:           body.email,
     city:            body.city
@@ -30,12 +31,12 @@ exports.postUser = function(req, res) {
     // favTheater:      ,
     // currentCity:     ,
     // favActor:        ,
-    // favDirector:     
+    // favDirector:
   });
 
   user.save(function (err) {
     if (!err) {
-      return console.log("created");
+      return console.log('created');
     } else {
       return console.log(err);
     }
@@ -100,22 +101,22 @@ exports.getFriends = function(req, res) {
   });
 };
 
-// Update user friends 
+// Update user friends
 exports.updateFriends = function(res, id) {
 
   db.User.findOne({facebookId : id}, function(err, user){
 
     if(!err) {
-      // <-- loop through the results array --> // 
+      // <-- loop through the results array --> //
       for (var i = 0; i < res.length; i++){
-        // <-- check if the user exists in the database --> // 
+        // <-- check if the user exists in the database --> //
         db.User.findOne({ facebookId: res[i].uid }, function(err, friend){
-          // <-- loop through the results array --> // 
+          // <-- loop through the results array --> //
           if (!err && friend !== null) {
 
             var friendId = friend.facebookId;
             var userFriends = user.friends;
-            // <-- if user doesn't already exist as a friend insert --> // 
+            // <-- if user doesn't already exist as a friend insert --> //
             if (userFriends.indexOf(friendId) === -1) {
 
               userFriends.push(friendId);
@@ -207,7 +208,7 @@ exports.putOuting = function(req, res) {
       } else {
         console.log(err);
       }
-      res.send(user);
+      res.send(outing);
     });
   });
 };
@@ -216,9 +217,9 @@ exports.putOuting = function(req, res) {
 // Delete outings handler function
 exports.deleteOuting = function(req, res) {
   db.Outing.findById(req.params.id, function(err, outing){
-    user.remove(function(err){
+    outing.remove(function(err){
       if(!err){
-        console.log('removed!');
+        console.log('outing removed!');
         res.send();
       } else {
         res.send(err);
@@ -226,3 +227,29 @@ exports.deleteOuting = function(req, res) {
     });
   });
 };
+
+exports.authFacebookCallback = function(req, res, next, passport){
+  console.log( 'in authFacebookCallback');
+  passport.authenticate('facebook', function(err, user){
+    if( err){ return next(err);}
+
+    if(!user){ return res.redirect('/');}
+    req.login(user, function(err){
+      if( err ){ return next(err);}
+      req.session.username = 'farid';
+      // console.log("req.session = ", req.session);
+      // console.log("user = ", user);
+      res.cookie(JSON.stringify(user));
+      return res.redirect('/#/dash');
+    });
+  })(req,res,next);
+};
+
+exports.isLoggedIn = function(req, res){
+  res.redirect('/#/dash');
+};
+exports.logout = function(req, res){
+  req.session.destroy();
+  res.redirect('/');
+};
+
