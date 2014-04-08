@@ -8,13 +8,21 @@ app.controller('OutingsController', function ($scope, $http) {
   var newOutingButtonVisible = true;
   var newOutingFormVisible = false;
 
+  // Rewrite using angular.forEach()?
+  var clearOutingForm = function() {
+    $scope.form.movie = '';
+    $scope.form.date = '';
+    $scope.form.theater = '';
+    $scope.form.invitees = '';
+  };
+
   // Function to create new 'outing' object from form and user.
   var createOuting = function(form, userId) {
     var outing = {};
     outing.movie = form.movie;
     outing.date = form.date;
     outing.theater = form.theater;
-    // Look these up in our DB based on theater name?
+    // In lieu of Fandango, look up below values in our DB based on theater name?
     // outing.address;    // outing.city;    // outing.state;    // outing.zip;
     outing.invitees = form.invitees;
     outing.attendees = [];
@@ -47,6 +55,7 @@ app.controller('OutingsController', function ($scope, $http) {
 
   // Function to process 'new outing' form.
   $scope.processOutingForm = function() {
+    // *** TO-DO: Remove '1234'.
     var outing = createOuting($scope.form, $scope.userId || 1234);
     $http({
       method: 'POST',
@@ -56,7 +65,7 @@ app.controller('OutingsController', function ($scope, $http) {
     .success(function(data) {
       console.log('POST Success:', data);
       // Clear form values.
-      // $scope.form.$setPristine(); // Doesn't work--why?
+      clearOutingForm();
       // Hide 'new outing' form, show 'new outing' button.
       newOutingFormVisible = false;
       newOutingButtonVisible = true;
@@ -70,6 +79,7 @@ app.controller('OutingsController', function ($scope, $http) {
 
   // Function to pull from DB 'outings' for user.
   $scope.getOutings = function(userId) {
+    // *** TO-DO: Remove '1234'.
     userId = userId || 1234;
     $http({
       method: 'GET',
