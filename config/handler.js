@@ -145,7 +145,7 @@ exports.queryFBFriends = function(token, profile){
 exports.getOuting = function(req, res){
   // console.log('req.params:', req.params);
   return db.Outing.find({
-    // *** TO-DO: Enable find of correct outings.
+    // *** TO-DO: Enable find of user- & friend-specific outings.
   }, function(err, outing){
   // return db.Outing.findById(req.params.id, function(err, outing){
     if(!err) {
@@ -227,9 +227,9 @@ exports.deleteOuting = function(req, res) {
 };
 
 exports.authFacebookCallback = function(req, res, next, passport){
-  console.log( 'in authFacebookCallback');
+  console.log('in authFacebookCallback');
   passport.authenticate('facebook', function(err, user){
-    if( err){ return next(err);}
+    if(err){ return next(err);}
 
     if(!user){ return res.redirect('/');}
     req.login(user, function(err){
@@ -250,4 +250,3 @@ exports.logout = function(req, res){
   req.session.destroy();
   res.redirect('/');
 };
-

@@ -3,10 +3,7 @@
 
 var app = angular.module('moviebuddyApp');
 
-app.controller('OutingsController', function ($scope, $rootScope, $http, getMoviesData) {
-
-// console.log(getMoviesData.allMovies);
-console.log($rootScope.user);
+app.controller('OutingsController', function ($scope, $rootScope, $http) {
 
   var newOutingButtonVisible = true;
   var newOutingFormVisible = false;
@@ -21,6 +18,9 @@ console.log($rootScope.user);
 
   // Function to create new 'outing' object from form and user.
   var createOuting = function(form, userId) {
+    if(form === undefined || userId === undefined) {
+      throw new Error('getOutings() must receive a form and a user ID.');
+    }
     var outing = {};
     outing.movie = form.movie;
     outing.date = form.date;
@@ -58,22 +58,22 @@ console.log($rootScope.user);
 
   // Function to process 'new outing' form.
   $scope.processOutingForm = function() {
-    // *** TO-DO: Remove '1234'.
-    var outing = createOuting($scope.form, $scope.userId || 1234);
+    var form = $scope.form;
+    var userId = $rootScope.user._id;
+    var outing = createOuting(form, userId);
     $http({
       method: 'POST',
-      url: '/api/outings/',
+      url: '/api/outings',
       data: outing
     })
     .success(function(data) {
       console.log('POST Success:', data);
-      // Clear form values.
       clearOutingForm();
       // Hide 'new outing' form, show 'new outing' button.
       newOutingFormVisible = false;
       newOutingButtonVisible = true;
       // Refresh the 'outings' display.
-      $scope.getOutings($scope.userId);
+      $scope.getOutings(userId);
     })
     .error(function(data, status, headers, config) {
       console.log('POST Error:', data, status, headers, config);
@@ -82,11 +82,12 @@ console.log($rootScope.user);
 
   // Function to pull from DB 'outings' for user.
   $scope.getOutings = function(userId) {
-    // *** TO-DO: Remove '1234'.
-    userId = userId || 1234;
+    if(userId === undefined) {
+      throw new Error('getOutings() must receive a user ID.');
+    }
     $http({
       method: 'GET',
-      url: '/api/outings/' + userId
+      url: '/api/outings'
     })
     .success(function(data) {
       console.log('GET Success:', data);
@@ -98,6 +99,6 @@ console.log($rootScope.user);
   };
 
   // Initialize display of outings.
-  $scope.getOutings($scope.userId);
-
+  $scope.getOutings($rootScope.user._id);
+  
 });
