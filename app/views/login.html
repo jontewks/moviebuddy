@@ -1,55 +1,49 @@
 <div id="fb-root"></div>
+
 <script>
 
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=1391051064505902";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, "script", "facebook-jssdk"));
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=1391051064505902";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, "script", "facebook-jssdk"));
 
-$(document).ready(function(){
+  $(document).ready(function(){
 
-  var loginHeight = function(){
-    var windowHeight = window.innerHeight - 100 + "px";
-    $(".loginContainer").css({
-      height : windowHeight
-    });
-  }
+    var loginHeight = function(){
+      var windowHeight = window.innerHeight - 100 + "px";
+      $(".loginContainer").css({
+        height : windowHeight
+      });
+    };
 
-  loginHeight();
-
-  $(window).resize(function(){
     loginHeight();
+
+    $(window).resize(function(){
+      loginHeight();
+    });
+
   });
-})
 
 </script>
 
 <div class="loginContainer" ng-controller="LoginController">
+
   <div class="loginHeaderDiv">
     <h1 class="loginHeader">MOVIE BUDDY</h1>
-    <h2 class="loginHeaderTwo">Organize Movies With Friends Fast</h2>
+    <h2 class="loginHeaderTwo">Organize Movies with Friends Fast</h2>
   </div>
 
 <!-- <div class="logoDiv"><span class="logo"></span></div> -->
 
   <div class="loginDiv">
-    <button class="fbLogin" ng-click="login()"></button>
-    <a href="/auth/facebook">Facebook</a>
+    <a href="/auth/facebook">
+      <button class="fbLogin"></button>
+    </a>
   </div>
 
-<!-- <button class="btn" ng-click="getFriends()">get friends</button>
-<button class="btn" ng-click="isLoggedIn()">is logged in?</button>
-<button class="btn" ng-click="getMyInfo()">Get my info</button>
-<button class="btn" ng-click="updateDB()">Update my info</button> -->
-
-<!-- <div ng-show="Facebook.getAuth()">
-  <h4>Access Token:</h4>
-  <p ng-bind="Facebook.getAuth().accessToken"></p>
-  <button class="btn btn-small" ng-click="Facebook.logout()">Logout</button>
-</div> -->
-
 </div>
+
 <div class="loginFooter"></div>

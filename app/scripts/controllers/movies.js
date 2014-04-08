@@ -99,7 +99,7 @@ app.controller('synopsisController', function($scope){
 
   $scope.toggleText = function(text){
     $scope.textLimit = $scope.textLimit === 40 ? $scope.textLimit = text.length : $scope.textLimit = 40;
-    $scope.moreText =  $scope.moreText === '...'? $scope.moreText = '' : $scope.moreText = '...';
+    $scope.moreText =  $scope.moreText === '...' ? $scope.moreText = '' : $scope.moreText = '...';
   };
 });
 
@@ -108,6 +108,7 @@ app.controller('criticsController', function($scope){
   $scope.moreText = '...';
 
   $scope.toggleText = function(text){
+    if (!text) { text = 0; }
     $scope.textLimit = $scope.textLimit === 40 ? $scope.textLimit = text.length : $scope.textLimit = 40;
     $scope.moreText =  $scope.moreText === '...' ? $scope.moreText = '' : $scope.moreText = '...';
   };
