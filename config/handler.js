@@ -1,4 +1,5 @@
 var db = require('./db_config');
+var FB = require('fb');
 
 // get a user from the db
 exports.getUser = function(req, res) {
@@ -99,6 +100,7 @@ exports.getFriends = function(req, res) {
 
 // Update user friends 
 exports.updateFriends = function(res, id) {
+
   db.User.findOne({facebookId : id}, function(err, user){
     if(!err) {
       // <-- loop through the results array --> // 
@@ -118,6 +120,17 @@ exports.updateFriends = function(res, id) {
         });
       }
     }
+  });
+};
+
+exports.queryFBFriends = function(token, profile){
+
+  FB.setAccessToken(token);
+
+  FB.api('fql', {
+    q : 'SELECT name, uid FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = '+profile.id+')'
+  }, function(res){
+    exports.updateFriends(res.data, profile.id);
   });
 };
 

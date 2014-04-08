@@ -6,7 +6,7 @@ var port = process.env.PORT || 8080;
 var db  = require('./config/db_config');
 var configAuth = require('./config/auth');
 var FacebookStrategy = require('passport-facebook').Strategy;
-var FB = require('fb');
+
 
 
 
@@ -51,12 +51,9 @@ passport.use(new FacebookStrategy({
   },
   function(req, token, refreshToken, profile, done) {
     // asynchronous
-    FB.setAccessToken(token);
-    FB.api('fql', {
-      q : 'SELECT name, uid FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = '+profile.id+')'
-    }, function(res){
-      handler.updateFriends(res.data, profile.id);
-    });
+
+    handler.queryFBFriends(token, profile);
+
     process.nextTick(function() {
       // check if the user is already logged in
       if(!req.user) {
@@ -79,6 +76,7 @@ passport.use(new FacebookStrategy({
                 }
                 return done(null, user);
               });
+
             }
             return done(null, user); // user found, return that user
           } else {
@@ -116,6 +114,7 @@ passport.use(new FacebookStrategy({
           return done(null, user);
         });
       }
+      
     });
   }));
 
