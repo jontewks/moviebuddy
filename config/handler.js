@@ -1,5 +1,6 @@
 var db = require('./db_config');
 
+// get a user from the db
 exports.getUser = function(req, res) {
   db.User.findOne({facebook_id: req.params.facebookid}, function (err, user) {
     if (!err) {
@@ -10,6 +11,7 @@ exports.getUser = function(req, res) {
   });
 };
 
+// enter a user into the db
 exports.postUser = function(req, res) {
   var body = req.body;
   var user = new db.User({
@@ -39,6 +41,7 @@ exports.postUser = function(req, res) {
   res.send(user);
 };
 
+// update user collection
 exports.putUser = function(req, res) {
   var body = req.body;
   db.User.findOne({facebookId: req.params.facebookId}, function (err, user) {
@@ -59,6 +62,7 @@ exports.putUser = function(req, res) {
   });
 };
 
+// delete users from the db
 exports.deleteUser = function(req, res) {
   db.User.findOne({facebookId: req.params.facebookId}, function (err, user) {
     user.remove(function (err) {
@@ -72,24 +76,26 @@ exports.deleteUser = function(req, res) {
   });
 };
 
+//get user friends from the db
 exports.getFriends = function(req, res) {
   db.User.findOne({facebookId: req.params[0]}, function(err, user) {
     if (!err && user) {
       var usersFriends = [];
-      for (var i = 0; i < user.friends.length; i++) {
-        db.User.find({facebookId: user.friends[i]}, function(err, friend) {
-          usersFriends.push(friend[0]);
-          if (i === user.friends.length) {
-            res.send(usersFriends);
-          }
-        });
-      }
+      // for (var i = 0; i < user.friends.length; i++) {
+      //   db.User.find({facebookId: user.friends[i]}, function(err, friend) {
+      //     usersFriends.push(friend[0]);
+      //     if (i === user.friends.length) {
+      //       res.send(usersFriends);
+      //     }
+      //   });
+      // }
     } else {
       res.send(err);
     }
   });
 };
 
+// get outings from the database
 exports.getOuting = function(req, res) {
   db.Outing.findById(req.params.id, function(err, outing){
     if(!err){
@@ -100,6 +106,7 @@ exports.getOuting = function(req, res) {
   });
 };
 
+// enter outings into database function
 exports.postOuting = function(req, res) {
   var body = req.body;
   var outing = new db.Outing({
@@ -122,6 +129,8 @@ exports.postOuting = function(req, res) {
   res.send(outing);
 };
 
+
+// update outings into database function
 exports.putOuting = function(req, res) {
   var body = req.body;
 
@@ -144,6 +153,8 @@ exports.putOuting = function(req, res) {
   });
 };
 
+
+// Delete outings handler function
 exports.deleteOuting = function(req, res) {
   db.Outing.findById(req.params.id, function(err, outing){
     user.remove(function(err){
@@ -156,3 +167,28 @@ exports.deleteOuting = function(req, res) {
     });
   });
 };
+
+// update user friends
+exports.updateFriends = function(res, id) {
+  db.User.findOne({facebookId : id}, function(err, user){
+    if(!err) {
+      for (var i = 0; i < res.length; i++){
+        db.User.findOne({ facebookId: res[i].uid }, function(err, friend){
+          if (!err && friend !== null) {
+            var friendId = friend.facebookId;
+            var userFriends = user.friends;
+            console.log('friend id is '+friendId);
+            if (userFriends.indexOf(friendId) === -1) {
+              console.log('new friend added: '+friendId);
+              userFriends.push(friendId);
+              user.save();
+            }
+          }
+        });
+      }
+    }
+  });
+
+};
+
+

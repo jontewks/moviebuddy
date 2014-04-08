@@ -13,7 +13,7 @@ app.service('getFriends', function ($http) {
 });
 
 app.controller('friendsController', function ($scope, $rootScope, getFriends) {
-  getFriends.friendsData($rootScope.me.id)
+  getFriends.friendsData($rootScope.user.facebookId)
   .then(function(friends){
     $scope.friends = friends.data;
   });
