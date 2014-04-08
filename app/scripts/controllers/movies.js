@@ -6,30 +6,15 @@ app.service('getMoviesData', function($http){
   var rottenTomatoesUrl = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?callback=JSON_CALLBACK&apikey=63za93cgdtv88ves8p6d9wrk';
   var pageLimitQuery = '&page_limit=';
   var pageQuery = '&page=';
-  var totalMovies;
-  var totalQueryPages;
-  this.allMovies = [];
-
 
   this.getMovieData = function(queryPage, queryPageLimit) {
     var query = rottenTomatoesUrl + pageLimitQuery + queryPageLimit + pageQuery + queryPage;
-    $http.jsonp(query)
-    .success(function(data){
-      var rtData = data.data;
-      totalMovies = rtData.total;
-      totalQueryPages = Math.ceil(totalMovies / queryPageLimit);
-
-      this.allMovies = this.allMovies.concat(rtData.movies);
-      queryPage++;
-
-      if (queryPage <= totalQueryPages) {
-        getMovies(queryPage, queryPageLimit);
-      }
-    });
+    return $http.jsonp(query);
   };
 });
 
-app.controller('moviesController', function ($scope, $http, getMoviesData) {
+
+app.controller('MoviesController', function ($scope, $http, getMoviesData) {
 
   var queryPage = 1;
   var queryPageLimit = 50;
@@ -99,7 +84,7 @@ app.controller('synopsisController', function($scope){
 
   $scope.toggleText = function(text){
     $scope.textLimit = $scope.textLimit === 40 ? $scope.textLimit = text.length : $scope.textLimit = 40;
-    $scope.moreText =  $scope.moreText === '...'? $scope.moreText = '' : $scope.moreText = '...';
+    $scope.moreText =  $scope.moreText === '...' ? $scope.moreText = '' : $scope.moreText = '...';
   };
 });
 
@@ -108,6 +93,7 @@ app.controller('criticsController', function($scope){
   $scope.moreText = '...';
 
   $scope.toggleText = function(text){
+    if (!text) { text = 0; }
     $scope.textLimit = $scope.textLimit === 40 ? $scope.textLimit = text.length : $scope.textLimit = 40;
     $scope.moreText =  $scope.moreText === '...' ? $scope.moreText = '' : $scope.moreText = '...';
   };
