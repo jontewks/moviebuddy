@@ -7,17 +7,17 @@
   </div>
 
   <div id="userDetails">
-    <span class="userDetail"><u>Name:</u> {{testUser}}</span>
-    <span class="userDetail"><u>Age:</u> {{testAge}}</span>
-    <span class="userDetail"><u>Current City:</u> {{testCurrentCity}}</span>
-    <span class="userDetail"><u>Hometown:</u> {{testHometown}}</span>
+    <span class="userDetail"><u>Name:</u> <span class='editableUserDetail' editable-text='User'>{{User || 'empty'}}</span></span>
+    <span class="userDetail"><u>Age:</u> <span  class='editableUserDetail' editable-text='Age'>{{Age}}</span></span>
+    <span class="userDetail"><u>Current City:</u> <span class='editableUserDetail' editable-text='CurrentCity'>{{CurrentCity}}</span></span>
+    <span class="userDetail" ><u>Hometown:</u> <span class='editableUserDetail' editable-text='Hometown'>{{Hometown}}</span></span>
   </div>
 
   <div id="userMovieDetails">
-    <span class="userDetail"><u>Favorite Movie:</u> {{testFavMovie}}</span>
-    <span class="userDetail"><u>Favorite Genre:</u> {{testFavGenre}}</span>
-    <span class="userDetail"><u>Favorite Theater:</u> {{testFavTheater}}</span>
-    <span class="userDetail"><u>Favorite Actor:</u> {{testFavActor}}</span>
+    <span class="userDetail"><u>Favorite Movie:</u> <span class='editableUserDetail' editable-text='FavMovie'>{{FavMovie}}</span></span>
+    <span class="userDetail"><u>Favorite Genre:</u> <span  class='editableUserDetail' editable-text='FavGenre'>{{FavGenre}}</span></span>
+    <span class="userDetail"><u>Favorite Theater:</u> <span class='editableUserDetail' editable-text='FavTheater'>{{FavTheater}}</span></span>
+    <span class="userDetail"><u>Favorite Actor:</u> <span class='editableUserDetail' editable-text='FavActor'>{{FavActor}}</span></span>
   </div>
 
 </div>

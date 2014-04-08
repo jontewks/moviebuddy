@@ -240,9 +240,15 @@ body {
 }
 
 .userDetail {
+  color: black;
+  border: 0px;
   width: 200px;
   line-height: 2.5em;
   display: block;
+}
+
+.editableUserDetail {
+  color: black;
 }
 
 /* friends */
