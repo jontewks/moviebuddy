@@ -1,5 +1,4 @@
 'use strict';
-/* global _ */
 
 var app = angular.module('moviebuddyApp');
 
@@ -25,7 +24,6 @@ app.controller('moviesController', function ($scope, $http, getMoviesData) {
   var pageLimit = 10;
   $scope.page = 1;
 
-
   var getMovies = function(queryPage, queryPageLimit) {
     getMoviesData.getMovieData(queryPage, queryPageLimit)
     .then(function(data){
@@ -43,7 +41,6 @@ app.controller('moviesController', function ($scope, $http, getMoviesData) {
   };
 
   getMovies(queryPage, queryPageLimit);
-
 
   // sort movies helper function
   var sortMovies = function(collection, category) {
@@ -82,13 +79,6 @@ app.controller('moviesController', function ($scope, $http, getMoviesData) {
   $scope.reverseAllMovies = function(){
     $scope.allMovies.reverse();
   };
-
-
-  $scope.awesomeThings = [
-    'HTML5 Boilerplate',
-    'AngularJS',
-    'Karma'
-  ];
 
 });
 

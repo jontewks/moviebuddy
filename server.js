@@ -135,10 +135,10 @@ app.delete('/api/user/:facebookId', handler.deleteUser);
 
 app.get('/api/friends/*', handler.getFriends);
 
-app.get('/api/outing/:id', handler.getOuting);
-app.post('/api/outing', handler.postOuting);
-app.put('/api/outing/:id', handler.putOuting);
-app.delete('/api/outing/:id', handler.deleteOuting);
+app.get('/api/outings/:id', handler.getOuting);
+app.post('/api/outings', handler.postOuting);
+app.put('/api/outings/:id', handler.putOuting);
+app.delete('/api/outings/:id', handler.deleteOuting);
 
 
 app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email'}));
