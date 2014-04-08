@@ -15,6 +15,16 @@
 
 }
 
+@font-face {
+  font-family: 'glyphicons';
+  src: url('../fonts/glyphicons-halflings-regular.eot');
+  src: url('../fonts/glyphicons-halflings-regular.svg'),
+       url('../fonts/glyphicons-halflings-regular.ttf'),
+       url('../fonts/glyphicons-halflings-regular.woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* Google Fonts
 
 font-family: 'Inder', sans-serif;
@@ -90,7 +100,7 @@ body {
   background-color: #00A8C6;
   text-transform: uppercase;
   margin-top: 40px;
-  margin-left: 200px;
+  margin-left: 100px;
 }
 
 .logoutButton:hover {
@@ -123,12 +133,6 @@ body {
 }
 
 /* login fun */
-
-/*.header {
-  height: 100px;
-  background: url('../images/grey_wash_wall.png');
-
-}*/
 
 .loginContainer {
   width: 100%;
@@ -203,7 +207,7 @@ body {
 
 .profileSection{
   height: 200px;
-  min-width: 700px;
+  min-width: 670px;
   text-transform: uppercase;
   font-size: .75em;
 }
@@ -211,7 +215,6 @@ body {
 .profile {
   margin-top: 20px;
   min-width: 600px;
-  width: auto;
 }
 
 #profilePicDiv {
@@ -228,7 +231,7 @@ body {
 #userDetails {
   margin-top: 10px;
   margin-left: 30px;
-  width: 200px;
+  width: 220px;
   float: left;
 }
 
@@ -236,35 +239,53 @@ body {
   margin-top: 10px;
   margin-left: 30px;
   display: inline-block;
-  width: 200px;
+  width: 220px;
 }
 
 .userDetail {
   color: black;
   border: 0px;
-  width: 200px;
+  width: 220px;
   line-height: 2.5em;
   display: block;
 }
 
 .editableUserDetail {
   color: black;
+  border: 0px;
 }
 
 /* css over-ride of xeditable angular */
+.editable-controls {
+
+}
+
 .editable-input {
-  border-radius: 2px;
-  border: 1px solid #333;
+  border: 0px;
+  border-bottom: 1px solid #333;
   height: 20px;
+  width: 75px !important;
+  background-color: #E0E4CC;
   font-family: 'Hammersmith One', sans-serif;
+  text-transform: uppercase;
 }
 
 .editable-input:focus {
   outline: 0;
 } 
 
-.editable-buttons {
-  
+.editable-buttons button {
+  padding: 0px;
+  width: 30px;
+  height: 30px;
+  font-size: 6px;
+  cursor: pointer;
+  border: 1px solid #00A8C6;
+  border-radius: 4px;
+  color: #FFFFFF;
+  background-color: #00A8C6;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 /* friends */
@@ -569,6 +590,28 @@ body {
     width: 350px;
   }
 
+  .editableUserDetail {
+
+  }
+
+  /* css over-ride of xeditable angular */
+  .editable-controlers {
+    display: inline;
+  }
+
+  .editable-input {
+    width: 150px !important;
+    font-size: 1em;
+  }
+
+  .editable-input:focus {
+
+  } 
+
+  .editable-buttons button {
+
+  }
+
   /* friends */
 
   .sectionContainerFriends {
@@ -691,12 +734,11 @@ body {
   .outingsSection {
 
   }
-<<<<<<< HEAD
 
   .outingsSectionHeader {
 
   }
-=======
+
   /* Outings */
   .outingsList {
     font-size: 12pt;
@@ -727,5 +769,4 @@ body {
 }
 .marketing p + h4 {
   margin-top: 28px;
->>>>>>> outings
 }
