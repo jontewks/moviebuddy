@@ -81,14 +81,14 @@ exports.getFriends = function(req, res) {
   db.User.findOne({facebookId: req.params[0]}, function(err, user) {
     if (!err && user) {
       var usersFriends = [];
-      // for (var i = 0; i < user.friends.length; i++) {
-      //   db.User.find({facebookId: user.friends[i]}, function(err, friend) {
-      //     usersFriends.push(friend[0]);
-      //     if (i === user.friends.length) {
-      //       res.send(usersFriends);
-      //     }
-      //   });
-      // }
+      for (var i = 0; i < user.friends.length; i++) {
+        db.User.find({facebookId: user.friends[i]}, function(err, friend) {
+          usersFriends.push(friend[0]);
+          if (i === user.friends.length) {
+            res.send(usersFriends);
+          }
+        });
+      }
     } else {
       res.send(err);
     }
@@ -177,9 +177,7 @@ exports.updateFriends = function(res, id) {
           if (!err && friend !== null) {
             var friendId = friend.facebookId;
             var userFriends = user.friends;
-            console.log('friend id is '+friendId);
             if (userFriends.indexOf(friendId) === -1) {
-              console.log('new friend added: '+friendId);
               userFriends.push(friendId);
               user.save();
             }
