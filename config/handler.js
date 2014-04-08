@@ -47,23 +47,28 @@ exports.postUser = function(req, res) {
 // update user collection
 exports.putUser = function(req, res) {
   var body = req.body;
-  db.User.findOne({facebookId: req.params.facebookId}, function (err, user) {
+  console.log(body);
+  // db.User.findOne({facebookId: req.params.facebookId}, function (err, user) {
 
-    user.facebookToken  = body.facebookToken;
-    user.name           = body.name;
-    user.email          = body.email;
-    user.city           = body.city;
+  //   // user.facebookToken  = body.facebookToken;
+  //   // user.name           = body.name;
+  //   // user.email          = body.email;
+  //   // user.city           = body.city;
+  //   // user.hometown       = body.hometown || '';
+  //   // user.currentCity    = body.CurrentCity || '';
 
-    user.save(function (err) {
-      if (!err) {
-        console.log('updated');
-      } else {
-        console.log(err);
-      }
 
-      res.send(user);
-    });
-  });
+
+  //   user.save(function (err) {
+  //     if (!err) {
+  //       console.log('updated');
+  //     } else {
+  //       console.log(err);
+  //     }
+
+  //     res.send(user);
+  //   });
+  // });
 };
 
 // delete users from the db

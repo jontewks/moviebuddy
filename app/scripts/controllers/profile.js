@@ -16,39 +16,44 @@ app.service('getUsers', function($http) {
 
 app.service('updateUser', function($http){
   this.updateUser = function(facebookId, userObj) {
-    return $http({
-      method : 'POST',
-      url    : '/api/updateUser',
-      data   : { user: userObj }
-    });
+    return $http.put('/api/updateUser/' + facebookId, { user: userObj});
   };
 });
 
 // This controller controls the profile.
-app.controller('ProfileController', function ($scope, $rootScope,getUsers) {
+app.controller('ProfileController', function ($scope, $rootScope,getUsers, updateUser) {
 
   // *** Want to grab this upon authentication. ***
-  $scope.User;
-  $scope.Hometown;
-  $scope.FavMovie;
-  $scope.FavGenre;
-  $scope.Age;
-  $scope.FavTheater;
-  $scope.CurrentCity;
-  $scope.FavActor;
-  $scope.profilePicture = 'http://graph.facebook.com/'+$rootScope.user.facebookId+'/picture?type=large';
+  $scope.user = {
+    name              : '',
+    Hometown          : '',
+    favMovie          : '',
+    favGenre          : '',
+    age               : '',
+    favTheater        : '',
+    currentCity       : '',
+    favActor          : '',
+    profilePicture    : 'http://graph.facebook.com/'+$rootScope.user.facebookId+'/picture?type=large'
+  };
+
   // *** Want to nest this in a promise or callback. ***
   getUsers.getUser($rootScope.user.facebookId)
   .then(function(data) {
     var user = data.data;
-    $scope.User         = user.name;
-    $scope.Hometown     = user.hometown;
-    $scope.FavMovie     = user.favMovie;
-    $scope.FavGenre     = user.favGenre;
-    $scope.Age          = user.age;
-    $scope.FavTheater   = user.favTheater;
-    $scope.CurrentCity  = user.currentCity;
-    $scope.FavActor     = user.favActor;
+    $scope.user.name         = user.name;
+    $scope.user.hometown     = user.hometown;
+    $scope.user.favMovie     = user.favMovie;
+    $scope.user.favGenre     = user.favGenre;
+    $scope.user.age          = user.age;
+    $scope.user.favTheater   = user.favTheater;
+    $scope.user.currentCity  = user.currentCity;
+    $scope.user.favActor     = user.favActor;
   });
+
+
+  $scope.updateUser = function(){
+    console.log('hitting updateUser');
+
+  };
 
 });

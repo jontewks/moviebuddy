@@ -251,6 +251,22 @@ body {
   color: black;
 }
 
+/* css over-ride of xeditable angular */
+.editable-input {
+  border-radius: 2px;
+  border: 1px solid #333;
+  height: 20px;
+  font-family: 'Hammersmith One', sans-serif;
+}
+
+.editable-input:focus {
+  outline: 0;
+} 
+
+.editable-buttons {
+  
+}
+
 /* friends */
 
 .sectionContainerFriends {
