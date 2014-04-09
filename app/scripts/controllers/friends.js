@@ -16,6 +16,7 @@ app.controller('FriendsController', function ($scope, $rootScope, getFriends) {
 
   getFriends.friendsData($rootScope.user.facebookId)
   .then(function(friends){
+    console.log('friends = ', friends);
     $scope.friends = friends.data;
   });
 

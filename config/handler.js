@@ -85,9 +85,10 @@ exports.getFriends = function(req, res) {
     if (!err && user) {
       var usersFriends = [];
       for (var i = 0; i < user.friends.length; i++) {
+
         db.User.find({facebookId: user.friends[i]}, function(err, friend) {
           usersFriends.push(friend[0]);
-          if (i === user.friends.length) {
+          if( user.friends.length === usersFriends.length){
             res.send(usersFriends);
           }
         });
