@@ -25,7 +25,7 @@ var authenticated = function(req, res, next) {
 };
 
 app.configure(function() {
-  app.use(express.cookieParser());
+  // app.use(express.cookieParser());
   app.use(express.bodyParser());
   app.use(express.static(__dirname + '/app'));
   app.use(express.session({secret: 'ilovefarid'}));
