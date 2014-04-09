@@ -30,7 +30,7 @@
       <span class="outingTheater">{{outing.theater}}</span> • 
       <!-- *** TO-DO: Show theater info (address & map upon click of theater name. -->
       <!-- <span ng-repeat="attendeeName in outing.attendeeNames" class="outingAttendees">{{attendeeName}}, </span> -->
-      <span ng-repeat="attendee in outing.attendees" class="outingAttendees">{{attendee.attendeeId.name}}, </span>
+      <span ng-repeat="(attendeeId, attendee) in outing.attendees" class="outingAttendees">{{attendee.name}}, </span>
       <button ng-click="joinOuting()" ng-show="showJoinButton()" type="button">Join</button>
       <!-- *** TO-DO: Show an 'edit' button if current user is the outing creator. -->
       <hr />
