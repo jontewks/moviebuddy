@@ -106,8 +106,14 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
   $scope.showJoinButton = function() {
     var userId = $rootScope.user.facebookId;
     // *** Refactor attendee list to be an object, not an array?
-    for(var i = 0; i < this.outing.attendeeIds.length; i++) {
-      if(this.outing.attendeeIds[i] === userId) {
+    // for(var i = 0; i < this.outing.attendeeIds.length; i++) {
+    //   if(this.outing.attendeeIds[i] === userId) {
+    //     return false;
+    //   }
+    // }
+    var attendeeId;
+    for(attendeeId in this.outing.attendees) {
+      if(attendeeId === userId) {
         return false;
       }
     }
