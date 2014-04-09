@@ -3,7 +3,7 @@
 
 var app = angular.module('moviebuddyApp');
 
-app.controller('OutingsController', function ($scope, $http) {
+app.controller('OutingsController', ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
 
   var newOutingButtonVisible = true;
   var newOutingFormVisible = false;
@@ -13,20 +13,27 @@ app.controller('OutingsController', function ($scope, $http) {
     $scope.form.movie = '';
     $scope.form.date = '';
     $scope.form.theater = '';
-    $scope.form.invitees = '';
+    // $scope.form.invitees = '';
   };
 
   // Function to create new 'outing' object from form and user.
-  var createOuting = function(form, userId) {
+  var createOuting = function(form, userId, userName) {
+    if(form === undefined || userId === undefined || userName === undefined) {
+      throw new Error('Insufficient input for function.');
+    }
     var outing = {};
     outing.movie = form.movie;
     outing.date = form.date;
     outing.theater = form.theater;
-    // In lieu of Fandango, look up below values in our DB based on theater name?
+    // Look up below values via TMS or Fandango API or app DB.
     // outing.address;    // outing.city;    // outing.state;    // outing.zip;
-    outing.invitees = form.invitees;
-    outing.attendees = [];
-    outing.creator = userId;
+    // Postpone invitation funcationality for post-MVP.
+    // outing.invitees = form.invitees;
+    outing.attendeeIds = [userId];
+    outing.attendeeNames = [userName, 'Alice Addams', 'Bob Buckman'];
+    // *** TO-DO: Access by userId instead of userName.
+    outing.creatorId = userId;
+    outing.creatorName = userName;
     return outing;
   };
 
@@ -55,22 +62,23 @@ app.controller('OutingsController', function ($scope, $http) {
 
   // Function to process 'new outing' form.
   $scope.processOutingForm = function() {
-    // *** TO-DO: Remove '1234'.
-    var outing = createOuting($scope.form, $scope.userId || 1234);
+    var form = $scope.form;
+    var userId = $rootScope.user.facebookId;
+    var userName = $rootScope.user.name;
+    var outing = createOuting(form, userId, userName);
     $http({
       method: 'POST',
-      url: '/api/outings/',
+      url: '/api/outings',
       data: outing
     })
     .success(function(data) {
       console.log('POST Success:', data);
-      // Clear form values.
       clearOutingForm();
       // Hide 'new outing' form, show 'new outing' button.
       newOutingFormVisible = false;
       newOutingButtonVisible = true;
       // Refresh the 'outings' display.
-      $scope.getOutings($scope.userId);
+      $scope.getOutings(userId);
     })
     .error(function(data, status, headers, config) {
       console.log('POST Error:', data, status, headers, config);
@@ -79,11 +87,12 @@ app.controller('OutingsController', function ($scope, $http) {
 
   // Function to pull from DB 'outings' for user.
   $scope.getOutings = function(userId) {
-    // *** TO-DO: Remove '1234'.
-    userId = userId || 1234;
+    if(userId === undefined) {
+      throw new Error('Insufficient input for function.');
+    }
     $http({
       method: 'GET',
-      url: '/api/outings/' + userId
+      url: '/api/outings'
     })
     .success(function(data) {
       console.log('GET Success:', data);
@@ -94,7 +103,26 @@ app.controller('OutingsController', function ($scope, $http) {
     });
   };
 
-  // Initialize display of outings.
-  $scope.getOutings($scope.userId);
+  $scope.showJoinButton = function() {
+    var userId = $rootScope.user.facebookId;
+    // *** Refactor attendee list to be an object, not an array?
+    for(var i = 0; i < this.outing.attendeeIds.length; i++) {
+      if(this.outing.attendeeIds[i] === userId) {
+        return false;
+      }
+    }
+    return true;
+  };
 
-});
+  $scope.joinOuting = function() {
+    var userId = $rootScope.user.facebookId;
+    var userName = $rootScope.user.name;
+    var outing = this.outing;
+    outing.attendeeIds.push(userId);
+    outing.attendeeNames.push(userName);
+  };
+
+  // Initialize display of outings.
+  $scope.getOutings($rootScope.user.facebookId);
+
+}]);
