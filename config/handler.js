@@ -256,6 +256,7 @@ exports.authFacebookCallback = function(req, res, next, passport) {
       if(err){
         return next(err);
       }
+      console.log(user);
       res.cookie('moviebuddy', user);
       return res.redirect('/#/dash');
     });
