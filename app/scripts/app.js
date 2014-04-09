@@ -44,11 +44,12 @@ app.run(function($rootScope, $location) {
 app.service('authentication', function($rootScope, $location, $http) {
   var cookieParser = function(cookie) {
     var splitCookie = cookie.split(';');
-    console.log('splitCookie: ', splitCookie);
     for (var i = 0; i < splitCookie.length; i++){
       var leftSide = splitCookie[i].split('=')[0];
       console.log('leftSide', leftSide);
-      if(leftSide === 'moviebuddy') {
+      console.log(leftSide === 'moviebuddy');
+      if( leftSide === 'moviebuddy') {
+        console.log('hitting the movie buddy left side!');
         console.log('in the cookieparser function: ', JSON.parse(splitCookie[i].split('=')[1]));
         return JSON.parse(splitCookie[i].split('=')[1]);
       }
