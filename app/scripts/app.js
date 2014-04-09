@@ -45,14 +45,18 @@ app.service('authentication', function($rootScope, $location, $http) {
   var cookieParser = function(cookie) {
     var splitCookie = cookie.split(';');
     for (var i = 0; i < splitCookie.length; i++){
+      console.log('splitcookie i: ', splitCookie[i]);
+
       var leftSide = splitCookie[i].split('=')[0];
+      
       console.log('leftSide', leftSide);
-      console.log(typeof leftSide);
-      if( JSON.parse(leftSide) === 'moviebuddy') {
+
+      if( leftSide === 'moviebuddy') {
         console.log('hitting the movie buddy left side!');
         console.log('in the cookieparser function: ', JSON.parse(splitCookie[i].split('=')[1]));
         return JSON.parse(splitCookie[i].split('=')[1]);
       }
+
     }
   };
 
