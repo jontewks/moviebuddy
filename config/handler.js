@@ -81,7 +81,7 @@ exports.deleteUser = function(req, res) {
   });
 };
 
-//get user friends from the db
+// get user friends from the db
 exports.getFriends = function(req, res) {
   db.User.findOne({facebookId: req.params[0]}, function(err, user) {
     if (!err && user) {
@@ -156,7 +156,7 @@ exports.getOuting = function(req, res) {
   return db.Outing.find({
     // *** TO-DO: Enable find of user- & friend-specific outings.
   }, function(err, outing){
-  // return db.Outing.findById(req.params.id, function(err, outing){
+  // return db.Outing.findById(req.params.id, function(err, outing) {
     if(!err) {
       return res.send(outing);
     } else {
