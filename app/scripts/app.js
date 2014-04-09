@@ -53,8 +53,8 @@ app.service('authentication', function($rootScope, $location, $http) {
 
       if( leftSide === ' moviebuddy') {
         console.log('hitting the movie buddy left side!');
-        console.log('in the cookieparser function: ', JSON.parse(splitCookie[i].split('=')[1]));
-        return JSON.parse(splitCookie[i].split('=')[1]);
+        console.log(angular.fromJson(splitCookie[i].split('=')[1]));
+        return angular.fromJson(splitCookie[i].split('=')[1]);
       }
 
     }
