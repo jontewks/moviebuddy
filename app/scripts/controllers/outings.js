@@ -103,6 +103,23 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
     });
   };
 
+  $scope.showJoinButton = function() {
+    var userId = $rootScope.user.facebookId;
+    if(this.outing.creatorId === userId) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  $scope.joinOuting = function() {
+    var userId = $rootScope.user.facebookId;
+    var userName = $rootScope.user.name;
+    var outing = this.outing;
+    outing.attendeeIds.push(userId);
+    outing.attendeeNames.push(userName);
+  };
+
   // Initialize display of outings.
   $scope.getOutings($rootScope.user.facebookId);
 
