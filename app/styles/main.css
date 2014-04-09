@@ -2,7 +2,6 @@
 
 /* web fonts */
 
-
 @font-face {
     font-family: 'bebasregular';
     src: url('../fonts/Bebas/bebas___-webfont.eot');
@@ -12,19 +11,15 @@
          url('../fonts/Bebas/bebas___-webfont.svg#bebasregular') format('svg');
     font-weight: normal;
     font-style: normal;
-
 }
 
 /* Google Fonts
-
 font-family: 'Inder', sans-serif;
 font-family: 'Viga', sans-serif;
 font-family: 'Hammersmith One', sans-serif;
 font-family: 'Gentium Book Basic', serif;
 
-
   Colors Used
-
 #00A8C6 - light blueish
 #F38630 - bright orange
 #FA6900 - slightly darker orange
@@ -40,7 +35,6 @@ html, body, div, section, article, aside, header, hgroup, footer, nav, h1, h2, h
 }
 
 html {
-
 }
 
 body {
@@ -50,7 +44,6 @@ body {
 }
 
 .container {
-
 }
 
 .headerDiv {
@@ -59,7 +52,6 @@ body {
   height: 100px;
   padding-top: 10px;
   padding-bottom: 30px;
-
 }
 
 .appHeader {
@@ -100,7 +92,6 @@ body {
 }
 
 .sectionDiv {
-
 }
 
 .sectionHeader {
@@ -127,7 +118,6 @@ body {
 /*.header {
   height: 100px;
   background: url('../images/grey_wash_wall.png');
-
 }*/
 
 .loginContainer {
@@ -161,11 +151,9 @@ body {
 }
 
 .logoDiv {
-
 }
 
 .logo {
-
 }
 
 .loginDiv {
@@ -308,7 +296,6 @@ body {
 /* movies */
 
 .moviesSection {
-
 }
 
 .moviesSectionHeader {
@@ -395,7 +382,6 @@ body {
 
 .criticScore {
   display: block;
-
 }
 
 .audienceScore {
@@ -408,7 +394,6 @@ body {
 }
 
 .actor {
-  
 }
 
 .criticsConsensus {
@@ -427,7 +412,6 @@ body {
 .synopsis {
   display: block;
   cursor: pointer;
-
 }
 
 .movieHR {
@@ -437,8 +421,8 @@ body {
 
 /* outings */
 
-.outingsSection {
-
+.centered {
+  text-align: center;
 }
 
 .outingsSectionHeader {
@@ -447,27 +431,32 @@ body {
   background-color: #00A8C6;
 }
 
-/* Outings */
+.outingField {
+  font-size: 14pt;
+}
+
 .outingsList {
-  font-size: 12pt;
+  font-size: 14pt;
 }
-.movie {
 
+.outingMovie {
+  color: white;
 }
-.date {
 
+.outingDate {
 }
-.theater {
 
+.outingTheater {
 }
-.invitees {
 
+.outingInvitees {
 }
-.attendees {
 
+.outingAttendees {
+  color: white;
 }
-.creator {
 
+.outingCreator {
 }
 
 /* footer */
@@ -478,27 +467,21 @@ body {
 
 @media (min-width: 990px) {
   .container {
-
   }
 
   .headerDiv {
-
   }
 
   .appHeader {
-
   }
 
   .sectionDiv {
-
   }
 
   .sectionHeader {
-
   }
 
   .sectionContainer {
-
   }
 
   .sectionContainerProfile {
@@ -508,11 +491,9 @@ body {
   /* login fun */
 
   .loginContainer {
-
   }
 
   .loginHeaderDiv {
-
   }
 
   .loginHeader {
@@ -520,7 +501,6 @@ body {
   }
 
   .loginHeaderTwo {
-
   }
 
   .loginDiv {
@@ -528,21 +508,17 @@ body {
   }
 
   .fbLogin {
-
   }
 
   .fbLogin:focus {
-
   }
 
   /* profile fun */
 
   .profileSection{
-
   }
 
   .profile {
-
   }
 
   #profilePicDiv {
@@ -572,37 +548,29 @@ body {
   /* friends */
 
   .sectionContainerFriends {
-
   }
 
   .friendsSection {
-
   }
 
   .friendsSectionHeader {
-
   }
 
   .friend {
-
   }
 
   .friendsPhoto {
-
   }
 
   .friendName {
-
   }
 
   /* movies */
 
   .moviesSection {
-
   }
 
   .moviesSectionHeader {
-
   }
 
   .filters {
@@ -612,11 +580,9 @@ body {
   .filter {
     width: 200px;
     height: 50px;
-
   }
 
   .filter:hover {
-
   }
 
   .searchFilter {
@@ -625,7 +591,6 @@ body {
   }
 
   .searchFilter:focus {
-
   }
 
   .movie {
@@ -646,73 +611,42 @@ body {
   }
 
   .movieTitle {
-
   }
 
   .criticScore {
-
   }
 
   .audienceScore {
-
   }
 
   .cast {
-
   }
 
   .actor {
-    
   }
 
   .criticsConsensus {
-
   }
 
   .runtime {
-
   }
 
   .mpaaRating {
-
   }
 
   .synopsis {
-
   }
 
   .movieHR {
-
   }
 
-  /* Outings */
-  .outingsList {
-    font-size: 12pt;
-  }
-  .movie {
-
-  }
-  .date {
-
-  }
-  .theater {
-
-  }
-  .invitees {
-
-  }
-  .attendees {
-
-  }
-  .creator {
-
-  }
 }
 
 /* Supporting marketing content */
 .marketing {
   margin: 40px 0;
 }
+
 .marketing p + h4 {
   margin-top: 28px;
 }
