@@ -29,8 +29,12 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
     // outing.address;    // outing.city;    // outing.state;    // outing.zip;
     // Postpone invitation funcationality for post-MVP.
     // outing.invitees = form.invitees;
-    outing.attendeeIds = [userId];
-    outing.attendeeNames = [userName, 'Alice Addams', 'Bob Buckman'];
+    // outing.attendeeIds = [userId];
+    // outing.attendeeNames = [userName, 'Alice Addams', 'Bob Buckman'];
+    outing.attendees = {};
+    outing.attendees[userId] = { name: userName };
+    outing.attendees[1001] = { name: 'Alice' };
+    outing.attendees[1002] = { name: 'Bob' };
     // *** TO-DO: Access by userId instead of userName.
     outing.creatorId = userId;
     outing.creatorName = userName;
