@@ -1,5 +1,4 @@
 'use strict';
-/* global FB */
 
 var app = angular.module('moviebuddyApp', ['ngRoute', 'ngCookies', 'xeditable']);
 
