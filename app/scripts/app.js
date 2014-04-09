@@ -53,12 +53,22 @@ app.service('authentication', function($rootScope, $location, $http) {
       }
       if (window.document.cookie !== '') {
         console.log(window.document.cookie);
-        var userObj = JSON.parse(window.document.cookie.split('=')[0]);
+        var userObj = cookieParser(window.document.cookie);
         $rootScope.user = userObj;
       }
     });
   };
 });
+
+var cookieParser = function(cookie) {
+  var splitCookie = cookie.split(';');
+  for (var i = 0; i < splitCookie.length; i++){
+    var leftSide = splitCookiep[i].split('=')[0];
+    if(leftSide === 'movieBuddyUser') {
+      return JSON.parse(splitCookie[i].split('=')[1]);
+    }
+  }
+}
 
 
 // Load the SDK Asynchronously
