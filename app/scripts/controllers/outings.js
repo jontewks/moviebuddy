@@ -25,7 +25,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
     outing.movie = form.movie;
     outing.date = form.date;
     outing.theater = form.theater;
-    // Look up below values via TMS or Fandango API.
+    // Look up below values via TMS or Fandango API or app DB.
     // outing.address;    // outing.city;    // outing.state;    // outing.zip;
     // Postpone invitation funcationality for post-MVP.
     // outing.invitees = form.invitees;
@@ -105,11 +105,13 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
 
   $scope.showJoinButton = function() {
     var userId = $rootScope.user.facebookId;
-    if(this.outing.creatorId === userId) {
-      return false;
-    } else {
-      return true;
+    // *** Refactor attendee list to be an object, not an array?
+    for(var i = 0; i < this.outing.attendeeIds.length; i++) {
+      if(this.outing.attendeeIds[i] === userId) {
+        return false;
+      }
     }
+    return true;
   };
 
   $scope.joinOuting = function() {
