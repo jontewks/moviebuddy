@@ -227,7 +227,6 @@ exports.deleteOuting = function(req, res) {
 };
 
 exports.authFacebookCallback = function(req, res, next, passport){
-  console.log( 'in authFacebookCallback');
   passport.authenticate('facebook', function(err, user){
     if( err){ return next(err);}
 
@@ -243,9 +242,7 @@ exports.authFacebookCallback = function(req, res, next, passport){
   })(req,res,next);
 };
 
-exports.isLoggedIn = function(req, res){
-  res.redirect('/#/dash');
-};
+
 exports.logout = function(req, res){
   req.session.destroy();
   res.redirect('/');
