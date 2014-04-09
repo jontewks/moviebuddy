@@ -1,8 +1,10 @@
 /* global require, process */
 var express = require('express');
 var handler = require('./config/handler');
+
 var app = express();
 var port = process.env.PORT || 8080;
+
 // initialize passport
 var passport = require('./config/passport').passport;
 
@@ -20,9 +22,9 @@ var authenticated = function(req, res, next) {
   } else {
     res.redirect('/');
   }
-}
+};
 
-app.configure( function(){
+app.configure(function() {
   app.use(express.cookieParser());
   app.use(express.bodyParser());
   app.use(express.static(__dirname + '/app'));
@@ -38,11 +40,10 @@ app.delete('/api/user/:facebookId', authenticated, handler.deleteUser);
 
 app.get(   '/api/friends/*', authenticated, handler.getFriends);
 
-app.get(   '/api/outings/:id', authenticated, handler.getOuting);
-app.post(  '/api/outings', authenticated, handler.postOuting);
-app.put(   '/api/outings/:id', authenticated, handler.putOuting);
-app.delete('/api/outings/:id', authenticated, handler.deleteOuting);
-
+app.get(   '/api/outings', handler.getOuting);
+app.post(  '/api/outings', handler.postOuting);
+app.put(   '/api/outings', handler.putOuting);
+app.delete('/api/outings', handler.deleteOuting);
 
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email'}));
 app.get('/auth/facebook/callback',function(req, res, next){
@@ -54,9 +55,9 @@ app.get('/auth/isLoggedIn', isLoggedIn);
 app.get('/logout', handler.logout);
 
 // redirect any other funky request to the home page
-app.get('/*', function(req, res){
+app.get('/*', function(req, res) {
   res.redirect('/');
-})
+});
 
 app.listen(port);
 console.log('Listening on ' + port);
