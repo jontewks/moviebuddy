@@ -53,7 +53,7 @@ app.controller('ProfileController', function ($scope, $rootScope,getUsers, updat
 
 
   $scope.updateUser = function(){
-    console.log($scope.user);
+
     updateUsers.updateUser($rootScope.user.facebookId, $scope.user);
 
   };
