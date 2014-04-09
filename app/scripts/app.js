@@ -47,6 +47,7 @@ app.service('authentication', function($rootScope, $location, $http) {
     for (var i = 0; i < splitCookie.length; i++){
       var leftSide = splitCookie[i].split('=')[0];
       if(leftSide === 'movieBuddyUser') {
+        console.log('in the cookieparser function: ', JSON.parse(splitCookie[i].split('=')[1]));
         return JSON.parse(splitCookie[i].split('=')[1]);
       }
     }
@@ -64,6 +65,7 @@ app.service('authentication', function($rootScope, $location, $http) {
       if (window.document.cookie !== '') {
         console.log(window.document.cookie);
         var userObj = cookieParser(window.document.cookie);
+        console.log('userObj: ', userObj);
         $rootScope.user = userObj;
       }
     });
