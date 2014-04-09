@@ -9,7 +9,7 @@ app.controller('LoginController', function ($scope, $rootScope, $http, $window, 
     FB.api('/me', function(response){
       console.log(response);
       $http({
-        url: 'http://moviebuddy.azurewebsite.net/api/user',
+        url: 'http://moviebuddy.azurewebsites.net/api/user',
         method: 'POST',
         data: { info: response }
       });
