@@ -6,7 +6,7 @@ app.service('getFriends', function($http) {
   this.friendsData = function(facebookId) {
     return $http({
       method: 'GET',
-      url: 'http://localhost:8080/api/friends/' + facebookId
+      url: 'http://moviebuddy.azurewebsite.net/api/friends/' + facebookId
     });
   };
 });
