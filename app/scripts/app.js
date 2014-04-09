@@ -50,6 +50,7 @@ app.service('authentication', function($rootScope, $location, $http) {
       var rightSide = splitCookie[i].split('=')[1];
 
       if (rightSide === 'undefined') {
+        console.log(leftSide);
         console.log('left side parser: ', JSON.parse(leftSide));
       }
 
