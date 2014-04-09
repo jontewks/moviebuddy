@@ -59,7 +59,7 @@ app.controller('OutingsController', function ($scope, $rootScope, $http) {
   // Function to process 'new outing' form.
   $scope.processOutingForm = function() {
     var form = $scope.form;
-    var userId = $rootScope.user._id;
+    var userId = $rootScope.user.facebookId;
     var outing = createOuting(form, userId);
     $http({
       method: 'POST',
@@ -99,6 +99,6 @@ app.controller('OutingsController', function ($scope, $rootScope, $http) {
   };
 
   // Initialize display of outings.
-  $scope.getOutings($rootScope.user._id);
+  $scope.getOutings($rootScope.user.facebookId);
   
 });
