@@ -160,16 +160,18 @@ exports.getOuting = function(req, res){
 exports.postOuting = function(req, res) {
   var body = req.body;
   var outing = new db.Outing({
-    movie:     body.movie,
-    date:      body.date,
-    theater:   body.theater,
-    address:   body.address,
-    city:      body.city,
-    state:     body.state,
-    zip:       body.zip,
-    // invitees:  body.invitees,
-    attendees: body.attendees,
-    creator:   body.creator
+    movie:       body.movie,
+    date:        body.date,
+    theater:     body.theater,
+    address:     body.address,
+    city:        body.city,
+    state:       body.state,
+    zip:         body.zip,
+    // invitees:    body.invitees,
+    attendeeIds: body.attendeeIds,
+    attendeeNames: body.attendeeNames,
+    creatorId:     body.creatorId,
+    creatorName:   body.creatorName
   });
 
   outing.save(function (err) {
