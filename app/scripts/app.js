@@ -44,17 +44,10 @@ app.run(function($rootScope, $location) {
 app.service('authentication', function($rootScope, $location, $http) {
   var cookieParser = function(cookie) {
     var splitCookie = cookie.split(';');
+    console.log(splitCookie);
     for (var i = 0; i < splitCookie.length; i++){
-
       var leftSide = splitCookie[i].split('=')[0];
       var rightSide = splitCookie[i].split('=')[1];
-
-      if (rightSide === 'undefined') {
-        console.log(typeof leftSide);
-        console.log(leftSide.slice(1));
-        console.log(JSON.parse(leftSide.slice(1)));
-        // console.log('left side parser: ', JSON.parse(leftSide));
-      }
 
       if( leftSide === ' moviebuddy') {
         console.log('this is the right side: '+ rightSide);
