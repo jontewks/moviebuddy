@@ -42,6 +42,16 @@ app.run(function($rootScope, $location) {
 
 // authentication service, handles login and logout
 app.service('authentication', function($rootScope, $location, $http) {
+  var cookieParser = function(cookie) {
+    var splitCookie = cookie.split(';');
+    for (var i = 0; i < splitCookie.length; i++){
+      var leftSide = splitCookie[i].split('=')[0];
+      if(leftSide === 'movieBuddyUser') {
+        return JSON.parse(splitCookie[i].split('=')[1]);
+      }
+    }
+  };
+
   this.auth = function(){
     return $http({
       method: 'GET',
@@ -60,15 +70,7 @@ app.service('authentication', function($rootScope, $location, $http) {
   };
 });
 
-var cookieParser = function(cookie) {
-  var splitCookie = cookie.split(';');
-  for (var i = 0; i < splitCookie.length; i++){
-    var leftSide = splitCookiep[i].split('=')[0];
-    if(leftSide === 'movieBuddyUser') {
-      return JSON.parse(splitCookie[i].split('=')[1]);
-    }
-  }
-}
+
 
 
 // Load the SDK Asynchronously
