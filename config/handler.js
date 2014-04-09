@@ -195,7 +195,6 @@ exports.postOuting = function(req, res) {
 
 };
 
-
 // update outings into database function
 exports.putOuting = function(req, res) {
 
@@ -226,7 +225,6 @@ exports.putOuting = function(req, res) {
   });
 
 };
-
 
 // Delete outings handler function
 exports.deleteOuting = function(req, res) {

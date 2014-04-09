@@ -119,8 +119,12 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
     var userId = $rootScope.user.facebookId;
     var userName = $rootScope.user.name;
     var outing = this.outing;
-    outing.attendeeIds.push(userId);
-    outing.attendeeNames.push(userName);
+    // outing.attendeeIds.push(userId);
+    // outing.attendeeNames.push(userName);
+    if(outing.attendees[userId]) {
+      throw new Error('User is already attending.');
+    }
+    outing.attendees[userId] = { name: userName };
   };
 
   // Initialize display of outings.
