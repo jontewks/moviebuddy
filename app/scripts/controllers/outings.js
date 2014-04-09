@@ -30,7 +30,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
     // Postpone invitation funcationality for post-MVP.
     // outing.invitees = form.invitees;
     outing.attendeeIds = [userId];
-    outing.attendeeNames = [userName];
+    outing.attendeeNames = [userName, 'Alice Addams', 'Bob Buckman'];
     // *** TO-DO: Access by userId instead of userName.
     outing.creatorId = userId;
     outing.creatorName = userName;

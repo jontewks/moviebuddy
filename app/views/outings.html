@@ -25,12 +25,11 @@
 
     <!-- *** TO-DO: Add '| filter:' inputs above the feed below. -->
     <div ng-repeat="outing in outings | orderBy: 'date'">
-      <span class="outingMovie">{{outing.movie}}</span>
-      <span class="outingDate">{{outing.date | date: 'EEE., MMM. d, yyyy'}}</span>
-      <span class="outingTheater">{{outing.theater}}</span>
+      <span class="outingMovie">{{outing.movie}}</span> • 
+      <span class="outingDate">{{outing.date | date: 'EEE., MMM. d'}}</span> • 
+      <span class="outingTheater">{{outing.theater}}</span> • 
       <!-- *** TO-DO: Show theater info (address & map upon click of theater name. -->
-      <!-- <span class="invitees">Invitees: {{outing.invitees}}</span> -->
-      <span class="outingAttendees">{{outing.attendeeNames}}</span>
+      <span ng-repeat="attendeeName in outing.attendeeNames" class="outingAttendees">{{attendeeName}}, </span>
       <!-- *** TO-DO: Show an 'edit' button if current user is the outing creator. -->
       <hr />
     </div>

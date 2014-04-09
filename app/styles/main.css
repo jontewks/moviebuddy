@@ -431,12 +431,9 @@ body {
   background-color: #00A8C6;
 }
 
-.outingField {
-  font-size: 14pt;
-}
-
 .outingsList {
   font-size: 14pt;
+  color: black;
 }
 
 .outingMovie {
@@ -444,6 +441,7 @@ body {
 }
 
 .outingDate {
+  color: gray;
 }
 
 .outingTheater {
@@ -454,9 +452,7 @@ body {
 }
 
 .outingAttendees {
-}
-
-.outingCreator {
+  color: gray;
 }
 
 /* footer */
