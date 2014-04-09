@@ -48,7 +48,7 @@ app.service('authentication', function($rootScope, $location, $http) {
       console.log('splitcookie i: ', splitCookie[i]);
 
       var leftSide = splitCookie[i].split('=')[0];
-
+      console.log('split cookie: '+splitCookie[i].split('='));
       console.log('leftSide'+leftSide);
 
       if( leftSide === 'moviebuddy') {
