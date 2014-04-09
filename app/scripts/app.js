@@ -51,10 +51,10 @@ app.service('authentication', function($rootScope, $location, $http) {
       if (response.data === 'false') {
         $location.path('/');
       }
-      if (window.document.cookie !== '') {
-        var userObj = JSON.parse(window.document.cookie.split('=')[0]);
-        $rootScope.user = userObj;
-      }
+      // if (window.document.cookie !== '') {
+      //   var userObj = JSON.parse(window.document.cookie.split('=')[0]);
+      //   $rootScope.user = userObj;
+      // }
     });
   };
 });
