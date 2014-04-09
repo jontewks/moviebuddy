@@ -276,8 +276,8 @@ body {
 
 .editable-buttons button {
   padding: 0px;
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   font-size: 6px;
   cursor: pointer;
   border: 0px;
@@ -527,7 +527,7 @@ body {
   }
 
   .sectionContainerProfile {
-    min-width: 1160px;
+    min-width: 1170px;
   }
 
   /* login fun */
@@ -580,7 +580,7 @@ body {
 
   #userDetails {
     margin-top: 0px;
-    width: 350px;
+    width: 400px;
     margin-left: 150px;
   }
 
@@ -591,7 +591,7 @@ body {
 
   .userDetail {
     font-size: 1.5em;
-    width: 350px;
+    width: 360px;
   }
 
   .editableUserDetail {
