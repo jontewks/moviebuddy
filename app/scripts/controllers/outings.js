@@ -3,7 +3,41 @@
 
 var app = angular.module('moviebuddyApp');
 
-app.controller('OutingsController', function ($scope, $rootScope, $http) {
+// app.factory('userName', ['facebookId', function userNameFactory($http, facebookId) {
+//   return $http({
+//     method: 'GET',
+//     url: '/api/user/' + facebookId
+//   });
+// }]);
+
+// var GetAllUsers = function($http) {
+//   this.allUsers = $http({
+//     method: 'GET',
+//     url: '/api/user'
+//   });
+// };
+// app.service('getAllUsers', ['$http', GetAllUsers]);
+
+// app.service('getAllUsers', function($http) {
+//   this.getAllUsers2 = function() {
+//     return $http({
+//       method: 'GET',
+//       url: '/api/user'
+//     });
+//   };
+// });
+
+// This service returns 'Users' from the DB.
+// app.service('getUsers', function($http) {
+//   this.getUser = function(facebookId) {
+//     return $http({
+//       method: 'GET',
+//       url: '/api/user/' + facebookId
+//     });
+//   };
+// });
+
+app.controller('OutingsController', ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
 
   var newOutingButtonVisible = true;
   var newOutingFormVisible = false;
@@ -17,9 +51,9 @@ app.controller('OutingsController', function ($scope, $rootScope, $http) {
   };
 
   // Function to create new 'outing' object from form and user.
-  var createOuting = function(form, userId) {
-    if(form === undefined || userId === undefined) {
-      throw new Error('getOutings() must receive a form and a user ID.');
+  var createOuting = function(form, userId, userName) {
+    if(form === undefined || userId === undefined || userName === undefined) {
+      throw new Error('Insufficient input for function.');
     }
     var outing = {};
     outing.movie = form.movie;
@@ -29,7 +63,8 @@ app.controller('OutingsController', function ($scope, $rootScope, $http) {
     // outing.address;    // outing.city;    // outing.state;    // outing.zip;
     // outing.invitees = form.invitees;
     outing.attendees = [];
-    outing.creator = userId;
+    // *** TO-DO: Access by userId instead of userName.
+    outing.creator = userName;
     return outing;
   };
 
@@ -60,7 +95,9 @@ app.controller('OutingsController', function ($scope, $rootScope, $http) {
   $scope.processOutingForm = function() {
     var form = $scope.form;
     var userId = $rootScope.user.facebookId;
-    var outing = createOuting(form, userId);
+    // *** TO-DO: Access by userId instead of userName.
+    var userName = $rootScope.user.name;
+    var outing = createOuting(form, userId, userName);
     $http({
       method: 'POST',
       url: '/api/outings',
@@ -83,7 +120,7 @@ app.controller('OutingsController', function ($scope, $rootScope, $http) {
   // Function to pull from DB 'outings' for user.
   $scope.getOutings = function(userId) {
     if(userId === undefined) {
-      throw new Error('getOutings() must receive a user ID.');
+      throw new Error('Insufficient input for function.');
     }
     $http({
       method: 'GET',
@@ -92,13 +129,64 @@ app.controller('OutingsController', function ($scope, $rootScope, $http) {
     .success(function(data) {
       console.log('GET Success:', data);
       $scope.outings = data;
+      // $scope.users = getAllUsers;
+      // console.log('userNameFactory', userNameFactory(userId));
+      // console.log('$scope.users:', $scope.users);
+      // console.log('getAllUsers', getAllUsers);
+      // console.log('getAllUsers', getAllUsers.getAllUsers2());
+      // getUsers.getUser(userId).then(function() { console.log('data', data); }); // Logs an array of all outings. 
+      // console.log('data',data);
     })
     .error(function(data, status, headers, config) {
       console.log('GET Error:', data, status, headers, config);
     });
   };
 
+  // $scope.getUserName = function(userId) {
+  //   // if(userId === undefined) {
+  //   //   throw new Error('getUserName() must receive a user ID.');
+  //   // }
+  //   // $http({
+  //   //   method: 'GET',
+  //   //   url: '/api/user/' + userId
+  //   // })
+  //   // .success(function(data) {
+  //   //   console.log('GET Success:', data);
+  //   //   return data;
+  //   // })
+  //   // .error(function(data, status, headers, config) {
+  //   //   console.log('GET Error:', data, status, headers, config);
+  //   // });
+  //   getUsers.getUser(userId).then(function(data) {
+  //     console.log('data.data.name', data.data.name);
+  //     return data.data.name;
+  //   });
+  // };
+
   // Initialize display of outings.
   $scope.getOutings($rootScope.user.facebookId);
-  
-});
+  // console.log('$rootScope:', $rootScope);
+}]);
+
+// app.directive('outingCreator', function() {
+//   return {
+//     template: 'outings2 {{outings.name}}'
+//   };
+// });
+
+// app.directive('outingCreator', function() {
+//   return {
+//     scope: {
+//       outing: '='
+//     },
+//     template: 'outings2 {{outings.name}}'
+//   };
+// });
+
+// app.directive('getOutingUserName', ['$scope', '$http', 'userId', function($scope, $http, userId) {
+//   var answer = x;
+//   scope.$watch(attrs.getUserName, function() {
+//     answer = 'test';
+//   }
+//   return answer;
+// }]);

@@ -14,14 +14,14 @@ app.service('getUsers', function($http) {
   };
 });
 
-app.service('updateUsers', function($http){
+app.service('updateUsers', function($http) {
   this.updateUser = function(facebookId, userObj) {
-    return $http.put('/api/user/' + facebookId, { user: userObj});
+    return $http.put('/api/user/' + facebookId, { user: userObj });
   };
 });
 
 // This controller controls the profile.
-app.controller('ProfileController', function ($scope, $rootScope,getUsers, updateUsers) {
+app.controller('ProfileController', function ($scope, $rootScope, getUsers, updateUsers) {
   var facebookId = $rootScope.user.facebookId;
   // *** Want to grab this upon authentication. ***
   $scope.user = {
@@ -42,13 +42,13 @@ app.controller('ProfileController', function ($scope, $rootScope,getUsers, updat
   .then(function(data) {
     var user = data.data;
     $scope.user.name         = user.name;
-    $scope.user.hometown     = user.hometown;
-    $scope.user.favMovie     = user.favMovie;
-    $scope.user.favGenre     = user.favGenre;
     $scope.user.age          = user.age;
+    $scope.user.hometown     = user.hometown;
+    $scope.user.currentCity  = user.currentCity;
     $scope.user.favTheater   = user.favTheater;
-    $scope.user.currentCity  = user.city;
+    $scope.user.favGenre     = user.favGenre;
     $scope.user.favActor     = user.favActor;
+    $scope.user.favMovie     = user.favMovie;
   });
 
 
