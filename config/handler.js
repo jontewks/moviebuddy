@@ -4,7 +4,6 @@ var FB = require('fb');
 
 // get a user from the db
 exports.getUser = function(req, res) {
-
   db.User.findOne({facebookId: req.params.facebookId}, function (err, user) {
     if (!err) {
       res.send(user);
@@ -46,6 +45,7 @@ exports.postUser = function(req, res) {
 
 // update user collection
 exports.putUser = function(req, res) {
+
   var userObj = req.body.user;
   db.User.findOne({facebookId: userObj.facebookId}, function (err, user) {
 
@@ -62,7 +62,9 @@ exports.putUser = function(req, res) {
       !err ? console.log('updated') : console.log(err);
       res.send(user);
     });
+
   });
+
 };
 
 // delete users from the db
@@ -85,7 +87,9 @@ exports.getFriends = function(req, res) {
     if (!err && user) {
       var usersFriends = [];
       for (var i = 0; i < user.friends.length; i++) {
-        db.User.find({facebookId: user.friends[i]}, function(err, friend) {
+        db.User.find({
+          facebookId: user.friends[i]
+        }, function(err, friend) {
           usersFriends.push(friend[0]);
           if (i === user.friends.length) {
             res.send(usersFriends);
@@ -102,7 +106,9 @@ exports.getFriends = function(req, res) {
 // Update user friends
 exports.updateFriends = function(res, id) {
 
-  db.User.findOne({facebookId : id}, function(err, user){
+  db.User.findOne({
+    facebookId: id
+  }, function(err, user){
 
     if(!err) {
       // <-- loop through the results array --> //
@@ -126,7 +132,9 @@ exports.updateFriends = function(res, id) {
         });
       }
     }
+
   });
+
 };
 
 exports.queryFBFriends = function(token, profile){
@@ -134,18 +142,19 @@ exports.queryFBFriends = function(token, profile){
   FB.setAccessToken(token);
 
   FB.api('fql', {
-    q : 'SELECT name, uid FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = '+profile.id+')'
-  }, function(res){
+    q: 'SELECT name, uid FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = '+profile.id+')'
+  }, function(res) {
     exports.updateFriends(res.data, profile.id);
   });
+
 };
 
 
 // get outings from the database
-exports.getOuting = function(req, res){
+exports.getOuting = function(req, res) {
   // console.log('req.params:', req.params);
   return db.Outing.find({
-    // *** TO-DO: Enable find of correct outings.
+    // *** TO-DO: Enable find of user- & friend-specific outings.
   }, function(err, outing){
   // return db.Outing.findById(req.params.id, function(err, outing){
     if(!err) {
@@ -158,18 +167,21 @@ exports.getOuting = function(req, res){
 
 // enter outings into database function
 exports.postOuting = function(req, res) {
+
   var body = req.body;
   var outing = new db.Outing({
-    movie:     body.movie,
-    date:      body.date,
-    theater:   body.theater,
-    address:   body.address,
-    city:      body.city,
-    state:     body.state,
-    zip:       body.zip,
-    invitees:  body.invitees,
-    attendees: body.attendees,
-    creator:   body.creator
+    movie:       body.movie,
+    date:        body.date,
+    theater:     body.theater,
+    address:     body.address,
+    city:        body.city,
+    state:       body.state,
+    zip:         body.zip,
+    // invitees:    body.invitees,
+    attendeeIds: body.attendeeIds,
+    attendeeNames: body.attendeeNames,
+    creatorId:     body.creatorId,
+    creatorName:   body.creatorName
   });
 
   outing.save(function (err) {
@@ -181,11 +193,13 @@ exports.postOuting = function(req, res) {
   });
 
   res.send(outing);
+
 };
 
 
 // update outings into database function
 exports.putOuting = function(req, res) {
+
   var body = req.body;
 
   return db.Outing.findById(req.params.id, function(err, outing){
@@ -196,7 +210,7 @@ exports.putOuting = function(req, res) {
     outing.city      = body.city;
     outing.state     = body.state;
     outing.zip       = body.zip;
-    outing.invitees  = body.invitees;
+    // outing.invitees  = body.invitees;
     outing.attendees = body.attendees;
     outing.creator   = body.creator;
 
@@ -208,7 +222,9 @@ exports.putOuting = function(req, res) {
       }
       res.send(outing);
     });
+
   });
+
 };
 
 
@@ -226,25 +242,34 @@ exports.deleteOuting = function(req, res) {
   });
 };
 
-exports.authFacebookCallback = function(req, res, next, passport){
-  passport.authenticate('facebook', function(err, user){
-    if( err){ return next(err);}
+exports.authFacebookCallback = function(req, res, next, passport) {
 
-    if(!user){ return res.redirect('/');}
-    req.login(user, function(err){
-      if( err ){ return next(err);}
+  passport.authenticate('facebook', function(err, user) {
+
+    if(err){
+      return next(err);
+    }
+
+    if(!user){
+      return res.redirect('/');
+    }
+
+    req.login(user, function(err) {
+      if(err){
+        return next(err);
+      }
       req.session.username = 'farid';
       // console.log("req.session = ", req.session);
       // console.log("user = ", user);
       res.cookie(JSON.stringify(user));
       return res.redirect('/#/dash');
     });
-  })(req,res,next);
+
+  })(req, res, next);
+
 };
 
-
-exports.logout = function(req, res){
+exports.logout = function(req, res) {
   req.session.destroy();
   res.redirect('/');
 };
-
