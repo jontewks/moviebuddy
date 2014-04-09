@@ -116,15 +116,29 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
   };
 
   $scope.joinOuting = function() {
+
     var userId = $rootScope.user.facebookId;
     var userName = $rootScope.user.name;
     var outing = this.outing;
-    // outing.attendeeIds.push(userId);
-    // outing.attendeeNames.push(userName);
+    var outingId = this.outing._id;
     if(outing.attendees[userId]) {
       throw new Error('User is already attending.');
     }
     outing.attendees[userId] = { name: userName };
+
+    $http({
+      method: 'PUT',
+      url: '/api/outings/' + outingId,
+      data: outing
+    })
+    .success(function(data) {
+      console.log('PUT Success:', data);
+      $scope.outings = data;
+    })
+    .error(function(data, status, headers, config) {
+      console.log('PUT Error:', data, status, headers, config);
+    });
+
   };
 
   // Initialize display of outings.
