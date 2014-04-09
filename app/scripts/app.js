@@ -27,7 +27,12 @@ app.config(function ($routeProvider) {
     .otherwise({
       redirectTo: '/',
       templateUrl: 'views/login.html',
-      controller: 'LoginController'
+      controller: 'LoginController',
+      resolve: {
+        checkLogin: function(authentication){
+          return authentication.auth();
+        }
+      }
     });
 });
 
@@ -44,6 +49,9 @@ app.service('authentication', function($rootScope, $location, $http) {
       url: '/auth/isLoggedIn'
     })
     .then(function(response){
+      if (response.data === 'false') {
+        $location.path('/');
+      }
       if (window.document.cookie !== '') {
         var userObj = JSON.parse(window.document.cookie.split('=')[0]);
         $rootScope.user = userObj;

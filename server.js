@@ -5,11 +5,21 @@ var app = express();
 var port = process.env.PORT || 8080;
 // initialize passport
 var passport = require('./config/passport').passport;
-function isLoggedIn(req, res, next) {
+
+var isLoggedIn = function(req, res) {
   if (req.isAuthenticated()){
-    return next();
+    res.send('true');
+  } else {
+    res.send('false');
   }
-  res.redirect('/');
+};
+
+var authenticated = function(req, res, next) {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.redirect('/');
+  }
 }
 
 app.configure( function(){
@@ -21,17 +31,17 @@ app.configure( function(){
   app.use(passport.session());
 });
 
-app.get(   '/api/user/:facebookId', handler.getUser);
-app.post(  '/api/user', isLoggedIn, handler.postUser);
-app.put(   '/api/user/:facebookId', handler.putUser);
-app.delete('/api/user/:facebookId', handler.deleteUser);
+app.get(   '/api/user/:facebookId', authenticated, handler.getUser);
+app.post(  '/api/user', authenticated, handler.postUser);
+app.put(   '/api/user/:facebookId', authenticated, handler.putUser);
+app.delete('/api/user/:facebookId', authenticated, handler.deleteUser);
 
-app.get(   '/api/friends/*', handler.getFriends);
+app.get(   '/api/friends/*', authenticated, handler.getFriends);
 
-app.get(   '/api/outings/:id', handler.getOuting);
-app.post(  '/api/outings',     handler.postOuting);
-app.put(   '/api/outings/:id', handler.putOuting);
-app.delete('/api/outings/:id', handler.deleteOuting);
+app.get(   '/api/outings/:id', authenticated, handler.getOuting);
+app.post(  '/api/outings', authenticated, handler.postOuting);
+app.put(   '/api/outings/:id', authenticated, handler.putOuting);
+app.delete('/api/outings/:id', authenticated, handler.deleteOuting);
 
 
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email'}));
@@ -39,9 +49,14 @@ app.get('/auth/facebook/callback',function(req, res, next){
   handler.authFacebookCallback(req, res, next, passport);
 });
 
-app.get('/auth/isLoggedIn', isLoggedIn , handler.isLoggedIn);
+app.get('/auth/isLoggedIn', isLoggedIn);
 
 app.get('/logout', handler.logout);
+
+// redirect any other funky request to the home page
+app.get('/*', function(req, res){
+  res.redirect('/');
+})
 
 app.listen(port);
 console.log('Listening on ' + port);
