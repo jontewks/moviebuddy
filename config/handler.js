@@ -178,8 +178,6 @@ exports.postOuting = function(req, res) {
     state:       body.state,
     zip:         body.zip,
     // invitees:    body.invitees,
-    // attendeeIds: body.attendeeIds,
-    // attendeeNames: body.attendeeNames,
     attendees:   body.attendees,
     creatorId:   body.creatorId,
     creatorName: body.creatorName
@@ -212,8 +210,6 @@ exports.putOuting = function(req, res) {
     outing.state       = body.state;
     outing.zip         = body.zip;
     // outing.invitees  = body.invitees;
-    // attendeeIds: body.attendeeIds;
-    // attendeeNames: body.attendeeNames;
     outing.attendees   = body.attendees;
     outing.creatorId   = body.creatorId;
     outing.creatorName = body.creatorName;

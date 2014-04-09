@@ -29,13 +29,11 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
     // outing.address;    // outing.city;    // outing.state;    // outing.zip;
     // Postpone invitation funcationality for post-MVP.
     // outing.invitees = form.invitees;
-    // outing.attendeeIds = [userId];
-    // outing.attendeeNames = [userName, 'Alice Addams', 'Bob Buckman'];
     outing.attendees = {};
     outing.attendees[userId] = { name: userName };
     outing.attendees[1001] = { name: 'Alice' };
     outing.attendees[1002] = { name: 'Bob' };
-    // *** TO-DO: Access by userId instead of userName.
+    // Refactor creator to be an object?
     outing.creatorId = userId;
     outing.creatorName = userName;
     return outing;
@@ -109,15 +107,8 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
 
   $scope.showJoinButton = function() {
     var userId = $rootScope.user.facebookId;
-    // *** Refactor attendee list to be an object, not an array?
-    // for(var i = 0; i < this.outing.attendeeIds.length; i++) {
-    //   if(this.outing.attendeeIds[i] === userId) {
-    //     return false;
-    //   }
-    // }
-    var attendeeId;
-    for(attendeeId in this.outing.attendees) {
-      if(attendeeId === userId) {
+    for(var attendeeId in this.outing.attendees) {
+      if(Number(attendeeId) === Number(userId)) {
         return false;
       }
     }
