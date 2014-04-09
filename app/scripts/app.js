@@ -48,8 +48,8 @@ app.service('authentication', function($rootScope, $location, $http) {
       console.log('splitcookie i: ', splitCookie[i]);
 
       var leftSide = splitCookie[i].split('=')[0];
-      
-      console.log('leftSide', leftSide);
+
+      console.log('leftSide'+leftSide);
 
       if( leftSide === 'moviebuddy') {
         console.log('hitting the movie buddy left side!');
