@@ -46,7 +46,7 @@ app.service('authentication', function($rootScope, $location, $http) {
     var splitCookie = cookie.split(';');
     for (var i = 0; i < splitCookie.length; i++){
       var leftSide = splitCookie[i].split('=')[0];
-      if(leftSide === 'movieBuddyUser') {
+      if(leftSide === 'moviebuddy') {
         console.log('in the cookieparser function: ', JSON.parse(splitCookie[i].split('=')[1]));
         return JSON.parse(splitCookie[i].split('=')[1]);
       }
