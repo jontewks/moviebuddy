@@ -152,7 +152,6 @@ exports.queryFBFriends = function(token, profile){
 
 // get outings from the database
 exports.getOuting = function(req, res) {
-  console.log('req.params:', req.params);
   return db.Outing.find({
     // *** TO-DO: Enable find of user- & friend-specific outings.
   }, function(err, outing){
