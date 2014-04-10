@@ -1,5 +1,4 @@
 'use strict';
-/* global FB */
 
 var app = angular.module('moviebuddyApp', ['ngRoute', 'ngCookies', 'xeditable']);
 
@@ -43,6 +42,17 @@ app.run(function($rootScope, $location) {
 
 // authentication service, handles login and logout
 app.service('authentication', function($rootScope, $location, $http) {
+  var cookieParser = function(cookie) {
+    var splitCookie = cookie.split(';');
+    for (var i = 0; i < splitCookie.length; i++){
+      var leftSide = splitCookie[i].split('=')[0];
+      var rightSide = splitCookie[i].split('=')[1];
+      if( rightSide === 'undefined') {
+        return JSON.parse(leftSide);
+      }
+    }
+  };
+
   this.auth = function(){
     return $http({
       method: 'GET',
@@ -53,12 +63,14 @@ app.service('authentication', function($rootScope, $location, $http) {
         $location.path('/');
       }
       if (window.document.cookie !== '') {
-        var userObj = JSON.parse(window.document.cookie.split('=')[0]);
+        var userObj = cookieParser(window.document.cookie);
         $rootScope.user = userObj;
       }
     });
   };
 });
+
+
 
 
 // Load the SDK Asynchronously
