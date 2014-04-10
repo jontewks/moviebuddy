@@ -256,9 +256,7 @@ exports.authFacebookCallback = function(req, res, next, passport) {
       if(err){
         return next(err);
       }
-      req.session.username = 'farid';
-
-      res.cookie(JSON.stringify(user));
+      res.cookie('moviebuddy', JSON.stringify(user));
       return res.redirect('/#/dash');
     });
 
