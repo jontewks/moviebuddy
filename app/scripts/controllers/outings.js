@@ -29,11 +29,11 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
     // outing.address;    // outing.city;    // outing.state;    // outing.zip;
     // Postpone invitation funcationality for post-MVP.
     // outing.invitees = form.invitees;
-    outing.attendeeIds = [userId];
-    outing.attendeeNames = [userName, 'Alice Addams', 'Bob Buckman'];
-    // *** TO-DO: Access by userId instead of userName.
-    outing.creatorId = userId;
-    outing.creatorName = userName;
+    outing.attendees = {};
+    outing.attendees[userId] = { name: userName };
+    outing.attendees[1001] = { name: 'Alice' };
+    outing.attendees[1002] = { name: 'Bob' };
+    outing.creator = userId;
     return outing;
   };
 
@@ -78,18 +78,15 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
       newOutingFormVisible = false;
       newOutingButtonVisible = true;
       // Refresh the 'outings' display.
-      $scope.getOutings(userId);
+      $scope.getOutings();
     })
     .error(function(data, status, headers, config) {
       console.log('POST Error:', data, status, headers, config);
     });
   };
 
-  // Function to pull from DB 'outings' for user.
-  $scope.getOutings = function(userId) {
-    if(userId === undefined) {
-      throw new Error('Insufficient input for function.');
-    }
+  // Function to pull all 'outings' from DB for user.
+  $scope.getOutings = function() {
     $http({
       method: 'GET',
       url: '/api/outings'
@@ -105,9 +102,8 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
 
   $scope.showJoinButton = function() {
     var userId = $rootScope.user.facebookId;
-    // *** Refactor attendee list to be an object, not an array?
-    for(var i = 0; i < this.outing.attendeeIds.length; i++) {
-      if(this.outing.attendeeIds[i] === userId) {
+    for(var attendeeId in this.outing.attendees) {
+      if(Number(attendeeId) === Number(userId)) {
         return false;
       }
     }
@@ -115,14 +111,32 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
   };
 
   $scope.joinOuting = function() {
+
     var userId = $rootScope.user.facebookId;
     var userName = $rootScope.user.name;
     var outing = this.outing;
-    outing.attendeeIds.push(userId);
-    outing.attendeeNames.push(userName);
+    var outingId = this.outing._id;
+    if(outing.attendees[userId]) {
+      throw new Error('User is already attending.');
+    }
+    outing.attendees[userId] = { name: userName };
+
+    $http({
+      method: 'PUT',
+      url: '/api/outings/' + outingId,
+      data: outing
+    })
+    .success(function(data) {
+      console.log('PUT Success:', data);
+      $scope.getOutings();
+    })
+    .error(function(data, status, headers, config) {
+      console.log('PUT Error:', data, status, headers, config);
+    });
+
   };
 
   // Initialize display of outings.
-  $scope.getOutings($rootScope.user.facebookId);
+  $scope.getOutings();
 
 }]);
