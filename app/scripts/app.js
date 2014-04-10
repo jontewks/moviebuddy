@@ -49,9 +49,9 @@ app.service('authentication', function($rootScope, $location, $http) {
       var leftSide = splitCookie[i].split('=')[0];
       var rightSide = splitCookie[i].split('=')[1];
 
-      if( leftSide === ' moviebuddy') {
-        console.log('this is the right side: '+ rightSide);
-        return JSON.parse(rightSide);
+      if( rightSide === 'undefined') {
+        console.log('this is the right side: '+ leftSide);
+        return JSON.parse(leftSide);
       }
 
     }
