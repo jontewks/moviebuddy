@@ -26,14 +26,20 @@
     <div ng-repeat="outing in outings | orderBy: 'date'">
       <!-- <span class="outingMovie">{{outing.movie}}</span> •  -->
 
-      <span editable-text="outing.movie" onaftersave="editOuting()">{{ outing.movie || "empty" }}</span> • 
+      <span editable-text="outing.movie" e-required e-form="textBtnForm" onaftersave="editOuting()" class="outingMovie">{{ outing.movie }}</span> • 
 
-      <span class="outingDate">{{outing.date | date: 'EEE., MMM. d'}}</span><br />
+      <!-- <span class="outingDate">{{outing.date | date: 'EEE., MMM. d'}}</span><br /> -->
+
+      <span editable-text="outing.date" onaftersave="editOuting()" class="outingDate">{{ outing.date | date: 'EEE., MMM. d' }}</span><br />
+
       <span class="outingTheater">{{outing.theater}}</span> • 
       <!-- *** TO-DO: Show theater info (address & map upon click of theater name. -->
       <span ng-repeat="(attendeeId, attendee) in outing.attendees" class="outingAttendees">{{attendee.name}}, </span>
       <button ng-click="joinOuting()" ng-show="showJoinButton()" type="button">Join</button>
       <!-- *** TO-DO: Show an 'edit' button if current user is the outing creator. -->
+
+      <button class="btn btn-default" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible">Edit</button>
+
       <hr />
     </div>
 
