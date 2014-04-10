@@ -1,4 +1,5 @@
 /* global require, module, process */
+
 // load all the things we need
 var FacebookStrategy = require('passport-facebook').Strategy;
 // load up the user model
