@@ -3,15 +3,8 @@
 var app = angular.module('moviebuddyApp');
 
 app.controller('DashController', function ($scope, authentication) {
-
-		$scope.logout = function(){
-      console.log('trying to logout!!!');
-      authentication.fbLogout();
-    };
-
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+	$scope.logout = function(){
+    console.log('trying to logout!!!');
+    authentication.fbLogout();
+  };
+});

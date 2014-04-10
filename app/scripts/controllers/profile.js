@@ -27,12 +27,11 @@ app.controller('ProfileController', function ($scope, $rootScope, getUsers, upda
   $scope.user = {
     facebookId        : facebookId,
     name              : '',
-    hometown          : '',
     favMovie          : '',
     favGenre          : '',
     age               : '',
     favTheater        : '',
-    currentCity       : '',
+    city              : '',
     favActor          : '',
     profilePicture    : 'http://graph.facebook.com/'+facebookId+'/picture?type=large'
   };
@@ -43,8 +42,7 @@ app.controller('ProfileController', function ($scope, $rootScope, getUsers, upda
     var user = data.data;
     $scope.user.name         = user.name;
     $scope.user.age          = user.age;
-    $scope.user.hometown     = user.hometown;
-    $scope.user.currentCity  = user.currentCity;
+    $scope.user.city         = user.city;
     $scope.user.favTheater   = user.favTheater;
     $scope.user.favGenre     = user.favGenre;
     $scope.user.favActor     = user.favActor;
