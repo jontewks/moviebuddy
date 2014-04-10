@@ -33,9 +33,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
     outing.attendees[userId] = { name: userName };
     outing.attendees[1001] = { name: 'Alice' };
     outing.attendees[1002] = { name: 'Bob' };
-    // Refactor creator to be an object?
-    outing.creatorId = userId;
-    outing.creatorName = userName;
+    outing.creator = userId;
     return outing;
   };
 
@@ -80,18 +78,15 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
       newOutingFormVisible = false;
       newOutingButtonVisible = true;
       // Refresh the 'outings' display.
-      $scope.getOutings(userId);
+      $scope.getOutings();
     })
     .error(function(data, status, headers, config) {
       console.log('POST Error:', data, status, headers, config);
     });
   };
 
-  // Function to pull from DB 'outings' for user.
-  $scope.getOutings = function(userId) {
-    if(userId === undefined) {
-      throw new Error('Insufficient input for function.');
-    }
+  // Function to pull all 'outings' from DB for user.
+  $scope.getOutings = function() {
     $http({
       method: 'GET',
       url: '/api/outings'
@@ -133,7 +128,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
     })
     .success(function(data) {
       console.log('PUT Success:', data);
-      $scope.outings = data;
+      $scope.getOutings();
     })
     .error(function(data, status, headers, config) {
       console.log('PUT Error:', data, status, headers, config);
@@ -142,6 +137,6 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
   };
 
   // Initialize display of outings.
-  $scope.getOutings($rootScope.user.facebookId);
+  $scope.getOutings();
 
 }]);

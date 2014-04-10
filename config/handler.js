@@ -179,8 +179,7 @@ exports.postOuting = function(req, res) {
     zip:         body.zip,
     // invitees:    body.invitees,
     attendees:   body.attendees,
-    creatorId:   body.creatorId,
-    creatorName: body.creatorName
+    creator:     body.creator
   });
 
   outing.save(function (err) {
@@ -200,7 +199,8 @@ exports.putOuting = function(req, res) {
 
   var body = req.body;
 
-  return db.Outing.findById(req.params.id, function(err, outing){
+  return db.Outing.findById(req.params._id, function(err, outing){
+
     outing.movie       = body.movie;
     outing.date        = body.date;
     outing.theater     = body.theater;
@@ -210,8 +210,7 @@ exports.putOuting = function(req, res) {
     outing.zip         = body.zip;
     // outing.invitees  = body.invitees;
     outing.attendees   = body.attendees;
-    outing.creatorId   = body.creatorId;
-    outing.creatorName = body.creatorName;
+    outing.creator     = body.creator;
 
     outing.save(function(err){
       if (!err){
@@ -257,8 +256,6 @@ exports.authFacebookCallback = function(req, res, next, passport) {
         return next(err);
       }
       req.session.username = 'farid';
-      // console.log("req.session = ", req.session);
-      // console.log("user = ", user);
       res.cookie(JSON.stringify(user));
       return res.redirect('/#/dash');
     });
