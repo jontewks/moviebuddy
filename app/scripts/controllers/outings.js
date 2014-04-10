@@ -136,6 +136,16 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
 
   };
 
+  $scope.editOuting = function() {
+    var outing = this.outing;
+    var outingId = this.outing._id;
+    return $http({
+      method: 'PUT',
+      url: '/api/outings/' + outingId,
+      data: outing
+    });
+  };
+
   // Initialize display of outings.
   $scope.getOutings();
 

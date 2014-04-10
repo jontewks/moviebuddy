@@ -24,8 +24,11 @@
 
     <!-- *** TO-DO: Add '| filter:' inputs above the feed below. -->
     <div ng-repeat="outing in outings | orderBy: 'date'">
-      <span class="outingMovie">{{outing.movie}}</span> • 
-      <span class="outingDate">{{outing.date | date: 'EEE., MMM. d'}}</span> • 
+      <!-- <span class="outingMovie">{{outing.movie}}</span> •  -->
+
+      <span editable-text="outing.movie" onaftersave="editOuting()">{{ outing.movie || "empty" }}</span> • 
+
+      <span class="outingDate">{{outing.date | date: 'EEE., MMM. d'}}</span><br />
       <span class="outingTheater">{{outing.theater}}</span> • 
       <!-- *** TO-DO: Show theater info (address & map upon click of theater name. -->
       <span ng-repeat="(attendeeId, attendee) in outing.attendees" class="outingAttendees">{{attendee.name}}, </span>
