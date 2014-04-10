@@ -116,7 +116,11 @@ function createTween( value, prop, animation ) {
 
 function defaultPrefilter( elem, props, opts ) {
 	/* jshint validthis: true */
+<<<<<<< HEAD
 	var prop, value, toggle, tween, hooks, oldfire, display, dDisplay,
+=======
+	var prop, value, toggle, tween, hooks, oldfire, display,
+>>>>>>> aec32b75bc189f0aa713a04ee6d47c6728422f36
 		anim = this,
 		orig = {},
 		style = elem.style,
@@ -160,16 +164,25 @@ function defaultPrefilter( elem, props, opts ) {
 		// Set display property to inline-block for height/width
 		// animations on inline elements that are having width/height animated
 		display = jQuery.css( elem, "display" );
+<<<<<<< HEAD
 		dDisplay = defaultDisplay( elem.nodeName );
 		if ( display === "none" ) {
 			display = dDisplay;
 		}
 		if ( display === "inline" &&
+=======
+		// Test default display if display is currently "none"
+		if ( (display === "none" ? defaultDisplay( elem.nodeName ) : display) === "inline" &&
+>>>>>>> aec32b75bc189f0aa713a04ee6d47c6728422f36
 				jQuery.css( elem, "float" ) === "none" ) {
 
 			// inline-level elements accept inline-block;
 			// block-level elements need to be inline with layout
+<<<<<<< HEAD
 			if ( !support.inlineBlockNeedsLayout || dDisplay === "inline" ) {
+=======
+			if ( !support.inlineBlockNeedsLayout || defaultDisplay( elem.nodeName ) === "inline" ) {
+>>>>>>> aec32b75bc189f0aa713a04ee6d47c6728422f36
 				style.display = "inline-block";
 			} else {
 				style.zoom = 1;
@@ -204,6 +217,13 @@ function defaultPrefilter( elem, props, opts ) {
 				}
 			}
 			orig[ prop ] = dataShow && dataShow[ prop ] || jQuery.style( elem, prop );
+<<<<<<< HEAD
+=======
+
+		// Any non-fx value stops us from restoring the original display value
+		} else {
+			display = undefined;
+>>>>>>> aec32b75bc189f0aa713a04ee6d47c6728422f36
 		}
 	}
 
@@ -245,6 +265,13 @@ function defaultPrefilter( elem, props, opts ) {
 				}
 			}
 		}
+<<<<<<< HEAD
+=======
+
+	// If this is a noop like .hide().hide(), restore an overwritten display value
+	} else if ( (display === "none" ? defaultDisplay( elem.nodeName ) : display) === "inline" ) {
+		style.display = display;
+>>>>>>> aec32b75bc189f0aa713a04ee6d47c6728422f36
 	}
 }
 

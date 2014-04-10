@@ -74,7 +74,13 @@ jQuery.extend({
 				var val = jQuery.find.attr( elem, "value" );
 				return val != null ?
 					val :
+<<<<<<< HEAD
 					jQuery.text( elem );
+=======
+					// Support: IE10-11+
+					// option.text throws exceptions (#14686, #14858)
+					jQuery.trim( jQuery.text( elem ) );
+>>>>>>> aec32b75bc189f0aa713a04ee6d47c6728422f36
 			}
 		},
 		select: {

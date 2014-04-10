@@ -32,8 +32,13 @@ var
 
 	cssShow = { position: "absolute", visibility: "hidden", display: "block" },
 	cssNormalTransform = {
+<<<<<<< HEAD
 		letterSpacing: 0,
 		fontWeight: 400
+=======
+		letterSpacing: "0",
+		fontWeight: "400"
+>>>>>>> aec32b75bc189f0aa713a04ee6d47c6728422f36
 	},
 
 	cssPrefixes = [ "Webkit", "O", "Moz", "ms" ];
@@ -92,6 +97,7 @@ function showHide( elements, show ) {
 				values[ index ] = jQuery._data( elem, "olddisplay", defaultDisplay(elem.nodeName) );
 			}
 		} else {
+<<<<<<< HEAD
 
 			if ( !values[ index ] ) {
 				hidden = isHidden( elem );
@@ -99,6 +105,12 @@ function showHide( elements, show ) {
 				if ( display && display !== "none" || !hidden ) {
 					jQuery._data( elem, "olddisplay", hidden ? display : jQuery.css( elem, "display" ) );
 				}
+=======
+			hidden = isHidden( elem );
+
+			if ( display && display !== "none" || !hidden ) {
+				jQuery._data( elem, "olddisplay", hidden ? display : jQuery.css( elem, "display" ) );
+>>>>>>> aec32b75bc189f0aa713a04ee6d47c6728422f36
 			}
 		}
 	}
@@ -171,7 +183,11 @@ function getWidthOrHeight( elem, name, extra ) {
 	var valueIsBorderBox = true,
 		val = name === "width" ? elem.offsetWidth : elem.offsetHeight,
 		styles = getStyles( elem ),
+<<<<<<< HEAD
 		isBorderBox = support.boxSizing() && jQuery.css( elem, "boxSizing", false, styles ) === "border-box";
+=======
+		isBorderBox = support.boxSizing && jQuery.css( elem, "boxSizing", false, styles ) === "border-box";
+>>>>>>> aec32b75bc189f0aa713a04ee6d47c6728422f36
 
 	// some non-html elements return undefined for offsetWidth, so check for null/undefined
 	// svg - https://bugzilla.mozilla.org/show_bug.cgi?id=649285
@@ -227,6 +243,11 @@ jQuery.extend({
 	cssNumber: {
 		"columnCount": true,
 		"fillOpacity": true,
+<<<<<<< HEAD
+=======
+		"flexGrow": true,
+		"flexShrink": true,
+>>>>>>> aec32b75bc189f0aa713a04ee6d47c6728422f36
 		"fontWeight": true,
 		"lineHeight": true,
 		"opacity": true,
@@ -295,9 +316,12 @@ jQuery.extend({
 				// Support: IE
 				// Swallow errors from 'invalid' CSS values (#5509)
 				try {
+<<<<<<< HEAD
 					// Support: Chrome, Safari
 					// Setting style to blank string required to delete "style: x !important;"
 					style[ name ] = "";
+=======
+>>>>>>> aec32b75bc189f0aa713a04ee6d47c6728422f36
 					style[ name ] = value;
 				} catch(e) {}
 			}
@@ -369,7 +393,11 @@ jQuery.each([ "height", "width" ], function( i, name ) {
 					elem,
 					name,
 					extra,
+<<<<<<< HEAD
 					support.boxSizing() && jQuery.css( elem, "boxSizing", false, styles ) === "border-box",
+=======
+					support.boxSizing && jQuery.css( elem, "boxSizing", false, styles ) === "border-box",
+>>>>>>> aec32b75bc189f0aa713a04ee6d47c6728422f36
 					styles
 				) : 0
 			);

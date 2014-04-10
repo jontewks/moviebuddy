@@ -56,8 +56,14 @@ jQuery.extend({
 		readyList.resolveWith( document, [ jQuery ] );
 
 		// Trigger any bound ready events
+<<<<<<< HEAD
 		if ( jQuery.fn.trigger ) {
 			jQuery( document ).trigger("ready").off("ready");
+=======
+		if ( jQuery.fn.triggerHandler ) {
+			jQuery( document ).triggerHandler( "ready" );
+			jQuery( document ).off( "ready" );
+>>>>>>> aec32b75bc189f0aa713a04ee6d47c6728422f36
 		}
 	}
 });

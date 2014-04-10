@@ -3,6 +3,7 @@ define([
 ], function( support ) {
 
 (function() {
+<<<<<<< HEAD
 	var fragment = document.createDocumentFragment(),
 		div = document.createElement("div"),
 		input = document.createElement("input");
@@ -10,6 +11,15 @@ define([
 	// Setup
 	div.setAttribute( "className", "t" );
 	div.innerHTML = "  <link/><table></table><a href='/a'>a</a>";
+=======
+	// Minified: var a,b,c
+	var input = document.createElement( "input" ),
+		div = document.createElement( "div" ),
+		fragment = document.createDocumentFragment();
+
+	// Setup
+	div.innerHTML = "  <link/><table></table><a href='/a'>a</a><input type='checkbox'/>";
+>>>>>>> aec32b75bc189f0aa713a04ee6d47c6728422f36
 
 	// IE strips leading whitespace when .innerHTML is used
 	support.leadingWhitespace = div.firstChild.nodeType === 3;
@@ -69,9 +79,12 @@ define([
 			support.deleteExpando = false;
 		}
 	}
+<<<<<<< HEAD
 
 	// Null elements to avoid leaks in IE.
 	fragment = div = input = null;
+=======
+>>>>>>> aec32b75bc189f0aa713a04ee6d47c6728422f36
 })();
 
 return support;

@@ -7,9 +7,14 @@ define([
 	"./var/class2type",
 	"./var/toString",
 	"./var/hasOwn",
+<<<<<<< HEAD
 	"./var/trim",
 	"./var/support"
 ], function( deletedIds, slice, concat, push, indexOf, class2type, toString, hasOwn, trim, support ) {
+=======
+	"./var/support"
+], function( deletedIds, slice, concat, push, indexOf, class2type, toString, hasOwn, support ) {
+>>>>>>> aec32b75bc189f0aa713a04ee6d47c6728422f36
 
 var
 	version = "@VERSION",
@@ -21,7 +26,12 @@ var
 		return new jQuery.fn.init( selector, context );
 	},
 
+<<<<<<< HEAD
 	// Make sure we trim BOM and NBSP (here's looking at you, Safari 5.0 and IE)
+=======
+	// Support: Android<4.1, IE<9
+	// Make sure we trim BOM and NBSP
+>>>>>>> aec32b75bc189f0aa713a04ee6d47c6728422f36
 	rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g,
 
 	// Matches dashed string for camelizing
@@ -54,10 +64,17 @@ jQuery.fn = jQuery.prototype = {
 	get: function( num ) {
 		return num != null ?
 
+<<<<<<< HEAD
 			// Return a 'clean' array
 			( num < 0 ? this[ num + this.length ] : this[ num ] ) :
 
 			// Return just the object
+=======
+			// Return just the one element from the set
+			( num < 0 ? this[ num + this.length ] : this[ num ] ) :
+
+			// Return all the elements in a clean array
+>>>>>>> aec32b75bc189f0aa713a04ee6d47c6728422f36
 			slice.call( this );
 	},
 
@@ -216,7 +233,11 @@ jQuery.extend({
 		// parseFloat NaNs numeric-cast false positives (null|true|false|"")
 		// ...but misinterprets leading-number strings, particularly hex literals ("0x...")
 		// subtraction forces infinities to NaN
+<<<<<<< HEAD
 		return obj - parseFloat( obj ) >= 0;
+=======
+		return !jQuery.isArray( obj ) && obj - parseFloat( obj ) >= 0;
+>>>>>>> aec32b75bc189f0aa713a04ee6d47c6728422f36
 	},
 
 	isEmptyObject: function( obj ) {
@@ -347,6 +368,7 @@ jQuery.extend({
 		return obj;
 	},
 
+<<<<<<< HEAD
 	// Use native String.trim function wherever possible
 	trim: trim && !trim.call("\uFEFF\xA0") ?
 		function( text ) {
@@ -361,6 +383,14 @@ jQuery.extend({
 				"" :
 				( text + "" ).replace( rtrim, "" );
 		},
+=======
+	// Support: Android<4.1, IE<9
+	trim: function( text ) {
+		return text == null ?
+			"" :
+			( text + "" ).replace( rtrim, "" );
+	},
+>>>>>>> aec32b75bc189f0aa713a04ee6d47c6728422f36
 
 	// results is for internal usage only
 	makeArray: function( arr, results ) {

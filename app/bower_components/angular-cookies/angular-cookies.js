@@ -1,5 +1,9 @@
 /**
+<<<<<<< HEAD
  * @license AngularJS v1.2.16
+=======
+ * @license AngularJS v1.2.17-build.104+sha.e987efd
+>>>>>>> aec32b75bc189f0aa713a04ee6d47c6728422f36
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */

@@ -3,10 +3,18 @@ define([
 ], function( support ) {
 
 (function() {
+<<<<<<< HEAD
 	var a, input, select, opt,
 		div = document.createElement("div" );
 
 	// Setup
+=======
+	// Minified: var a,b,c,d,e
+	var input, div, select, a, opt;
+
+	// Setup
+	div = document.createElement( "div" );
+>>>>>>> aec32b75bc189f0aa713a04ee6d47c6728422f36
 	div.setAttribute( "className", "t" );
 	div.innerHTML = "  <link/><table></table><a href='/a'>a</a><input type='checkbox'/>";
 	a = div.getElementsByTagName("a")[ 0 ];
@@ -54,9 +62,12 @@ define([
 	input.value = "t";
 	input.setAttribute( "type", "radio" );
 	support.radioValue = input.value === "t";
+<<<<<<< HEAD
 
 	// Null elements to avoid leaks in IE.
 	a = input = select = opt = div = null;
+=======
+>>>>>>> aec32b75bc189f0aa713a04ee6d47c6728422f36
 })();
 
 return support;

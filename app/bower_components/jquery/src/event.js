@@ -13,7 +13,11 @@ define([
 
 var rformElems = /^(?:input|select|textarea)$/i,
 	rkeyEvent = /^key/,
+<<<<<<< HEAD
 	rmouseEvent = /^(?:mouse|contextmenu)|click/,
+=======
+	rmouseEvent = /^(?:mouse|pointer|contextmenu)|click/,
+>>>>>>> aec32b75bc189f0aa713a04ee6d47c6728422f36
 	rfocusMorph = /^(?:focusinfocus|focusoutblur)$/,
 	rtypenamespace = /^([^.]*)(?:\.(.+)|)$/;
 
@@ -616,8 +620,14 @@ jQuery.event = {
 		beforeunload: {
 			postDispatch: function( event ) {
 
+<<<<<<< HEAD
 				// Even when returnValue equals to undefined Firefox will still show alert
 				if ( event.result !== undefined ) {
+=======
+				// Support: Firefox 20+
+				// Firefox doesn't alert if the returnValue field is not set.
+				if ( event.result !== undefined && event.originalEvent ) {
+>>>>>>> aec32b75bc189f0aa713a04ee6d47c6728422f36
 					event.originalEvent.returnValue = event.result;
 				}
 			}
@@ -683,11 +693,17 @@ jQuery.Event = function( src, props ) {
 		// Events bubbling up the document may have been marked as prevented
 		// by a handler lower down the tree; reflect the correct value.
 		this.isDefaultPrevented = src.defaultPrevented ||
+<<<<<<< HEAD
 				src.defaultPrevented === undefined && (
 				// Support: IE < 9
 				src.returnValue === false ||
 				// Support: Android < 4.0
 				src.getPreventDefault && src.getPreventDefault() ) ?
+=======
+				src.defaultPrevented === undefined &&
+				// Support: IE < 9, Android < 4.0
+				src.returnValue === false ?
+>>>>>>> aec32b75bc189f0aa713a04ee6d47c6728422f36
 			returnTrue :
 			returnFalse;
 
@@ -750,7 +766,18 @@ jQuery.Event.prototype = {
 		e.cancelBubble = true;
 	},
 	stopImmediatePropagation: function() {
+<<<<<<< HEAD
 		this.isImmediatePropagationStopped = returnTrue;
+=======
+		var e = this.originalEvent;
+
+		this.isImmediatePropagationStopped = returnTrue;
+
+		if ( e && e.stopImmediatePropagation ) {
+			e.stopImmediatePropagation();
+		}
+
+>>>>>>> aec32b75bc189f0aa713a04ee6d47c6728422f36
 		this.stopPropagation();
 	}
 };
@@ -758,7 +785,13 @@ jQuery.Event.prototype = {
 // Create mouseenter/leave events using mouseover/out and event-time checks
 jQuery.each({
 	mouseenter: "mouseover",
+<<<<<<< HEAD
 	mouseleave: "mouseout"
+=======
+	mouseleave: "mouseout",
+	pointerenter: "pointerover",
+	pointerleave: "pointerout"
+>>>>>>> aec32b75bc189f0aa713a04ee6d47c6728422f36
 }, function( orig, fix ) {
 	jQuery.event.special[ orig ] = {
 		delegateType: fix,

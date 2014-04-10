@@ -25,7 +25,11 @@ jQuery.fn.load = function( url, params, callback ) {
 		off = url.indexOf(" ");
 
 	if ( off >= 0 ) {
+<<<<<<< HEAD
 		selector = url.slice( off, url.length );
+=======
+		selector = jQuery.trim( url.slice( off, url.length ) );
+>>>>>>> aec32b75bc189f0aa713a04ee6d47c6728422f36
 		url = url.slice( 0, off );
 	}
 
