@@ -176,10 +176,9 @@ exports.postOuting = function(req, res) {
     state:       body.state,
     zip:         body.zip,
     // invitees:    body.invitees,
-    attendeeIds: body.attendeeIds,
-    attendeeNames: body.attendeeNames,
-    creatorId:     body.creatorId,
-    creatorName:   body.creatorName
+    attendees:   body.attendees,
+    creatorId:   body.creatorId,
+    creatorName: body.creatorName
   });
 
   outing.save(function (err) {
@@ -194,23 +193,23 @@ exports.postOuting = function(req, res) {
 
 };
 
-
 // update outings into database function
 exports.putOuting = function(req, res) {
 
   var body = req.body;
 
   return db.Outing.findById(req.params.id, function(err, outing){
-    outing.movie     = body.movie;
-    outing.date      = body.date;
-    outing.theater   = body.theater;
-    outing.address   = body.address;
-    outing.city      = body.city;
-    outing.state     = body.state;
-    outing.zip       = body.zip;
+    outing.movie       = body.movie;
+    outing.date        = body.date;
+    outing.theater     = body.theater;
+    outing.address     = body.address;
+    outing.city        = body.city;
+    outing.state       = body.state;
+    outing.zip         = body.zip;
     // outing.invitees  = body.invitees;
-    outing.attendees = body.attendees;
-    outing.creator   = body.creator;
+    outing.attendees   = body.attendees;
+    outing.creatorId   = body.creatorId;
+    outing.creatorName = body.creatorName;
 
     outing.save(function(err){
       if (!err){
@@ -224,7 +223,6 @@ exports.putOuting = function(req, res) {
   });
 
 };
-
 
 // Delete outings handler function
 exports.deleteOuting = function(req, res) {
