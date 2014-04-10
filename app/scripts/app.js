@@ -44,16 +44,12 @@ app.run(function($rootScope, $location) {
 app.service('authentication', function($rootScope, $location, $http) {
   var cookieParser = function(cookie) {
     var splitCookie = cookie.split(';');
-    console.log(splitCookie);
     for (var i = 0; i < splitCookie.length; i++){
       var leftSide = splitCookie[i].split('=')[0];
       var rightSide = splitCookie[i].split('=')[1];
-
       if( rightSide === 'undefined') {
-        console.log('this is the right side: '+ leftSide);
         return JSON.parse(leftSide);
       }
-
     }
   };
 
@@ -67,9 +63,7 @@ app.service('authentication', function($rootScope, $location, $http) {
         $location.path('/');
       }
       if (window.document.cookie !== '') {
-        console.log(window.document.cookie);
         var userObj = cookieParser(window.document.cookie);
-        console.log('userObj: ', userObj);
         $rootScope.user = userObj;
       }
     });
