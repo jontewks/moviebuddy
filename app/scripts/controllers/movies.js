@@ -30,7 +30,7 @@ app.service('getMoviesData', function($http){
 });
 
 
-app.controller('MoviesController', function ($scope, $http, getMoviesData) {
+app.controller('MoviesController', function ( $rootScope, $scope, $http, getMoviesData) {
 
   var queryPage = 1;
   var queryPageLimit = 50;
@@ -41,7 +41,9 @@ app.controller('MoviesController', function ($scope, $http, getMoviesData) {
   var getMovies = function(queryPage, queryPageLimit) {
     getMoviesData.getMovieData(queryPage, queryPageLimit)
     .then(function(){
-      $scope.allMovies = getMoviesData.allMovies;
+      var sortedMovies = getMoviesData.allMovies.sort(function(a,b){return a.title.localeCompare(b.title);});
+      $scope.allMovies = sortedMovies;
+      $rootScope.allMovies = sortedMovies;
     });
   };
 

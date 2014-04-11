@@ -16,12 +16,13 @@ exports.getUser = function(req, res) {
 // enter a user into the db
 exports.postUser = function(req, res) {
   var body = req.body;
+  console.log('body: ' + body);
   var user = new db.User({
     facebookId:      body.facebookId,
-    facebookToken:  body.facebookToken,
+    facebookToken:   body.facebookToken,
     name:            body.name,
     email:           body.email,
-    city:            body.city
+    city:            body.location
     // hometown:        ,
     // favMovie:        ,
     // favGenre:        ,
@@ -47,11 +48,11 @@ exports.postUser = function(req, res) {
 exports.putUser = function(req, res) {
 
   var userObj = req.body.user;
+  console.log('userObj: ', userObj);
   db.User.findOne({facebookId: userObj.facebookId}, function (err, user) {
 
     user.name          = userObj.name;
-    user.hometown      = userObj.hometown     || '';
-    user.city          = userObj.currentCity  || '';
+    user.city          = userObj.city         || '';
     user.favMovie      = userObj.favMovie     || '';
     user.favGenre      = userObj.favGenre     || '';
     user.favTheater    = userObj.favTheater   || '';

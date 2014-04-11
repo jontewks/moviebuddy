@@ -3,7 +3,7 @@
 
 var app = angular.module('moviebuddyApp');
 
-app.controller('OutingsController', ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
+app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'getMoviesData', function ($scope, $rootScope, $http, getMoviesData) {
 
   var newOutingButtonVisible = true;
   var newOutingFormVisible = false;
@@ -18,9 +18,22 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
 
   // Function to create new 'outing' object from form and user.
   var createOuting = function(form, userId, userName) {
+    var movieTitles = [];
+
     if(form === undefined || userId === undefined || userName === undefined) {
       throw new Error('Insufficient input for function.');
     }
+
+    for (var movie in $rootScope.allMovies) {
+      movieTitles.push($rootScope.allMovies[movie].title);
+    }
+
+    if (movieTitles.indexOf(form.movie) === -1) {
+      clearOutingForm();
+      alert('Meow why don\'t you enter a valid movie title mmmmmkay?');
+      throw new Error('Invalid Movie Title');
+    }
+
     var outing = {};
     outing.movie = form.movie;
     outing.date = form.date;
@@ -133,10 +146,8 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
     .error(function(data, status, headers, config) {
       console.log('PUT Error:', data, status, headers, config);
     });
-
   };
 
   // Initialize display of outings.
   $scope.getOutings();
-
 }]);
