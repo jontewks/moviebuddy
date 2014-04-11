@@ -196,10 +196,11 @@ exports.postOuting = function(req, res) {
 exports.putOuting = function(req, res) {
 
   var body = req.body;
+  console.log(body)
 
   return db.Outing.findById(req.params._id, function(err, outing) {
 
-    outing.movie       = body.movie;
+    outing.movie       = body.movie.title;
     outing.date        = body.date;
     outing.theater     = body.theater;
     outing.address     = body.address;

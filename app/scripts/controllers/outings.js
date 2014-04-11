@@ -18,24 +18,11 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'getMovies
 
   // Function to create new 'outing' object from form and user.
   var createOuting = function(form, userId, userName) {
-    var movieTitles = [];
-
     if(form === undefined || userId === undefined || userName === undefined) {
       throw new Error('Insufficient input for function.');
     }
-
-    for (var movie in $rootScope.allMovies) {
-      movieTitles.push($rootScope.allMovies[movie].title);
-    }
-
-    if (movieTitles.indexOf(form.movie) === -1) {
-      clearOutingForm();
-      alert('Meow why don\'t you enter a valid movie title mmmmmkay?');
-      throw new Error('Invalid Movie Title');
-    }
-
     var outing = {};
-    outing.movie = form.movie;
+    outing.movie = form.movie.title;
     outing.date = form.date;
     outing.theater = form.theater;
     // Look up below values via TMS or Fandango API or app DB.
