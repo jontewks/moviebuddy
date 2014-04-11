@@ -35,17 +35,21 @@
 
         <span ng-repeat="(attendeeId, attendee) in outing.attendees" class="outingAttendees">{{ attendee.name }}, </span>
 
+        <!-- 'Join' button shows if user isn't attending. -->
         <button ng-click="joinOuting()" ng-show="showJoinButton()" type="button">Join</button>
 
-        <!-- Edit button (shows if user created 'outing'). -->
+        <!-- 'Bail' button shows if user is attending. -->
+        <button ng-click="bailOuting()" ng-show="showBailButton()" type="button">Bail</button>
+
+        <!-- 'Edit' button shows if user created 'outing'). -->
         <button type="button" ng-click="editableForm.$show()" ng-show="!editableForm.$visible && showEditButton()">Edit</button>
 
-        <!-- buttons to submit / cancel form -->
+        <!-- 'Submit/cancel edits' buttons show if user is editing. -->
         <span ng-show="editableForm.$visible">
 
           <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">Save</button>
 
-          <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">Cancel</button>
+          <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">Never Mind</button>
 
         </span>
 

@@ -136,6 +136,41 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
 
   };
 
+  $scope.showBailButton = function() {
+    var userId = $rootScope.user.facebookId;
+    for(var attendeeId in this.outing.attendees) {
+      if(Number(attendeeId) === Number(userId)) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  $scope.bailOuting = function() {
+
+    var userId = $rootScope.user.facebookId;
+    var outing = this.outing;
+    var outingId = this.outing._id;
+    if(!outing.attendees[userId]) {
+      throw new Error('User isn\'t yet attending.');
+    }
+    delete outing.attendees[userId];
+
+    $http({
+      method: 'PUT',
+      url: '/api/outings/' + outingId,
+      data: outing
+    })
+    .success(function(data) {
+      console.log('PUT Success:', data);
+      $scope.getOutings();
+    })
+    .error(function(data, status, headers, config) {
+      console.log('PUT Error:', data, status, headers, config);
+    });
+
+  };
+
   $scope.showEditButton = function() {
     var userId = $rootScope.user.facebookId;
     var creator = this.outing.creator;
