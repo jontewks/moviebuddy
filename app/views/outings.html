@@ -7,7 +7,12 @@
 
   <!-- 'new outing' form below displays when button above is clicked. -->
   <form ng-submit="processOutingForm()" ng-show="showNewOutingForm()" name="outingForm">
-    <input ng-model="form.movie" required name="movie" type="text" placeholder="Movie" class="outingField">
+    <input ng-model="form.movie" required name="movie" type="text" placeholder="Movie" class="outingField" list="moviesList" />
+    <datalist id="moviesList">
+      <option ng-repeat="movie in allMovies" value="{{movie.title}}">
+    </datalist>
+    <!-- <select ng-model="currentMovie" ng-options=" movie.title for movie in allMovies ">
+    </select> -->
     <!-- *** TO-DO: Enable display of filter-search results above via something like below: -->
       <!-- ng-model="movie in movies | filter:movieTitle | orderBy:movieTitle" ??-->
     <input ng-model="form.date" name="date" type="date" class="outingField">
@@ -24,9 +29,9 @@
 
     <!-- *** TO-DO: Add '| filter:' inputs above the feed below. -->
     <div ng-repeat="outing in outings | orderBy: 'date'">
-      <span class="outingMovie">{{outing.movie}}</span> • 
-      <span class="outingDate">{{outing.date | date: 'EEE., MMM. d'}}</span> • 
-      <span class="outingTheater">{{outing.theater}}</span> • 
+      <span class="outingMovie">{{outing.movie}}</span> •
+      <span class="outingDate">{{outing.date | date: 'EEE., MMM. d'}}</span> •
+      <span class="outingTheater">{{outing.theater}}</span> •
       <!-- *** TO-DO: Show theater info (address & map upon click of theater name. -->
       <span ng-repeat="(attendeeId, attendee) in outing.attendees" class="outingAttendees">{{attendee.name}}, </span>
       <button ng-click="joinOuting()" ng-show="showJoinButton()" type="button">Join</button>

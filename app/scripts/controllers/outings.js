@@ -3,7 +3,7 @@
 
 var app = angular.module('moviebuddyApp');
 
-app.controller('OutingsController', ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
+app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'getMoviesData', function ($scope, $rootScope, $http, getMoviesData) {
 
   var newOutingButtonVisible = true;
   var newOutingFormVisible = false;

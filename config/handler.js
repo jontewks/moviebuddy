@@ -52,7 +52,7 @@ exports.putUser = function(req, res) {
   db.User.findOne({facebookId: userObj.facebookId}, function (err, user) {
 
     user.name          = userObj.name;
-    user.city          = userObj.currentCity  || '';
+    user.city          = userObj.city         || '';
     user.favMovie      = userObj.favMovie     || '';
     user.favGenre      = userObj.favGenre     || '';
     user.favTheater    = userObj.favTheater   || '';
