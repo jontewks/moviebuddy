@@ -136,6 +136,15 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
 
   };
 
+  $scope.showEditButton = function() {
+    var userId = $rootScope.user.facebookId;
+    var creator = this.outing.creator;
+    if(Number(creator) === Number(userId)) {
+      return true;
+    }
+    return false;
+  };
+
   $scope.editOuting = function() {
     var outing = this.outing;
     var outingId = this.outing._id;

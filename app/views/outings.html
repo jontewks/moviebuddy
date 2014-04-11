@@ -37,8 +37,8 @@
 
         <button ng-click="joinOuting()" ng-show="showJoinButton()" type="button">Join</button>
 
-        <!-- button to edit 'outing' -->
-        <button type="button" class="btn btn-default" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit</button>
+        <!-- Edit button (shows if user created 'outing'). -->
+        <button type="button" ng-click="editableForm.$show()" ng-show="!editableForm.$visible && showEditButton()">Edit</button>
 
         <!-- buttons to submit / cancel form -->
         <span ng-show="editableForm.$visible">
