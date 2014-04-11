@@ -32,7 +32,7 @@
 
       <form editable-form name="editableForm" onaftersave="editOuting()">
 
-        <span editable-select="outing.movie" e-name="movie" e-required class="outingMovie" e-ng-options="movie.title for movie in allMovies">{{ outing.movie }}</span> • 
+        <span editable-select="outing.movie" e-name="movie" e-required class="outingMovie" e-ng-options="movie.title as movie.title for movie in allMovies">{{ outing.movie }}</span> • 
 
         <span editable-date="outing.date" e-name="date" class="outingDate">{{ outing.date | date: 'EEE., MMM. d' }}</span><br>
 
