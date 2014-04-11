@@ -177,7 +177,7 @@ exports.postOuting = function(req, res) {
     zip:         body.zip,
     // invitees:    body.invitees,
     attendees:   body.attendees,
-    creator:     body.creator
+    organizers:  body.organizers
   });
 
   outing.save(function (err) {
@@ -197,7 +197,7 @@ exports.putOuting = function(req, res) {
 
   var body = req.body;
 
-  return db.Outing.findById(req.params._id, function(err, outing){
+  return db.Outing.findById(req.params._id, function(err, outing) {
 
     outing.movie       = body.movie;
     outing.date        = body.date;
@@ -208,9 +208,9 @@ exports.putOuting = function(req, res) {
     outing.zip         = body.zip;
     // outing.invitees  = body.invitees;
     outing.attendees   = body.attendees;
-    outing.creator     = body.creator;
+    outing.organizers  = body.organizers;
 
-    outing.save(function(err){
+    outing.save(function(err) {
       if (!err){
         console.log('updated');
       } else {
@@ -225,12 +225,13 @@ exports.putOuting = function(req, res) {
 
 // Delete outings handler function
 exports.deleteOuting = function(req, res) {
-  db.Outing.findById(req.params.id, function(err, outing){
-    outing.remove(function(err){
+  db.Outing.findById(req.params._id, function(err, outing) {
+    outing.remove(function(err) {
       if(!err){
         console.log('outing removed!');
         res.send();
       } else {
+        console.log('error removing outing!');
         res.send(err);
       }
     });
