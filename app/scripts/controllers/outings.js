@@ -31,9 +31,11 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
     // outing.invitees = form.invitees;
     outing.attendees = {};
     outing.attendees[userId] = { name: userName };
+    // Remove two dummy attendees below before deployment.
     outing.attendees[1001] = { name: 'Alice' };
     outing.attendees[1002] = { name: 'Bob' };
-    outing.creator = userId;
+    outing.organizers = {};
+    outing.organizers[userId] = { name: userName };
     return outing;
   };
 
@@ -102,7 +104,8 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
 
   $scope.showJoinButton = function() {
     var userId = $rootScope.user.facebookId;
-    for(var attendeeId in this.outing.attendees) {
+    var outing = this.outing;
+    for(var attendeeId in outing.attendees) {
       if(Number(attendeeId) === Number(userId)) {
         return false;
       }
@@ -116,9 +119,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
     var userName = $rootScope.user.name;
     var outing = this.outing;
     var outingId = this.outing._id;
-    if(outing.attendees[userId]) {
-      throw new Error('User is already attending.');
-    }
+
     outing.attendees[userId] = { name: userName };
 
     $http({
@@ -138,7 +139,8 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
 
   $scope.showBailButton = function() {
     var userId = $rootScope.user.facebookId;
-    for(var attendeeId in this.outing.attendees) {
+    var outing = this.outing;
+    for(var attendeeId in outing.attendees) {
       if(Number(attendeeId) === Number(userId)) {
         return true;
       }
@@ -146,36 +148,70 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
     return false;
   };
 
-  $scope.bailOuting = function() {
+  var chooseNewOrganizers = function(outing) {
+    var newOrganizers = {};
+    for(var attendeeId in outing.attendees) {
+      // For MVP, simply promote all remaining attendees to organizers.
+      newOrganizers[attendeeId] = outing.attendees[attendeeId];
+    }
+    return newOrganizers;
+  };
 
+  $scope.cancelOuting = function() {
+    var outingId = this.outing._id;
+    return $http({
+      method: 'DELETE',
+      url: '/api/outings/' + outingId
+    });
+  };
+
+  $scope.bailOuting = function() {
     var userId = $rootScope.user.facebookId;
     var outing = this.outing;
     var outingId = this.outing._id;
-    if(!outing.attendees[userId]) {
-      throw new Error('User isn\'t yet attending.');
-    }
+
     delete outing.attendees[userId];
+    delete outing.organizers[userId];
 
-    $http({
-      method: 'PUT',
-      url: '/api/outings/' + outingId,
-      data: outing
-    })
-    .success(function(data) {
-      console.log('PUT Success:', data);
-      $scope.getOutings();
-    })
-    .error(function(data, status, headers, config) {
-      console.log('PUT Error:', data, status, headers, config);
-    });
+    // Check if bailing user was only organizer.
+    if(Object.keys(outing.organizers).length <= 0) {
 
+      // Check if no other attendees.
+      if(Object.keys(outing.attendees).length <= 0) {
+
+        console.log('No one attending; canceling outing.');
+        $scope.cancelOuting();
+        return;
+
+      } else {
+
+        console.log('No one organizing; prompting user for new organizers.');
+        outing.organizers = chooseNewOrganizers(outing);
+
+        $http({
+          method: 'PUT',
+          url: '/api/outings/' + outingId,
+          data: outing
+        })
+        .success(function(data) {
+          console.log('PUT Success:', data);
+          $scope.getOutings();
+        })
+        .error(function(data, status, headers, config) {
+          console.log('PUT Error:', data, status, headers, config);
+        });
+
+      }
+    }
   };
 
   $scope.showEditButton = function() {
     var userId = $rootScope.user.facebookId;
-    var creator = this.outing.creator;
-    if(Number(creator) === Number(userId)) {
-      return true;
+    var outing = this.outing;
+    for(var organizerId in outing.organizers) {
+      if(Number(organizerId) === Number(userId)) {
+        return true;
+      }
     }
     return false;
   };

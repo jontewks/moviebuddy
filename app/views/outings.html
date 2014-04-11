@@ -41,15 +41,15 @@
         <!-- 'Bail' button shows if user is attending. -->
         <button ng-click="bailOuting()" ng-show="showBailButton()" type="button">Bail</button>
 
-        <!-- 'Edit' button shows if user created 'outing'). -->
+        <!-- 'Edit' button shows if user created 'outing'. -->
         <button type="button" ng-click="editableForm.$show()" ng-show="!editableForm.$visible && showEditButton()">Edit</button>
 
         <!-- 'Submit/cancel edits' buttons show if user is editing. -->
         <span ng-show="editableForm.$visible">
 
-          <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">Save</button>
+          <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">Save Edit</button>
 
-          <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">Never Mind</button>
+          <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">Cancel Edit</button>
 
         </span>
 
