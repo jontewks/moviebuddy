@@ -32,8 +32,8 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
     outing.attendees = {};
     outing.attendees[userId] = { name: userName };
     // Remove two dummy attendees below before deployment.
-    outing.attendees[1001] = { name: 'Alice' };
-    outing.attendees[1002] = { name: 'Bob' };
+    // outing.attendees[1001] = { name: 'Alice' };
+    // outing.attendees[1002] = { name: 'Bob' };
     outing.organizers = {};
     outing.organizers[userId] = { name: userName };
     return outing;
@@ -157,11 +157,18 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
     return newOrganizers;
   };
 
-  $scope.cancelOuting = function() {
-    var outingId = this.outing._id;
+  var cancelOuting = function(outing) {
+    var outingId = outing._id;
     return $http({
       method: 'DELETE',
       url: '/api/outings/' + outingId
+    })
+    .success(function() {
+      console.log('DELETE Success:');
+      $scope.getOutings();
+    })
+    .error(function(data, status, headers, config) {
+      console.log('DELETE Error:', data, status, headers, config);
     });
   };
 
@@ -180,7 +187,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', function (
       if(Object.keys(outing.attendees).length <= 0) {
 
         console.log('No one attending; canceling outing.');
-        $scope.cancelOuting();
+        cancelOuting(outing);
         return;
 
       } else {
