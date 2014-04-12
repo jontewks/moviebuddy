@@ -22,7 +22,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'getMovies
     var outing = {};
 
     outing.movie = form.movie.title;
-    outing.date = form.date;
+    outing.date = form.date+'T07:00:00Z'; // Add 7 hours so angular shows correct date in THIS TIME ZONE ONLY omg fix this guyz.
     outing.theater = form.theater;
     // Look up below values via TMS or Fandango API or app DB.
     // outing.address;    // outing.city;    // outing.state;    // outing.zip;
