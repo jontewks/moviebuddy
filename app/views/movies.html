@@ -1,16 +1,22 @@
 <h3 class="sectionHeader moviesSectionHeader">MOVIES</h3>
-<!-- ng-click="link = '-visits'; reverse = !reverse" -->
+
 <div class="sectionContainer movieDiv">
+
   <div class="filters">
-  <button class="filter" ng-click="category = 'ratings.audience_score'; reverse = !reverse">Audience Score</button>
-  <button class="filter" ng-click="category = 'ratings.critics_score'; reverse = !reverse">Critics' Score</button>
-  <button class="filter" ng-click="category = 'title'; reverse = !reverse">Title</button>
-  <button class="filter" ng-click="category = 'runtime'; reverse = !reverse">Runtime</button>
-  <br>
-  <input class="searchFilter" type="text" placeholder="Search by movie title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search By Movie Title'" ng-model="search.title">
-  <hr>
+
+    <button class="filter" ng-click="category = 'ratings.audience_score'; reverse = !reverse">Audience Score</button>
+    <button class="filter" ng-click="category = 'ratings.critics_score'; reverse = !reverse">Critics' Score</button>
+    <button class="filter" ng-click="category = 'title'; reverse = !reverse">Title</button>
+    <button class="filter" ng-click="category = 'runtime'; reverse = !reverse">Runtime</button>
+    <br>
+
+    <input class="searchFilter" type="text" placeholder="Search by movie title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search By Movie Title'" ng-model="search.title">
+    <hr>
+
   </div>
+
   <div class="movie" ng-repeat="movie in allMovies | filter:search:strict | orderBy:category:reverse" >
+
     <img src={{movie.posters.thumbnail}} class="movieThumb">
     <div class="infoOne">
       <span class="movieTitle"><u>{{movie.title}}</u></span>
@@ -20,13 +26,16 @@
         <span class="actor" ng-repeat="actor in movie.abridged_cast">{{actor.name}} </span> 
       </div>
     </div>
+
     <div class="infoTwo">
       <span class="runtime">Runtime: {{movie.runtime = movie.runtime ? movie.runtime : 0}} min.</span>
       <span class="mpaaRating">Rated: {{movie.mpaa_rating}}</span>
-      <span ng-controller="criticsController" ng-click="toggleText(movie.critics_consensus)" class="criticsConsensus">Critics Consensus: {{movie.critics_consensus | limitTo:textLimit}}{{moreText}}</span>
-      <span ng-controller="synopsisController" ng-click="toggleText(movie.synopsis)" class="synopsis">Synopsis: {{movie.synopsis | limitTo:textLimit}}{{moreText}}</span>
+      <span ng-controller="movieInfoController" ng-click="toggleText(movie.critics_consensus)" class="criticsConsensus">Critics Consensus: {{movie.critics_consensus | limitTo:textLimit}}{{moreText}}</span>
+      <span ng-controller="movieInfoController" ng-click="toggleText(movie.synopsis)" class="synopsis">Synopsis: {{movie.synopsis | limitTo:textLimit}}{{moreText}}</span>
     </div>
-    <hr class="movieHR">
-  </div>
 
+    <hr class="movieHR">
+
+  </div>
+  
 </div>

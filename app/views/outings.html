@@ -2,68 +2,36 @@
 
 <div class="sectionContainer centered">
 
-  <!-- Button shows on launch, hides on click. -->
   <button ng-click="newOuting()" ng-show="showNewOutingButton()">New Outing</button>
 
-  <!-- Form shows when button above is clicked. -->
   <form ng-submit="processOutingForm()" ng-show="showNewOutingForm()" name="outingForm">
-
-    <!-- <input ng-model="form.movie" required name="movie" type="search" placeholder="Movie" class="outingField" list="moviesList" />
-    <datalist id="moviesList">
-      <option ng-repeat="movie in allMovies" value="{{movie.title}}">
-    </datalist> -->
-
     <select ng-model="form.movie" name="movie" ng-options="movie.title for movie in allMovies"></select>
-
     <input ng-model="form.date" name="date" type="date" class="outingField">
-
     <input ng-model="form.theater" name="theater" type="text" placeholder="Theater" class="outingField">
-
     <button ng-click="cancelNewOuting()" type="reset">Cancel</button>
-
-    <button ng-click="createOuting()" type="submit">Create Outing</button>
-
+    <button ng-click="" type="submit">Create Outing</button>
   </form>
 
-  <!-- List (feed) of outings. -->
   <div class="outingsList">
-
     <div ng-repeat="outing in outings | orderBy: 'date'">
-
       <form editable-form name="editableForm" onaftersave="editOuting()">
-
+        
         <span editable-select="outing.movie" e-name="movie" e-required class="outingMovie" e-ng-options="movie.title as movie.title for movie in allMovies">{{ outing.movie }}</span> • 
-
         <span editable-date="outing.date" e-name="date" class="outingDate">{{ outing.date | date: 'EEE., MMM. d' }}</span><br>
-
         <span editable-text="outing.theater" e-name="theater" class="outingTheater">{{ outing.theater }}</span> • 
-
         <span ng-repeat="(attendeeId, attendee) in outing.attendees" class="outingAttendees">{{ attendee.name }}, </span>
 
-        <!-- 'Join' button shows if user isn't attending. -->
         <button ng-click="joinOuting()" ng-show="showJoinButton()" type="button">Join</button>
-
-        <!-- 'Bail' button shows if user is attending. -->
         <button ng-click="bailOuting()" ng-show="showBailButton()" type="button">Bail</button>
-
-        <!-- 'Edit' button shows if user created 'outing'. -->
         <button type="button" ng-click="editableForm.$show()" ng-show="!editableForm.$visible && showEditButton()">Edit</button>
 
-        <!-- 'Submit/cancel edits' buttons show if user is editing. -->
         <span ng-show="editableForm.$visible">
-
           <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">Save Edit</button>
-
           <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">Cancel Edit</button>
-
         </span>
-
         <hr>
 
       </form>
-
     </div>
-
   </div>
-
 </div>

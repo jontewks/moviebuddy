@@ -1,16 +1,13 @@
 'use strict';
-/* global FB */
 
 var app = angular.module('moviebuddyApp', ['ngRoute', 'ngCookies', 'xeditable']);
 
-app.config(function ($routeProvider) {
-
+app.config(['$routeProvider', function ($routeProvider) {
   $routeProvider
     .when('/', {
       templateUrl: 'views/login.html',
-      controller: 'LoginController',
       resolve: {
-        checkLogin: function(authentication){
+        checkLogin: function(authentication) {
           return authentication.auth();
         }
       }
@@ -19,47 +16,31 @@ app.config(function ($routeProvider) {
       templateUrl: 'views/dashboard.html',
       controller: 'DashController',
       resolve: {
-        checkLogin: function(authentication){
+        checkLogin: function(authentication) {
           return authentication.auth();
         }
       }
     })
     .otherwise({
-      redirectTo: '/',
-      templateUrl: 'views/login.html',
-      controller: 'LoginController',
-      resolve: {
-        checkLogin: function(authentication){
-          return authentication.auth();
+      redirectTo: '/'
+    });
+}]);
+
+// Authentication service that handles login and logout
+app.service('authentication', ['$rootScope', '$location', '$http', function ($rootScope, $location, $http) {
+  this.auth = function() {
+    return $http.get('/auth/isLoggedIn')
+      .then(function (response) {
+        if (response.data === 'false') {
+          $location.path('/');
         }
-      }
-    });
-});
 
-app.run(function($rootScope, $location) {
- // Fun Stuff
-});
-
-
-// authentication service, handles login and logout
-app.service('authentication', function($rootScope, $location, $http) {
-  this.auth = function(){
-    return $http({
-      method: 'GET',
-      url: '/auth/isLoggedIn'
-    })
-    .then(function(response){
-      if (response.data === 'false') {
-        $location.path('/');
-      }
-      if (window.document.cookie !== '') {
-        var userObj = JSON.parse(window.document.cookie.split('=')[0]);
-        $rootScope.user = userObj;
-      }
-    });
+        if (window.document.cookie !== '') {
+          $rootScope.user = JSON.parse(window.document.cookie.split('=')[0]);
+        }
+      });
   };
-});
-
+}]);
 
 // Load the SDK Asynchronously
 (function(d){
@@ -69,4 +50,3 @@ app.service('authentication', function($rootScope, $location, $http) {
   js.src = '//connect.facebook.net/en_US/all.js';
   ref.parentNode.insertBefore(js, ref);
 }(document));
-

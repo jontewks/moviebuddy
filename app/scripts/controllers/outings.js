@@ -1,27 +1,26 @@
 'use strict';
-/* global angular */
 
 var app = angular.module('moviebuddyApp');
 
 app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'getMoviesData', function ($scope, $rootScope, $http, getMoviesData) {
-
   var newOutingButtonVisible = true;
   var newOutingFormVisible = false;
 
-  // Rewrite using angular.forEach()?
-  var clearOutingForm = function() {
+  $scope.clearOutingForm = function() {
     $scope.form.movie = '';
     $scope.form.date = '';
     $scope.form.theater = '';
     // $scope.form.invitees = '';
   };
 
-  // Function to create new 'outing' object from form and user.
-  var createOuting = function(form, userId, userName) {
-    if(form === undefined || userId === undefined || userName === undefined) {
+  // Function to create new outing object from form and user.
+  $scope.createOuting = function(form, userId, userName) {
+    if (form === undefined || userId === undefined || userName === undefined) {
       throw new Error('Insufficient input for function.');
     }
+
     var outing = {};
+
     outing.movie = form.movie.title;
     outing.date = form.date;
     outing.theater = form.theater;
@@ -31,16 +30,10 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'getMovies
     // outing.invitees = form.invitees;
     outing.attendees = {};
     outing.attendees[userId] = { name: userName };
-    // Remove two dummy attendees below before deployment.
-    // outing.attendees[1001] = { name: 'Alice' };
-    // outing.attendees[1002] = { name: 'Bob' };
     outing.organizers = {};
     outing.organizers[userId] = { name: userName };
     return outing;
   };
-
-  // Define empty object to hold form data.
-  $scope.form = {};
 
   $scope.showNewOutingButton = function() {
     return newOutingButtonVisible;
@@ -50,71 +43,68 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'getMovies
     return newOutingFormVisible;
   };
 
-  // Function to hide 'new outing' button & show 'new outing' form.
+  // Hides 'new outing' button & show 'new outing' form.
   $scope.newOuting = function() {
     newOutingButtonVisible = false;
     newOutingFormVisible = true;
   };
 
-  // Function to hide 'new outing' form & show 'new outing' button.
+  // Hides 'new outing' form & show 'new outing' button.
   $scope.cancelNewOuting = function() {
     newOutingFormVisible = false;
     newOutingButtonVisible = true;
   };
 
-  // Function to process 'new outing' form.
-  $scope.processOutingForm = function() {
-    var form = $scope.form;
-    var userId = $rootScope.user.facebookId;
-    var userName = $rootScope.user.name;
-    var outing = createOuting(form, userId, userName);
-    $http({
-      method: 'POST',
-      url: '/api/outings',
-      data: outing
-    })
-    .success(function(data) {
-      console.log('POST Success:', data);
-      clearOutingForm();
-      // Hide 'new outing' form, show 'new outing' button.
-      newOutingFormVisible = false;
-      newOutingButtonVisible = true;
-      // Refresh the 'outings' display.
-      $scope.getOutings();
-    })
-    .error(function(data, status, headers, config) {
-      console.log('POST Error:', data, status, headers, config);
-    });
-  };
-
-  // Function to pull all 'outings' from DB for user.
+  // Pulls all 'outings' from DB for user.
   $scope.getOutings = function() {
     $http({
       method: 'GET',
       url: '/api/outings'
     })
-    .success(function(data) {
-      console.log('GET Success:', data);
+    .success(function (data) {
       $scope.outings = data;
     })
-    .error(function(data, status, headers, config) {
+    .error(function (data, status, headers, config) {
       console.log('GET Error:', data, status, headers, config);
+    });
+  };
+
+  // Processes 'new outing' form.
+  $scope.processOutingForm = function() {
+    var form = $scope.form;
+    var userId = $rootScope.user.facebookId;
+    var userName = $rootScope.user.name;
+    var outing = $scope.createOuting(form, userId, userName);
+    
+    $http({
+      method: 'POST',
+      url: '/api/outings',
+      data: outing
+    })
+    .success(function (data) {
+      $scope.clearOutingForm();
+      $scope.cancelNewOuting();
+      $scope.getOutings();
+    })
+    .error(function (data, status, headers, config) {
+      console.log('POST Error:', data, status, headers, config);
     });
   };
 
   $scope.showJoinButton = function() {
     var userId = $rootScope.user.facebookId;
     var outing = this.outing;
-    for(var attendeeId in outing.attendees) {
-      if(Number(attendeeId) === Number(userId)) {
+
+    for (var attendeeId in outing.attendees) {
+      if (Number(attendeeId) === Number(userId)) {
         return false;
       }
     }
+
     return true;
   };
 
   $scope.joinOuting = function() {
-
     var userId = $rootScope.user.facebookId;
     var userName = $rootScope.user.name;
     var outing = this.outing;
@@ -127,11 +117,10 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'getMovies
       url: '/api/outings/' + outingId,
       data: outing
     })
-    .success(function(data) {
-      console.log('PUT Success:', data);
+    .success(function (data) {
       $scope.getOutings();
     })
-    .error(function(data, status, headers, config) {
+    .error(function (data, status, headers, config) {
       console.log('PUT Error:', data, status, headers, config);
     });
   };
@@ -139,34 +128,36 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'getMovies
   $scope.showBailButton = function() {
     var userId = $rootScope.user.facebookId;
     var outing = this.outing;
-    for(var attendeeId in outing.attendees) {
-      if(Number(attendeeId) === Number(userId)) {
+
+    for (var attendeeId in outing.attendees) {
+      if (Number(attendeeId) === Number(userId)) {
         return true;
       }
     }
+
     return false;
   };
 
   var chooseNewOrganizers = function(outing) {
     var newOrganizers = {};
-    for(var attendeeId in outing.attendees) {
+
+    for (var attendeeId in outing.attendees) {
       // For MVP, simply promote all remaining attendees to organizers.
       newOrganizers[attendeeId] = outing.attendees[attendeeId];
     }
+
     return newOrganizers;
   };
 
   var cancelOuting = function(outing) {
-    var outingId = outing._id;
-    return $http({
+    $http({
       method: 'DELETE',
-      url: '/api/outings/' + outingId
+      url: '/api/outings/' + outing._id
     })
-    .success(function() {
-      console.log('DELETE Success:');
+    .success(function () {
       $scope.getOutings();
     })
-    .error(function(data, status, headers, config) {
+    .error(function (data, status, headers, config) {
       console.log('DELETE Error:', data, status, headers, config);
     });
   };
@@ -180,18 +171,13 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'getMovies
     delete outing.organizers[userId];
 
     // Check if bailing user was only organizer.
-    if(Object.keys(outing.organizers).length <= 0) {
+    if (Object.keys(outing.organizers).length <= 0) {
 
       // Check if no other attendees.
-      if(Object.keys(outing.attendees).length <= 0) {
-
-        console.log('No one attending; canceling outing.');
+      if (Object.keys(outing.attendees).length <= 0) {
         cancelOuting(outing);
         return;
-
       } else {
-
-        console.log('No one organizing; prompting user for new organizers.');
         outing.organizers = chooseNewOrganizers(outing);
 
         $http({
@@ -199,14 +185,12 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'getMovies
           url: '/api/outings/' + outingId,
           data: outing
         })
-        .success(function(data) {
-          console.log('PUT Success:', data);
+        .success(function (data) {
           $scope.getOutings();
         })
-        .error(function(data, status, headers, config) {
+        .error(function (data, status, headers, config) {
           console.log('PUT Error:', data, status, headers, config);
         });
-
       }
     }
   };
@@ -214,24 +198,27 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'getMovies
   $scope.showEditButton = function() {
     var userId = $rootScope.user.facebookId;
     var outing = this.outing;
-    for(var organizerId in outing.organizers) {
-      if(Number(organizerId) === Number(userId)) {
+
+    for (var organizerId in outing.organizers) {
+      if (Number(organizerId) === Number(userId)) {
         return true;
       }
     }
+
     return false;
   };
 
   $scope.editOuting = function() {
     var outing = this.outing;
     var outingId = this.outing._id;
-    return $http({
+
+    $http({
       method: 'PUT',
       url: '/api/outings/' + outingId,
       data: outing
     });
   };
 
-  // Initialize display of outings.
-  $scope.getOutings();
+  $scope.getOutings(); // Initialize display of outings.
+  $scope.form = {}; // Define empty object to hold form data.
 }]);

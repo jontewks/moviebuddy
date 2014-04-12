@@ -1,59 +1,41 @@
 'use strict';
 
-/* global angular */
-
 var app = angular.module('moviebuddyApp');
 
-// This service returns 'Users' from the DB.
-app.service('getUsers', function($http) {
+// Returns users from the DB.
+app.service('getUsers', ['$http', function ($http) {
   this.getUser = function(facebookId) {
-    return $http({
-      method: 'GET',
-      url: '/api/user/' + facebookId
-    });
+    return $http.get('/api/user/' + facebookId);
   };
-});
+}]);
 
-app.service('updateUsers', function($http) {
+app.service('updateUsers', ['$http', function ($http) {
   this.updateUser = function(facebookId, userObj) {
     return $http.put('/api/user/' + facebookId, { user: userObj });
   };
-});
+}]);
 
-// This controller controls the profile.
-app.controller('ProfileController', function ($scope, $rootScope, getUsers, updateUsers) {
+app.controller('ProfileController', ['$scope', '$rootScope', 'getUsers', 'updateUsers', function ($scope, $rootScope, getUsers, updateUsers) {
   var facebookId = $rootScope.user.facebookId;
-  // *** Want to grab this upon authentication. ***
-  $scope.user = {
-    facebookId        : facebookId,
-    name              : '',
-    favMovie          : '',
-    favGenre          : '',
-    age               : '',
-    favTheater        : '',
-    city              : '',
-    favActor          : '',
-    profilePicture    : 'http://graph.facebook.com/'+facebookId+'/picture?type=large'
-  };
+  
+  $scope.user = {};
 
-  // *** Want to nest this in a promise or callback. ***
   getUsers.getUser(facebookId)
-  .then(function(data) {
-    var user = data.data;
-    $scope.user.name         = user.name;
-    $scope.user.age          = user.age;
-    $scope.user.city         = user.city;
-    $scope.user.favTheater   = user.favTheater;
-    $scope.user.favGenre     = user.favGenre;
-    $scope.user.favActor     = user.favActor;
-    $scope.user.favMovie     = user.favMovie;
-  });
+    .then(function (user) {
+      var user = user.data;
 
+      $scope.user.name = user.name;
+      $scope.user.age = user.age;
+      $scope.user.city = user.city;
+      $scope.user.favTheater = user.favTheater;
+      $scope.user.favGenre = user.favGenre;
+      $scope.user.favActor = user.favActor;
+      $scope.user.favMovie = user.favMovie;
+      $scope.user.facebookId = facebookId;
+      $scope.user.profilePicture = 'http://graph.facebook.com/' + facebookId + '/picture?type=large';
+    });
 
-  $scope.updateUser = function(){
-
+  $scope.updateUser = function() {
     updateUsers.updateUser($rootScope.user.facebookId, $scope.user);
-
   };
-
-});
+}]);
