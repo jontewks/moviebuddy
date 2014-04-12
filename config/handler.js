@@ -120,7 +120,12 @@ exports.queryFBFriends = function(token, profile){
 
 exports.getOuting = function(req, res) {
   // *** TO-DO: Enable find of user- & friend-specific outings.
-  db.Outing.find({}, function (err, outing) {
+  var d = new Date();
+  var day = d.getDate();
+  var month = d.getMonth();
+  var year = d.getFullYear();
+
+  db.Outing.find({ 'date': { '$gte': new Date(year, month, day) }}, function (err, outing) {
     if (!err) {
       res.send(outing);
     } else {
