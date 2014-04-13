@@ -21,6 +21,15 @@ app.config(['$routeProvider', function ($routeProvider) {
         }
       }
     })
+    .when('/newOuting', {
+      templateUrl: 'views/outings.html',
+      controller: 'OutingsController',
+      resolve: {
+        checkLogin: function(authentication) {
+          return authentication.auth();
+        }
+      }
+    })
     .otherwise({
       redirectTo: '/'
     });

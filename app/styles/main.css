@@ -394,7 +394,15 @@ body {
   margin-left: 25px;
 }
 
-.infoTwo{
+.infoTwo {
+  width: 200px;
+  height: 180px;
+  margin-left: 25px;
+  display: inline-block;
+}
+
+.infoThree {
+  float: right;
   width: 200px;
   height: 180px;
   margin-left: 25px;
