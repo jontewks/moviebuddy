@@ -36,20 +36,37 @@ app.config(['$routeProvider', function ($routeProvider) {
 }]);
 
 // Authentication service that handles login and logout
-app.service('authentication', ['$rootScope', '$location', '$http', function ($rootScope, $location, $http) {
-  this.auth = function() {
-    return $http.get('/auth/isLoggedIn')
-      .then(function (response) {
-        if (response.data === 'false') {
-          $location.path('/');
-        }
-
-        if (window.document.cookie !== '') {
-          $rootScope.user = JSON.parse(window.document.cookie.split('=')[0]);
-        }
-      });
+// authentication service, handles login and logout
+app.service('authentication', function($rootScope, $location, $http) {
+  var cookieParser = function(cookie) {
+    var splitCookie = cookie.split(';');
+    for (var i = 0; i < splitCookie.length; i++){
+      var leftSide = splitCookie[i].split('=')[0];
+      var rightSide = splitCookie[i].split('=')[1];
+      if( rightSide === 'undefined') {
+        return JSON.parse(leftSide);
+      }
+    }
   };
-}]);
+
+  this.auth = function(){
+    return $http({
+      method: 'GET',
+      url: '/auth/isLoggedIn'
+    })
+    .then(function(response){
+      if (response.data === 'false') {
+        $location.path('/');
+      }
+      if (window.document.cookie !== '') {
+        var userObj = cookieParser(window.document.cookie);
+        $rootScope.user = userObj;
+      }
+    });
+  };
+});
+
+
 
 // Load the SDK Asynchronously
 (function(d){

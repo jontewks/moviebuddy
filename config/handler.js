@@ -196,7 +196,6 @@ exports.authFacebookCallback = function(req, res, next, passport) {
   passport.authenticate('facebook', function (err, user) {
     if (err) { return next(err); }
     if (!user) { return res.redirect('/'); }
-
     req.login(user, function (err) {
       if (err) { return next(err); }
       req.session.username = 'farid';
