@@ -466,18 +466,15 @@ body {
 }
 
 .outingDate {
-  color: gray;
-}
-
-.outingTheater {
   color: white;
 }
 
-.outingInvitees {
+.outingTheater {
+  color: lightgray;
 }
 
 .outingAttendees {
-  color: gray;
+  color: lightgray;
 }
 
 /* footer */

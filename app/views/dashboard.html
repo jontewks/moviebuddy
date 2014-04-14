@@ -1,8 +1,8 @@
 <script>
-  /* global $ */
   'use strict';
-  $(document).ready(function(){
-    $('body').on('click', '.sectionHeader', function(){
+
+  $(function () {
+    $('body').on('click', '.sectionHeader', function () {
       $(this).next().slideToggle();
     });
 

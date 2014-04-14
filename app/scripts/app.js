@@ -2,14 +2,12 @@
 
 var app = angular.module('moviebuddyApp', ['ngRoute', 'ngCookies', 'xeditable']);
 
-app.config(function ($routeProvider) {
-
+app.config(['$routeProvider', function ($routeProvider) {
   $routeProvider
     .when('/', {
       templateUrl: 'views/login.html',
-      controller: 'LoginController',
       resolve: {
-        checkLogin: function(authentication){
+        checkLogin: function(authentication) {
           return authentication.auth();
         }
       }
@@ -18,28 +16,17 @@ app.config(function ($routeProvider) {
       templateUrl: 'views/dashboard.html',
       controller: 'DashController',
       resolve: {
-        checkLogin: function(authentication){
+        checkLogin: function(authentication) {
           return authentication.auth();
         }
       }
     })
     .otherwise({
-      redirectTo: '/',
-      templateUrl: 'views/login.html',
-      controller: 'LoginController',
-      resolve: {
-        checkLogin: function(authentication){
-          return authentication.auth();
-        }
-      }
+      redirectTo: '/'
     });
-});
+}]);
 
-app.run(function($rootScope, $location) {
- // Fun Stuff
-});
-
-
+// Authentication service that handles login and logout
 // authentication service, handles login and logout
 app.service('authentication', function($rootScope, $location, $http) {
   var cookieParser = function(cookie) {
@@ -72,7 +59,6 @@ app.service('authentication', function($rootScope, $location, $http) {
 
 
 
-
 // Load the SDK Asynchronously
 (function(d){
   var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
@@ -81,4 +67,3 @@ app.service('authentication', function($rootScope, $location, $http) {
   js.src = '//connect.facebook.net/en_US/all.js';
   ref.parentNode.insertBefore(js, ref);
 }(document));
-
