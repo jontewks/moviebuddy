@@ -119,6 +119,10 @@ body {
   background: url('../images/grey_wash_wall.png');
 }
 
+.movieOutingCreation {
+  display: none;
+}
+
 .sectionContainerProfile {
   color: black;
   padding: 20px;
@@ -402,11 +406,9 @@ body {
 }
 
 .infoThree {
-  float: right;
-  width: 200px;
-  height: 180px;
-  margin-left: 25px;
-  display: inline-block;
+  float: left;
+  clear: both;
+  margin: auto;
 }
 
 .movieTitle {

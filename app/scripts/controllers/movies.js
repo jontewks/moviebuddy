@@ -42,6 +42,10 @@ app.controller('MoviesController', ['$rootScope', '$scope', 'getMoviesData', fun
       });
   };
 
+  $scope.storeCurrent = function(movie) {
+    $rootScope.currentMovie = movie;
+  };
+
   getMovies(queryPage, queryPageLimit);
 }]);
 

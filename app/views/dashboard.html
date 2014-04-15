@@ -9,6 +9,14 @@
     $('.editable-buttons').css({
       'border': '1px solid red'
     });
+
+    $('body').on('click', '.infoThree', function () {
+      $(this).next().slideToggle();
+    });
+
+    $('body').on('click', '.outingCreation', function () {
+      $(this).parent().slideToggle();
+    });
   });
 </script>
 

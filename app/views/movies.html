@@ -35,7 +35,18 @@
     </div>
 
     <div class="infoThree">
-      <a href="/newOuting">Go see it!</a>
+      <button ng-click="storeCurrent(movie.title)">Go see it!</button>
+    </div>
+
+    <div class="sectionContainer centered" ng-controller="OutingsController">
+
+      <form ng-submit="processOutingForm()" name="outingForm">
+        <input ng-model="form.date" name="date" type="date" class="outingField">
+        <input ng-model="form.theater" name="theater" type="text" placeholder="Theater" class="outingField">
+        <button ng-click="cancelNewOuting()" type="reset">Cancel</button>
+        <button ng-click="" type="submit" class="outingCreation">Create Outing</button>
+      </form>
+
     </div>
 
     <hr class="movieHR">

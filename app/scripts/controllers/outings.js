@@ -20,8 +20,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'getMovies
     }
 
     var outing = {};
-
-    outing.movie = form.movie.title;
+    outing.movie = $rootScope.currentMovie;
     outing.date = form.date+'T07:00:00Z'; // Add 7 hours so angular shows correct date in THIS TIME ZONE ONLY omg fix this guyz.
     outing.theater = form.theater;
     // Look up below values via TMS or Fandango API or app DB.
@@ -62,7 +61,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'getMovies
       url: '/api/outings'
     })
     .success(function (data) {
-      $scope.outings = data;
+      $rootScope.outings = data;
     })
     .error(function (data, status, headers, config) {
       console.log('GET Error:', data, status, headers, config);
@@ -82,9 +81,9 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'getMovies
       data: outing
     })
     .success(function (data) {
+      $scope.getOutings();
       $scope.clearOutingForm();
       $scope.cancelNewOuting();
-      $scope.getOutings();
     })
     .error(function (data, status, headers, config) {
       console.log('POST Error:', data, status, headers, config);
