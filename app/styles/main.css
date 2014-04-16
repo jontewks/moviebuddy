@@ -1,7 +1,7 @@
-/* Yeoman Symbols */
+@charset "UTF-8"; 
 
-/*
-@font-face {
+/* Yeoman Symbols */
+/*@font-face {
   font-family: 'glyphicons';
   src: url('../fonts/glyphicons-halflings-regular.eot');
   src: url('../fonts/glyphicons-halflings-regular.svg'),
@@ -17,26 +17,68 @@ html, body, div, section, article, aside, header, hgroup, footer, nav, h1, h2, h
   margin: 0;
   padding: 0;
   border: 0;
+  outline: 0;
 }
 
 body {
   font-family: 'PT Sans', sans-serif;
+  font-weight: 400;
   color: #fff;
   background: #3F0506;
 }
 
 .container {
-  min-width: 750px;
+  width: 100%;
+  min-width: 320px;
 }
 
-.headerDiv {
+/* App Launch / FB Login */
+
+.loginHeaderDiv {
+  height: 75%;
+  text-align: center;
+}
+
+.loginHeaderMain {
+  position: relative;
+  top: 50%;
+  font-weight: 700;
+  font-size: 36pt;
+}
+
+.loginHeaderSub {
+  position: relative;
+  top: 50%;
+  font-size: 18pt;
+  font-weight: 400;
+}
+
+.loginDiv {
+  height: 50%;
+  position: relative;
+  text-align: center;
+  margin: auto;
+  border-radius: 15px;
+}
+
+.fbLogin {
+  width: 194px;
+  height: 37px;
+  border: 0px;
+  background: url('../images/fblogin.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  cursor: pointer;
+}
+
+/*.headerDiv {
   text-align: center;
   height: 100px;
   padding-top: 10px;
   padding-bottom: 30px;
-}
+}*/
 
-.appHeader {
+/*.appHeader {
   background: url('../images/bearLogo.png');
   background-repeat: no-repeat;
   background-position: center;
@@ -49,9 +91,9 @@ body {
   margin: auto;
   background-color: white;
   display: inline-block;
-}
+}*/
 
-.logoutButton {
+/*.logoutButton {
   position: absolute;
   display: inline-block;
   padding: 8px 15px;
@@ -65,101 +107,31 @@ body {
   text-transform: uppercase;
   margin-top: 40px;
   margin-left: 100px;
-}
+}*/
 
-.logoutButton:hover {
+/*.logoutButton:hover {
   background-color: rgba(37, 244, 154, .75);
   border-color: rgba(37, 244, 154, .75);
   color: #ffffff;
-}
+}*/
 
-.sectionDiv {
-}
-
-.sectionHeader {
+/*.sectionHeader {
   text-align: center;
   font-weight: 900;
   font-size: 2em;
   letter-spacing: .1em;
   cursor: pointer;
-}
+}*/
 
-.sectionContainer {
+/*.sectionContainer {
   padding: 20px;
   display: none;
-  background: url('../images/grey_wash_wall.png');
-}
+}*/
 
-.sectionContainerProfile {
+/*.sectionContainerProfile {
   color: black;
   padding: 20px;
-}
-
-/* login fun */
-
-.loginContainer {
-  width: 100%;
-  background: url('../images/bg.jpg');
-}
-
-.loginHeaderDiv {
-  padding-bottom: 15px;
-  background: url('../images/grey_wash_wall.png');
-}
-
-.loginHeader {
-  letter-spacing: .05em;
-  color: white;
-  font-size: 5em;
-  text-transform: uppercase;
-  text-align: center;
-  word-spacing: .1em;
-  text-decoration: underline;
-}
-
-.loginHeaderTwo {
-  color: white ;
-  text-align: center; 
-  letter-spacing: .05em;
-  word-spacing: .2em;
-  margin-top: 10px;
-}
-
-.logoDiv {
-}
-
-.logo {
-}
-
-.loginDiv {
-  text-align: center;
-  padding: 10px;
-  margin: auto;
-  margin-top: 170px;
-  border-radius: 15px;
-  width: 400px;
-  background: url('../images/grey_wash_wall.png');
-}
-
-.fbLogin {
-  height: 80px;
-  width: 400px;
-  border: 0px;
-  background: url('../images/fblogin.png');
-  background-position: center;
-  cursor: pointer;
-}
-
-.fbLogin:focus {
-  outline: 0;
-}
-
-.loginFooter {
-  height: 150px;
-  background: url('../images/grey_wash_wall.png');
-  bottom: 0;
-  margin: 0 auto;
-}
+}*/
 
 /* Profile Fun */
 
@@ -228,7 +200,6 @@ body {
 }
 
 .editable-input:focus {
-  outline: 0;
 } 
 
 .editable-buttons button {
@@ -322,7 +293,6 @@ body {
 }
 
 .filter:focus {
-  outline: 0;
 }
 
 .searchFilter {
@@ -340,7 +310,6 @@ body {
 }
 
 .searchFilter:focus {
-  outline: 0;
 }
 
 .movie {
@@ -430,7 +399,6 @@ body {
 }
 
 .outingMovie {
-  color: white;
 }
 
 .outingDate {
@@ -438,7 +406,6 @@ body {
 }
 
 .outingTheater {
-  color: white;
 }
 
 .outingInvitees {
@@ -450,203 +417,17 @@ body {
 
 /* footer */
 .footer {
-  background: url('../images/grey_wash_wall.png');
-  height: 100px;
+  /*height: 100px;*/
 }
 
-@media (min-width: 768px) {
+/* Tablet Layout */
+@media only screen and (min-width: 768px) {
+
+}
+
+/* Desktop Layout */
+@media only screen and (min-width: 1024px) {
   .container {
+    max-width: 1024px;
   }
-
-  .headerDiv {
-  }
-
-  .appHeader {
-  }
-
-  .sectionDiv {
-  }
-
-  .sectionHeader {
-  }
-
-  .sectionContainer {
-  }
-
-  .sectionContainerProfile {
-    min-width: 1170px;
-  }
-
-  /* login fun */
-
-  .loginContainer {
-  }
-
-  .loginHeaderDiv {
-  }
-
-  .loginHeader {
-    font-size: 7em;
-  }
-
-  .loginHeaderTwo {
-  }
-
-  .loginDiv {
-    margin-top: 150px;
-  }
-
-  .fbLogin {
-  }
-
-  .fbLogin:focus {
-  }
-
-  /* profile fun */
-
-  .profileSection{
-  }
-
-  .profile {
-  }
-
-  #profilePicDiv {
-    margin-left: 50px;
-  }
-
-  #profilePic {
-
-  }
-
-  #userDetails {
-    margin-top: 0px;
-    width: 400px;
-    margin-left: 150px;
-  }
-
-  #userMovieDetails {
-    margin-top: 0px;
-    width: 400px;
-  }
-
-  .userDetail {
-    font-size: 1.5em;
-    width: 360px;
-  }
-
-  .editableUserDetail {
-
-  }
-
-  /* css override of xeditable angular */
-  .editable-controlers {
-    display: inline;
-  }
-
-  .editable-input {
-    width: 130px !important;
-    font-size: 1em;
-  }
-
-  .editable-input:focus {
-  }
-
-  .editable-buttons button {
-  }
-
-  /* friends */
-
-  .sectionContainerFriends {
-  }
-
-  .friendsSection {
-  }
-
-  .friendsSectionHeader {
-  }
-
-  .friend {
-  }
-
-  .friendsPhoto {
-  }
-
-  .friendName {
-  }
-
-  /* movies */
-
-  .moviesSection {
-  }
-
-  .moviesSectionHeader {
-  }
-
-  .filters {
-    min-width: 1050px;
-  }
-
-  .filter {
-    width: 200px;
-    height: 50px;
-  }
-
-  .filter:hover {
-  }
-
-  .searchFilter {
-    height: 50px;
-    font-size: 1.5em;
-  }
-
-  .searchFilter:focus {
-  }
-
-  .movie {
-    font-size: 1.3em;
-    min-width: 1050px;
-  }
-
-  .movieThumb {
-    margin-left: 50px;
-  }
-
-  .infoOne {
-    width: 400px;
-  }
-
-  .infoTwo {
-    width: 400px;
-  }
-
-  .movieTitle {
-  }
-
-  .criticScore {
-  }
-
-  .audienceScore {
-  }
-
-  .cast {
-  }
-
-  .actor {
-  }
-
-  .criticsConsensus {
-  }
-
-  .runtime {
-  }
-
-  .mpaaRating {
-  }
-
-  .synopsis {
-  }
-
-  .movieHR {
-  }
-
 }
