@@ -2,9 +2,11 @@
 
 var app = angular.module('moviebuddyApp');
 
-app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'getMoviesData', function ($scope, $rootScope, $http, getMoviesData) {
+app.controller('OutingsController', ['$scope', '$rootScope', '$http', '$q', 'getMoviesData',  function ($scope, $rootScope, $http, $q, getMoviesData) {
   var newOutingButtonVisible = true;
   var newOutingFormVisible = false;
+
+
 
   $scope.clearOutingForm = function() {
     $scope.form.movie = '';
@@ -217,6 +219,10 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'getMovies
       data: outing
     });
   };
+
+
+
+
 
   $scope.getOutings(); // Initialize display of outings.
   $scope.form = {}; // Define empty object to hold form data.

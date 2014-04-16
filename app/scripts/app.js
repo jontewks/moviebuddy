@@ -35,25 +35,6 @@ app.config(['$routeProvider', function ($routeProvider) {
     });
 }]);
 
-// Authentication service that handles login and logout
-// authentication service, handles login and logout
-app.service('authentication', function($rootScope, $location, $http) {
-
-  this.auth = function(){
-    return $http({
-      method: 'GET',
-      url: '/auth/isLoggedIn'
-    })
-    .then(function(response){
-      if (response.data === 'false') {
-        $location.path('/');
-      }
-      $rootScope.user = response.data;
-    });
-  };
-});
-
-
 
 // Load the SDK Asynchronously
 (function(d){
