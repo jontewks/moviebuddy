@@ -55,7 +55,7 @@ function(req, token, refreshToken, profile, done) {
             user.name  = profile.name.givenName + ' ' + profile.name.familyName;
             user.email = (profile.emails !== undefined ? profile.emails[0].value : '').toLowerCase();
             console.log('in passport1, profile looks like: ', profile);
-            user.hometown = profile._json.location.name ? profile._json.location.name : '';
+            user.city = profile._json.location.name ? profile._json.location.name : '';
             user.save(function(err) {
               if (err){
                 throw err;
@@ -69,12 +69,13 @@ function(req, token, refreshToken, profile, done) {
           // if there is no user, create them
           var newUser            = new db.User();
 
+          console.log('in passport2, profile looks like: ', profile);
+
           newUser.facebookToken = token;
           newUser.facebookId = profile.id;
-          newUser.name  = profile.name.givenName + ' ' + profile.name.familyName;
+          newUser.name  = profile.displayName;
           newUser.email = (profile.emails !== undefined ? profile.emails[0].value : '').toLowerCase();
-          console.log('in passport2, profile looks like: ', profile);
-          newUser.hometown = profile._json.location.name ? profile._json.location.name : '';
+          newUser.city = profile._json.location.name ? profile._json.location.name : '';
           newUser.save(function(err) {
             if (err){
               throw err;
@@ -91,7 +92,7 @@ function(req, token, refreshToken, profile, done) {
       user.name  = profile.name.givenName + ' ' + profile.name.familyName;
       user.email = (profile.emails !== undefined ? profile.emails[0].value : '').toLowerCase();
       console.log('in passport3, profile looks like: ', profile);
-      user.hometown = profile._json.location.name ? profile._json.location.name : '';
+      user.city = profile._json.location.name ? profile._json.location.name : '';
       user.save(function(err) {
         if (err){
           throw err;

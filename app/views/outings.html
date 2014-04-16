@@ -2,38 +2,36 @@
 
 <div class="sectionContainer centered">
 
-  <!-- Show 'new outing' button on launch, hide upon click. -->
   <button ng-click="newOuting()" ng-show="showNewOutingButton()">New Outing</button>
 
-  <!-- 'new outing' form below displays when button above is clicked. -->
   <form ng-submit="processOutingForm()" ng-show="showNewOutingForm()" name="outingForm">
-    <input ng-model="form.movie" required name="movie" type="text" placeholder="Movie" class="outingField">
-    <!-- *** TO-DO: Enable display of filter-search results above via something like below: -->
-      <!-- ng-model="movie in movies | filter:movieTitle | orderBy:movieTitle" ??-->
+    <select ng-model="form.movie" name="movie" ng-options="movie.title for movie in allMovies"></select>
     <input ng-model="form.date" name="date" type="date" class="outingField">
-      <!-- *** TO-DO: Limit date input to range today thru next 90 days. -->
     <input ng-model="form.theater" name="theater" type="text" placeholder="Theater" class="outingField">
-    <!-- *** TO-DO: Add button to allow user to change their current city. -->
-    <!-- <input ng-model="form.invitees" name="invitees" type="text" placeholder="Invite Friends"> -->
     <button ng-click="cancelNewOuting()" type="reset">Cancel</button>
-    <button ng-click="createOuting()" type="submit">Create Outing</button>
+    <button ng-click="" type="submit">Create Outing</button>
   </form>
 
-  <!-- Display list (feed) of outings. -->
   <div class="outingsList">
-
-    <!-- *** TO-DO: Add '| filter:' inputs above the feed below. -->
     <div ng-repeat="outing in outings | orderBy: 'date'">
-      <span class="outingMovie">{{outing.movie}}</span> • 
-      <span class="outingDate">{{outing.date | date: 'EEE., MMM. d'}}</span> • 
-      <span class="outingTheater">{{outing.theater}}</span> • 
-      <!-- *** TO-DO: Show theater info (address & map upon click of theater name. -->
-      <span ng-repeat="(attendeeId, attendee) in outing.attendees" class="outingAttendees">{{attendee.name}}, </span>
-      <button ng-click="joinOuting()" ng-show="showJoinButton()" type="button">Join</button>
-      <!-- *** TO-DO: Show an 'edit' button if current user is the outing creator. -->
-      <hr />
+      <form editable-form name="editableForm" onaftersave="editOuting()">
+        
+        <span editable-select="outing.movie" e-name="movie" e-required class="outingMovie" e-ng-options="movie.title as movie.title for movie in allMovies">{{ outing.movie }}</span> • 
+        <span editable-date="outing.date" e-name="date" class="outingDate">{{ outing.date | date: 'EEE., MMM. d' }}</span><br>
+        <span editable-text="outing.theater" e-name="theater" class="outingTheater">{{ outing.theater }}</span> • 
+        <span ng-repeat="(attendeeId, attendee) in outing.attendees" class="outingAttendees">{{ attendee.name }}, </span>
+
+        <button ng-click="joinOuting()" ng-show="showJoinButton()" type="button">Join</button>
+        <button ng-click="bailOuting()" ng-show="showBailButton()" type="button">Bail</button>
+        <button type="button" ng-click="editableForm.$show()" ng-show="!editableForm.$visible && showEditButton()">Edit</button>
+
+        <span ng-show="editableForm.$visible">
+          <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">Save Edit</button>
+          <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">Cancel Edit</button>
+        </span>
+        <hr>
+
+      </form>
     </div>
-
   </div>
-
 </div>

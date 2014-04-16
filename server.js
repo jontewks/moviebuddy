@@ -43,7 +43,7 @@ app.get(   '/api/friends/*', authenticated, handler.getFriends);
 app.get(   '/api/outings', handler.getOuting);
 app.post(  '/api/outings', handler.postOuting);
 app.put(   '/api/outings/:_id', handler.putOuting);
-app.delete('/api/outings', handler.deleteOuting);
+app.delete('/api/outings/:_id', handler.deleteOuting);
 
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email'}));
 app.get('/auth/facebook/callback',function(req, res, next){

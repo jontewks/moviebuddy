@@ -119,6 +119,10 @@ body {
   background: url('../images/grey_wash_wall.png');
 }
 
+.movieOutingCreation {
+  display: none;
+}
+
 .sectionContainerProfile {
   color: black;
   padding: 20px;
@@ -394,11 +398,17 @@ body {
   margin-left: 25px;
 }
 
-.infoTwo{
+.infoTwo {
   width: 200px;
   height: 180px;
   margin-left: 25px;
   display: inline-block;
+}
+
+.infoThree {
+  float: left;
+  clear: both;
+  margin: auto;
 }
 
 .movieTitle {
@@ -466,18 +476,15 @@ body {
 }
 
 .outingDate {
-  color: gray;
-}
-
-.outingTheater {
   color: white;
 }
 
-.outingInvitees {
+.outingTheater {
+  color: lightgray;
 }
 
 .outingAttendees {
-  color: gray;
+  color: lightgray;
 }
 
 /* footer */
