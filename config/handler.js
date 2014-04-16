@@ -11,7 +11,7 @@ exports.authenticated = function(req, res, next) {
 
 exports.isLoggedIn = function(req, res) {
   if (req.isAuthenticated()){
-    res.send('true');
+    res.send(req.session.passport.user);
   } else {
     res.send('false');
   }
@@ -214,8 +214,6 @@ exports.authFacebookCallback = function(req, res, next, passport) {
     if (!user) { return res.redirect('/'); }
     req.login(user, function (err) {
       if (err) { return next(err); }
-      req.session.username = 'farid';
-      res.cookie(JSON.stringify(user));
       return res.redirect('/#/dash');
     });
   })(req, res, next);
