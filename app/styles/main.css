@@ -301,7 +301,6 @@ body {
 }
 
 .friend {
-  height: 75px;
   padding: 10px;
   background-color: lightgray;
   border-radius: 5px;
@@ -320,6 +319,14 @@ body {
   padding-top: 20px;
   padding-bottom: 20px;
   font-size: 2em;
+}
+
+.friendInfo {
+  display: none;
+}
+
+.friendDetail {
+  display: block;
 }
 
 /* movies */

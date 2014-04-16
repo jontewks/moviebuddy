@@ -15,6 +15,7 @@ app.service('getFriends', ['$http', function ($http) {
 app.controller('FriendsController', ['$scope', '$rootScope', 'getFriends', function ($scope, $rootScope, getFriends) {
   getFriends.friendsData($rootScope.user.facebookId)
     .then(function(friends) {
+      console.log(friends);
       $scope.friends = friends.data;
     });
 }]);

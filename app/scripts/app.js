@@ -45,7 +45,6 @@ app.service('authentication', function($rootScope, $location, $http) {
       url: '/auth/isLoggedIn'
     })
     .then(function(response){
-      console.log(response);
       if (response.data === 'false') {
         $location.path('/');
       }
