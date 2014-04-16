@@ -9,7 +9,6 @@ var database = process.env.DBDATABASE || 'moviebuddy';
 
 mongoose.connect('mongodb://' + user + ':' + pword + '@' + domain + ':' + port + '/' + database);
 
-
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
