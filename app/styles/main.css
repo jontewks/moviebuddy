@@ -1,18 +1,6 @@
-/* Space out content a bit */
+/* Yeoman Symbols */
 
-/* web fonts */
-
-@font-face {
-    font-family: 'bebasregular';
-    src: url('../fonts/Bebas/bebas___-webfont.eot');
-    src: url('../fonts/Bebas/bebas___-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/Bebas/bebas___-webfont.woff') format('woff'),
-         url('../fonts/Bebas/bebas___-webfont.ttf') format('truetype'),
-         url('../fonts/Bebas/bebas___-webfont.svg#bebasregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
+/*
 @font-face {
   font-family: 'glyphicons';
   src: url('../fonts/glyphicons-halflings-regular.eot');
@@ -22,19 +10,6 @@
   font-weight: normal;
   font-style: normal;
 }
-
-/* Google Fonts
-font-family: 'Inder', sans-serif;
-font-family: 'Viga', sans-serif;
-font-family: 'Hammersmith One', sans-serif;
-font-family: 'Gentium Book Basic', serif;
-
-  Colors Used
-#00A8C6 - light blueish
-#F38630 - bright orange
-#FA6900 - slightly darker orange
-rgba(37, 244, 154, .75) - mint
-#E0E4CC - off white
 */
 
 /* Global Reset */
@@ -44,13 +19,10 @@ html, body, div, section, article, aside, header, hgroup, footer, nav, h1, h2, h
   border: 0;
 }
 
-html {
-}
-
 body {
-  font-family: 'Hammersmith One', sans-serif;
-  color: #333;
-  background: #E0E4CC;
+  font-family: 'PT Sans', sans-serif;
+  color: #fff;
+  background: #3F0506;
 }
 
 .container {
@@ -59,7 +31,6 @@ body {
 
 .headerDiv {
   text-align: center;
-  background: url('../images/grey_wash_wall.png');
   height: 100px;
   padding-top: 10px;
   padding-bottom: 30px;
@@ -119,10 +90,6 @@ body {
   background: url('../images/grey_wash_wall.png');
 }
 
-.movieOutingCreation {
-  display: none;
-}
-
 .sectionContainerProfile {
   color: black;
   padding: 20px;
@@ -141,7 +108,6 @@ body {
 }
 
 .loginHeader {
-  font-family: 'Bebas';
   letter-spacing: .05em;
   color: white;
   font-size: 5em;
@@ -154,7 +120,6 @@ body {
 .loginHeaderTwo {
   color: white ;
   text-align: center; 
-  font-family: 'Bebas';
   letter-spacing: .05em;
   word-spacing: .2em;
   margin-top: 10px;
@@ -398,17 +363,11 @@ body {
   margin-left: 25px;
 }
 
-.infoTwo {
+.infoTwo{
   width: 200px;
   height: 180px;
   margin-left: 25px;
   display: inline-block;
-}
-
-.infoThree {
-  float: left;
-  clear: both;
-  margin: auto;
 }
 
 .movieTitle {
@@ -453,7 +412,6 @@ body {
   margin-bottom: 10px;
 }
 
-
 /* outings */
 
 .centered {
@@ -476,15 +434,18 @@ body {
 }
 
 .outingDate {
-  color: white;
+  color: gray;
 }
 
 .outingTheater {
-  color: lightgray;
+  color: white;
+}
+
+.outingInvitees {
 }
 
 .outingAttendees {
-  color: lightgray;
+  color: gray;
 }
 
 /* footer */
@@ -493,7 +454,7 @@ body {
   height: 100px;
 }
 
-@media (min-width: 990px) {
+@media (min-width: 768px) {
   .container {
   }
 
@@ -688,13 +649,4 @@ body {
   .movieHR {
   }
 
-}
-
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
-}
-
-.marketing p + h4 {
-  margin-top: 28px;
 }
