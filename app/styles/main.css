@@ -2,11 +2,11 @@
 
 /* Yeoman Symbols */
 /*@font-face {
-  font-family: 'glyphicons';
-  src: url('../fonts/glyphicons-halflings-regular.eot');
-  src: url('../fonts/glyphicons-halflings-regular.svg'),
-       url('../fonts/glyphicons-halflings-regular.ttf'),
-       url('../fonts/glyphicons-halflings-regular.woff');
+  font-family: "glyphicons";
+  src: url("../fonts/glyphicons-halflings-regular.eot");
+  src: url("../fonts/glyphicons-halflings-regular.svg"),
+       url("../fonts/glyphicons-halflings-regular.ttf"),
+       url("../fonts/glyphicons-halflings-regular.woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -18,13 +18,19 @@ html, body, div, section, article, aside, header, hgroup, footer, nav, h1, h2, h
   padding: 0;
   border: 0;
   outline: 0;
+  text-indent: 0;
 }
 
 body {
-  font-family: 'PT Sans', sans-serif;
+  font-family: "PT Sans", sans-serif;
   font-weight: 400;
   color: #fff;
   background: #3F0506;
+}
+
+a {
+  color: white;
+  text-decoration: none;
 }
 
 .container {
@@ -64,11 +70,76 @@ body {
 .fbLogin {
   width: 194px;
   height: 37px;
-  border: 0px;
-  background: url('../images/fblogin.png');
+  border: none;
+  background: url("../images/fblogin.png");
   background-repeat: no-repeat;
   background-size: 100%;
   cursor: pointer;
+}
+
+/* Nav Bar */
+
+nav {
+  text-align: center; /* Centers the group. */
+  width: 100%;
+  position: fixed;
+  background-color: #A81303;
+}
+
+nav a {
+  position: relative;
+  top: 50%;
+}
+
+.navDiv {
+  width: 32.4%; /* Why not 33.333%? */
+  height: 44px;
+  display: inline-block;
+  background-color: #A81303;
+  text-align: center;
+}
+
+.navDiv:hover {
+  background-color: #D90414;
+}
+
+.navDiv span {
+  position: relative;
+  top: 25%;
+}
+
+/* outings */
+
+.centered {
+  text-align: center;
+}
+
+.outingsSectionHeader {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #00A8C6;
+}
+
+.outingsList {
+  font-size: 14pt;
+  color: black;
+}
+
+.outingMovie {
+}
+
+.outingDate {
+  color: gray;
+}
+
+.outingTheater {
+}
+
+.outingInvitees {
+}
+
+.outingAttendees {
+  color: gray;
 }
 
 /*.headerDiv {
@@ -79,7 +150,7 @@ body {
 }*/
 
 /*.appHeader {
-  background: url('../images/bearLogo.png');
+  background: url("../images/bearLogo.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -174,7 +245,7 @@ body {
 
 .userDetail {
   color: black;
-  border: 0px;
+  border: none;
   width: 270px;
   line-height: 2.5em;
   display: block;
@@ -182,7 +253,7 @@ body {
 
 .editableUserDetail {
   color: black;
-  border: 0px;
+  border: none;
 }
 
 /* css override of xeditable angular */
@@ -190,12 +261,12 @@ body {
 }
 
 .editable-input {
-  border: 0px;
+  border: none;
   border-bottom: 1px solid #333;
   height: 20px;
   width: 100px !important;
   background-color: #E0E4CC;
-  font-family: 'Hammersmith One', sans-serif;
+  font-family: "Hammersmith One", sans-serif;
   text-transform: uppercase;
 }
 
@@ -208,7 +279,7 @@ body {
   height: 25px;
   font-size: 6px;
   cursor: pointer;
-  border: 0px;
+  border: none;
   border-radius: 4px;
   color: #FFFFFF;
   background-color: #00A8C6;
@@ -298,7 +369,7 @@ body {
 .searchFilter {
   height: 30px;
   width: 300px;
-  border: 0px;
+  border: none;
   border-bottom: 3px solid black;
   padding: 0px;
   margin-top: 10px;
@@ -379,40 +450,6 @@ body {
 
 .movieHR {
   margin-bottom: 10px;
-}
-
-/* outings */
-
-.centered {
-  text-align: center;
-}
-
-.outingsSectionHeader {
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background-color: #00A8C6;
-}
-
-.outingsList {
-  font-size: 14pt;
-  color: black;
-}
-
-.outingMovie {
-}
-
-.outingDate {
-  color: gray;
-}
-
-.outingTheater {
-}
-
-.outingInvitees {
-}
-
-.outingAttendees {
-  color: gray;
 }
 
 /* footer */

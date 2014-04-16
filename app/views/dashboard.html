@@ -1,7 +1,7 @@
 <script>
   'use strict';
-
   $(function () {
+
     $('body').on('click', '.sectionHeader', function () {
       $(this).next().slideToggle();
     });
@@ -17,15 +17,22 @@
     $('body').on('click', '.outingCreation', function () {
       $(this).parent().slideToggle();
     });
+
   });
 </script>
 
 <div ng-controller="DashController">
 
-  <div class="headerDiv">
-    <h3 class="appHeader"></h3>
-    <a class="logoutButton" href="/logout">Logout</a>
+<!--   <div class="headerDiv">
+    <h3 class="appHeader">Holler!</h3>
   </div>
+ -->
+
+  <nav>
+    <a alt="icon" href="#"><div class="navDiv" id="outingsNav"><span>Outings</span></div></a>
+    <a alt="icon" href="#"><div class="navDiv" id="moviesNav"><span>Movies</span></div></a>
+    <a alt="icon" href="#"><div class="navDiv" id="profileNav"><span>Profile</span></div></a>
+  </nav>
 
   <div class="sectionDiv profileSection" ng-include="'/views/profile.html'" ng-controller="ProfileController"></div>
   <div class="sectionDiv friendsSection" ng-include="'/views/friends.html'" ng-controller="FriendsController"></div>
