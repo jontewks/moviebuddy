@@ -1,6 +1,22 @@
 var db = require('./db_config');
 var FB = require('fb');
 
+exports.authenticated = function(req, res, next) {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.redirect('/');
+  }
+};
+
+exports.isLoggedIn = function(req, res) {
+  if (req.isAuthenticated()){
+    res.send('true');
+  } else {
+    res.send('false');
+  }
+};
+
 exports.getUser = function(req, res) {
   db.User.findOne({ facebookId: req.params.facebookId }, function (err, user) {
     if (!err) {
