@@ -2,7 +2,7 @@
 
 var app = angular.module('moviebuddyApp');
 
-app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'getMoviesData', function ($scope, $rootScope, $http, getMoviesData) {
+app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert', function ($scope, $rootScope, $http, sendAlert) {
   var newOutingButtonVisible = true;
   var newOutingFormVisible = false;
 
@@ -31,6 +31,9 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'getMovies
     outing.attendees[userId] = { name: userName };
     outing.organizers = {};
     outing.organizers[userId] = { name: userName };
+
+    sendAlert.email();
+
     return outing;
   };
 
