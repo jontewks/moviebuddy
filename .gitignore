@@ -3,5 +3,5 @@ app/bower_components
 .tmp
 .sass-cache
 *.DS_Store
-app/bower_components
 dist
+config/auth.js
