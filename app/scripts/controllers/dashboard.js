@@ -4,43 +4,40 @@ var app = angular.module('moviebuddyApp');
 
 app.controller('DashController', ['$scope', 'authentication', '$location', '$route', function ($scope, authentication, $location, $route) {
 
-  // $scope.route = $route;
+  $scope.route = $route;
 
-  var outingsVisible = true;
-  var moviesVisible = false;
-  var profileVisible = false;
+  $scope.outingsVisible = true;
+  $scope.moviesVisible = false;
+  $scope.profileVisible = false;
 
   $scope.showOutings = function() {
-    return outingsVisible;
+    return $scope.outingsVisible;
   };
 
   $scope.showMovies = function() {
-    return moviesVisible;
+    return $scope.moviesVisible;
   };
 
   $scope.showProfile = function() {
-    return profileVisible;
+    return $scope.profileVisible;
   };
 
   $scope.navToOutings = function() {
-    outingsVisible = true;
-    moviesVisible = false;
-    profileVisible = false;
-    // console.log($scope, $route, $location);
+    $scope.outingsVisible = true;
+    $scope.moviesVisible = false;
+    $scope.profileVisible = false;
   };
 
   $scope.navToMovies = function() {
-    outingsVisible = false;
-    moviesVisible = true;
-    profileVisible = false;
-    // console.log($scope, $route, $location);
+    $scope.outingsVisible = false;
+    $scope.moviesVisible = true;
+    $scope.profileVisible = false;
   };
 
   $scope.navToProfile = function() {
-    outingsVisible = false;
-    moviesVisible = false;
-    profileVisible = true;
-    // console.log($scope, $route, $location);
+    $scope.outingsVisible = false;
+    $scope.moviesVisible = false;
+    $scope.profileVisible = true;
   };
 
   $scope.logout = function() {

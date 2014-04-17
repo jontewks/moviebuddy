@@ -99,7 +99,7 @@ nav a {
   text-align: center;
 }
 
-.navDiv:hover, .navDiv:active, .navDiv:focus {
+.navDiv:hover, .navDiv:active, .navDiv:focus, .navDiv.active {
   background-color: #D90414;
 }
 
