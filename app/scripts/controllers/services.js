@@ -23,6 +23,8 @@ app.service('updateUsers', ['$http', function ($http) {
   };
 }]);
 
+// specifically Rotten Tomatoes Theater Data service
+
 app.service('getRTMovies', ['$http','$q', function ($http, $q) {
 
   this.allMovies = [];
@@ -57,6 +59,8 @@ app.service('getRTMovies', ['$http','$q', function ($http, $q) {
     
   };
 }]);
+
+// Movie and Theater data Service
 
 app.service('getTheaterData', ['$http', '$rootScope', 'getRTMovies', function ($http, $rootScope, getRTMovies){
 
@@ -193,6 +197,8 @@ app.service('authentication', function($rootScope, $location, $http) {
 
 });
 
+
+// get user's location
 app.service('getLocation', function($http, $rootScope, $q){
 
   this.getZip = function(){
@@ -214,4 +220,11 @@ app.service('getLocation', function($http, $rootScope, $q){
     return deferred.promise;
   };
 
-})
+});
+
+app.service('outingsData', function($http, $rootScope){
+
+});
+
+
+

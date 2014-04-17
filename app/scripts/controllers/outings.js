@@ -297,9 +297,6 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http',  function 
   };
 
 
-
-
-
   $scope.getOutings(); // Initialize display of outings.
   $scope.form = {}; // Define empty object to hold form data.
 }]);
