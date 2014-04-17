@@ -28,9 +28,9 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
     // Postpone invitation funcationality for post-MVP.
     // outing.invitees = form.invitees;
     outing.attendees = {};
-    outing.attendees[ '_' + userId] = { id: userId, name: userName };
+    outing.attendees[ '_' + userId] = { facebookId: userId.toString(), name: userName };
     outing.organizers = {};
-    outing.organizers['_' + userId] = { id: userId, name: userName };
+    outing.organizers['_' + userId] = { facebookId: userId.toString(), name: userName };
 
     sendAlert.email();
 
@@ -111,7 +111,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
     var outing = this.outing;
     var outingId = this.outing._id;
 
-    outing.attendees[ '_' + userId] = { name: userName };
+    outing.attendees[ '_' + userId] = { facebookId: userId.toString(), name: userName };
 
     $http({
       method: 'PUT',
