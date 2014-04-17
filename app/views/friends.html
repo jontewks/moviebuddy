@@ -1,3 +1,12 @@
+<script>
+  $(function(){
+    $('body').on('click', '.friend', function(e){
+      e.preventDefault();
+      $(this).find('.friendInfo').slideToggle();
+    });
+  })
+</script>
+
 <h3 class="sectionHeader friendsSectionHeader" ng-click="getMovieFriends()">FRIENDS</h3>
 
 <div class="sectionContainer sectionContainerFriends">
@@ -5,6 +14,36 @@
   <div ng-repeat="friend in friends" class="friend">
     <img class="friendsPhoto" ng-src="http://graph.facebook.com/{{friend.facebookId}}/picture?type=large" />
     <span class="friendName">{{friend.name}}</span>
+  
+
+    <div class="friendInfo">
+      
+        <span class="friendDetail">
+          <u>Age:</u>
+          <span>{{friend.age}}</span>
+        </span>
+        <span class="friendDetail">
+          <u>City:</u>
+          <span>{{friend.city}}</span>
+        </span>
+        <span class="friendDetail">
+          <u>Favorite Movie:</u>
+          <span>{{friend.favMovie}}</span>
+        </span>
+        <span class="friendDetail">
+          <u>Favorite Genre:</u>
+         <span>{{friend.favGenre}}</span>
+       </span>
+        <span class="friendDetail">
+          <u>Favorite Theater:</u>
+          <span>{{friend.favTheater}}</span>
+        </span>
+        <span class="friendDetail">
+          <u>Favorite Actor:</u>
+          <span>{{friend.favActor}}</span>
+        </span>
+
+    </div>
   </div>
 
 </div>

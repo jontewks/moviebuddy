@@ -2,8 +2,9 @@
 
 var app = angular.module('moviebuddyApp');
 
-app.controller('DashController', ['$scope', 'authentication', function ($scope, authentication) {
+app.controller('DashController', ['$scope', '$http','$rootScope', 'authentication', function ($scope, $http, $rootScope, authentication) {
 	$scope.logout = function() {
     authentication.fbLogout();
   };
+
 }]);

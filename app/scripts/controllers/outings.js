@@ -3,13 +3,91 @@
 var app = angular.module('moviebuddyApp');
 
 app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert', function ($scope, $rootScope, $http, sendAlert) {
+
   var newOutingButtonVisible = true;
   var newOutingFormVisible = false;
+
+  var theaterField = false;
+  var showtimeField = false;
+
+  $scope.theaters = {};
+  $scope.showtimes = [];
+
+  $scope.theaterField = function(){
+    return theaterField;
+  };
+
+  $scope.showtimeField = function(){
+    return showtimeField;
+  };
+
+  var showTheaterField = function(){
+    theaterField = true;
+  };
+
+  var showShowtimeField = function(){
+    showtimeField = true;
+  };
+  
+
+  $scope.getTheaters = function(movie){
+    if (movie.title !== '') {
+      showTheaterField();
+    }
+    $scope.currentMovie = movie;
+    for (var k = 0; k < movie.showtimes.length; k++){
+      $scope.theaters[movie.showtimes[k].theatre.name] = movie.showtimes[k];
+    }
+  };
+
+  $scope.getShowtimes = function(movie, theater) {
+    if (theater !== '') {
+      showShowtimeField();
+    }
+    $scope.showtimes = [];
+    for (var i = 0; i < movie.showtimes.length; i++) {
+      var showtime = movie.showtimes[i];
+      if ($scope.theaters[showtime.theatre.name]) {
+        var time = formatDate(new Date(showtime.dateTime));
+        $scope.showtimes.push(time);
+      }
+    }
+  };
+
+  var formatDate = function(date){
+    var hr = date.getHours();
+    var min = date.getMinutes();
+    var ampm = 'AM';
+
+    if (hr > 12) {
+      hr = hr - 12;
+      ampm = 'PM';
+    } else if (hr === 12) {
+      ampm = 'PM';
+    }
+
+    if (min < 10) {
+      min = '0' + min;
+    }
+
+    var time = hr + ':' + min + ampm;
+
+    return time;
+  };
+
+  $scope.storeCurrent = function(movie) {
+    for (var i = 0; i < $rootScope.allMovies.length; i++) {
+      if (movie === $rootScope.allMovies[i].title) {
+        $scope.currentMovie = $rootScope.allMovies[i];
+      }
+    }
+  };
 
   $scope.clearOutingForm = function() {
     $scope.form.movie = '';
     $scope.form.date = '';
     $scope.form.theater = '';
+    $scope.form.showtime = '';
     // $scope.form.invitees = '';
   };
 
@@ -20,17 +98,18 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
     }
 
     var outing = {};
-    outing.movie = $rootScope.currentMovie;
+    outing.movie = $scope.currentMovie.title;
     outing.date = form.date+'T07:00:00Z'; // Add 7 hours so angular shows correct date in THIS TIME ZONE ONLY omg fix this guyz.
-    outing.theater = form.theater;
+    outing.theater = form.theater.theatre.name;
     // Look up below values via TMS or Fandango API or app DB.
     // outing.address;    // outing.city;    // outing.state;    // outing.zip;
     // Postpone invitation funcationality for post-MVP.
     // outing.invitees = form.invitees;
+    outing.showtime = form.showtime;
     outing.attendees = {};
-    outing.attendees[userId] = { name: userName };
+    outing.attendees[ '_' + userId] = { facebookId: userId.toString(), name: userName };
     outing.organizers = {};
-    outing.organizers[userId] = { name: userName };
+    outing.organizers['_' + userId] = { facebookId: userId.toString(), name: userName };
 
     sendAlert.email();
 
@@ -61,7 +140,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
   $scope.getOutings = function() {
     $http({
       method: 'GET',
-      url: '/api/outings'
+      url: '/api/outings/' + $rootScope.user.facebookId
     })
     .success(function (data) {
       $rootScope.outings = data;
@@ -77,7 +156,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
     var userId = $rootScope.user.facebookId;
     var userName = $rootScope.user.name;
     var outing = $scope.createOuting(form, userId, userName);
-    
+
     $http({
       method: 'POST',
       url: '/api/outings',
@@ -112,7 +191,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
     var outing = this.outing;
     var outingId = this.outing._id;
 
-    outing.attendees[userId] = { name: userName };
+    outing.attendees[ '_' + userId] = { facebookId: userId.toString(), name: userName };
 
     $http({
       method: 'PUT',
@@ -145,7 +224,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
 
     for (var attendeeId in outing.attendees) {
       // For MVP, simply promote all remaining attendees to organizers.
-      newOrganizers[attendeeId] = outing.attendees[attendeeId];
+      newOrganizers[ '_' + attendeeId] = outing.attendees[ '_' + attendeeId];
     }
 
     return newOrganizers;
@@ -169,8 +248,8 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
     var outing = this.outing;
     var outingId = this.outing._id;
 
-    delete outing.attendees[userId];
-    delete outing.organizers[userId];
+    delete outing.attendees[ '_' + userId];
+    delete outing.organizers[ '_' + userId];
 
     // Check if bailing user was only organizer.
     if (Object.keys(outing.organizers).length <= 0) {
@@ -220,6 +299,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
       data: outing
     });
   };
+
 
   $scope.getOutings(); // Initialize display of outings.
   $scope.form = {}; // Define empty object to hold form data.
