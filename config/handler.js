@@ -138,16 +138,32 @@ exports.queryFBFriends = function(token, profile){
 
 exports.getOuting = function(req, res) {
   // *** TO-DO: Enable find of user- & friend-specific outings.
-  var d = new Date();
-  var day = d.getDate();
-  var month = d.getMonth();
-  var year = d.getFullYear();
-
-  db.Outing.find({ 'date': { '$gte': new Date(year, month, day) }}, function (err, outing) {
-    if (!err) {
-      res.send(outing);
+  db.User.findOne( { 'facebookId': req.params.facebookId}, function( err, user){
+    if( err ){
+      console.log('error retrieving userId:', req.params.facebookId, 'from mongodb');
+      res.send(404);
     } else {
-      console.log(err);
+      var idList = user.friends.concat(req.params.facebookId);
+      var results = [];
+      var counter = 0;
+      for( var i = 0; i < idList.length; i++){
+        var keyString = 'organizers._' + idList[i] + '.facebookId';
+        var facebookIdString = idList[i].toString();
+
+        var queryObject = { };
+        queryObject[keyString] = facebookIdString;
+        db.Outing.find(queryObject, function( err, friendOutings){
+          if( friendOutings.length > 0){
+            results = results.concat(friendOutings)
+            counter++;
+          } else {
+            counter++;
+          }
+          if( counter === idList.length){
+            res.send(results);
+          }
+        });
+      }
     }
   });
 };

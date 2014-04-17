@@ -21,7 +21,7 @@ app.delete('/api/user/:facebookId', handler.authenticated, handler.deleteUser);
 
 app.get('/api/friends/*', handler.authenticated, handler.getFriends);
 
-app.get('/api/outings', handler.getOuting);
+app.get('/api/outings/:facebookId', handler.getOuting);
 app.post('/api/outings', handler.postOuting);
 app.put('/api/outings/:_id', handler.putOuting);
 app.delete('/api/outings/:_id', handler.deleteOuting);
