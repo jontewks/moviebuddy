@@ -28,9 +28,9 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'getMovies
     // Postpone invitation funcationality for post-MVP.
     // outing.invitees = form.invitees;
     outing.attendees = {};
-    outing.attendees[userId] = { name: userName };
+    outing.attendees[ '_' + userId] = { id: userId, name: userName };
     outing.organizers = {};
-    outing.organizers[userId] = { name: userName };
+    outing.organizers['_' + userId] = { id: userId, name: userName };
     return outing;
   };
 
@@ -58,7 +58,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'getMovies
   $scope.getOutings = function() {
     $http({
       method: 'GET',
-      url: '/api/outings'
+      url: '/api/outings/' + $rootScope.user.facebookId
     })
     .success(function (data) {
       $rootScope.outings = data;
@@ -74,7 +74,6 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'getMovies
     var userId = $rootScope.user.facebookId;
     var userName = $rootScope.user.name;
     var outing = $scope.createOuting(form, userId, userName);
-    
     $http({
       method: 'POST',
       url: '/api/outings',
@@ -109,7 +108,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'getMovies
     var outing = this.outing;
     var outingId = this.outing._id;
 
-    outing.attendees[userId] = { name: userName };
+    outing.attendees[ '_' + userId] = { name: userName };
 
     $http({
       method: 'PUT',
@@ -142,7 +141,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'getMovies
 
     for (var attendeeId in outing.attendees) {
       // For MVP, simply promote all remaining attendees to organizers.
-      newOrganizers[attendeeId] = outing.attendees[attendeeId];
+      newOrganizers[ '_' + attendeeId] = outing.attendees[ '_' + attendeeId];
     }
 
     return newOrganizers;
@@ -166,8 +165,8 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'getMovies
     var outing = this.outing;
     var outingId = this.outing._id;
 
-    delete outing.attendees[userId];
-    delete outing.organizers[userId];
+    delete outing.attendees[ '_' + userId];
+    delete outing.organizers[ '_' + userId];
 
     // Check if bailing user was only organizer.
     if (Object.keys(outing.organizers).length <= 0) {
