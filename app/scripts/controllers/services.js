@@ -53,9 +53,30 @@ app.service('getTheaterData', ['$http', function ($http){
   this.getTheaters = function(zip) {
     var query = 'http://data.tmsapi.com/v1/theatres?zip='+zip+'&api_key=evgps6crhu6hxpyczeh9k5er';
 
-    $http.get(query)
+    return $http.get(query);
+  };
+
+  this.getTheaterShowtimes = function(theaterId) {
+    if (!theaterId) { return; }
+    var date = new Date();
+    var year = date.getYear() + 1900;
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+
+    if (day < 10) {
+      day = '0' + day;
+    }
+
+    if (month < 10) {
+      month = '0' + month;
+    }
+    var today = year +'-'+ month + '-'+ day;
+
+    var query = 'http://data.tmsapi.com/v1/theatres/'+theaterId+'/showings?startDate='+today+'&api_key=evgps6crhu6hxpyczeh9k5er';
+    
+    $http.jsonp(query)
     .success(function(data){
-      console.log('data: ', data);
+      console.log(data);
     });
   };
 
@@ -83,7 +104,6 @@ app.service('authentication', function($rootScope, $location, $http) {
 app.service('getLocation', function($http, $rootScope, $q){
 
   this.getZip = function(){
-    var that = this;
 
     var deferred = $q.defer();
 
@@ -95,7 +115,7 @@ app.service('getLocation', function($http, $rootScope, $q){
       $http.get(zipQuery)
       .success(function(data){
         $rootScope.currentZip = data.results[0].address_components[7].short_name;
-        deferred.resolve();
+        deferred.resolve($rootScope.currentZip);
       });
     });
 

@@ -23,8 +23,6 @@ app.controller('MoviesController', ['$rootScope', '$scope', 'getMoviesData', 'ge
 
   getMovies(queryPage, queryPageLimit);
 
-  getTheaterData.getTheaters(94102);
-
 }]);
 
 app.controller('movieInfoController', ['$scope', function ($scope) {
