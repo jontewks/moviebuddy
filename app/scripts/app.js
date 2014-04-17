@@ -3,6 +3,7 @@
 var app = angular.module('moviebuddyApp', ['ngRoute', 'ngCookies', 'xeditable']);
 
 app.config(['$routeProvider', function ($routeProvider) {
+
   $routeProvider
     .when('/', {
       templateUrl: 'views/login.html',
@@ -65,8 +66,6 @@ app.service('authentication', function($rootScope, $location, $http) {
     });
   };
 });
-
-
 
 // Load the SDK Asynchronously
 (function(d){
