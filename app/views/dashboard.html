@@ -23,21 +23,17 @@
 
 <div ng-controller="DashController">
 
-<!--   <div class="headerDiv">
-    <h3 class="appHeader">Holler!</h3>
-  </div>
- -->
-
   <nav>
-    <a alt="icon" href="#"><div class="navDiv" id="outingsNav"><span>Outings</span></div></a>
-    <a alt="icon" href="#"><div class="navDiv" id="moviesNav"><span>Movies</span></div></a>
-    <a alt="icon" href="#"><div class="navDiv" id="profileNav"><span>Profile</span></div></a>
+    <a alt="icon" href=""><div ng-click="navToOutings()" class="navDiv" id="outingsNav"><span>Outings</span></div></a>
+    <a alt="icon" href=""><div ng-click="navToMovies()" class="navDiv" id="moviesNav"><span>Movies</span></div></a>
+    <a alt="icon" href=""><div ng-click="navToProfile()" class="navDiv" id="profileNav"><span>Profile</span></div></a>
   </nav>
 
-  <div class="sectionDiv profileSection" ng-include="'/views/profile.html'" ng-controller="ProfileController"></div>
-  <div class="sectionDiv friendsSection" ng-include="'/views/friends.html'" ng-controller="FriendsController"></div>
-  <div class="sectionDiv moviesSection" ng-include="'/views/movies.html'" ng-controller="MoviesController"></div>
-  <div class="sectionDiv outingsSection" ng-include="'/views/outings.html'" ng-controller="OutingsController"></div>
+  <div ng-show="showOutings()" class="sectionDiv outingsSection" ng-include="'/views/outings.html'" ng-controller="OutingsController"></div>
+  <div ng-show="showMovies()" class="sectionDiv moviesSection" ng-include="'/views/movies.html'" ng-controller="MoviesController"></div>
+  <div ng-show="showProfile()" class="sectionDiv profileSection" ng-include="'/views/profile.html'" ng-controller="ProfileController"></div>
+
+  <!-- <div class="sectionDiv friendsSection" ng-include="'/views/friends.html'" ng-controller="FriendsController"></div> -->
 
 </div>
 
