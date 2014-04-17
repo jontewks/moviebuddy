@@ -70,7 +70,8 @@ app.service('sendAlert', ['$rootScope', '$http', function ($rootScope, $http) {
     $http({
       method: 'POST',
       url: '/sendalert',
-      data: JSON.stringify({ 
+      data: JSON.stringify({
+        type: 'email',
         userId: $rootScope.user.facebookId,
         movie: $rootScope.currentMovie
       })
