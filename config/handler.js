@@ -13,7 +13,7 @@ exports.authenticated = function(req, res, next) {
 
 exports.isLoggedIn = function(req, res) {
   if (req.isAuthenticated()){
-    res.send('true');
+    res.send(req.session.passport.user);
   } else {
     res.send('false');
   }
@@ -178,6 +178,7 @@ exports.postOuting = function(req, res) {
     city: body.city,
     state: body.state,
     zip: body.zip,
+    showtime: body.showtime,
     // invitees: body.invitees,
     attendees: body.attendees,
     organizers: body.organizers
@@ -201,6 +202,7 @@ exports.putOuting = function(req, res) {
     outing.city = body.city;
     outing.state = body.state;
     outing.zip = body.zip;
+    outing.showtime = body.showtime;
     // outing.invitees = body.invitees;
     outing.attendees = body.attendees;
     outing.organizers = body.organizers;
@@ -232,8 +234,6 @@ exports.authFacebookCallback = function(req, res, next, passport) {
     if (!user) { return res.redirect('/'); }
     req.login(user, function (err) {
       if (err) { return next(err); }
-      req.session.username = 'farid';
-      res.cookie(JSON.stringify(user));
       return res.redirect('/#/dash');
     });
   })(req, res, next);

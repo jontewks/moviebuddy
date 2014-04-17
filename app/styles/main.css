@@ -119,10 +119,6 @@ body {
   background: url('../images/grey_wash_wall.png');
 }
 
-.movieOutingCreation {
-  display: none;
-}
-
 .sectionContainerProfile {
   color: black;
   padding: 20px;
@@ -301,7 +297,6 @@ body {
 }
 
 .friend {
-  height: 75px;
   padding: 10px;
   background-color: lightgray;
   border-radius: 5px;
@@ -320,6 +315,14 @@ body {
   padding-top: 20px;
   padding-bottom: 20px;
   font-size: 2em;
+}
+
+.friendInfo {
+  display: none;
+}
+
+.friendDetail {
+  display: block;
 }
 
 /* movies */
@@ -452,6 +455,20 @@ body {
 .movieHR {
   margin-bottom: 10px;
 }
+
+.movieOutingCreation {
+  display: none;
+}
+
+.movieOutingDiv {
+  display: block;
+}
+
+.movieOutingForm {
+  display: none;
+}
+
+
 
 
 /* outings */

@@ -2,19 +2,6 @@
 
 var app = angular.module('moviebuddyApp');
 
-// Returns users from the DB.
-app.service('getUsers', ['$http', function ($http) {
-  this.getUser = function(facebookId) {
-    return $http.get('/api/user/' + facebookId);
-  };
-}]);
-
-app.service('updateUsers', ['$http', function ($http) {
-  this.updateUser = function(facebookId, userObj) {
-    return $http.put('/api/user/' + facebookId, { user: userObj });
-  };
-}]);
-
 app.controller('ProfileController', ['$scope', '$rootScope', 'getUsers', 'updateUsers', function ($scope, $rootScope, getUsers, updateUsers) {
   var facebookId = $rootScope.user.facebookId;
   
