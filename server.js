@@ -32,7 +32,7 @@ app.get('/auth/facebook/callback', function (req, res, next) {
   handler.authFacebookCallback(req, res, next, passport);
 });
 
-app.post('/sendalert', handler.sendAlert);
+app.post('/sendalert', handler.authenticated, handler.sendAlert);
 
 app.get('/logout', handler.logout);
 

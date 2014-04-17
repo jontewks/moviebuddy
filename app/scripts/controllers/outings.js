@@ -127,7 +127,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
     outing.organizers = {};
     outing.organizers['_' + userId] = { facebookId: userId.toString(), name: userName };
 
-    sendAlert.email();
+    sendAlert.email('creationEmail', $scope.currentMovie.title);
 
     return outing;
   };
@@ -215,6 +215,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
       data: outing
     })
     .success(function (data) {
+      sendAlert.email('joinEmail', $scope.currentMovie.title);
       $scope.getOutings();
     })
     .error(function (data, status, headers, config) {
@@ -266,6 +267,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
 
     delete outing.attendees[ '_' + userId];
     delete outing.organizers[ '_' + userId];
+    sendAlert.email('bailEmail', outing.movie);
 
     // Check if bailing user was only organizer.
     if (Object.keys(outing.organizers).length <= 0) {
