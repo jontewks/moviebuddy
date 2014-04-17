@@ -103,7 +103,7 @@ app.service('getTheaterData', ['$http', '$rootScope', 'getRTMovies', function ($
           }
 
           // critics score
-          if (!movie.audience_score) {
+          if (!movie.critics_score) {
             for (var k = 0; k < rtMovies.length; k++) {
               var rtMovie = rtMovies[k];
               if (rtMovies[k].title.toUpperCase() === movie.title.toUpperCase()) {

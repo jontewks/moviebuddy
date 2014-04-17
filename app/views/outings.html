@@ -6,17 +6,20 @@
 
   <form ng-submit="processOutingForm()" ng-show="showNewOutingForm()" name="outingForm">
     <div>
-      1. Select A Movie and Date:
+      1. Select A Movie:
       <select ng-model="form.movie" name="movie" ng-options="movie.title for movie in allMovies" ng-change='getTheaters(form.movie)'></select>
-      <input ng-model="form.date" name="date" type="date" class="outingField">
+    </div>
+    <div ng-show='dateFieldDisplay()'>
+      2. Select a Date: 
+      <input ng-model="form.date" name="date" type="date" class="outingField" ng-change='showTheaters()'>
     </div>
     <div ng-show="theaterField()">
-      2. Select a Theater
+      3. Select a Theater:
       <select ng-model="form.theater" name="theater" type="text" placeholder="Theater" class="outingField" ng-options="theater.theatre.name for (name, theater) in theaters" ng-change='getShowtimes(form.movie, form.theater)' ></select>
     </div>
     <div ng-show="showtimeField()">
-      3. Select a Date
-      <select ng-model="form.showtime" name="theater" type="text" placeholder="Theater" class="outingField" ng-options="showtime for showtime in showtimes" ></select>
+      4. Select a Showtime:
+      <select ng-model="form.showtime" name="theater" type="text" placeholder="Theater" class="outingField" ng-options="showtime for (showtime, showtime) in showtimes" ></select>
     </div>
     
     <button ng-click="cancelNewOuting()" type="reset">Cancel</button>
