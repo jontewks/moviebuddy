@@ -215,7 +215,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
       data: outing
     })
     .success(function (data) {
-      sendAlert.email('joinEmail', $scope.currentMovie.title);
+      sendAlert.email('joinEmail', outing.movie);
       $scope.getOutings();
     })
     .error(function (data, status, headers, config) {
