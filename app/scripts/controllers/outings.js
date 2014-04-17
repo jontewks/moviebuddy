@@ -267,6 +267,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
 
     delete outing.attendees[ '_' + userId];
     delete outing.organizers[ '_' + userId];
+    sendAlert.email('bailEmail', outing.movie);
 
     // Check if bailing user was only organizer.
     if (Object.keys(outing.organizers).length <= 0) {

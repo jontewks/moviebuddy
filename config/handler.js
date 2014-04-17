@@ -274,6 +274,15 @@ exports.sendAlert = function(req, res) {
         };
       }
 
+      if (req.body.type === 'bailEmail') {
+        var mailOptions = {
+          from: 'MovieBuddyApp <moviebuddyapp@gmail.com>',
+          to: userEmail,
+          subject: 'You bailed on an outing',
+          text: 'You have bailed on an outing to go see the movie ' + req.body.movie + ', you quitter.'
+        };
+      }
+
       smtpTransport.sendMail(mailOptions, function (err, res) {
         if (err) {
           console.log(err);
