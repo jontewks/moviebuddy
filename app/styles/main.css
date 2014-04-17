@@ -1,17 +1,5 @@
 @charset "UTF-8"; 
 
-/* Yeoman Symbols **************/
-/*@font-face {
-  font-family: "glyphicons";
-  src: url("../fonts/glyphicons-halflings-regular.eot");
-  src: url("../fonts/glyphicons-halflings-regular.svg"),
-       url("../fonts/glyphicons-halflings-regular.ttf"),
-       url("../fonts/glyphicons-halflings-regular.woff");
-  font-weight: normal;
-  font-style: normal;
-}
-*/
-
 /* Global Reset ****************/
 html, body, div, section, article, aside, header, hgroup, footer, nav, h1, h2, h3, h4, h5, h6, p, blockquote, address, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {
   margin: 0;
@@ -50,7 +38,7 @@ a {
 /* Nav Bar *********************/
 
 nav {
-  text-align: center; /* Centers the group. */
+  text-align: center;
   width: 100%;
   position: fixed;
   background-color: #A81303;
@@ -69,12 +57,8 @@ nav a {
 
 .editable-input {
   border: none;
-  /*border-bottom: 1px solid #333;*/
   height: 20px;
   width: 100px !important;
-  /*background-color: #E0E4CC;*/
-  /*font-family: "Hammersmith One", sans-serif;*/
-  /*text-transform: uppercase;*/
 }
 
 .editable-input:focus {
@@ -91,7 +75,6 @@ nav a {
   color: #FFFFFF;
   background-color: #00A8C6;
   text-align: center;
-  /*text-transform: uppercase;*/
 }
 
 .editable-buttons button:nth-child(2) {
@@ -99,7 +82,6 @@ nav a {
 }
 
 .navDiv {
-/*  width: 32.4%; /* Why not 33.333%? */
   width: 24%;
   height: 44px;
   display: inline-block;
@@ -223,14 +205,10 @@ nav a {
 }
 
 .moviesSectionHeader {
-  /*padding-top: 40px;*/
-  /*padding-bottom: 40px;*/
-  /*background-color: rgba(37, 244, 154, .75);*/
 }
 
 .filters {
   text-align: center;
-  /*min-width: 650px;*/
 }
 
 .filter {
@@ -242,7 +220,6 @@ nav a {
   -moz-border-radius: 4px;
   color: #ffffff;
   background-color: #00A8C6;
-  /*text-transform: uppercase;*/
 }
 
 .filter:hover {
@@ -258,14 +235,11 @@ nav a {
   height: 30px;
   width: 300px;
   border: none;
-  /*border-bottom: 3px solid black;*/
   padding: 0px;
   margin-top: 10px;
-  /*text-transform: uppercase;*/
   line-height: 1em;
   font-size: 1.2em;
   text-align: center;
-  /*background-color: rgba(255, 255, 255, 0);*/
 }
 
 .searchFilter:focus {
@@ -275,10 +249,7 @@ nav a {
   margin: 0;
   padding: 0;
   display: block;
-  /*padding-top: 15px;*/
-  /*margin-bottom: 10px;*/
   overflow: ellipsis;
-  /*color: lightgray;*/
 }
 
 .movieThumb {
@@ -289,13 +260,11 @@ nav a {
 .infoOne {
   float: left;
   width: 200px;
-  /*height: 180px;*/
   margin-left: 12px;
 }
 
 .infoTwo {
   width: 200px;
-  /*height: 180px;*/
   margin-left: 12px;
   display: inline-block;
 }
@@ -389,14 +358,11 @@ nav a {
 
 .profileSection{
   height: 200px;
-  /*min-width: 750px;*/
-  /*text-transform: uppercase;*/
   font-size: .75em;
 }
 
 .profile {
   margin-top: 20px;
-  /*min-width: 700px;*/
 }
 
 #profilePicDiv {
@@ -436,74 +402,6 @@ nav a {
   color: black;
   border: none;
 }
-
-/* Leftover Junk to Delete */
-
-/*.footer {
-  height: 100px;
-}*/
-
-/*.headerDiv {
-  text-align: center;
-  height: 100px;
-  padding-top: 10px;
-  padding-bottom: 30px;
-}*/
-
-/*.appHeader {
-  background: url("../images/bearLogo.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  height: 100px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  width: 120px;
-  border-radius: 50%;
-  margin: auto;
-  background-color: white;
-  display: inline-block;
-}*/
-
-/*.logoutButton {
-  position: absolute;
-  display: inline-block;
-  padding: 8px 15px;
-  cursor: pointer;
-  border: 1px solid #00A8C6;
-  border-radius: 4px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  color: #ffffff;
-  background-color: #00A8C6;
-  text-transform: uppercase;
-  margin-top: 40px;
-  margin-left: 100px;
-}*/
-
-/*.logoutButton:hover {
-  background-color: rgba(37, 244, 154, .75);
-  border-color: rgba(37, 244, 154, .75);
-  color: #ffffff;
-}*/
-
-/*.sectionHeader {
-  text-align: center;
-  font-weight: 900;
-  font-size: 2em;
-  letter-spacing: .1em;
-  cursor: pointer;
-}*/
-
-/*.sectionContainer {
-  padding: 20px;
-  display: none;
-}*/
-
-/*.sectionContainerProfile {
-  color: black;
-  padding: 20px;
-}*/
 
 /* Tablet Layout ***************/
 @media only screen and (min-width: 768px) {
