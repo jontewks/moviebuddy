@@ -9,9 +9,10 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
 
   var theaterField = false;
   var showtimeField = false;
+  var dateField = false;
 
   $scope.theaters = {};
-  $scope.showtimes = [];
+  $scope.showtimes = {};
 
   $scope.theaterField = function(){
     return theaterField;
@@ -21,6 +22,10 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
     return showtimeField;
   };
 
+  $scope.dateFieldDisplay = function(){
+    return dateField;
+  };
+
   var showTheaterField = function(){
     theaterField = true;
   };
@@ -28,11 +33,18 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
   var showShowtimeField = function(){
     showtimeField = true;
   };
-  
+
+  var showDateField = function(){
+    dateField = true;
+  };
+
+  $scope.showTheaters = function(){
+    showTheaterField();
+  };
 
   $scope.getTheaters = function(movie){
     if (movie.title !== '') {
-      showTheaterField();
+      showDateField();
     }
     $scope.currentMovie = movie;
     for (var k = 0; k < movie.showtimes.length; k++){
@@ -44,12 +56,12 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
     if (theater !== '') {
       showShowtimeField();
     }
-    $scope.showtimes = [];
+    $scope.showtimes = {};
     for (var i = 0; i < movie.showtimes.length; i++) {
       var showtime = movie.showtimes[i];
       if ($scope.theaters[showtime.theatre.name]) {
         var time = formatDate(new Date(showtime.dateTime));
-        $scope.showtimes.push(time);
+        $scope.showtimes[time] = time;
       }
     }
   };
@@ -88,7 +100,10 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
     $scope.form.date = '';
     $scope.form.theater = '';
     $scope.form.showtime = '';
-    // $scope.form.invitees = '';
+
+    theaterField = false;
+    showtimeField = false;
+    dateField = false;
   };
 
   // Function to create new outing object from form and user.
@@ -177,7 +192,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
     var outing = this.outing;
 
     for (var attendeeId in outing.attendees) {
-      if (Number(attendeeId) === Number(userId)) {
+      if (attendeeId === ('_' + userId)) {
         return false;
       }
     }
@@ -211,7 +226,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
     var outing = this.outing;
 
     for (var attendeeId in outing.attendees) {
-      if (Number(attendeeId) === Number(userId)) {
+      if (attendeeId === ('_' + userId)) {
         return true;
       }
     }
