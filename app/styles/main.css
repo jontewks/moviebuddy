@@ -38,6 +38,43 @@ a {
   min-width: 320px;
 }
 
+.sectionContainer {
+  position: relative;
+  top: 44px;
+}
+
+/* Nav Bar */
+
+nav {
+  text-align: center; /* Centers the group. */
+  width: 100%;
+  position: fixed;
+  background-color: #A81303;
+  z-index: 999;
+}
+
+nav a {
+  position: relative;
+  top: 50%;
+}
+
+.navDiv {
+  width: 32.4%; /* Why not 33.333%? */
+  height: 44px;
+  display: inline-block;
+  background-color: #A81303;
+  text-align: center;
+}
+
+.navDiv:hover, .navDiv:active, .navDiv:focus, .navDiv.active {
+  background-color: #D90414;
+}
+
+.navDiv span {
+  position: relative;
+  top: 25%;
+}
+
 /* App Launch / FB Login */
 
 .loginHeaderDiv {
@@ -75,37 +112,6 @@ a {
   background-repeat: no-repeat;
   background-size: 100%;
   cursor: pointer;
-}
-
-/* Nav Bar */
-
-nav {
-  text-align: center; /* Centers the group. */
-  width: 100%;
-  position: fixed;
-  background-color: #A81303;
-}
-
-nav a {
-  position: relative;
-  top: 50%;
-}
-
-.navDiv {
-  width: 32.4%; /* Why not 33.333%? */
-  height: 44px;
-  display: inline-block;
-  background-color: #A81303;
-  text-align: center;
-}
-
-.navDiv:hover, .navDiv:active, .navDiv:focus, .navDiv.active {
-  background-color: #D90414;
-}
-
-.navDiv span {
-  position: relative;
-  top: 25%;
 }
 
 /* outings */
