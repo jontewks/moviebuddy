@@ -21,17 +21,19 @@ app.delete('/api/user/:facebookId', handler.authenticated, handler.deleteUser);
 
 app.get('/api/friends/*', handler.authenticated, handler.getFriends);
 
-app.get('/api/outings', handler.getOuting);
+app.get('/api/outings/:facebookId', handler.getOuting);
 app.post('/api/outings', handler.postOuting);
 app.put('/api/outings/:_id', handler.putOuting);
 app.delete('/api/outings/:_id', handler.deleteOuting);
 
+app.get('/auth/isLoggedIn', handler.isLoggedIn);
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
 app.get('/auth/facebook/callback', function (req, res, next) {
   handler.authFacebookCallback(req, res, next, passport);
 });
 
-app.get('/auth/isLoggedIn', handler.isLoggedIn);
+app.post('/sendalert', handler.sendAlert);
+
 app.get('/logout', handler.logout);
 
 // Redirect any other funky request to the home page

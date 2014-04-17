@@ -1,5 +1,7 @@
 var db = require('./db_config');
 var FB = require('fb');
+var nodemailer = require('nodemailer');
+var auth = require('./auth');
 
 exports.authenticated = function(req, res, next) {
   if (req.isAuthenticated()) {
@@ -11,7 +13,7 @@ exports.authenticated = function(req, res, next) {
 
 exports.isLoggedIn = function(req, res) {
   if (req.isAuthenticated()){
-    res.send('true');
+    res.send(req.session.passport.user);
   } else {
     res.send('false');
   }
@@ -136,16 +138,32 @@ exports.queryFBFriends = function(token, profile){
 
 exports.getOuting = function(req, res) {
   // *** TO-DO: Enable find of user- & friend-specific outings.
-  var d = new Date();
-  var day = d.getDate();
-  var month = d.getMonth();
-  var year = d.getFullYear();
-
-  db.Outing.find({ 'date': { '$gte': new Date(year, month, day) }}, function (err, outing) {
-    if (!err) {
-      res.send(outing);
+  db.User.findOne( { 'facebookId': req.params.facebookId}, function( err, user){
+    if( err ){
+      console.log('error retrieving userId:', req.params.facebookId, 'from mongodb');
+      res.send(404);
     } else {
-      console.log(err);
+      var idList = user.friends.concat(req.params.facebookId);
+      var results = [];
+      var counter = 0;
+      for( var i = 0; i < idList.length; i++){
+        var keyString = 'organizers._' + idList[i] + '.facebookId';
+        var facebookIdString = idList[i].toString();
+
+        var queryObject = { };
+        queryObject[keyString] = facebookIdString;
+        db.Outing.find(queryObject, function( err, friendOutings){
+          if( friendOutings.length > 0){
+            results = results.concat(friendOutings)
+            counter++;
+          } else {
+            counter++;
+          }
+          if( counter === idList.length){
+            res.send(results);
+          }
+        });
+      }
     }
   });
 };
@@ -160,6 +178,7 @@ exports.postOuting = function(req, res) {
     city: body.city,
     state: body.state,
     zip: body.zip,
+    showtime: body.showtime,
     // invitees: body.invitees,
     attendees: body.attendees,
     organizers: body.organizers
@@ -183,6 +202,7 @@ exports.putOuting = function(req, res) {
     outing.city = body.city;
     outing.state = body.state;
     outing.zip = body.zip;
+    outing.showtime = body.showtime;
     // outing.invitees = body.invitees;
     outing.attendees = body.attendees;
     outing.organizers = body.organizers;
@@ -214,11 +234,49 @@ exports.authFacebookCallback = function(req, res, next, passport) {
     if (!user) { return res.redirect('/'); }
     req.login(user, function (err) {
       if (err) { return next(err); }
-      req.session.username = 'farid';
-      res.cookie(JSON.stringify(user));
       return res.redirect('/#/dash');
     });
   })(req, res, next);
+};
+
+exports.sendAlert = function(req, res) {
+  var userEmail;
+
+  var smtpTransport = nodemailer.createTransport('SMTP', {
+    service: 'Gmail',
+    auth: {
+      user: auth.gmailAuth.user,
+      pass: auth.gmailAuth.pass
+    }
+  });
+
+  db.User.findOne({ facebookId: req.body.userId }, function (err, user) {
+    if (err) {
+      console.log(err);
+    } else {
+      userEmail = user.email;
+
+      var mailOptions = {
+        from: 'MovieBuddyApp <moviebuddyapp@gmail.com>',
+        to: userEmail,
+        subject: 'New Outing Created',
+        text: 'You have created a new outing to go see the movie ' + req.body.movie + ', we will keep you updated with any changes.'
+        // html: '<b>Hello world ✔</b>'
+      };
+
+      smtpTransport.sendMail(mailOptions, function (err, res) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log('Message sent: ' + res.message);
+        }
+
+        smtpTransport.close();
+      });
+    }
+  });
+
+  res.send();
 };
 
 exports.logout = function(req, res) {

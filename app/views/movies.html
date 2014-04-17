@@ -2,8 +2,8 @@
 
   <div class="filters">
 
-    <button class="filter" ng-click="category = 'ratings.audience_score'; reverse = !reverse">Audience Score</button>
-    <button class="filter" ng-click="category = 'ratings.critics_score'; reverse = !reverse">Critics' Score</button>
+    <button class="filter" ng-click="category = 'audience_score'; reverse = !reverse">Audience Score</button>
+    <button class="filter" ng-click="category = 'critics_score'; reverse = !reverse">Critics' Score</button>
     <button class="filter" ng-click="category = 'title'; reverse = !reverse">Title</button>
     <button class="filter" ng-click="category = 'runtime'; reverse = !reverse">Runtime</button>
     <br>
@@ -15,34 +15,44 @@
 
   <div class="movie" ng-repeat="movie in allMovies | filter:search:strict | orderBy:category:reverse" >
 
-    <img src={{movie.posters.thumbnail}} class="movieThumb">
+    <img src={{movie.thumbnail}} class="movieThumb">
     <div class="infoOne">
       <span class="movieTitle"><u>{{movie.title}}</u></span>
-      <span class="criticScore">Critics Score: {{movie.ratings.critics_score}}%</span>
-      <span class="audienceScore">Audience Score: {{movie.ratings.audience_score}}%</span>
+      <span class="criticScore">Critics Score: {{movie.critics_score}}%</span>
+      <span class="audienceScore">Audience Score: {{movie.audience_score}}%</span>
       <div class="cast">
-        <span class="actor" ng-repeat="actor in movie.abridged_cast">{{actor.name}} </span> 
+        <span class="actor" ng-repeat="actor in movie.topCast">{{actor}} </span> 
       </div>
     </div>
 
     <div class="infoTwo">
       <span class="runtime">Runtime: {{movie.runtime = movie.runtime ? movie.runtime : 0}} min.</span>
-      <span class="mpaaRating">Rated: {{movie.mpaa_rating}}</span>
+      <span class="mpaaRating">Rated: {{movie.ratings[0].code}}</span>
       <span ng-controller="movieInfoController" ng-click="toggleText(movie.critics_consensus)" class="criticsConsensus">Critics Consensus: {{movie.critics_consensus | limitTo:textLimit}}{{moreText}}</span>
       <span ng-controller="movieInfoController" ng-click="toggleText(movie.synopsis)" class="synopsis">Synopsis: {{movie.synopsis | limitTo:textLimit}}{{moreText}}</span>
     </div>
 
-    <div class="infoThree">
-      <button ng-click="storeCurrent(movie.title)">Go see it!</button>
-    </div>
+    <div class="sectionContainer movieOutingDiv" ng-controller="OutingsController">
 
-    <div class="sectionContainer centered" ng-controller="OutingsController">
+      <div class="infoThree">
+        <button ng-click="storeCurrent(movie.title)">Go see it!</button>
+      </div>
 
-      <form ng-submit="processOutingForm()" name="outingForm" class="movieOutingCreation">
-        <input ng-model="form.date" name="date" type="date" class="outingField">
-        <input ng-model="form.theater" name="theater" type="text" placeholder="Theater" class="outingField">
+      <form ng-submit="processOutingForm()" name="outingForm" class="movieOutingForm">
+        <div>
+          1. Select A Date:
+          <input ng-model="form.date" name="date" type="date" class="outingField" ng-change='getTheaters(currentMovie)'>
+        </div>
+        <div ng-show="theaterField()">
+          2. Select a Theater
+          <select ng-model="form.theater" name="theater" type="text" placeholder="Theater" class="outingField" ng-options="theater.theatre.name for (name, theater) in theaters" ng-change='getShowtimes(currentMovie, form.theater)' ></select>
+        </div>
+        <div ng-show="showtimeField()">
+          3. Select a Date
+          <select ng-model="form.showtime" name="theater" type="text" placeholder="Theater" class="outingField" ng-options="showtime for showtime in showtimes" ></select>
+        </div>
         <button ng-click="cancelNewOuting()" type="reset">Cancel</button>
-        <button ng-click="" type="submit" class="outingCreation">Create Outing</button>
+        <button ng-click="" type="submit">Create Outing</button>
       </form>
 
     </div>

@@ -164,8 +164,6 @@ nav a {
 }
 
 .outingsList {
-  font-size: 14pt;
-  color: black;
 }
 
 .outingMovie {
@@ -217,7 +215,7 @@ nav a {
 
 /* Movies **********************/
 
-.movieOutingCreation {
+.movieOutingForm {
   display: none;
 }
 
@@ -225,9 +223,9 @@ nav a {
 }
 
 .moviesSectionHeader {
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background-color: rgba(37, 244, 154, .75);
+  /*padding-top: 40px;*/
+  /*padding-bottom: 40px;*/
+  /*background-color: rgba(37, 244, 154, .75);*/
 }
 
 .filters {
@@ -260,25 +258,27 @@ nav a {
   height: 30px;
   width: 300px;
   border: none;
-  border-bottom: 3px solid black;
+  /*border-bottom: 3px solid black;*/
   padding: 0px;
   margin-top: 10px;
   /*text-transform: uppercase;*/
   line-height: 1em;
   font-size: 1.2em;
   text-align: center;
-  background-color: rgba(255, 255, 255, 0);
+  /*background-color: rgba(255, 255, 255, 0);*/
 }
 
 .searchFilter:focus {
 }
 
 .movie {
+  margin: 0;
+  padding: 0;
   display: block;
-  padding-top: 15px;
-  margin-bottom: 10px;
+  /*padding-top: 15px;*/
+  /*margin-bottom: 10px;*/
   overflow: ellipsis;
-  color: lightgray;
+  /*color: lightgray;*/
 }
 
 .movieThumb {
@@ -289,15 +289,20 @@ nav a {
 .infoOne {
   float: left;
   width: 200px;
-  height: 180px;
-  margin-left: 25px;
+  /*height: 180px;*/
+  margin-left: 12px;
 }
 
-.infoTwo{
+.infoTwo {
   width: 200px;
-  height: 180px;
-  margin-left: 25px;
+  /*height: 180px;*/
+  margin-left: 12px;
   display: inline-block;
+}
+
+.infoThree {
+  margin: 0;
+  padding: 0;
 }
 
 .movieTitle {
@@ -339,7 +344,7 @@ nav a {
 }
 
 .movieHR {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 /* Friends *********************/
