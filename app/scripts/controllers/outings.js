@@ -190,7 +190,6 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
   $scope.showJoinButton = function() {
     var userId = $rootScope.user.facebookId;
     var outing = this.outing;
-    console.log(userId);
 
     for (var attendeeId in outing.attendees) {
       if (attendeeId === ('_' + userId)) {
@@ -227,7 +226,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
     var outing = this.outing;
 
     for (var attendeeId in outing.attendees) {
-      if (Number(attendeeId) === Number(userId)) {
+      if (attendeeId === ('_' + userId)) {
         return true;
       }
     }
