@@ -17,19 +17,19 @@
 
   <div class="movie" ng-repeat="movie in allMovies | filter:search:strict | orderBy:category:reverse" >
 
-    <img src={{movie.posters.thumbnail}} class="movieThumb">
+    <img src={{movie.thumbnail}} class="movieThumb">
     <div class="infoOne">
       <span class="movieTitle"><u>{{movie.title}}</u></span>
-      <span class="criticScore">Critics Score: {{movie.ratings.critics_score}}%</span>
-      <span class="audienceScore">Audience Score: {{movie.ratings.audience_score}}%</span>
+      <span class="criticScore">Critics Score: {{movie.critics_score}}%</span>
+      <span class="audienceScore">Audience Score: {{movie.audience_score}}%</span>
       <div class="cast">
-        <span class="actor" ng-repeat="actor in movie.abridged_cast">{{actor.name}} </span> 
+        <span class="actor" ng-repeat="actor in movie.topCast">{{actor}} </span> 
       </div>
     </div>
 
     <div class="infoTwo">
       <span class="runtime">Runtime: {{movie.runtime = movie.runtime ? movie.runtime : 0}} min.</span>
-      <span class="mpaaRating">Rated: {{movie.mpaa_rating}}</span>
+      <span class="mpaaRating">Rated: {{movie.ratings[0].code}}</span>
       <span ng-controller="movieInfoController" ng-click="toggleText(movie.critics_consensus)" class="criticsConsensus">Critics Consensus: {{movie.critics_consensus | limitTo:textLimit}}{{moreText}}</span>
       <span ng-controller="movieInfoController" ng-click="toggleText(movie.synopsis)" class="synopsis">Synopsis: {{movie.synopsis | limitTo:textLimit}}{{moreText}}</span>
     </div>

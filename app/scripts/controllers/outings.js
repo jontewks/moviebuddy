@@ -2,14 +2,11 @@
 
 var app = angular.module('moviebuddyApp');
 
-app.controller('OutingsController', ['$scope', '$rootScope', '$http', '$q', 'getMoviesData','getTheaterData',  function ($scope, $rootScope, $http, $q, getMoviesData, getTheaterData) {
+app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'getTheaterData',  function ($scope, $rootScope, $http, getTheaterData) {
   var newOutingButtonVisible = true;
   var newOutingFormVisible = false;
   $scope.showtimes = [];
 
-  $scope.moviesAtTheater = function(movie){
-
-  };
 
   $scope.clearOutingForm = function() {
     $scope.form.movie = '';

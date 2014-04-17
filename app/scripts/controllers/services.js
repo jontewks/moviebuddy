@@ -23,62 +23,153 @@ app.service('updateUsers', ['$http', function ($http) {
   };
 }]);
 
-app.service('getMoviesData', ['$http', function ($http) {
+app.service('getRTMovies', ['$http','$q', function ($http, $q) {
+
   this.allMovies = [];
 
   // Gets all data for movies currently in theaters and stores the movie objects in the allMovies array.
-  this.getMovieData = function(queryPage, queryPageLimit) {
+  this.getMovieData = function(queryPage, queryPageLimit, deferred) {
     var self = this;
     var rottenTomatoesUrl = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?callback=JSON_CALLBACK&apikey=63za93cgdtv88ves8p6d9wrk';
     var totalMovies;
     var totalQueryPages;
     var query = rottenTomatoesUrl + '&page_limit=' + queryPageLimit + '&page=' + queryPage;
 
-    return $http.jsonp(query)
+    deferred = deferred || $q.defer();
+
+    $http.jsonp(query)
       .success(function (data) {
+
         totalMovies = data.total;
         totalQueryPages = Math.ceil(totalMovies / queryPageLimit);
         self.allMovies = self.allMovies.concat(data.movies);
         queryPage++;
 
         if (queryPage <= totalQueryPages) {
-          self.getMovieData(queryPage, queryPageLimit);
+          self.getMovieData(queryPage, queryPageLimit, deferred);
+        } else {
+          deferred.resolve(self.allMovies);
         }
+
       });
+
+    return deferred.promise;
+    
   };
 }]);
 
-app.service('getTheaterData', ['$http', function ($http){
+app.service('getTheaterData', ['$http', '$rootScope', 'getRTMovies', function ($http, $rootScope, getRTMovies){
 
-  this.getTheaters = function(zip) {
-    var query = 'http://data.tmsapi.com/v1/theatres?zip='+zip+'&api_key=evgps6crhu6hxpyczeh9k5er';
 
-    return $http.get(query);
-  };
+  var date = new Date();
+  var year = date.getYear() + 1900;
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+  if (day < 10)   { day = '0' + day;     }
+  if (month < 10) { month = '0' + month; }
 
-  this.getTheaterShowtimes = function(theaterId) {
-    if (!theaterId) { return; }
-    var date = new Date();
-    var year = date.getYear() + 1900;
-    var month = date.getMonth() + 1;
-    var day = date.getDate();
+  var today = year +'-'+ month + '-'+ day;
 
-    if (day < 10) {
-      day = '0' + day;
-    }
+  this.getMovies = function() {
 
-    if (month < 10) {
-      month = '0' + month;
-    }
-    var today = year +'-'+ month + '-'+ day;
+    var query = 'http://data.tmsapi.com/v1/movies/showings?startDate='+today+'&zip='+ $rootScope.currentZip +'&api_key=evgps6crhu6hxpyczeh9k5er';
 
-    var query = 'http://data.tmsapi.com/v1/theatres/'+theaterId+'/showings?startDate='+today+'&api_key=evgps6crhu6hxpyczeh9k5er';
-    
-    $http.jsonp(query)
-    .success(function(data){
-      console.log(data);
+    $http.get(query)
+    .then(function(data){
+      $rootScope.allMovies = data.data;
+      getRTMovies.getMovieData(1, 50)
+      .then(function(movies){
+        var rtMovies = movies;
+        for (var i = 0; i < $rootScope.allMovies.length; i++) {
+
+
+          var movie = $rootScope.allMovies[i];
+
+
+          // check for movie poster
+          if (!movie.thumbnail) {
+            for (var k = 0; k < rtMovies.length; k++) {
+              var rtMovie = rtMovies[k];
+              if (rtMovies[k].title.toUpperCase() === movie.title.toUpperCase()) {
+                movie.thumbnail = rtMovie.posters.thumbnail;
+              }
+            }
+            if (!movie.thumbnail) {
+              movie.thumbnail = 'http://images.rottentomatoescdn.com/images/redesign/poster_default.gif';
+            }
+          }
+
+          // critics score
+          if (!movie.audience_score) {
+            for (var k = 0; k < rtMovies.length; k++) {
+              var rtMovie = rtMovies[k];
+              if (rtMovies[k].title.toUpperCase() === movie.title.toUpperCase()) {
+                movie.critics_score = rtMovie.ratings.critics_score;
+              }
+            }
+            if (!movie.critics_score) {
+              movie.critics_score = 'N/A';
+            }
+          }
+
+          // audience score
+          if (!movie.audience_score) {
+            for (var k = 0; k < rtMovies.length; k++) {
+              var rtMovie = rtMovies[k];
+              if (rtMovies[k].title.toUpperCase() === movie.title.toUpperCase()) {
+                movie.audience_score = rtMovie.ratings.audience_score;
+              }
+            }
+            if (!movie.audience_score) {
+              movie.audience_score = 'N/A';
+            }
+          }
+
+          //critics consensus
+          if (!movie.critics_consensus) {
+            for (var k = 0; k < rtMovies.length; k++) {
+              var rtMovie = rtMovies[k];
+              if (rtMovies[k].title.toUpperCase() === movie.title.toUpperCase()) {
+                movie.critics_consensus = rtMovie.critics_consensus;
+              }
+            }
+          }
+
+          //synopsis
+          if (!movie.synopsis) {
+            for (var k = 0; k < rtMovies.length; k++) {
+              var rtMovie = rtMovies[k];
+              if (rtMovies[k].title.toUpperCase() === movie.title.toUpperCase()) {
+                movie.synopsis = rtMovie.synopsis;
+              }
+            }
+            if (movie.longDescription) {
+              movie.synopsis = movie.longDescription;
+            } else if(!movie.synopsis && !movie.longDescription) {
+              movie.synopsis = '';
+            }
+          }
+
+          //runtime
+          if (!movie.runtime || movie.runtime === 0) {
+            for (var k = 0; k < rtMovies.length; k++) {
+              var rtMovie = rtMovies[k];
+              if (rtMovies[k].title.toUpperCase() === movie.title.toUpperCase()) {
+                movie.runtime = rtMovie.runtime;
+              }
+            }
+            if (!movie.runtime) {
+              movie.runtime = 0;
+            }
+          }
+
+        } // end of for loop
+
+      });
+
     });
   };
+
 
 }]);
 
@@ -99,6 +190,7 @@ app.service('authentication', function($rootScope, $location, $http) {
       $rootScope.user = response.data;
     });
   };
+
 });
 
 app.service('getLocation', function($http, $rootScope, $q){

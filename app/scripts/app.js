@@ -18,6 +18,12 @@ app.config(['$routeProvider', function ($routeProvider) {
       resolve: {
         checkLogin: function(authentication) {
           return authentication.auth();
+        },
+        getZipAndMovies : function($rootScope, getLocation, getTheaterData) {
+          getLocation.getZip()
+          .then(function(){
+            getTheaterData.getMovies();
+          });
         }
       }
     })
