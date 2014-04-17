@@ -32,7 +32,7 @@
       <span ng-controller="movieInfoController" ng-click="toggleText(movie.synopsis)" class="synopsis">Synopsis: {{movie.synopsis | limitTo:textLimit}}{{moreText}}</span>
     </div>
 
-    <div class="sectionContainer movieOutingDiv" ng-controller="OutingsController">
+    <div class="movieOutingDiv" ng-controller="OutingsController">
 
       <div class="infoThree">
         <button ng-click="storeCurrent(movie.title)">Go see it!</button>

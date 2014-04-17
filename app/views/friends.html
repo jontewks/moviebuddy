@@ -1,3 +1,12 @@
+<script>
+  $(function(){
+    $('body').on('click', '.friend', function(e){
+      e.preventDefault();
+      $(this).find('.friendInfo').slideToggle();
+    });
+  })
+</script>
+
 <div class="sectionContainer">
 
   <div ng-repeat="friend in friends" class="friend">
