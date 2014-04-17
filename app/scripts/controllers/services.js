@@ -108,7 +108,7 @@ app.service('getTheaterData', ['$http', '$rootScope', 'getRTMovies', function ($
               }
             }
             if (!movie.critics_score) {
-              movie.critics_score = 'N/A';
+              movie.critics_score = 0;
             }
           }
 
@@ -121,7 +121,7 @@ app.service('getTheaterData', ['$http', '$rootScope', 'getRTMovies', function ($
               }
             }
             if (!movie.audience_score) {
-              movie.audience_score = 'N/A';
+              movie.audience_score = 0;
             }
           }
 

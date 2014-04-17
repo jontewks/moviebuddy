@@ -4,10 +4,6 @@ var app = angular.module('moviebuddyApp');
 
 app.controller('MoviesController', ['$rootScope', '$scope', 'getTheaterData', function ($rootScope, $scope, getTheaterData) {
 
-  $scope.storeCurrent = function(movie) {
-    $rootScope.currentMovie = movie;
-  };
-
 
 }]);
 

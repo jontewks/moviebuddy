@@ -119,10 +119,6 @@ body {
   background: url('../images/grey_wash_wall.png');
 }
 
-.movieOutingCreation {
-  display: none;
-}
-
 .sectionContainerProfile {
   color: black;
   padding: 20px;
@@ -459,6 +455,20 @@ body {
 .movieHR {
   margin-bottom: 10px;
 }
+
+.movieOutingCreation {
+  display: none;
+}
+
+.movieOutingDiv {
+  display: block;
+}
+
+.movieOutingForm {
+  display: none;
+}
+
+
 
 
 /* outings */
