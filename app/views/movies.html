@@ -1,6 +1,4 @@
-<h3 class="sectionHeader moviesSectionHeader">MOVIES</h3>
-
-<div class="sectionContainer movieDiv">
+<div class="sectionContainer">
 
   <div class="filters">
 
@@ -40,7 +38,7 @@
 
     <div class="sectionContainer centered" ng-controller="OutingsController">
 
-      <form ng-submit="processOutingForm()" name="outingForm">
+      <form ng-submit="processOutingForm()" name="outingForm" class="movieOutingCreation">
         <input ng-model="form.date" name="date" type="date" class="outingField">
         <input ng-model="form.theater" name="theater" type="text" placeholder="Theater" class="outingField">
         <button ng-click="cancelNewOuting()" type="reset">Cancel</button>

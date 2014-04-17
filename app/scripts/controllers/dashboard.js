@@ -8,6 +8,7 @@ app.controller('DashController', ['$scope', 'authentication', '$location', '$rou
 
   $scope.outingsVisible = true;
   $scope.moviesVisible = false;
+  $scope.friendsVisible = false;
   $scope.profileVisible = false;
 
   $scope.showOutings = function() {
@@ -18,6 +19,10 @@ app.controller('DashController', ['$scope', 'authentication', '$location', '$rou
     return $scope.moviesVisible;
   };
 
+  $scope.showFriends = function() {
+    return $scope.friendsVisible;
+  };
+
   $scope.showProfile = function() {
     return $scope.profileVisible;
   };
@@ -25,18 +30,28 @@ app.controller('DashController', ['$scope', 'authentication', '$location', '$rou
   $scope.navToOutings = function() {
     $scope.outingsVisible = true;
     $scope.moviesVisible = false;
+    $scope.friendsVisible = false;
     $scope.profileVisible = false;
   };
 
   $scope.navToMovies = function() {
     $scope.outingsVisible = false;
     $scope.moviesVisible = true;
+    $scope.friendsVisible = false;
+    $scope.profileVisible = false;
+  };
+
+  $scope.navToFriends = function() {
+    $scope.outingsVisible = false;
+    $scope.moviesVisible = false;
+    $scope.friendsVisible = true;
     $scope.profileVisible = false;
   };
 
   $scope.navToProfile = function() {
     $scope.outingsVisible = false;
     $scope.moviesVisible = false;
+    $scope.friendsVisible = false;
     $scope.profileVisible = true;
   };
 

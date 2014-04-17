@@ -1,6 +1,6 @@
 @charset "UTF-8"; 
 
-/* Yeoman Symbols */
+/* Yeoman Symbols **************/
 /*@font-face {
   font-family: "glyphicons";
   src: url("../fonts/glyphicons-halflings-regular.eot");
@@ -12,7 +12,7 @@
 }
 */
 
-/* Global Reset */
+/* Global Reset ****************/
 html, body, div, section, article, aside, header, hgroup, footer, nav, h1, h2, h3, h4, h5, h6, p, blockquote, address, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {
   margin: 0;
   padding: 0;
@@ -47,7 +47,7 @@ a {
   top: 44px;
 }
 
-/* Nav Bar */
+/* Nav Bar *********************/
 
 nav {
   text-align: center; /* Centers the group. */
@@ -62,8 +62,45 @@ nav a {
   top: 50%;
 }
 
+/* XEditable *******************/
+
+.editable-controls {
+}
+
+.editable-input {
+  border: none;
+  /*border-bottom: 1px solid #333;*/
+  height: 20px;
+  width: 100px !important;
+  /*background-color: #E0E4CC;*/
+  /*font-family: "Hammersmith One", sans-serif;*/
+  /*text-transform: uppercase;*/
+}
+
+.editable-input:focus {
+} 
+
+.editable-buttons button {
+  padding: 0px;
+  width: 25px;
+  height: 25px;
+  font-size: 6px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  color: #FFFFFF;
+  background-color: #00A8C6;
+  text-align: center;
+  /*text-transform: uppercase;*/
+}
+
+.editable-buttons button:nth-child(2) {
+  background-color: #d9534f;
+}
+
 .navDiv {
-  width: 32.4%; /* Why not 33.333%? */
+/*  width: 32.4%; /* Why not 33.333%? */
+  width: 24%;
   height: 44px;
   display: inline-block;
   background-color: #A81303;
@@ -79,7 +116,7 @@ nav a {
   top: 25%;
 }
 
-/* App Launch / FB Login */
+/* App Launch / FB Login *******/
 
 .loginHeaderDiv {
   height: 75%;
@@ -118,7 +155,7 @@ nav a {
   cursor: pointer;
 }
 
-/* outings */
+/* Outings *********************/
 
 .outingsSectionHeader {
   padding-top: 40px;
@@ -178,194 +215,11 @@ nav a {
   background-color: #A81303;
 }
 
-/*.headerDiv {
-  text-align: center;
-  height: 100px;
-  padding-top: 10px;
-  padding-bottom: 30px;
-}*/
+/* Movies **********************/
 
-/*.appHeader {
-  background: url("../images/bearLogo.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  height: 100px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  width: 120px;
-  border-radius: 50%;
-  margin: auto;
-  background-color: white;
-  display: inline-block;
-}*/
-
-/*.logoutButton {
-  position: absolute;
-  display: inline-block;
-  padding: 8px 15px;
-  cursor: pointer;
-  border: 1px solid #00A8C6;
-  border-radius: 4px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  color: #ffffff;
-  background-color: #00A8C6;
-  text-transform: uppercase;
-  margin-top: 40px;
-  margin-left: 100px;
-}*/
-
-/*.logoutButton:hover {
-  background-color: rgba(37, 244, 154, .75);
-  border-color: rgba(37, 244, 154, .75);
-  color: #ffffff;
-}*/
-
-/*.sectionHeader {
-  text-align: center;
-  font-weight: 900;
-  font-size: 2em;
-  letter-spacing: .1em;
-  cursor: pointer;
-}*/
-
-/*.sectionContainer {
-  padding: 20px;
+.movieOutingCreation {
   display: none;
-}*/
-
-/*.sectionContainerProfile {
-  color: black;
-  padding: 20px;
-}*/
-
-/* Profile Fun */
-
-.profileSection{
-  height: 200px;
-  min-width: 750px;
-  text-transform: uppercase;
-  font-size: .75em;
 }
-
-.profile {
-  margin-top: 20px;
-  min-width: 700px;
-}
-
-#profilePicDiv {
-  float: left;
-  margin-left: 15px;
-}
-
-#profilePic {
-  height: 150px;
-  width: 140px;
-  border-radius: 20px;
-}
-
-#userDetails {
-  margin-top: 10px;
-  margin-left: 30px;
-  width: 220px;
-  float: left;
-}
-
-#userMovieDetails {
-  margin-top: 10px;
-  margin-left: 30px;
-  display: inline-block;
-  width: 270px;
-}
-
-.userDetail {
-  color: black;
-  border: none;
-  width: 270px;
-  line-height: 2.5em;
-  display: block;
-}
-
-.editableUserDetail {
-  color: black;
-  border: none;
-}
-
-/* css override of xeditable angular */
-.editable-controls {
-}
-
-.editable-input {
-  border: none;
-  border-bottom: 1px solid #333;
-  height: 20px;
-  width: 100px !important;
-  background-color: #E0E4CC;
-  font-family: "Hammersmith One", sans-serif;
-  text-transform: uppercase;
-}
-
-.editable-input:focus {
-} 
-
-.editable-buttons button {
-  padding: 0px;
-  width: 25px;
-  height: 25px;
-  font-size: 6px;
-  cursor: pointer;
-  border: none;
-  border-radius: 4px;
-  color: #FFFFFF;
-  background-color: #00A8C6;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.editable-buttons button:nth-child(2) {
-  background-color: #d9534f;
-}
-
-/* friends */
-
-.sectionContainerFriends {
-  padding-left: 0px;
-}
-
-.friendsSection {
-  padding: 0px !important;
-}
-
-.friendsSectionHeader {
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background-color: #F38630;
-}
-
-.friend {
-  height: 75px;
-  padding: 10px;
-  background-color: lightgray;
-  border-radius: 5px;
-  width: 100%;
-}
-
-.friendsPhoto {
-  height: 70px;
-  border-radius: 20px;
-  float: left;
-}
-
-.friendName {
-  display: inline-block;
-  margin-left: 50px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  font-size: 2em;
-}
-
-/* movies */
 
 .moviesSection {
 }
@@ -378,7 +232,7 @@ nav a {
 
 .filters {
   text-align: center;
-  min-width: 650px;
+  /*min-width: 650px;*/
 }
 
 .filter {
@@ -390,7 +244,7 @@ nav a {
   -moz-border-radius: 4px;
   color: #ffffff;
   background-color: #00A8C6;
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
 }
 
 .filter:hover {
@@ -409,7 +263,7 @@ nav a {
   border-bottom: 3px solid black;
   padding: 0px;
   margin-top: 10px;
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
   line-height: 1em;
   font-size: 1.2em;
   text-align: center;
@@ -488,17 +342,170 @@ nav a {
   margin-bottom: 10px;
 }
 
-/* footer */
-.footer {
-  /*height: 100px;*/
+/* Friends *********************/
+
+.sectionContainerFriends {
+  padding-left: 0px;
 }
 
-/* Tablet Layout */
+.friendsSection {
+  padding: 0px !important;
+}
+
+.friendsSectionHeader {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #F38630;
+}
+
+.friend {
+  height: 75px;
+  padding: 10px;
+  background-color: lightgray;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.friendsPhoto {
+  height: 70px;
+  border-radius: 20px;
+  float: left;
+}
+
+.friendName {
+  display: inline-block;
+  margin-left: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 2em;
+}
+
+/* Profile *********************/
+
+.profileSection{
+  height: 200px;
+  /*min-width: 750px;*/
+  /*text-transform: uppercase;*/
+  font-size: .75em;
+}
+
+.profile {
+  margin-top: 20px;
+  /*min-width: 700px;*/
+}
+
+#profilePicDiv {
+  float: left;
+  margin-left: 15px;
+}
+
+#profilePic {
+  height: 150px;
+  width: 140px;
+  border-radius: 20px;
+}
+
+#userDetails {
+  margin-top: 10px;
+  margin-left: 30px;
+  width: 220px;
+  float: left;
+}
+
+#userMovieDetails {
+  margin-top: 10px;
+  margin-left: 30px;
+  display: inline-block;
+  width: 270px;
+}
+
+.userDetail {
+  color: black;
+  border: none;
+  width: 270px;
+  line-height: 2.5em;
+  display: block;
+}
+
+.editableUserDetail {
+  color: black;
+  border: none;
+}
+
+/* Leftover Junk to Delete */
+
+/*.footer {
+  height: 100px;
+}*/
+
+/*.headerDiv {
+  text-align: center;
+  height: 100px;
+  padding-top: 10px;
+  padding-bottom: 30px;
+}*/
+
+/*.appHeader {
+  background: url("../images/bearLogo.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 100px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 120px;
+  border-radius: 50%;
+  margin: auto;
+  background-color: white;
+  display: inline-block;
+}*/
+
+/*.logoutButton {
+  position: absolute;
+  display: inline-block;
+  padding: 8px 15px;
+  cursor: pointer;
+  border: 1px solid #00A8C6;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #ffffff;
+  background-color: #00A8C6;
+  text-transform: uppercase;
+  margin-top: 40px;
+  margin-left: 100px;
+}*/
+
+/*.logoutButton:hover {
+  background-color: rgba(37, 244, 154, .75);
+  border-color: rgba(37, 244, 154, .75);
+  color: #ffffff;
+}*/
+
+/*.sectionHeader {
+  text-align: center;
+  font-weight: 900;
+  font-size: 2em;
+  letter-spacing: .1em;
+  cursor: pointer;
+}*/
+
+/*.sectionContainer {
+  padding: 20px;
+  display: none;
+}*/
+
+/*.sectionContainerProfile {
+  color: black;
+  padding: 20px;
+}*/
+
+/* Tablet Layout ***************/
 @media only screen and (min-width: 768px) {
 
 }
 
-/* Desktop Layout */
+/* Desktop Layout **************/
 @media only screen and (min-width: 1024px) {
   .container {
     max-width: 1024px;
