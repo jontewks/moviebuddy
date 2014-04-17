@@ -30,11 +30,11 @@
     <div ng-repeat="outing in outings | orderBy: 'date'">
       <form editable-form name="editableForm" onaftersave="editOuting()">
         
-        <span editable-select="outing.movie" e-name="movie" e-required class="outingMovie" e-ng-options="movie.title as movie.title for movie in allMovies">{{ outing.movie }}</span> • 
-        <span editable-date="outing.date" e-name="date" class="outingDate">{{ outing.date | date: 'EEE., MMM. d' }}</span><br>
-        <span editable-text="outing.theater" e-name="theater" class="outingTheater">{{ outing.theater }}</span> • 
+        <span class="outingMovie">{{ outing.movie }}</span> • 
+        <span class="outingDate">{{ outing.date | date: 'EEE., MMM. d' }}</span><br>
+        <span class="outingTheater">{{ outing.theater }}</span> • 
         <span ng-repeat="(attendeeId, attendee) in outing.attendees" class="outingAttendees">{{ attendee.name }}, </span>
-        <span editable-text="outing.showtime" e-name="showtime" class="outingShowtime">{{ outing.showtime }}</span>
+        <span class="outingShowtime">{{ outing.showtime }}</span>
 
         <button ng-click="joinOuting()" ng-show="showJoinButton()" type="button">Join</button>
         <button ng-click="bailOuting()" ng-show="showBailButton()" type="button">Bail</button>
