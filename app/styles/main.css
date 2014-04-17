@@ -33,6 +33,10 @@ a {
   text-decoration: none;
 }
 
+.centered {
+  text-align: center;
+}
+
 .container {
   width: 100%;
   min-width: 320px;
@@ -116,10 +120,6 @@ nav a {
 
 /* outings */
 
-.centered {
-  text-align: center;
-}
-
 .outingsSectionHeader {
   padding-top: 40px;
   padding-bottom: 40px;
@@ -146,6 +146,36 @@ nav a {
 
 .outingAttendees {
   color: gray;
+}
+
+.newOutingButton {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  width: 100%;
+  height: 40px;
+  border: 0;
+  background-color: #A81303;
+  color: white;
+  font-size: 12pt;
+  font-weight: 400;
+}
+
+.newOutingButton:hover, .newOutingButton:active, .newOutingButton:focus, .newOutingButton.active {
+  background-color: #D90414;
+}
+
+.outingForm {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 800;
+  width: 100%;
+  padding: 8px 2px;
+  background-color: #A81303;
 }
 
 /*.headerDiv {

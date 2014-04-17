@@ -2,9 +2,9 @@
 
 <div class="sectionContainer centered">
 
-  <button ng-click="newOuting()" ng-show="showNewOutingButton()">New Outing</button>
+  <button ng-click="newOuting()" ng-show="showNewOutingButton()" class="newOutingButton">New Outing</button>
 
-  <form ng-submit="processOutingForm()" ng-show="showNewOutingForm()" name="outingForm">
+  <form ng-submit="processOutingForm()" ng-show="showNewOutingForm()" name="outingForm" class="outingForm">
     <select ng-model="form.movie" name="movie" ng-options="movie.title for movie in allMovies"></select>
     <input ng-model="form.date" name="date" type="date" class="outingField">
     <input ng-model="form.theater" name="theater" type="text" placeholder="Theater" class="outingField">
