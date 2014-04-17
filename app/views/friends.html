@@ -7,14 +7,11 @@
   })
 </script>
 
-<h3 class="sectionHeader friendsSectionHeader" ng-click="getMovieFriends()">FRIENDS</h3>
-
-<div class="sectionContainer sectionContainerFriends">
+<div class="sectionContainer">
 
   <div ng-repeat="friend in friends" class="friend">
     <img class="friendsPhoto" ng-src="http://graph.facebook.com/{{friend.facebookId}}/picture?type=large" />
     <span class="friendName">{{friend.name}}</span>
-  
 
     <div class="friendInfo">
       
