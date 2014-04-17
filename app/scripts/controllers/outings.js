@@ -11,7 +11,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
   var showtimeField = false;
 
   $scope.theaters = {};
-  $scope.showtimes = [];
+  $scope.showtimes = {};
 
   $scope.theaterField = function(){
     return theaterField;
@@ -44,12 +44,12 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
     if (theater !== '') {
       showShowtimeField();
     }
-    $scope.showtimes = [];
+    $scope.showtimes = {};
     for (var i = 0; i < movie.showtimes.length; i++) {
       var showtime = movie.showtimes[i];
       if ($scope.theaters[showtime.theatre.name]) {
         var time = formatDate(new Date(showtime.dateTime));
-        $scope.showtimes.push(time);
+        $scope.showtimes[time] = time;
       }
     }
   };
