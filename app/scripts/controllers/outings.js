@@ -9,9 +9,10 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
 
   var theaterField = false;
   var showtimeField = false;
+  var dateField = false;
 
   $scope.theaters = {};
-  $scope.showtimes = [];
+  $scope.showtimes = {};
 
   $scope.theaterField = function(){
     return theaterField;
@@ -21,6 +22,10 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
     return showtimeField;
   };
 
+  $scope.dateFieldDisplay = function(){
+    return dateField;
+  };
+
   var showTheaterField = function(){
     theaterField = true;
   };
@@ -28,11 +33,18 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
   var showShowtimeField = function(){
     showtimeField = true;
   };
-  
+
+  var showDateField = function(){
+    dateField = true;
+  };
+
+  $scope.showTheaters = function(){
+    showTheaterField();
+  };
 
   $scope.getTheaters = function(movie){
     if (movie.title !== '') {
-      showTheaterField();
+      showDateField();
     }
     $scope.currentMovie = movie;
     for (var k = 0; k < movie.showtimes.length; k++){
@@ -44,25 +56,26 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
     if (theater !== '') {
       showShowtimeField();
     }
-    $scope.showtimes = [];
+    $scope.showtimes = {};
     for (var i = 0; i < movie.showtimes.length; i++) {
       var showtime = movie.showtimes[i];
       if ($scope.theaters[showtime.theatre.name]) {
         var time = formatDate(new Date(showtime.dateTime));
-        $scope.showtimes.push(time);
+        $scope.showtimes[time] = time;
       }
     }
   };
 
   var formatDate = function(date){
-    var hr = date.getHours();
+
+    var hour = date.getHours();
     var min = date.getMinutes();
     var ampm = 'AM';
 
-    if (hr > 12) {
-      hr = hr - 12;
+    if (hour > 12) {
+      hour = hour - 12;
       ampm = 'PM';
-    } else if (hr === 12) {
+    } else if (hour === 12) {
       ampm = 'PM';
     }
 
@@ -70,7 +83,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
       min = '0' + min;
     }
 
-    var time = hr + ':' + min + ampm;
+    var time = hour + ':' + min + ampm;
 
     return time;
   };
@@ -88,7 +101,10 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
     $scope.form.date = '';
     $scope.form.theater = '';
     $scope.form.showtime = '';
-    // $scope.form.invitees = '';
+
+    theaterField = false;
+    showtimeField = false;
+    dateField = false;
   };
 
   // Function to create new outing object from form and user.
@@ -111,7 +127,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
     outing.organizers = {};
     outing.organizers['_' + userId] = { facebookId: userId.toString(), name: userName };
 
-    sendAlert.email();
+    sendAlert.email('creationEmail', $scope.currentMovie.title);
 
     return outing;
   };
@@ -177,7 +193,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
     var outing = this.outing;
 
     for (var attendeeId in outing.attendees) {
-      if (Number(attendeeId) === Number(userId)) {
+      if (attendeeId === ('_' + userId)) {
         return false;
       }
     }
@@ -199,6 +215,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
       data: outing
     })
     .success(function (data) {
+      sendAlert.email('joinEmail', $scope.currentMovie.title);
       $scope.getOutings();
     })
     .error(function (data, status, headers, config) {
@@ -211,7 +228,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
     var outing = this.outing;
 
     for (var attendeeId in outing.attendees) {
-      if (Number(attendeeId) === Number(userId)) {
+      if (attendeeId === ('_' + userId)) {
         return true;
       }
     }
@@ -250,6 +267,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
 
     delete outing.attendees[ '_' + userId];
     delete outing.organizers[ '_' + userId];
+    sendAlert.email('bailEmail', outing.movie);
 
     // Check if bailing user was only organizer.
     if (Object.keys(outing.organizers).length <= 0) {

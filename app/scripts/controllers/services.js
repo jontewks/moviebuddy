@@ -64,7 +64,6 @@ app.service('getRTMovies', ['$http','$q', function ($http, $q) {
 
 app.service('getTheaterData', ['$http', '$rootScope', 'getRTMovies', function ($http, $rootScope, getRTMovies){
 
-
   var date = new Date();
   var year = date.getYear() + 1900;
   var month = date.getMonth() + 1;
@@ -104,7 +103,7 @@ app.service('getTheaterData', ['$http', '$rootScope', 'getRTMovies', function ($
           }
 
           // critics score
-          if (!movie.audience_score) {
+          if (!movie.critics_score) {
             for (var k = 0; k < rtMovies.length; k++) {
               var rtMovie = rtMovies[k];
               if (rtMovies[k].title.toUpperCase() === movie.title.toUpperCase()) {
@@ -228,13 +227,14 @@ app.service('outingsData', function($http, $rootScope){
 // Notifications service
 app.service('sendAlert', ['$rootScope', '$http', function ($rootScope, $http) {
   
-  this.email = function() {
+  this.email = function(type, movie) {
     $http({
       method: 'POST',
       url: '/sendalert',
-      data: JSON.stringify({ 
+      data: JSON.stringify({
+        type: type,
         userId: $rootScope.user.facebookId,
-        movie: $rootScope.currentMovie
+        movie: movie
       })
     })
     .success(function (data) {

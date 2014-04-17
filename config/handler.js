@@ -256,13 +256,32 @@ exports.sendAlert = function(req, res) {
     } else {
       userEmail = user.email;
 
-      var mailOptions = {
-        from: 'MovieBuddyApp <moviebuddyapp@gmail.com>',
-        to: userEmail,
-        subject: 'New Outing Created',
-        text: 'You have created a new outing to go see the movie ' + req.body.movie + ', we will keep you updated with any changes.'
-        // html: '<b>Hello world ✔</b>'
-      };
+      if (req.body.type === 'creationEmail') {
+        var mailOptions = {
+          from: 'MovieBuddyApp <moviebuddyapp@gmail.com>',
+          to: userEmail,
+          subject: 'New outing created',
+          text: 'You have created a new outing to go see the movie ' + req.body.movie + ', we will keep you updated with any changes.'
+        };
+      }
+
+      if (req.body.type === 'joinEmail') {
+        var mailOptions = {
+          from: 'MovieBuddyApp <moviebuddyapp@gmail.com>',
+          to: userEmail,
+          subject: 'You joined an outing',
+          text: 'You have joined an outing to go see the movie ' + req.body.movie + '!'
+        };
+      }
+
+      if (req.body.type === 'bailEmail') {
+        var mailOptions = {
+          from: 'MovieBuddyApp <moviebuddyapp@gmail.com>',
+          to: userEmail,
+          subject: 'You bailed on an outing',
+          text: 'You have bailed on an outing to go see the movie ' + req.body.movie + ', you quitter.'
+        };
+      }
 
       smtpTransport.sendMail(mailOptions, function (err, res) {
         if (err) {
