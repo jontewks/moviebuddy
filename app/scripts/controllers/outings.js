@@ -111,7 +111,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
     outing.organizers = {};
     outing.organizers['_' + userId] = { facebookId: userId.toString(), name: userName };
 
-    sendAlert.email();
+    sendAlert.email('creationEmail', $scope.currentMovie.title);
 
     return outing;
   };
@@ -199,6 +199,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
       data: outing
     })
     .success(function (data) {
+      sendAlert.email('joinEmail', $scope.currentMovie.title);
       $scope.getOutings();
     })
     .error(function (data, status, headers, config) {

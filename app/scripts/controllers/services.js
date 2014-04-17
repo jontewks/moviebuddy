@@ -228,13 +228,14 @@ app.service('outingsData', function($http, $rootScope){
 // Notifications service
 app.service('sendAlert', ['$rootScope', '$http', function ($rootScope, $http) {
   
-  this.email = function() {
+  this.email = function(type, movie) {
     $http({
       method: 'POST',
       url: '/sendalert',
-      data: JSON.stringify({ 
+      data: JSON.stringify({
+        type: type,
         userId: $rootScope.user.facebookId,
-        movie: $rootScope.currentMovie
+        movie: movie
       })
     })
     .success(function (data) {

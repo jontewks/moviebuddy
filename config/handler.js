@@ -240,43 +240,51 @@ exports.authFacebookCallback = function(req, res, next, passport) {
 };
 
 exports.sendAlert = function(req, res) {
-  if (req.body.type === 'email') {
-    var userEmail;
+  var userEmail;
 
-    var smtpTransport = nodemailer.createTransport('SMTP', {
-      service: 'Gmail',
-      auth: {
-        user: auth.gmailAuth.user,
-        pass: auth.gmailAuth.pass
-      }
-    });
+  var smtpTransport = nodemailer.createTransport('SMTP', {
+    service: 'Gmail',
+    auth: {
+      user: auth.gmailAuth.user,
+      pass: auth.gmailAuth.pass
+    }
+  });
 
-    db.User.findOne({ facebookId: req.body.userId }, function (err, user) {
-      if (err) {
-        console.log(err);
-      } else {
-        userEmail = user.email;
+  db.User.findOne({ facebookId: req.body.userId }, function (err, user) {
+    if (err) {
+      console.log(err);
+    } else {
+      userEmail = user.email;
 
+      if (req.body.type === 'creationEmail') {
         var mailOptions = {
           from: 'MovieBuddyApp <moviebuddyapp@gmail.com>',
           to: userEmail,
-          subject: 'New Outing Created',
+          subject: 'New outing created',
           text: 'You have created a new outing to go see the movie ' + req.body.movie + ', we will keep you updated with any changes.'
-          // html: '<b>Hello world ✔</b>'
         };
-
-        smtpTransport.sendMail(mailOptions, function (err, res) {
-          if (err) {
-            console.log(err);
-          } else {
-            console.log('Message sent: ' + res.message);
-          }
-
-          smtpTransport.close();
-        });
       }
-    });
-  }
+
+      if (req.body.type === 'joinEmail') {
+        var mailOptions = {
+          from: 'MovieBuddyApp <moviebuddyapp@gmail.com>',
+          to: userEmail,
+          subject: 'You joined an outing',
+          text: 'You have joined an outing to go see the movie ' + req.body.movie + '!'
+        };
+      }
+
+      smtpTransport.sendMail(mailOptions, function (err, res) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log('Message sent: ' + res.message);
+        }
+
+        smtpTransport.close();
+      });
+    }
+  });
 
   res.send();
 };
