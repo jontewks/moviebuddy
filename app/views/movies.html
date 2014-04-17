@@ -1,6 +1,4 @@
-<h3 class="sectionHeader moviesSectionHeader">MOVIES</h3>
-
-<div class="sectionContainer movieDiv">
+<div class="sectionContainer">
 
   <div class="filters">
 
@@ -34,9 +32,7 @@
       <span ng-controller="movieInfoController" ng-click="toggleText(movie.synopsis)" class="synopsis">Synopsis: {{movie.synopsis | limitTo:textLimit}}{{moreText}}</span>
     </div>
 
-
-
-    <div class="sectionContainer movieOutingDiv" ng-controller="OutingsController">
+    <div class="movieOutingDiv" ng-controller="OutingsController">
 
       <div class="infoThree">
         <button ng-click="storeCurrent(movie.title)">Go see it!</button>
@@ -45,18 +41,18 @@
 
       <form ng-submit="processOutingForm()" name="outingForm" class='movieOutingForm'>
         <div>
-          1. Select A Date:
+          1. Select Date:<br />
           <input ng-model="form.date" name="date" type="date" class="outingField" ng-change='getTheaters(currentMovie); showTheaters()'>
         </div>
         <div ng-show="theaterField()">
-          2. Select a Theater:
-          <select ng-model="form.theater" name="theater" type="text" placeholder="Theater" class="outingField" ng-options="theater.theatre.name for (name, theater) in theaters" ng-change='getShowtimes(currentMovie, form.theater)' ></select>
+          2. Select Theater:<br />
+          <select ng-model="form.theater" name="theater" type="text" placeholder="Theater" class="outingField" ng-options="theater.theatre.name for (name, theater) in theaters" ng-change='getShowtimes(currentMovie, form.theater)' ></select><br />
         </div>
         <div ng-show="showtimeField()">
-          3. Select a Showtime:
+          3. Select Show Time:<br />
           <select ng-model="form.showtime" name="theater" type="text" placeholder="Theater" class="outingField" ng-options="showtime for (showtime, showtime) in showtimes" ></select>
         </div>
-        
+
         <button ng-click="cancelNewOuting()" type="reset">Cancel</button>
         <button ng-click="" type="submit">Create Outing</button>
       </form>

@@ -3,6 +3,7 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
   <head>
     <div id="fb-root"></div>
     <meta charset="utf-8">
@@ -15,17 +16,17 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
-    <link href='http://fonts.googleapis.com/css?family=Inder|Viga|Hammersmith+One|Gentium+Book+Basic:400,700,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
     <link href="bower_components/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
+
   <body ng-app="moviebuddyApp">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
     <div class="container" ng-view></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -58,5 +59,7 @@
         <script src="scripts/controllers/outings.js"></script>
         <script src="scripts/controllers/services.js"></script>
         <!-- endbuild -->
+
   </body>
+
 </html>

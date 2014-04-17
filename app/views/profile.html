@@ -1,6 +1,4 @@
-<h3 class="sectionHeader"></h3>
-
-<div class="sectionContainerProfile">
+<div class="sectionContainer">
   
   <div id="profilePicDiv">
     <img id="profilePic" src={{user.profilePicture}}>
@@ -38,6 +36,10 @@
       <u>Favorite Actor:</u>
       <span class='editableUserDetail' onaftersave='updateUser()' editable-text='user.favActor'>{{user.favActor || 'update'}}</span>
     </span>
+  </div>
+
+  <div>
+    <a class="logoutButton" href="/logout">Logout</a>
   </div>
 
 </div>
