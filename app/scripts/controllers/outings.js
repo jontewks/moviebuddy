@@ -67,14 +67,15 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
   };
 
   var formatDate = function(date){
-    var hr = date.getHours();
+
+    var hour = date.getHours();
     var min = date.getMinutes();
     var ampm = 'AM';
 
-    if (hr > 12) {
-      hr = hr - 12;
+    if (hour > 12) {
+      hour = hour - 12;
       ampm = 'PM';
-    } else if (hr === 12) {
+    } else if (hour === 12) {
       ampm = 'PM';
     }
 
@@ -82,7 +83,7 @@ app.controller('OutingsController', ['$scope', '$rootScope', '$http', 'sendAlert
       min = '0' + min;
     }
 
-    var time = hr + ':' + min + ampm;
+    var time = hour + ':' + min + ampm;
 
     return time;
   };
