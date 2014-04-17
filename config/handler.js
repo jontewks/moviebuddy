@@ -1,5 +1,7 @@
 var db = require('./db_config');
 var FB = require('fb');
+var nodemailer = require('nodemailer');
+var auth = require('./auth');
 
 exports.authenticated = function(req, res, next) {
   if (req.isAuthenticated()) {
@@ -252,6 +254,46 @@ exports.authFacebookCallback = function(req, res, next, passport) {
       return res.redirect('/#/dash');
     });
   })(req, res, next);
+};
+
+exports.sendAlert = function(req, res) {
+  var userEmail;
+
+  var smtpTransport = nodemailer.createTransport('SMTP', {
+    service: 'Gmail',
+    auth: {
+      user: auth.gmailAuth.user,
+      pass: auth.gmailAuth.pass
+    }
+  });
+
+  db.User.findOne({ facebookId: req.body.userId }, function (err, user) {
+    if (err) {
+      console.log(err);
+    } else {
+      userEmail = user.email;
+
+      var mailOptions = {
+        from: 'MovieBuddyApp <moviebuddyapp@gmail.com>',
+        to: userEmail,
+        subject: 'New Outing Created',
+        text: 'You have created a new outing to go see the movie ' + req.body.movie + ', we will keep you updated with any changes.'
+        // html: '<b>Hello world ✔</b>'
+      };
+
+      smtpTransport.sendMail(mailOptions, function (err, res) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log('Message sent: ' + res.message);
+        }
+
+        smtpTransport.close();
+      });
+    }
+  });
+
+  res.send();
 };
 
 exports.logout = function(req, res) {
