@@ -354,6 +354,10 @@ nav a {
   font-size: 2em;
 }
 
+.friendInfo {
+  display: none;
+}
+
 /* Profile *********************/
 
 .profileSection{

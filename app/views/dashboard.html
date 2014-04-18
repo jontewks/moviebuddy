@@ -20,13 +20,11 @@
   <nav>
     <a alt="icon" href=""><div ng-click="navToOutings()" class="navDiv" id="outingsNav" ng-class="{ active: outingsVisible === true }"><span>Outings</span></div></a>
     <a alt="icon" href=""><div ng-click="navToMovies()" class="navDiv" id="moviesNav" ng-class="{ active: moviesVisible === true }"><span>Movies</span></div></a>
-    <a alt="icon" href=""><div ng-click="navToFriends()" class="navDiv" id="friendsNav" ng-class="{ active: friendsVisible === true }"><span>Friends</span></div></a>
     <a alt="icon" href=""><div ng-click="navToProfile()" class="navDiv" id="profileNav" ng-class="{ active: profileVisible === true }"><span>Profile</span></div></a>
   </nav>
 
   <div ng-show="showOutings()" class="sectionDiv outingsSection" ng-include="'/views/outings.html'" ng-controller="OutingsController"></div>
   <div ng-show="showMovies()" class="sectionDiv moviesSection" ng-include="'/views/movies.html'" ng-controller="MoviesController"></div>
-  <div ng-show="showFriends()" class="sectionDiv friendsSection" ng-include="'/views/friends.html'" ng-controller="FriendsController"></div>
   <div ng-show="showProfile()" class="sectionDiv profileSection" ng-include="'/views/profile.html'" ng-controller="ProfileController"></div>
 
 </div>

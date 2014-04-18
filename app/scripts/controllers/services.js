@@ -244,6 +244,3 @@ app.service('sendAlert', ['$rootScope', '$http', function ($rootScope, $http) {
     });
   };
 }]);
-
-
-

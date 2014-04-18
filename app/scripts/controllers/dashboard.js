@@ -2,10 +2,7 @@
 
 var app = angular.module('moviebuddyApp');
 
-app.controller('DashController', ['$scope', '$http','$rootScope', '$location', '$route', 'authentication', function ($scope, $http, $rootScope, authentication, $location, $route) {
-
-  $scope.route = $route;
-
+app.controller('DashController', ['$scope', 'authentication', function ($scope, authentication) {
   $scope.outingsVisible = true;
   $scope.moviesVisible = false;
   $scope.friendsVisible = false;
@@ -41,13 +38,6 @@ app.controller('DashController', ['$scope', '$http','$rootScope', '$location', '
     $scope.profileVisible = false;
   };
 
-  $scope.navToFriends = function() {
-    $scope.outingsVisible = false;
-    $scope.moviesVisible = false;
-    $scope.friendsVisible = true;
-    $scope.profileVisible = false;
-  };
-
   $scope.navToProfile = function() {
     $scope.outingsVisible = false;
     $scope.moviesVisible = false;
@@ -58,5 +48,4 @@ app.controller('DashController', ['$scope', '$http','$rootScope', '$location', '
   $scope.logout = function() {
     authentication.fbLogout();
   };
-
 }]);
