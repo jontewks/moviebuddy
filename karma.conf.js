@@ -14,9 +14,10 @@ module.exports = function(config) {
       'app/bower_components/angular/angular.js',
       'app/bower_components/angular-mocks/angular-mocks.js',
       'app/bower_components/angular-route/angular-route.js',
+      'app/bower_components/angular-cookies/angular-cookies.js',
+      'app/bower_components/angular-xeditable/dist/js/xeditable.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
-      'test/mock/**/*.js',
       'test/spec/**/*.js'
     ],
 

@@ -2,11 +2,6 @@
 
 var app = angular.module('moviebuddyApp');
 
-app.controller('MoviesController', ['$rootScope', '$scope', 'getTheaterData', function ($rootScope, $scope, getTheaterData) {
-
-
-}]);
-
 app.controller('movieInfoController', ['$scope', function ($scope) {
   $scope.textLimit = 75;
   $scope.moreText = '...';

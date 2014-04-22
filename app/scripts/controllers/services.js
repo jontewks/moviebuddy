@@ -179,7 +179,7 @@ app.service('getTheaterData', ['$http', '$rootScope', 'getRTMovies', function ($
 // Authentication service that handles login and logout
 // authentication service, handles login and logout
 
-app.service('authentication', function($rootScope, $location, $http) {
+app.service('authentication', ['$rootScope', '$location', '$http', function ($rootScope, $location, $http) {
 
   this.auth = function(){
     return $http({
@@ -194,10 +194,10 @@ app.service('authentication', function($rootScope, $location, $http) {
     });
   };
 
-});
+}]);
 
 // get user's location
-app.service('getLocation', function($http, $rootScope, $q){
+app.service('getLocation', ['$http', '$rootScope', '$q', function ($http, $rootScope, $q) {
 
   this.getZip = function(){
 
@@ -218,11 +218,7 @@ app.service('getLocation', function($http, $rootScope, $q){
     return deferred.promise;
   };
 
-});
-
-app.service('outingsData', function($http, $rootScope){
-
-});
+}]);
 
 // Notifications service
 app.service('sendAlert', ['$rootScope', '$http', function ($rootScope, $http) {
